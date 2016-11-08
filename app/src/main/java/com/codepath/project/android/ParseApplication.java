@@ -2,6 +2,7 @@ package com.codepath.project.android;
 
 import android.app.Application;
 
+import com.codepath.project.android.network.ParseHelper;
 import com.parse.Parse;
 import com.parse.interceptors.ParseLogInterceptor;
 
@@ -18,9 +19,9 @@ public class ParseApplication extends Application {
         // clientKey is not needed unless explicitly configured
         // any network interceptors must be added with the Configuration Builder given this syntax
         Parse.initialize(new Parse.Configuration.Builder(this)
-                .applicationId("myAppId") // should correspond to APP_ID env variable
+                .applicationId(ParseHelper.PARSE_APPLICATION_ID) // should correspond to APP_ID env variable
                 .clientKey(null)  // set explicitly unless clientKey is explicitly configured on Parse server
                 .addNetworkInterceptor(new ParseLogInterceptor())
-                .server("https://productreviewsudhish.herokuapp.com/parse/").build());
+                .server(ParseHelper.PARSE_SERVER_URL).build());
     }
 }

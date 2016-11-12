@@ -64,13 +64,21 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setRecycleView(){
-        RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rv_products);
-        LinearLayoutManager layoutManager
+        RecyclerView rvProducts = (RecyclerView) findViewById(R.id.rv_products);
+        LinearLayoutManager layoutManagerProducts
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         ArrayList<Product> products = Product.createProductList(20);
-        ProductsAdapter adapter = new ProductsAdapter(this, products);
-        rvContacts.setAdapter(adapter);
-        rvContacts.setLayoutManager(layoutManager);
+        ProductsAdapter productsAdapter = new ProductsAdapter(this, products);
+        rvProducts.setAdapter(productsAdapter);
+        rvProducts.setLayoutManager(layoutManagerProducts);
+
+        RecyclerView rvReviews = (RecyclerView) findViewById(R.id.rv_reviews);
+        LinearLayoutManager layoutManagerReviews
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        ArrayList<Product> reviews = Product.createReviewList(20);
+        ProductsAdapter reviewsAdapter = new ProductsAdapter(this, reviews);
+        rvReviews.setAdapter(reviewsAdapter);
+        rvReviews.setLayoutManager(layoutManagerReviews);
     }
 
     private void setSearchView(MenuItem searchItem){

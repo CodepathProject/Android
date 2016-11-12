@@ -1,5 +1,9 @@
 package com.codepath.project.android.model;
 
+import com.codepath.project.android.data.TestData;
+
+import junit.framework.Test;
+
 import java.util.ArrayList;
 
 /**
@@ -31,8 +35,23 @@ public class Product {
         ArrayList<Product> productList = new ArrayList<Product>();
         for(int i = 0; i < length; i++){
             Product product = new Product();
-            product.setName("HP Notebook");
-            product.setImageUrl("http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c05218075.png");
+            String name = TestData.itemName[i%3];
+            String imageUrl = TestData.itemUrl[i%3];
+            product.setName(name);
+            product.setImageUrl(imageUrl);
+            productList.add(product);
+        }
+        return productList;
+    }
+
+    public static ArrayList<Product> createReviewList(int length){
+        ArrayList<Product> productList = new ArrayList<Product>();
+        for(int i = 0; i < length; i++){
+            Product product = new Product();
+            String name = TestData.reviewItemName[i%3];
+            String imageUrl = TestData.reviewItemUrl[i%3];
+            product.setName(name);
+            product.setImageUrl(imageUrl);
             productList.add(product);
         }
         return productList;

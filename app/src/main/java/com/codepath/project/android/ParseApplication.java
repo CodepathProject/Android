@@ -2,26 +2,34 @@ package com.codepath.project.android;
 
 import android.app.Application;
 
-import com.codepath.project.android.network.ParseHelper;
+import com.codepath.project.android.model.Product;
+import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.interceptors.ParseLogInterceptor;
 
-/**
- * Created by skasabar on 11/7/16.
- */
+import java.util.List;
 
 public class ParseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        // set applicationId, and server server based on the values in the Heroku settings.
-        // clientKey is not needed unless explicitly configured
-        // any network interceptors must be added with the Configuration Builder given this syntax
+        ParseObject.registerSubclass(Product.class);
         Parse.initialize(new Parse.Configuration.Builder(this)
-                .applicationId(ParseHelper.PARSE_APPLICATION_ID) // should correspond to APP_ID env variable
-                .clientKey(null)  // set explicitly unless clientKey is explicitly configured on Parse server
+                .applicationId("myAppId")
+                .clientKey(null)
                 .addNetworkInterceptor(new ParseLogInterceptor())
-                .server(ParseHelper.PARSE_SERVER_URL).build());
+                .server("https://codepath.herokuapp.com/parse/").build());
+
+        ParseQuery<Product> query = ParseQuery.getQuery("Product");
+
+        query.findInBackground(new FindCallback<Product>() {
+            public void done(List<Product> productList, ParseException e) {
+                System.out.println(productList);
+            }
+        });
+
     }
 }

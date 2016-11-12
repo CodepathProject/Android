@@ -1,33 +1,38 @@
 package com.codepath.project.android.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.view.MenuInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.ProductsAdapter;
+import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.Product;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
+    RecyclerView rvProducts;
+    ProductsAdapter productsAdapter;
+    List<Product> products;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +69,30 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setRecycleView(){
-        RecyclerView rvProducts = (RecyclerView) findViewById(R.id.rv_products);
+        rvProducts = (RecyclerView) findViewById(R.id.rv_products);
         LinearLayoutManager layoutManagerProducts
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        ArrayList<Product> products = Product.createProductList(20);
-        ProductsAdapter productsAdapter = new ProductsAdapter(this, products);
-        rvProducts.setAdapter(productsAdapter);
+                = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         rvProducts.setLayoutManager(layoutManagerProducts);
+        products = new ArrayList<>();
+        productsAdapter = new ProductsAdapter(HomeActivity.this, products);
+        rvProducts.setAdapter(productsAdapter);
+        productsAdapter.notifyDataSetChanged();
+
+        ParseQuery<Product> query = ParseQuery.getQuery("Product");
+        query.findInBackground(new FindCallback<Product>() {
+            public void done(List<Product> productList, ParseException e) {
+                products.addAll(productList);
+                productsAdapter.notifyDataSetChanged();
+                ItemClickSupport.addTo(rvProducts).setOnItemClickListener(
+                        (recyclerView, position, v) -> {
+                            Intent intent = new Intent(HomeActivity.this, ProductViewActivity.class);
+                            intent.putExtra("productId", productList.get(position).getObjectId());
+                            startActivity(intent);
+                        }
+                );
+            }
+        });
+
 
         RecyclerView rvReviews = (RecyclerView) findViewById(R.id.rv_reviews);
         LinearLayoutManager layoutManagerReviews

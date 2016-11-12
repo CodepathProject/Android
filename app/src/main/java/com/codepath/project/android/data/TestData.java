@@ -1,9 +1,5 @@
 package com.codepath.project.android.data;
 
-/**
- * Created by anmallya on 11/11/2016.
- */
-
 public class TestData {
 
     public static final String [] itemName = {"HP Notebook 14-ax010nr", "32GB USB Flash Drive", "32GB USB Flash Drive"};

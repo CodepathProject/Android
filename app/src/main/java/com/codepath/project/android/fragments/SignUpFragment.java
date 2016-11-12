@@ -12,14 +12,9 @@ import android.widget.EditText;
 import com.codepath.project.android.R;
 import com.codepath.project.android.network.ParseHelper;
 
-import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
-/**
- * Created by skasabar on 11/8/16.
- */
 
 public class SignUpFragment extends Fragment {
 

@@ -42,5 +42,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignEnd="@+id/tvBrandName" />
+        android:layout_alignEnd="@+id/tvBrandName"
+        android:onClick="onAddReview"/>
 </RelativeLayout>

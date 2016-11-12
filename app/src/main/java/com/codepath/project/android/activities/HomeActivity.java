@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.MenuInflater;
 import android.view.View;
@@ -17,6 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.adapter.ProductsAdapter;
+import com.codepath.project.android.model.Product;
+
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,7 +35,9 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
         setNavigationDrawer();
+        setRecycleView();
     }
 
     @Override
@@ -55,6 +63,15 @@ public class HomeActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private void setRecycleView(){
+        RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rv_products);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        ArrayList<Product> products = Product.createProductList(20);
+        ProductsAdapter adapter = new ProductsAdapter(this, products);
+        rvContacts.setAdapter(adapter);
+        rvContacts.setLayoutManager(layoutManager);
+    }
 
     private void setSearchView(MenuItem searchItem){
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);

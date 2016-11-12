@@ -13,4 +13,18 @@
     tools:context="com.codepath.project.android.activities.HomeActivity"
     tools:showIn="@layout/app_bar_home">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:text = "Popular Products"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/tv_popular_products"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_products"
+        android:layout_below="@id/tv_popular_products"
+        android:layout_width="match_parent"
+        android:layout_height="170dp" />
 </RelativeLayout>

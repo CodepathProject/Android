@@ -22,53 +22,73 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        tools:src="@mipmap/ic_launcher"
-        android:id="@+id/ivProductImage"
-        android:layout_marginEnd="10dp"
-        android:layout_alignParentStart="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rlHeader">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        tools:text="Samsung Galaxy S7"
-        android:id="@+id/tvProductName"
-        android:layout_toEndOf="@+id/ivProductImage" />
+            <ImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="10dp"
+                tools:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        tools:text="Samsung"
-        android:id="@+id/tvBrandName"
-        android:layout_below="@+id/tvProductName"
-        android:layout_toEndOf="@+id/ivProductImage" />
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/ivProductImage"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:text="Samsung Galaxy S7" />
 
-    <RatingBar
-        tools:rating="6.7"
-        android:stepSize="0.5"
-        android:numStars="10"
-        android:paddingTop="5dp"
-        style="?android:attr/ratingBarStyleSmall"
-        android:id="@+id/rbAverageRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvBrandName"
-        android:layout_toEndOf="@+id/ivProductImage" />
+            <TextView
+                android:id="@+id/tvBrandName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvProductName"
+                android:layout_toEndOf="@+id/ivProductImage"
+                android:paddingTop="5dp"
+                tools:text="Samsung" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Review"
-        android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignEnd="@+id/tvBrandName"
-        android:onClick="onAddReview"/>
-        
+            <RatingBar
+                android:id="@+id/rbAverageRating"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvBrandName"
+                android:layout_toEndOf="@+id/ivProductImage"
+                android:numStars="10"
+                android:paddingTop="5dp"
+                android:stepSize="0.5"
+                tools:rating="6.7" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvReviewsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rlHeader"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            tools:text="Reviews" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvReviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button"
+            android:layout_below="@id/tvReviewsTitle"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:onClick="onAddReview"
+            android:text="Add Review" />
+
     </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,10 +16,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.adapter.ReviewsAdapter;
 import com.codepath.project.android.fragments.ComposeFragment;
 import com.codepath.project.android.model.Product;
+import com.codepath.project.android.model.Review;
 import com.parse.ParseQuery;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +41,11 @@ public class ProductViewActivity extends AppCompatActivity {
     RatingBar rbAverageRating;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.rvReviews)
+    RecyclerView rvReviews;
+
+    ReviewsAdapter reviewsAdapter;
+    List<Review> reviews;
 
     Product product;
 
@@ -50,6 +62,14 @@ public class ProductViewActivity extends AppCompatActivity {
         }
 
         if(savedInstanceState == null) {
+
+            reviews = new ArrayList<>();
+            reviewsAdapter = new ReviewsAdapter(this, reviews);
+            rvReviews.setAdapter(reviewsAdapter);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            mLayoutManager.scrollToPosition(0);
+            rvReviews.setLayoutManager(mLayoutManager);
+
             String productId = getIntent().getStringExtra("productId");
             ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
             query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
@@ -61,6 +81,18 @@ public class ProductViewActivity extends AppCompatActivity {
                     tvProductName.setText(product.getName());
                     tvBrandName.setText(product.getBrand());
                     rbAverageRating.setRating((float) product.getAverageRating());
+
+                    ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
+                    reviewQuery.whereEqualTo("product", product);
+                    reviewQuery.findInBackground((reviewList, err) -> {
+                        if (err == null) {
+                            reviews.addAll(reviewList);
+                            reviewsAdapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 } else {
                     Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
                 }

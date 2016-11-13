@@ -69,5 +69,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignEnd="@+id/tvBrandName"
         android:onClick="onAddReview"/>
+        
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

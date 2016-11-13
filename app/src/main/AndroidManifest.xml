@@ -16,7 +16,7 @@
         <activity android:name=".activities.SignUpActivity" />
         <activity
             android:name=".activities.SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home"
@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ProductViewActivity"></activity>
+        <activity android:name=".activities.ProductViewActivity"/>
     </application>
 
 </manifest>

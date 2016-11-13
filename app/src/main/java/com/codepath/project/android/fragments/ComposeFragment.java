@@ -23,7 +23,6 @@ import com.parse.ParseQuery;
 public class ComposeFragment extends DialogFragment {
 
     private EditText etReviewText;
-    private Button btnPost;
     Product product;
 
     public ComposeFragment() {}
@@ -56,14 +55,10 @@ public class ComposeFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
         etReviewText = (EditText) view.findViewById(R.id.etReviewText);
-        btnPost = (Button) view.findViewById(R.id.btnPost);
+        Button btnPost = (Button) view.findViewById(R.id.btnPost);
         ImageView ivComposeCancel = (ImageView) view.findViewById(R.id.ivComposeCancel);
 
-        ivComposeCancel.setOnClickListener(v -> {
-            InputMethodManager imm =(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            dismiss();
-        });
+        ivComposeCancel.setOnClickListener(v -> closeKeyboardAndDismiss(view));
 
         String title = getArguments().getString("title", "Compose review");
         getDialog().setTitle(title);
@@ -78,6 +73,7 @@ public class ComposeFragment extends DialogFragment {
         String productId = bundle.getString("productId");
         ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
         query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        assert productId != null;
         query.getInBackground(productId.trim(), (p, e) -> {
             if(e == null) {
                 product = p;
@@ -92,9 +88,13 @@ public class ComposeFragment extends DialogFragment {
             product.incrementReviewCount();
             review.setProduct(product);
             review.saveInBackground();
-            InputMethodManager imm =(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            dismiss();
+            closeKeyboardAndDismiss(view);
         });
+    }
+
+    public void closeKeyboardAndDismiss(View view) {
+        InputMethodManager imm =(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        dismiss();
     }
 }

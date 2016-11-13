@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -29,6 +30,8 @@ public class ProductViewActivity extends AppCompatActivity {
     TextView tvBrandName;
     @BindView(R.id.rbAverageRating)
     RatingBar rbAverageRating;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     Product product;
 
@@ -38,6 +41,8 @@ public class ProductViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_view);
         ButterKnife.bind(this);
 
+        setSupportActionBar(toolbar);
+
         if(savedInstanceState == null) {
             String productId = getIntent().getStringExtra("productId");
             ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
@@ -46,6 +51,7 @@ public class ProductViewActivity extends AppCompatActivity {
                 if (e == null) {
                     product = p;
                     Picasso.with(this).load(product.getImageUrl()).into(ivProductImage);
+                    getSupportActionBar().setTitle(product.getName());
                     tvProductName.setText(product.getName());
                     tvBrandName.setText(product.getBrand());
                     rbAverageRating.setRating((float) product.getAverageRating());

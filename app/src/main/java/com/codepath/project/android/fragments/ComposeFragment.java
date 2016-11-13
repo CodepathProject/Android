@@ -2,7 +2,6 @@ package com.codepath.project.android.fragments;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
-import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.parse.ParseQuery;
@@ -64,8 +62,7 @@ public class ComposeFragment extends DialogFragment {
         ivComposeCancel.setOnClickListener(v -> {
             InputMethodManager imm =(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            Intent intent = new Intent(getActivity(), ProductViewActivity.class);
-            startActivity(intent);
+            dismiss();
         });
 
         String title = getArguments().getString("title", "Compose review");
@@ -97,8 +94,7 @@ public class ComposeFragment extends DialogFragment {
             review.saveInBackground();
             InputMethodManager imm =(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            Intent intent = new Intent(getActivity(), ProductViewActivity.class);
-            startActivity(intent);
+            dismiss();
         });
     }
 }

@@ -1,12 +1,12 @@
 package com.codepath.project.android.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +27,10 @@ public class ProductViewActivity extends AppCompatActivity {
     TextView tvProductName;
     @BindView(R.id.tvBrandName)
     TextView tvBrandName;
+    @BindView(R.id.rbAverageRating)
+    RatingBar rbAverageRating;
 
     Product product;
-    String productId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,7 @@ public class ProductViewActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if(savedInstanceState == null) {
-            productId = getIntent().getStringExtra("productId");
-
+            String productId = getIntent().getStringExtra("productId");
             ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
             query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
             query.getInBackground(productId, (p, e) -> {
@@ -48,17 +48,12 @@ public class ProductViewActivity extends AppCompatActivity {
                     Picasso.with(this).load(product.getImageUrl()).into(ivProductImage);
                     tvProductName.setText(product.getName());
                     tvBrandName.setText(product.getBrand());
+                    rbAverageRating.setRating((float) product.getAverageRating());
                 } else {
                     Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
                 }
             });
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
     }
 
     public void onAddReview(View view) {

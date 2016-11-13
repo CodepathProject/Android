@@ -15,8 +15,6 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.ProductsAdapter;
@@ -92,13 +90,10 @@ public class HomeActivity extends AppCompatActivity
             products.addAll(productList);
             productsAdapter.notifyDataSetChanged();
             handler.postDelayed(runnable, speedScroll);
-            rvProducts.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    handler.removeCallbacks(runnable);
-                    v.setOnTouchListener(null);
-                    return false;
-                }
+            rvProducts.setOnTouchListener((v, event) -> {
+                handler.removeCallbacks(runnable);
+                v.setOnTouchListener(null);
+                return false;
             });
         });
 

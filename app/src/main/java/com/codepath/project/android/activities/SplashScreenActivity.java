@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.codepath.project.android.R;
-import com.codepath.project.android.fragments.SignUpFragment;
+import com.parse.ParseUser;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -23,8 +23,11 @@ public class SplashScreenActivity extends AppCompatActivity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
-                    startActivity(intent);
+                    if (ParseUser.getCurrentUser() == null) {
+                        startLoginActivity();
+                    } else {
+                        startHomeActivity();
+                    }
                 }
             }
         };
@@ -35,5 +38,27 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (LoginActivity.REQUEST_CODE_LOGIN) :
+                if (resultCode == LoginActivity.RESULT_OK) {
+                    startHomeActivity();
+                }
+                break;
+        }
+    }
+
+    public void startLoginActivity() {
+        Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+        startActivityForResult(intent, LoginActivity.REQUEST_CODE_LOGIN);
+    }
+
+    public void startHomeActivity() {
+        Intent intent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+        startActivity(intent);
     }
 }

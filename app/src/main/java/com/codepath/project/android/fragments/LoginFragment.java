@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.HomeActivity;
 import com.codepath.project.android.activities.LoginActivity;
 import com.codepath.project.android.activities.SignUpActivity;
 import com.codepath.project.android.activities.SplashScreenActivity;
@@ -56,7 +57,8 @@ public class LoginFragment extends Fragment {
                                                     ParseHelper.PARSE_LOGIN_SUCCESS_SNACKTOAST,
                                                     getActivity().getColor(R.color.colorGreen),
                                                     getActivity().getColor(R.color.colorGray));
-                                            // move to home splashactivity & switch to home screen
+                                                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                                                    startActivity(intent);
                                         } else {
                                             GeneralUtils.showSnackBar(getView(),
                                                     ParseHelper.PARSE_LOGIN_FAILED_SNACKTOAST,

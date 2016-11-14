@@ -95,4 +95,17 @@ public class Product extends ParseObject {
         return productList;
     }
 
+    public static ArrayList<Product> createCategoryList(int length){
+        ArrayList<Product> productList = new ArrayList<Product>();
+        for(int i = 0; i < length; i++){
+            Product product = new Product();
+            String name = TestData.catItemName[i%4];
+            String imageUrl = TestData.catItemUrl[i%4];
+            product.setName(name);
+            product.setImageUrl(imageUrl);
+            productList.add(product);
+        }
+        return productList;
+    }
+
 }

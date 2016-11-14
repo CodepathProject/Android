@@ -1,6 +1,7 @@
 package com.codepath.project.android.activities;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -16,22 +17,13 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        Thread timerThread = new Thread(){
-            public void run(){
-                try{
-                    sleep(SPLASH_TIME);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }finally{
-                    if (ParseUser.getCurrentUser() == null) {
-                        startLoginActivity();
-                    } else {
-                        startHomeActivity();
-                    }
-                }
+        new Handler().postDelayed(() -> {
+            if (ParseUser.getCurrentUser() == null) {
+                startLoginActivity();
+            } else {
+                startHomeActivity();
             }
-        };
-        timerThread.start();
+        }, SPLASH_TIME);
     }
 
     @Override

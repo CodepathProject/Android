@@ -19,6 +19,7 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 public class ComposeFragment extends DialogFragment {
 
@@ -87,6 +88,7 @@ public class ComposeFragment extends DialogFragment {
             review.setText(etReviewText.getText().toString());
             product.incrementReviewCount();
             review.setProduct(product);
+            review.setUser(ParseUser.getCurrentUser());
             review.saveInBackground();
             closeKeyboardAndDismiss(view);
         });

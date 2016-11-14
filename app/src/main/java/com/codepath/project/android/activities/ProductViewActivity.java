@@ -1,5 +1,6 @@
 package com.codepath.project.android.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
@@ -22,6 +23,7 @@ import com.codepath.project.android.fragments.ComposeFragment;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -122,14 +124,21 @@ public class ProductViewActivity extends AppCompatActivity {
     }
 
     public void onAddReview(View view) {
-        Bundle bundle = new Bundle();
-        bundle.putString("productId", product.getObjectId());
 
-        FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-        ComposeFragment composeFragment = ComposeFragment.newInstance("Add review");
-        composeFragment.setArguments(bundle);
-        composeFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Dialog_FullScreen);
-        composeFragment.show(fm, "fragment_compose");
+        ParseUser user = ParseUser.getCurrentUser();
+
+        if(user != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("productId", product.getObjectId());
+            FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+            ComposeFragment composeFragment = ComposeFragment.newInstance("Add review");
+            composeFragment.setArguments(bundle);
+            composeFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Dialog_FullScreen);
+            composeFragment.show(fm, "fragment_compose");
+        } else {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     final int speedScroll = 1500;

@@ -2,6 +2,7 @@ package com.codepath.project.android.model;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 @ParseClassName("Review")
 public class Review extends ParseObject {
@@ -24,5 +25,9 @@ public class Review extends ParseObject {
 
     public void setProduct(Product product) {
         put("product", product);
+    }
+
+    public void setUser(ParseUser user) {
+        put("user", user);
     }
 }

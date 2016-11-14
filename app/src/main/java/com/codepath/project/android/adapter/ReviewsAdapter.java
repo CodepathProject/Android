@@ -12,6 +12,9 @@ import com.codepath.project.android.model.Review;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ReviewsAdapter extends
         RecyclerView.Adapter<ReviewsAdapter.ViewHolder> {
 
@@ -28,11 +31,11 @@ public class ReviewsAdapter extends
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvReview;
+        @BindView(R.id.tvReview) TextView tvReview;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvReview = (TextView) itemView.findViewById(R.id.tvReview);
+            ButterKnife.bind(this, itemView);
         }
     }
 

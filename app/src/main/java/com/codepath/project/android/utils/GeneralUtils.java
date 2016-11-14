@@ -9,10 +9,6 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
-/**
- * Created by skasabar on 11/13/16.
- */
-
 public class GeneralUtils {
 
     public static void showSnackBar(View v, String message, int textColor, int backgroundColor) {

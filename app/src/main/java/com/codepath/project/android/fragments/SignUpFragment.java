@@ -34,18 +34,15 @@ public class SignUpFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         unbinder = ButterKnife.bind(this, view);
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParseHelper.newUserSignUp(etFirstName.getText().toString(),
-                        etPassword.getText().toString(),
-                        etEmail.getText().toString());
-                GeneralUtils.showSnackBar(getView(),
-                        ParseHelper.PARSE_SIGNUP_SUCCESS_SNACKTOAST,
-                        getActivity().getColor(R.color.colorGreen),
-                        getActivity().getColor(R.color.colorGray));
-                getActivity().finish();
-            }
+        btnSignUp.setOnClickListener(v -> {
+            ParseHelper.newUserSignUp(etFirstName.getText().toString(),
+                    etPassword.getText().toString(),
+                    etEmail.getText().toString());
+            GeneralUtils.showSnackBar(getView(),
+                    ParseHelper.PARSE_SIGNUP_SUCCESS_SNACKTOAST,
+                    getActivity().getColor(R.color.colorGreen),
+                    getActivity().getColor(R.color.colorGray));
+            getActivity().finish();
         });
         return view;
     }

@@ -27,11 +27,19 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Toolbar toolbar;
-    RecyclerView rvProducts;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.rv_products) RecyclerView rvProducts;
+    @BindView(R.id.drawer_layout) DrawerLayout drawer;
+    @BindView(R.id.nav_view) NavigationView navigationView;
+    @BindView(R.id.rv_categories) RecyclerView rvCategory;
+    @BindView(R.id.rv_reviews) RecyclerView rvReviews;
+
     ProductsAdapter productsAdapter;
     List<Product> products;
 
@@ -39,7 +47,7 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         setNavigationDrawer();
@@ -48,7 +56,6 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -70,7 +77,6 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setRecycleView(){
-        rvProducts = (RecyclerView) findViewById(R.id.rv_products);
         LinearLayoutManager layoutManagerProducts
                 = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         rvProducts.setLayoutManager(layoutManagerProducts);
@@ -87,7 +93,7 @@ public class HomeActivity extends AppCompatActivity
         );
         productsAdapter.notifyDataSetChanged();
 
-        ParseQuery<Product> query = ParseQuery.getQuery("Product");
+        ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
         query.findInBackground((productList, e) -> {
             products.addAll(productList);
             productsAdapter.notifyDataSetChanged();
@@ -99,7 +105,6 @@ public class HomeActivity extends AppCompatActivity
             });
         });
 
-        RecyclerView rvReviews = (RecyclerView) findViewById(R.id.rv_reviews);
         LinearLayoutManager layoutManagerReviews
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         ArrayList<Product> reviews = Product.createReviewList(20);
@@ -107,7 +112,6 @@ public class HomeActivity extends AppCompatActivity
         rvReviews.setAdapter(reviewsAdapter);
         rvReviews.setLayoutManager(layoutManagerReviews);
 
-        RecyclerView rvCategory = (RecyclerView) findViewById(R.id.rv_categories);
         GridLayoutManager layoutManagerCategory = new GridLayoutManager(this, 2);
         ArrayList<Product> category = Product.createCategoryList(4);
         CategoryAdapter categoryAdapter = new CategoryAdapter(this, category);
@@ -132,13 +136,10 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setNavigationDrawer(){
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -147,7 +148,6 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

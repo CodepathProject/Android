@@ -12,22 +12,14 @@ import android.widget.EditText;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.HomeActivity;
-import com.codepath.project.android.activities.LoginActivity;
 import com.codepath.project.android.activities.SignUpActivity;
-import com.codepath.project.android.activities.SplashScreenActivity;
 import com.codepath.project.android.network.ParseHelper;
 import com.codepath.project.android.utils.GeneralUtils;
-import com.parse.LogInCallback;
-import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
-/**
- * Created by skasabar on 11/12/16.
- */
 
 public class LoginFragment extends Fragment {
 
@@ -44,37 +36,26 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         unbinder = ButterKnife.bind(this, view);
-        btnLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParseUser.logInInBackground(etEmail.getText().toString(),
-                                            etPassword.getText().toString(),
-                                            new LogInCallback() {
-                                    @Override
-                                    public void done(ParseUser user, ParseException e) {
-                                        if (user != null) {
-                                            GeneralUtils.showSnackBar(getView(),
-                                                    ParseHelper.PARSE_LOGIN_SUCCESS_SNACKTOAST,
-                                                    getActivity().getColor(R.color.colorGreen),
-                                                    getActivity().getColor(R.color.colorGray));
-                                                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                                                    startActivity(intent);
-                                        } else {
-                                            GeneralUtils.showSnackBar(getView(),
-                                                    ParseHelper.PARSE_LOGIN_FAILED_SNACKTOAST,
-                                                    getActivity().getColor(R.color.colorRed),
-                                                    getActivity().getColor(R.color.colorGray));
-                                        }
-                                    }
-                                });
-            }
-        });
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SignUpActivity.class);
-                startActivity(intent);
-            }
+        btnLogIn.setOnClickListener(v -> ParseUser.logInInBackground(etEmail.getText().toString(),
+                                    etPassword.getText().toString(),
+                (user, e) -> {
+                    if (user != null) {
+                        GeneralUtils.showSnackBar(getView(),
+                                ParseHelper.PARSE_LOGIN_SUCCESS_SNACKTOAST,
+                                getActivity().getColor(R.color.colorGreen),
+                                getActivity().getColor(R.color.colorGray));
+                                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                                startActivity(intent);
+                    } else {
+                        GeneralUtils.showSnackBar(getView(),
+                                ParseHelper.PARSE_LOGIN_FAILED_SNACKTOAST,
+                                getActivity().getColor(R.color.colorRed),
+                                getActivity().getColor(R.color.colorGray));
+                    }
+                }));
+        btnSignUp.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SignUpActivity.class);
+            startActivity(intent);
         });
 
         return view;

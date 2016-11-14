@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.codepath.project.android.R;
 import com.codepath.project.android.model.Product;
 import com.squareup.picasso.Picasso;
@@ -44,8 +45,7 @@ public class ProductsAdapter extends
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View contactView = inflater.inflate(R.layout.item_product, parent, false);
-        ViewHolder viewHolder = new ViewHolder(contactView);
-        return viewHolder;
+        return new ViewHolder(contactView);
     }
 
     // Involves populating data into the item through holder

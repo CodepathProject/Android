@@ -21,10 +21,18 @@ import com.codepath.project.android.model.Review;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import butterknife.BindView;
+import butterknife.Unbinder;
+
 public class ComposeFragment extends DialogFragment {
 
-    private EditText etReviewText;
+    @BindView(R.id.etReviewText) EditText etReviewText;
+    @BindView(R.id.btnPost) Button btnPost;
+    @BindView(R.id.ivComposeCancel) ImageView ivComposeCancel;
+
     Product product;
+
+    private Unbinder unbinder;
 
     public ComposeFragment() {}
 
@@ -54,10 +62,6 @@ public class ComposeFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Get field from view
-        etReviewText = (EditText) view.findViewById(R.id.etReviewText);
-        Button btnPost = (Button) view.findViewById(R.id.btnPost);
-        ImageView ivComposeCancel = (ImageView) view.findViewById(R.id.ivComposeCancel);
 
         ivComposeCancel.setOnClickListener(v -> closeKeyboardAndDismiss(view));
 
@@ -98,5 +102,10 @@ public class ComposeFragment extends DialogFragment {
         InputMethodManager imm =(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         dismiss();
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

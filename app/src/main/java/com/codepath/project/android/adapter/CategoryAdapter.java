@@ -14,9 +14,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by anmallya on 11/13/2016.
- */
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class CategoryAdapter extends
         RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
@@ -33,13 +33,12 @@ public class CategoryAdapter extends
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvCategoryName;
-        public ImageView ivCategoryImage;
+        @BindView(R.id.tv_category_name) TextView tvCategoryName;
+        @BindView(R.id.iv_category) ImageView ivCategoryImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvCategoryName = (TextView) itemView.findViewById(R.id.tv_category_name);
-            ivCategoryImage = (ImageView) itemView.findViewById(R.id.iv_category);
+            ButterKnife.bind(this, itemView);
         }
     }
 

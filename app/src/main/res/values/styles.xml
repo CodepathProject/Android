@@ -1,6 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -17,6 +18,74 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+    <style name="background">
+        <item name="android:background">#9e9e9e</item>
+    </style>
+
+    <style name="loginEditText">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:backgroundTint">@color/colorOrange</item>
+        <item name="android:textColorHint">@color/colorGray</item>
+    </style>
+
+    <style name="loginHelperText">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="loginButton">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/colorOrange</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+    <style name="signupEditText">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:backgroundTint">@color/colorOrange</item>
+        <item name="android:textColorHint">@color/colorGray</item>
+    </style>
+
+    <style name="signupButton">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/colorOrange</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+    <style name="loginLinearLayout">
+        <item name="android:background">#00000000</item>
+    </style>
+
+    <style name="signupLinearLayout">
+        <item name="android:background">#00000000</item>
+        <item name="android:layout_margin">15dp</item>
+    </style>
+
+    <style name="login">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/colorOrange</item>
+    </style>
+
+    <style name="facebookText">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/colorBlue</item>
+    </style>
+
+    <style name="facebookView">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+
     <style name="Dialog.FullScreen" parent="Theme.AppCompat.Dialog">
         <item name="android:padding">0dp</item>
         <item name="android:windowBackground">@android:color/white</item>
@@ -29,4 +98,5 @@
         <item name="android:paddingBottom">24dp</item>
         <item name="android:orientation">vertical</item>
     </style>
+
 </resources>

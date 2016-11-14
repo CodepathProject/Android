@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.network.ParseHelper;
+import com.codepath.project.android.utils.GeneralUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +40,11 @@ public class SignUpFragment extends Fragment {
                 ParseHelper.newUserSignUp(etFirstName.getText().toString(),
                         etPassword.getText().toString(),
                         etEmail.getText().toString());
+                GeneralUtils.showSnackBar(getView(),
+                        ParseHelper.PARSE_SIGNUP_SUCCESS_SNACKTOAST,
+                        getActivity().getColor(R.color.colorGreen),
+                        getActivity().getColor(R.color.colorGray));
+                getActivity().finish();
             }
         });
         return view;

@@ -160,16 +160,13 @@ public class HomeActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
+        switch (item.getItemId()) {
             case R.id.nav_logout:
                 ParseUser.logOut();
                 Intent intent = new Intent(this, SplashScreenActivity.class);
                 startActivity(intent);
                 break;
         }
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -178,7 +175,6 @@ public class HomeActivity extends AppCompatActivity
     final Handler handler = new Handler();
     final Runnable runnable = new Runnable() {
         int count = 0;
-
         @Override
         public void run() {
             if (count < products.size()) {

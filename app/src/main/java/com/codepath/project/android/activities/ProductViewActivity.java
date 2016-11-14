@@ -22,6 +22,9 @@ import com.codepath.project.android.adapter.ReviewsAdapter;
 import com.codepath.project.android.fragments.ComposeFragment;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
@@ -86,6 +89,22 @@ public class ProductViewActivity extends AppCompatActivity {
                     tvProductName.setText(product.getName());
                     tvBrandName.setText(product.getBrand());
                     rbAverageRating.setRating((float) product.getAverageRating());
+
+                    YouTubePlayerFragment youtubeFragment = (YouTubePlayerFragment)
+                            getFragmentManager().findFragmentById(R.id.youtubeFragment);
+                    youtubeFragment.initialize("AIzaSyCk70hKeShEmA5EDKGNDDaejcUvdb2pNW0",
+                            new YouTubePlayer.OnInitializedListener() {
+                                @Override
+                                public void onInitializationSuccess(YouTubePlayer.Provider provider,
+                                                                    YouTubePlayer youTubePlayer, boolean b) {
+                                    youTubePlayer.cueVideo(product.getVideo());
+                                }
+                                @Override
+                                public void onInitializationFailure(YouTubePlayer.Provider provider,
+                                                                    YouTubeInitializationResult youTubeInitializationResult) {
+
+                                }
+                            });
 
                     ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
                     reviewQuery.whereEqualTo("product", product);

@@ -108,4 +108,8 @@ public class Product extends ParseObject {
         return productList;
     }
 
+    public String getVideo() {
+        return getString("mainVideo");
+    }
+
 }

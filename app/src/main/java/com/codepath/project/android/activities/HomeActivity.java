@@ -9,6 +9,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.adapter.ProductsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.Product;
@@ -104,6 +106,13 @@ public class HomeActivity extends AppCompatActivity
         ProductsAdapter reviewsAdapter = new ProductsAdapter(this, reviews);
         rvReviews.setAdapter(reviewsAdapter);
         rvReviews.setLayoutManager(layoutManagerReviews);
+
+        RecyclerView rvCategory = (RecyclerView) findViewById(R.id.rv_categories);
+        GridLayoutManager layoutManagerCategory = new GridLayoutManager(this, 2);
+        ArrayList<Product> category = Product.createCategoryList(4);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category);
+        rvCategory.setAdapter(categoryAdapter);
+        rvCategory.setLayoutManager(layoutManagerCategory);
     }
 
     private void setSearchView(MenuItem searchItem){

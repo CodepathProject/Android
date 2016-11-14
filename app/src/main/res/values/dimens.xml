@@ -16,4 +16,13 @@
     <dimen name="detail_backdrop_height">256dp</dimen>
     <dimen name="card_margin">16dp</dimen>
     <dimen name="list_item_avatar_size">40dp</dimen>
+
+    <dimen name="home_tv_size">15sp</dimen>
+    <dimen name="home_rv_category_margin">5dp</dimen>
+
+
+    <dimen name="category_item_margin">10dp</dimen>
+    <dimen name="category_item_iv_height">160dp</dimen>
+    <dimen name="category_item_tv_padding">5dp</dimen>
+    <dimen name="category_item_tv_size">15sp</dimen>
 </resources>

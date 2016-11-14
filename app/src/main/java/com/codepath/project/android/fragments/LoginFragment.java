@@ -1,5 +1,6 @@
 package com.codepath.project.android.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.LoginActivity;
+import com.codepath.project.android.activities.SignUpActivity;
+import com.codepath.project.android.activities.SplashScreenActivity;
 import com.codepath.project.android.network.ParseHelper;
 import com.codepath.project.android.utils.GeneralUtils;
 import com.parse.LogInCallback;
@@ -60,6 +64,13 @@ public class LoginFragment extends Fragment {
                                         }
                                     }
                                 });
+            }
+        });
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                startActivity(intent);
             }
         });
 

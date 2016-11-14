@@ -16,6 +16,8 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.CategoryAdapter;
@@ -23,6 +25,7 @@ import com.codepath.project.android.adapter.ProductsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.Product;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +144,9 @@ public class HomeActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        View header = navigationView.getHeaderView(0);
+        TextView tvUserName = (TextView)header.findViewById(R.id.tvUserName);
+        tvUserName.setText("Hello, " + ParseUser.getCurrentUser().get("firstName"));
     }
 
 

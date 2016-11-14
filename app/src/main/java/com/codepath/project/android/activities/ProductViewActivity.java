@@ -25,6 +25,7 @@ import com.codepath.project.android.model.Review;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,7 @@ public class ProductViewActivity extends AppCompatActivity {
 
             reviews = new ArrayList<>();
             reviewsAdapter = new ReviewsAdapter(this, reviews);
+            rvReviews.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).build());
             rvReviews.setAdapter(reviewsAdapter);
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             mLayoutManager.scrollToPosition(0);

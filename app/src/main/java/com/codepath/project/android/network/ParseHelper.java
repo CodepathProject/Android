@@ -17,7 +17,7 @@ public class ParseHelper {
                                      String password,
                                      String email) {
         ParseUser user = new ParseUser();
-        user.setUsername(name);
+        user.put("firstName", name);
         user.setPassword(password);
         user.setEmail(email);
         user.setUsername(email);

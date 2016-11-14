@@ -18,6 +18,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:text="Hello, Aniruddha Mallya"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:id="@+id/tvUserName" />
 
 </LinearLayout>

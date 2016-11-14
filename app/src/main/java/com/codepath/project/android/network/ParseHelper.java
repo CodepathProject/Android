@@ -11,6 +11,7 @@ public class ParseHelper {
     public static final String PARSE_SERVER_URL = "https://productreviewsudhish.herokuapp.com/parse/";
     public static final String PARSE_LOGIN_SUCCESS_SNACKTOAST = "Login Successful !";
     public static final String PARSE_LOGIN_FAILED_SNACKTOAST = "Login Failed !";
+    public static final String PARSE_SIGNUP_SUCCESS_SNACKTOAST = "Sign Up Successful !";
 
     public static void newUserSignUp(String name,
                                      String password,

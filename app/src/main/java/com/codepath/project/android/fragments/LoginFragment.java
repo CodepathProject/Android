@@ -56,6 +56,7 @@ public class LoginFragment extends Fragment {
                                                     ParseHelper.PARSE_LOGIN_SUCCESS_SNACKTOAST,
                                                     getActivity().getColor(R.color.colorGreen),
                                                     getActivity().getColor(R.color.colorGray));
+                                            // move to home splashactivity & switch to home screen
                                         } else {
                                             GeneralUtils.showSnackBar(getView(),
                                                     ParseHelper.PARSE_LOGIN_FAILED_SNACKTOAST,

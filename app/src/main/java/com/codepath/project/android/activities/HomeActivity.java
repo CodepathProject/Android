@@ -2,12 +2,14 @@ package com.codepath.project.android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -16,11 +18,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.adapter.ProductsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.Product;
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -76,23 +77,27 @@ public class HomeActivity extends AppCompatActivity
         products = new ArrayList<>();
         productsAdapter = new ProductsAdapter(HomeActivity.this, products);
         rvProducts.setAdapter(productsAdapter);
+
+        ItemClickSupport.addTo(rvProducts).setOnItemClickListener(
+                (recyclerView, position, v) -> {
+                    Intent intent = new Intent(HomeActivity.this, ProductViewActivity.class);
+                    intent.putExtra("productId", products.get(position).getObjectId());
+                    startActivity(intent);
+                }
+        );
         productsAdapter.notifyDataSetChanged();
 
         ParseQuery<Product> query = ParseQuery.getQuery("Product");
-        query.findInBackground(new FindCallback<Product>() {
-            public void done(List<Product> productList, ParseException e) {
-                products.addAll(productList);
-                productsAdapter.notifyDataSetChanged();
-                ItemClickSupport.addTo(rvProducts).setOnItemClickListener(
-                        (recyclerView, position, v) -> {
-                            Intent intent = new Intent(HomeActivity.this, ProductViewActivity.class);
-                            intent.putExtra("productId", productList.get(position).getObjectId());
-                            startActivity(intent);
-                        }
-                );
-            }
+        query.findInBackground((productList, e) -> {
+            products.addAll(productList);
+            productsAdapter.notifyDataSetChanged();
+            handler.postDelayed(runnable, speedScroll);
+            rvProducts.setOnTouchListener((v, event) -> {
+                handler.removeCallbacks(runnable);
+                v.setOnTouchListener(null);
+                return false;
+            });
         });
-
 
         RecyclerView rvReviews = (RecyclerView) findViewById(R.id.rv_reviews);
         LinearLayoutManager layoutManagerReviews
@@ -101,6 +106,13 @@ public class HomeActivity extends AppCompatActivity
         ProductsAdapter reviewsAdapter = new ProductsAdapter(this, reviews);
         rvReviews.setAdapter(reviewsAdapter);
         rvReviews.setLayoutManager(layoutManagerReviews);
+
+        RecyclerView rvCategory = (RecyclerView) findViewById(R.id.rv_categories);
+        GridLayoutManager layoutManagerCategory = new GridLayoutManager(this, 2);
+        ArrayList<Product> category = Product.createCategoryList(4);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category);
+        rvCategory.setAdapter(categoryAdapter);
+        rvCategory.setLayoutManager(layoutManagerCategory);
     }
 
     private void setSearchView(MenuItem searchItem){
@@ -139,4 +151,17 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    final int speedScroll = 1500;
+    final Handler handler = new Handler();
+    final Runnable runnable = new Runnable() {
+        int count = 0;
+        @Override
+        public void run() {
+            if(count < products.size()){
+                rvProducts.scrollToPosition(++count);
+                handler.postDelayed(this,speedScroll);
+            }
+        }
+    };
 }

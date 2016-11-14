@@ -9,7 +9,7 @@ import com.parse.ParseUser;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    int SPLASH_TIME = 3000;
+    int SPLASH_TIME = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

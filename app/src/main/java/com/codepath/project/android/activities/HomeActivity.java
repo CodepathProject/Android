@@ -36,12 +36,18 @@ import butterknife.ButterKnife;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.rv_products) RecyclerView rvProducts;
-    @BindView(R.id.drawer_layout) DrawerLayout drawer;
-    @BindView(R.id.nav_view) NavigationView navigationView;
-    @BindView(R.id.rv_categories) RecyclerView rvCategory;
-    @BindView(R.id.rv_reviews) RecyclerView rvReviews;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.rv_products)
+    RecyclerView rvProducts;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+    @BindView(R.id.rv_categories)
+    RecyclerView rvCategory;
+    @BindView(R.id.rv_reviews)
+    RecyclerView rvReviews;
 
     ProductsAdapter productsAdapter;
     List<Product> products;
@@ -79,7 +85,7 @@ public class HomeActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void setRecycleView(){
+    private void setRecycleView() {
         LinearLayoutManager layoutManagerProducts
                 = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         rvProducts.setLayoutManager(layoutManagerProducts);
@@ -122,7 +128,7 @@ public class HomeActivity extends AppCompatActivity
         rvCategory.setLayoutManager(layoutManagerCategory);
     }
 
-    private void setSearchView(MenuItem searchItem){
+    private void setSearchView(MenuItem searchItem) {
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.requestFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -131,6 +137,7 @@ public class HomeActivity extends AppCompatActivity
                 System.out.println("Query submitted");
                 return true;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
@@ -138,14 +145,14 @@ public class HomeActivity extends AppCompatActivity
         });
     }
 
-    private void setNavigationDrawer(){
+    private void setNavigationDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
-        TextView tvUserName = (TextView)header.findViewById(R.id.tvUserName);
+        TextView tvUserName = (TextView) header.findViewById(R.id.tvUserName);
         tvUserName.setText("Hello, " + ParseUser.getCurrentUser().get("firstName"));
     }
 
@@ -154,6 +161,15 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+
+        switch (id) {
+            case R.id.nav_logout:
+                ParseUser.logOut();
+                Intent intent = new Intent(this, SplashScreenActivity.class);
+                startActivity(intent);
+                break;
+        }
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -162,11 +178,12 @@ public class HomeActivity extends AppCompatActivity
     final Handler handler = new Handler();
     final Runnable runnable = new Runnable() {
         int count = 0;
+
         @Override
         public void run() {
-            if(count < products.size()){
+            if (count < products.size()) {
                 rvProducts.scrollToPosition(++count);
-                handler.postDelayed(this,speedScroll);
+                handler.postDelayed(this, speedScroll);
             }
         }
     };

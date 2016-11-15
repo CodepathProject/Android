@@ -13,3 +13,7 @@ The following **required** functionality is completed:
 * [x] For each product selected, user can see the following details:
   * [x] Product Name, Brand, Rating and Reviews
 * [x] User can write a review to the product.
+
+## Video walkthrough
+
+[sendvid](http://4.sendvid.com/t4xlpub4.mp4)

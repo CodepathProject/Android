@@ -19,5 +19,14 @@ public class ParseApplication extends Application {
                 .clientKey(null)
                 .addNetworkInterceptor(new ParseLogInterceptor())
                 .server("https://codepath.herokuapp.com/parse/").build());
+
+//        byte[] data = "Working at Parse is great!".getBytes();
+//        ParseFile file = new ParseFile("resume.txt", data);
+//        file.saveInBackground();
+//
+//        ParseObject jobApplication = new ParseObject("JobApplication");
+//        jobApplication.put("applicantName", "Joe Smith");
+//        jobApplication.put("applicantResumeFile", file);
+//        jobApplication.saveInBackground();
     }
 }

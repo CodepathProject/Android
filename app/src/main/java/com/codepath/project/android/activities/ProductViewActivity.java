@@ -2,7 +2,6 @@ package com.codepath.project.android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -112,12 +111,12 @@ public class ProductViewActivity extends AppCompatActivity {
                         if (err == null) {
                             reviews.addAll(reviewList);
                             reviewsAdapter.notifyDataSetChanged();
-                            handler.postDelayed(runnable, speedScroll);
-                            rvReviews.setOnTouchListener((v, event) -> {
-                                handler.removeCallbacks(runnable);
-                                v.setOnTouchListener(null);
-                                return false;
-                            });
+//                            handler.postDelayed(runnable, speedScroll);
+//                            rvReviews.setOnTouchListener((v, event) -> {
+//                                handler.removeCallbacks(runnable);
+//                                v.setOnTouchListener(null);
+//                                return false;
+//                            });
                         } else {
                             Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
                         }
@@ -162,19 +161,19 @@ public class ProductViewActivity extends AppCompatActivity {
         }
     }
 
-    final int speedScroll = 1500;
-    final Handler handler = new Handler();
-    final Runnable runnable = new Runnable() {
-        int count = 0;
-        @Override
-        public void run() {
-            if (count < reviews.size()) {
-                rvReviews.scrollToPosition(++count);
-                handler.postDelayed(this, speedScroll);
-            } else {
-                count = 0;
-                handler.postDelayed(this, speedScroll);
-            }
-        }
-    };
+//    final int speedScroll = 1500;
+//    final Handler handler = new Handler();
+//    final Runnable runnable = new Runnable() {
+//        int count = 0;
+//        @Override
+//        public void run() {
+//            if (count < reviews.size()) {
+//                rvReviews.scrollToPosition(++count);
+//                handler.postDelayed(this, speedScroll);
+//            } else {
+//                count = 0;
+//                handler.postDelayed(this, speedScroll);
+//            }
+//        }
+//    };
 }

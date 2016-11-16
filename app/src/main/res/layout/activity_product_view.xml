@@ -107,6 +107,7 @@
         app:fabSize="normal"
         android:onClick="onAddReview"
         app:backgroundTint="@color/colorPrimary"
+        android:tint="@color/colorIcons"
         app:layout_anchor="@id/rlProduct"
         app:layout_anchorGravity="bottom|right|end" />
 

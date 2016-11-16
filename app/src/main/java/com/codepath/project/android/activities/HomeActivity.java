@@ -125,7 +125,7 @@ public class HomeActivity extends AppCompatActivity
 
         GridLayoutManager layoutManagerCategory = new GridLayoutManager(this, GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
         ArrayList<Product> category = Product.createCategoryList(12);
-        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category, "GRID");
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
     }

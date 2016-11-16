@@ -4,6 +4,8 @@ import com.codepath.project.android.data.TestData;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
+import junit.framework.Test;
+
 import java.util.ArrayList;
 
 @ParseClassName("Product")
@@ -95,15 +97,24 @@ public class Product extends ParseObject {
         return productList;
     }
 
-    public static ArrayList<Product> createCategoryList(int length){
+    public static ArrayList<Product> createCategoryList(int length, CategoryViewType type){
         ArrayList<Product> productList = new ArrayList<Product>();
-        for(int i = 0; i < length; i++){
+
+        int size = (type == CategoryViewType.GRID ) ? (length - 1) : length;
+
+        for(int i = 0; i < size; i++){
             Product product = new Product();
             String name = TestData.catItemName[i%4];
             String imageUrl = TestData.catItemUrl[i%4];
             product.setName(name);
             product.setImageUrl(imageUrl);
             productList.add(product);
+        }
+        if(type == CategoryViewType.GRID) {
+            Product more = new Product();
+            more.setName("");
+            more.setImageUrl(TestData.MORE_URL);
+            productList.add(more);
         }
         return productList;
     }

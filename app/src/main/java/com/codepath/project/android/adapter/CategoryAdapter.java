@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.CategoryActivity;
+import com.codepath.project.android.model.CategoryViewType;
 import com.codepath.project.android.model.Product;
 import com.squareup.picasso.Picasso;
 
@@ -24,9 +25,9 @@ public class CategoryAdapter extends
 
     private List<Product> mProducts;
     private Context mContext;
-    private String mItemLayoutType;
+    private CategoryViewType mItemLayoutType;
 
-    public CategoryAdapter(Context context, List<Product> products, String itemLayoutType) {
+    public CategoryAdapter(Context context, List<Product> products, CategoryViewType itemLayoutType) {
         mProducts = products;
         mContext = context;
         mItemLayoutType = itemLayoutType;
@@ -51,9 +52,9 @@ public class CategoryAdapter extends
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View contactView = null;
-        if(mItemLayoutType.equals("GRID")){
+        if(mItemLayoutType.equals(CategoryViewType.GRID)){
             contactView = inflater.inflate(R.layout.item_category, parent, false);
-        }else if(mItemLayoutType.equals("VERTICAL")){
+        }else if(mItemLayoutType.equals(CategoryViewType.VERTICAL)){
             contactView = inflater.inflate(R.layout.item_category_vertical, parent, false);
         }
         ViewHolder viewHolder = new ViewHolder(contactView);
@@ -68,10 +69,18 @@ public class CategoryAdapter extends
         tvProductName.setText(product.getName());
         ImageView ivProductImage = viewHolder.ivCategoryImage;
         Picasso.with(getContext()).load(product.getImageUrl()).into(ivProductImage);
-        ivProductImage.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), CategoryActivity.class);
-            getContext().startActivity(intent);
-        });
+
+        if(mItemLayoutType.equals(CategoryViewType.GRID)){
+            if(position == (getItemCount() - 1)) {
+                ivProductImage.setOnClickListener(v -> {
+                    Intent intent = new Intent(getContext(), CategoryActivity.class);
+                    getContext().startActivity(intent);
+                });
+                tvProductName.setVisibility(View.INVISIBLE);
+            } else{
+                tvProductName.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     // Returns the total count of items in the list

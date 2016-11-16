@@ -23,6 +23,7 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.adapter.ProductsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
+import com.codepath.project.android.model.CategoryViewType;
 import com.codepath.project.android.model.Product;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -124,8 +125,8 @@ public class HomeActivity extends AppCompatActivity
         rvReviews.setLayoutManager(layoutManagerReviews);
 
         GridLayoutManager layoutManagerCategory = new GridLayoutManager(this, GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
-        ArrayList<Product> category = Product.createCategoryList(12);
-        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category, "GRID");
+        ArrayList<Product> category = Product.createCategoryList(12, CategoryViewType.GRID);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category, CategoryViewType.GRID);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
     }

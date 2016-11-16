@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.codepath.project.android.R;
 import com.codepath.project.android.model.Review;
 import com.codepath.project.android.utils.GeneralUtils;
-import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -58,19 +57,14 @@ public class ReviewsAdapter extends
     public void onBindViewHolder(ReviewsAdapter.ViewHolder viewHolder, int position) {
         Review review = mReviews.get(position);
         TextView tvReview = viewHolder.tvReview;
-        try {
-            ParseUser user = review.getUser();
-            String formattedText = "";
-            if(user != null) {
-                user = user.fetchIfNeeded();
-                formattedText += "<b>" + user.getString("firstName") + ": </b> ";
-                Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(user.getObjectId())).into(viewHolder.ivProfile);
-            }
-            formattedText+= review.getText();
-            tvReview.setText(Html.fromHtml(formattedText));
-        } catch (ParseException e) {
-            e.printStackTrace();
+        ParseUser user = review.getUser();
+        String formattedText = "";
+        if(user != null) {
+            formattedText += "<b>" + user.getString("firstName") + ": </b> ";
+            Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(user.getObjectId())).into(viewHolder.ivProfile);
         }
+        formattedText += review.getText();
+        tvReview.setText(Html.fromHtml(formattedText));
 
 //        if(review.getImages() != null && review.getImages().size() > 0) {
 //            viewHolder.llImages.setVisibility(View.VISIBLE);

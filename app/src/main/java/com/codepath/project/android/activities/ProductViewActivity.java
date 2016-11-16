@@ -106,6 +106,7 @@ public class ProductViewActivity extends AppCompatActivity {
                             });
 
                     ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
+                    reviewQuery.include("user");
                     reviewQuery.whereEqualTo("product", product);
                     reviewQuery.findInBackground((reviewList, err) -> {
                         if (err == null) {

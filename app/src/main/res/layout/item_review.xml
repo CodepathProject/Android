@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     android:paddingBottom="@dimen/rv_home_item_padding"
     android:paddingEnd="@dimen/rv_home_item_padding"
     android:paddingTop="@dimen/rv_home_item_padding">

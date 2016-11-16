@@ -49,6 +49,8 @@ public class HomeActivity extends AppCompatActivity
     @BindView(R.id.rv_reviews)
     RecyclerView rvReviews;
 
+    public static final int GRID_ROW_COUNT = 2;
+
     ProductsAdapter productsAdapter;
     List<Product> products;
 
@@ -121,8 +123,8 @@ public class HomeActivity extends AppCompatActivity
         rvReviews.setAdapter(reviewsAdapter);
         rvReviews.setLayoutManager(layoutManagerReviews);
 
-        GridLayoutManager layoutManagerCategory = new GridLayoutManager(this, 2);
-        ArrayList<Product> category = Product.createCategoryList(4);
+        GridLayoutManager layoutManagerCategory = new GridLayoutManager(this, GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
+        ArrayList<Product> category = Product.createCategoryList(12);
         CategoryAdapter categoryAdapter = new CategoryAdapter(this, category);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);

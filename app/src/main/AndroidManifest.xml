@@ -28,11 +28,11 @@
         <activity
             android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.CustomActionBar">
-        </activity>
-        <activity android:name=".activities.ProductViewActivity" />
-        <activity android:name=".activities.LoginActivity"/>
-
+            android:theme="@style/AppTheme.CustomActionBar"></activity>
+        <activity android:name=".activities.ProductViewActivity"/>
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.CategoryActivity"
+            android:theme="@style/AppTheme.CustomActionBar"></activity>
     </application>
 
 </manifest>

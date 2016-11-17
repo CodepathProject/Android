@@ -65,29 +65,6 @@ public class ReviewsAdapter extends
         }
         formattedText += review.getText();
         tvReview.setText(Html.fromHtml(formattedText));
-
-//        if(review.getImages() != null && review.getImages().size() > 0) {
-//            viewHolder.llImages.setVisibility(View.VISIBLE);
-//            viewHolder.llImages.removeAllViews();
-//            for(ParseFile image: review.getImages()) {
-////                ParseImageView ivImage = new ParseImageView(getContext());
-////                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 500);
-////                layoutParams.setMarginEnd(30);
-////                ivImage.setLayoutParams(layoutParams);
-////                ivImage.setParseFile(image);
-////                viewHolder.llImages.addView(ivImage);
-//
-//
-//                ImageView ivImage = new ImageView(getContext());
-//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 500);
-//                layoutParams.setMarginEnd(30);
-//                ivImage.setLayoutParams(layoutParams);
-//                Picasso.with(getContext()).load(image.getUrl()).into(ivImage);
-//                viewHolder.llImages.addView(ivImage);
-//            }
-//        } else {
-//            viewHolder.llImages.setVisibility(View.GONE);
-//        }
     }
 
     @Override

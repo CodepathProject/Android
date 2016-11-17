@@ -52,18 +52,11 @@
         android:clickable="true"
         android:id="@+id/btnPost" />
 
-
-    <ScrollView
-        android:id="@+id/scrollView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCapturedImages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ivCamera"
         android:layout_alignParentStart="true">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:id="@+id/llImages">
-        </LinearLayout>
-    </ScrollView>
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

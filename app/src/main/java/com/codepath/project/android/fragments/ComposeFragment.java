@@ -5,13 +5,14 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +21,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.helpers.BitmapScaler;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
+import com.codepath.project.android.utils.ImageUtils;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -49,11 +50,14 @@ public class ComposeFragment extends DialogFragment {
     @BindView(R.id.btnPost) Button btnPost;
     @BindView(R.id.ivComposeCancel) ImageView ivComposeCancel;
     @BindView(R.id.ivCamera) ImageView ivCamera;
-    @BindView(R.id.llImages) LinearLayout llImages;
+    @BindView(R.id.rvCapturedImages) RecyclerView rvCapturedImages;
 
     List<ParseFile> images;
 
+    List<Bitmap> bitmaps;
+
     Product product;
+    ImageCaptureAdapter imageCaptureAdapter;
 
     private Unbinder unbinder;
 
@@ -88,6 +92,7 @@ public class ComposeFragment extends DialogFragment {
         unbinder = ButterKnife.bind(this, view);
 
         images = new ArrayList<>();
+        bitmaps = new ArrayList<>();
 
         ivComposeCancel.setOnClickListener(v -> closeKeyboardAndDismiss(view));
 
@@ -127,6 +132,11 @@ public class ComposeFragment extends DialogFragment {
         });
 
         ivCamera.setOnClickListener(v -> onCameraClick());
+
+        imageCaptureAdapter = new ImageCaptureAdapter(getActivity(), bitmaps);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        rvCapturedImages.setLayoutManager(mLayoutManager);
+        rvCapturedImages.setAdapter(imageCaptureAdapter);
     }
 
     public void closeKeyboardAndDismiss(View view) {
@@ -154,7 +164,8 @@ public class ComposeFragment extends DialogFragment {
         if (requestCode == 1034) {
             if (resultCode == getActivity().RESULT_OK) {
                 Uri takenPhotoUri = getPhotoFileUri("photo-codepath.jpg");
-                Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
+                //Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
+                Bitmap takenImage = ImageUtils.rotateBitmapOrientation(takenPhotoUri.getPath());
                 Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(takenImage, 500);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -163,14 +174,9 @@ public class ComposeFragment extends DialogFragment {
                 if (bytearray != null){
                     ParseFile file = new ParseFile("abcd.jpg", bytearray);
                     images.add(file);
+                    bitmaps.add(resizedBitmap);
+                    imageCaptureAdapter.notifyDataSetChanged();
                 }
-
-                ImageView ivImage = new ImageView(getActivity());
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(500, 500);
-                layoutParams.setMarginEnd(30);
-                ivImage.setLayoutParams(layoutParams);
-                ivImage.setImageBitmap(resizedBitmap);
-                llImages.addView(ivImage);
             }
         }
     }
@@ -179,7 +185,9 @@ public class ComposeFragment extends DialogFragment {
         if (isExternalStorageAvailable()) {
             File mediaStorageDir = new File(
                     getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "MyCustomApp");
-            if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){}
+            if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+
+            }
             return Uri.fromFile(new File(mediaStorageDir.getPath() + File.separator + fileName));
         }
         return null;
@@ -194,5 +202,56 @@ public class ComposeFragment extends DialogFragment {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         ComposeFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    public void removeImage(int position) {
+        images.remove(position);
+        bitmaps.remove(position);
+        imageCaptureAdapter.notifyDataSetChanged();
+    }
+
+    public class ImageCaptureAdapter  extends
+            RecyclerView.Adapter<ImageCaptureAdapter.ViewHolder> {
+
+        private List<Bitmap> mImages;
+        private Context mContext;
+
+        public ImageCaptureAdapter(Context context, List<Bitmap> images) {
+            mImages = images;
+            mContext = context;
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            @BindView(R.id.ivCancel)
+            ImageView ivCancel;
+            @BindView(R.id.ivImage)
+            ImageView ivImage;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                ButterKnife.bind(this, itemView);
+            }
+        }
+
+        @Override
+        public ImageCaptureAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            Context context = parent.getContext();
+            LayoutInflater inflater = LayoutInflater.from(context);
+            View contactView = inflater.inflate(R.layout.item_image_capture, parent, false);
+            return new ViewHolder(contactView);
+        }
+
+        @Override
+        public void onBindViewHolder(ImageCaptureAdapter.ViewHolder viewHolder, int position) {
+            Bitmap image = mImages.get(position);
+            viewHolder.ivImage.setImageBitmap(image);
+
+            viewHolder.ivCancel.setOnClickListener(v -> removeImage(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mImages.size();
+        }
     }
 }

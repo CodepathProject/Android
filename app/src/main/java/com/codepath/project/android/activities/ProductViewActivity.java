@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.ReviewsAdapter;
 import com.codepath.project.android.fragments.ComposeFragment;
+import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -76,6 +77,14 @@ public class ProductViewActivity extends AppCompatActivity {
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             mLayoutManager.scrollToPosition(0);
             rvReviews.setLayoutManager(mLayoutManager);
+
+            ItemClickSupport.addTo(rvReviews).setOnItemClickListener(
+                    (recyclerView, position, v) -> {
+                        Intent intent = new Intent(ProductViewActivity.this, DetailedReviewActivity.class);
+                        intent.putExtra("reviewId", reviews.get(position).getObjectId());
+                        startActivity(intent);
+                    }
+            );
 
             String productId = getIntent().getStringExtra("productId");
             ParseQuery<Product> query = ParseQuery.getQuery(Product.class);

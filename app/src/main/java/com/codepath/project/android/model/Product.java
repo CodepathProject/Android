@@ -120,7 +120,11 @@ public class Product extends ParseObject {
     }
 
     public String getVideo() {
-        return getString("mainVideo");
+        // the stored videoUrl points to full youtube link
+        // have to split the url for the "id"
+        String videoUrl = getString("videoUrl");
+        String videoId = videoUrl.split("=")[1];
+        return videoId;
     }
 
 }

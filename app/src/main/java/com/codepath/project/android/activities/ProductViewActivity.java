@@ -96,7 +96,8 @@ public class ProductViewActivity extends AppCompatActivity {
                                 @Override
                                 public void onInitializationSuccess(YouTubePlayer.Provider provider,
                                                                     YouTubePlayer youTubePlayer, boolean b) {
-                                    youTubePlayer.cueVideo(product.getVideo());
+                                    //youTubePlayer.cueVideo(product.getVideo());
+                                    youTubePlayer.loadVideo(product.getVideo());
                                 }
                                 @Override
                                 public void onInitializationFailure(YouTubePlayer.Provider provider,

@@ -6,6 +6,8 @@ import com.parse.ParseObject;
 
 import junit.framework.Test;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 @ParseClassName("Product")
@@ -80,6 +82,10 @@ public class Product extends ParseObject {
         return getString("imageUrl");
     }
 
+    public JSONArray getImageSetUrls() {
+        return getJSONArray("imageSetUrls");
+    }
+
     public void setImageUrl(String imageUrl) {
         put("imageUrl", imageUrl);
     }
@@ -127,4 +133,15 @@ public class Product extends ParseObject {
         return videoId;
     }
 
+    public JSONArray getVideoSetUrls() {
+        return getJSONArray("videoSetUrls");
+    }
+
+    public String getCategory() {
+        return getString("category");
+    }
+
+    public String getSubCategory() {
+        return getString("subCategory");
+    }
 }

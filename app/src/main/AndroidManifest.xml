@@ -34,7 +34,8 @@
         <activity
             android:name=".activities.CategoryActivity"
             android:theme="@style/AppTheme.CustomActionBar" />
-        <activity android:name=".activities.DetailedReviewActivity"></activity>
+        <activity android:name=".activities.DetailedReviewActivity" />
+        <activity android:name=".activities.ImageFullscreenActivity"></activity>
     </application>
 
 </manifest>

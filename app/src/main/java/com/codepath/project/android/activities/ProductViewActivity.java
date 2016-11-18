@@ -94,6 +94,14 @@ public class ProductViewActivity extends AppCompatActivity {
                     product = p;
                     collapsingToolbar.setTitle(p.getName());
                     Picasso.with(this).load(product.getImageUrl()).into(ivProductImage);
+
+                    ivProductImage.setOnClickListener(v -> {
+                        Intent intent = new Intent(this, ImageFullscreenActivity.class);
+                        String image = product.getImageUrl();
+                        intent.putExtra("image", image);
+                        startActivity(intent);
+                    });
+
                     getSupportActionBar().setTitle(product.getName());
                     tvProductName.setText(product.getName());
                     tvBrandName.setText(product.getBrand());

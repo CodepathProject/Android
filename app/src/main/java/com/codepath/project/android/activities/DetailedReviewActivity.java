@@ -3,6 +3,7 @@ package com.codepath.project.android.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -48,7 +49,7 @@ public class DetailedReviewActivity extends AppCompatActivity {
         imageUrl = new ArrayList<>();
         imageAdapter = new ImageAdapter(this, imageUrl);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rvReviewImage.setLayoutManager(mLayoutManager);
+        rvReviewImage.setLayoutManager(new GridLayoutManager(this, 2));
         rvReviewImage.setAdapter(imageAdapter);
 
 

@@ -14,7 +14,6 @@ import com.codepath.project.android.activities.SplashScreenActivity;
 import com.codepath.project.android.adapter.MyProductsAdapter;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Product;
-import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -61,22 +60,11 @@ public class ProductsListFragment extends Fragment {
             startActivity(intent);
         }
         if (mPage == 1) {
-            try {
-                AppUser.getInstance().fetchIfNeeded();
-                productsList.addAll(user.getShelfProducts());
-                productsAdapter.notifyDataSetChanged();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
+            productsList.addAll(user.getShelfProducts());
+            productsAdapter.notifyDataSetChanged();
         } else {
-            try {
-                AppUser.getInstance().fetchIfNeeded();
-                productsList.addAll(user.getWishListProducts());
-                productsAdapter.notifyDataSetChanged();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            productsList.addAll(user.getWishListProducts());
+            productsAdapter.notifyDataSetChanged();
         }
         return view;
     }

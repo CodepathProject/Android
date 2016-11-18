@@ -164,10 +164,14 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.nav_my_products:
+                Intent myProductsIntent = new Intent(this, MyProductsActivity.class);
+                startActivity(myProductsIntent);
+                break;
             case R.id.nav_logout:
                 ParseUser.logOut();
-                Intent intent = new Intent(this, SplashScreenActivity.class);
-                startActivity(intent);
+                Intent logoutIntent = new Intent(this, SplashScreenActivity.class);
+                startActivity(logoutIntent);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

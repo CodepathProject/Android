@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.ReviewsAdapter;
 import com.codepath.project.android.fragments.ComposeFragment;
 import com.codepath.project.android.helpers.ItemClickSupport;
+import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.parse.ParseQuery;
@@ -50,11 +52,16 @@ public class ProductViewActivity extends AppCompatActivity {
     RecyclerView rvReviews;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
+    @BindView(R.id.btnShelf)
+    Button btnShelf;
+    @BindView(R.id.btnWishlist)
+    Button btnWishlist;
 
     ReviewsAdapter reviewsAdapter;
     List<Review> reviews;
 
     Product product;
+    AppUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,29 +69,11 @@ public class ProductViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_view);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
+        user = new AppUser(ParseUser.getCurrentUser());
 
+        setUpToolbar();
         if(savedInstanceState == null) {
-            reviews = new ArrayList<>();
-            reviewsAdapter = new ReviewsAdapter(this, reviews);
-            rvReviews.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).build());
-            rvReviews.setAdapter(reviewsAdapter);
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-            mLayoutManager.scrollToPosition(0);
-            rvReviews.setLayoutManager(mLayoutManager);
-            rvReviews.setNestedScrollingEnabled(false);
-
-            ItemClickSupport.addTo(rvReviews).setOnItemClickListener(
-                    (recyclerView, position, v) -> {
-                        Intent intent = new Intent(ProductViewActivity.this, DetailedReviewActivity.class);
-                        intent.putExtra("reviewId", reviews.get(position).getObjectId());
-                        startActivity(intent);
-                    }
-            );
+            setUpRecyclerView();
 
             String productId = getIntent().getStringExtra("productId");
             ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
@@ -146,6 +135,84 @@ public class ProductViewActivity extends AppCompatActivity {
                     Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
                 }
             });
+        }
+
+        if(user.getParseUser() != null) {
+            if(user.getShelfProducts() != null && user.getShelfProducts().contains(product)) {
+                btnShelf.setText("Remove from shelf");
+            }
+            if(user.getWishListProducts() != null && user.getWishListProducts().contains(product)) {
+                btnWishlist.setText("Remove from wishlist");
+            }
+        }
+        setUpBtnShelfClickListener();
+        setUpBtnWishlistClickListener();
+    }
+
+    private void setUpBtnWishlistClickListener() {
+        btnWishlist.setOnClickListener(v -> {
+            if(user.getParseUser() != null) {
+                if(user.getWishListProducts() != null && user.getWishListProducts().contains(product)) {
+                    user.removeWishListProduct(product);
+                    btnWishlist.setText("Add to wishlist");
+                    Toast.makeText(this, "Removed from wishlist", Toast.LENGTH_SHORT).show();
+                } else {
+                    user.addWishListProduct(product);
+                    btnWishlist.setText("Remove from wishlist");
+                    Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+                }
+                user.save();
+            } else {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setUpBtnShelfClickListener() {
+        btnShelf.setOnClickListener(v -> {
+            if(user.getParseUser() != null) {
+                if(user.getShelfProducts() != null && user.getShelfProducts().contains(product)) {
+                    user.removeShelfProduct(product);
+                    btnShelf.setText("Add to shelf");
+                    Toast.makeText(this, "Removed from shelf", Toast.LENGTH_SHORT).show();
+                } else {
+                    user.addShelfProduct(product);
+                    btnShelf.setText("Remove from shelf");
+                    Toast.makeText(this, "Added to shelf", Toast.LENGTH_SHORT).show();
+                }
+                user.save();
+            } else {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setUpRecyclerView() {
+        reviews = new ArrayList<>();
+        reviewsAdapter = new ReviewsAdapter(this, reviews);
+        rvReviews.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).build());
+        rvReviews.setAdapter(reviewsAdapter);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mLayoutManager.scrollToPosition(0);
+        rvReviews.setLayoutManager(mLayoutManager);
+        rvReviews.setNestedScrollingEnabled(false);
+
+        ItemClickSupport.addTo(rvReviews).setOnItemClickListener(
+                (recyclerView, position, v) -> {
+                    Intent intent = new Intent(ProductViewActivity.this, DetailedReviewActivity.class);
+                    intent.putExtra("reviewId", reviews.get(position).getObjectId());
+                    startActivity(intent);
+                }
+        );
+    }
+
+    private void setUpToolbar() {
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
 

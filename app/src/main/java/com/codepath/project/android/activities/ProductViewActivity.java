@@ -2,6 +2,7 @@ package com.codepath.project.android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +23,6 @@ import com.codepath.project.android.fragments.ComposeFragment;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
@@ -50,6 +48,8 @@ public class ProductViewActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.rvReviews)
     RecyclerView rvReviews;
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbar;
 
     ReviewsAdapter reviewsAdapter;
     List<Review> reviews;
@@ -69,7 +69,6 @@ public class ProductViewActivity extends AppCompatActivity {
         }
 
         if(savedInstanceState == null) {
-
             reviews = new ArrayList<>();
             reviewsAdapter = new ReviewsAdapter(this, reviews);
             rvReviews.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).build());
@@ -77,6 +76,7 @@ public class ProductViewActivity extends AppCompatActivity {
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             mLayoutManager.scrollToPosition(0);
             rvReviews.setLayoutManager(mLayoutManager);
+            rvReviews.setNestedScrollingEnabled(false);
 
             ItemClickSupport.addTo(rvReviews).setOnItemClickListener(
                     (recyclerView, position, v) -> {
@@ -92,28 +92,29 @@ public class ProductViewActivity extends AppCompatActivity {
             query.getInBackground(productId, (p, e) -> {
                 if (e == null) {
                     product = p;
+                    collapsingToolbar.setTitle(p.getName());
                     Picasso.with(this).load(product.getImageUrl()).into(ivProductImage);
                     getSupportActionBar().setTitle(product.getName());
                     tvProductName.setText(product.getName());
                     tvBrandName.setText(product.getBrand());
                     rbAverageRating.setRating((float) product.getAverageRating());
 
-                    YouTubePlayerFragment youtubeFragment = (YouTubePlayerFragment)
-                            getFragmentManager().findFragmentById(R.id.youtubeFragment);
-                    youtubeFragment.initialize("AIzaSyCk70hKeShEmA5EDKGNDDaejcUvdb2pNW0",
-                            new YouTubePlayer.OnInitializedListener() {
-                                @Override
-                                public void onInitializationSuccess(YouTubePlayer.Provider provider,
-                                                                    YouTubePlayer youTubePlayer, boolean b) {
-                                    //youTubePlayer.cueVideo(product.getVideo());
-                                    youTubePlayer.loadVideo(product.getVideo());
-                                }
-                                @Override
-                                public void onInitializationFailure(YouTubePlayer.Provider provider,
-                                                                    YouTubeInitializationResult youTubeInitializationResult) {
-
-                                }
-                            });
+//                    YouTubePlayerFragment youtubeFragment = (YouTubePlayerFragment)
+//                            getFragmentManager().findFragmentById(R.id.youtubeFragment);
+//                    youtubeFragment.initialize("AIzaSyCk70hKeShEmA5EDKGNDDaejcUvdb2pNW0",
+//                            new YouTubePlayer.OnInitializedListener() {
+//                                @Override
+//                                public void onInitializationSuccess(YouTubePlayer.Provider provider,
+//                                                                    YouTubePlayer youTubePlayer, boolean b) {
+//                                    //youTubePlayer.cueVideo(product.getVideo());
+//                                    youTubePlayer.loadVideo(product.getVideo());
+//                                }
+//                                @Override
+//                                public void onInitializationFailure(YouTubePlayer.Provider provider,
+//                                                                    YouTubeInitializationResult youTubeInitializationResult) {
+//
+//                                }
+//                            });
 
                     ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
                     reviewQuery.include("user");

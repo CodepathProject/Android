@@ -54,17 +54,18 @@ public class ProductsListFragment extends Fragment {
         mLayoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        AppUser user = new AppUser();
-        if (ParseUser.getCurrentUser() == null) {
+        AppUser user = (AppUser) ParseUser.getCurrentUser();
+        if (user == null) {
             Intent intent = new Intent(getActivity(), SplashScreenActivity.class);
             startActivity(intent);
-        }
-        if (mPage == 1) {
-            productsList.addAll(user.getShelfProducts());
-            productsAdapter.notifyDataSetChanged();
         } else {
-            productsList.addAll(user.getWishListProducts());
-            productsAdapter.notifyDataSetChanged();
+            if (mPage == 1) {
+                productsList.addAll(user.getShelfProducts());
+                productsAdapter.notifyDataSetChanged();
+            } else {
+                productsList.addAll(user.getWishListProducts());
+                productsAdapter.notifyDataSetChanged();
+            }
         }
         return view;
     }

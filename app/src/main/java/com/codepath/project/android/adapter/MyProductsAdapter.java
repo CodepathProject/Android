@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.model.Product;
-import com.parse.ParseException;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -49,19 +48,18 @@ public class MyProductsAdapter extends
         return new ViewHolder(contactView);
     }
 
-    // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(MyProductsAdapter.ViewHolder viewHolder, int position) {
         Product product = mProducts.get(position);
-        try {
-            product = product.fetchIfNeeded();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        TextView tvProductName = viewHolder.tvProductNAme;
-        tvProductName.setText(product.getName());
-        ImageView ivProductImage = viewHolder.ivProductImage;
-        Picasso.with(getContext()).load(product.getImageUrl()).into(ivProductImage);
+            product.fetchIfNeededInBackground((object, e) -> {
+                if(e == null) {
+                    Product temp = (Product) object;
+                    TextView tvProductName = viewHolder.tvProductNAme;
+                    tvProductName.setText(temp.getName());
+                    ImageView ivProductImage = viewHolder.ivProductImage;
+                    Picasso.with(getContext()).load(temp.getImageUrl()).into(ivProductImage);
+                }
+            });
     }
 
     // Returns the total count of items in the list

@@ -1,42 +1,38 @@
 package com.codepath.project.android.model;
 
+import com.parse.ParseClassName;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AppUser {
-    private static ParseUser user = ParseUser.getCurrentUser();
-
-    public static ParseUser getInstance() {
-        return user;
-    }
+@ParseClassName("_User")
+public class AppUser extends ParseUser {
 
     public void addShelfProduct(Product product) {
-        user.addUnique("shelfProducts", product);
+        addUnique("shelfProducts", product);
     }
 
     public List<Product> getShelfProducts() {
-        return (List<Product>) user.get("shelfProducts");
+        List<Product> products = new ArrayList<>();
+        products.addAll((List<Product>) get("shelfProducts"));
+        return products;
     }
 
     public void removeShelfProduct(Product product) {
-        user.removeAll("shelfProducts", Arrays.asList(product));
+        removeAll("shelfProducts", Arrays.asList(product));
     }
 
     public void addWishListProduct(Product product) {
-        user.addUnique("wishListProducts", product);
+        addUnique("wishListProducts", product);
     }
 
     public List<Product> getWishListProducts() {
-        return (List<Product>) user.get("wishListProducts");
+        return (List<Product>) get("wishListProducts");
     }
 
     public void removeWishListProduct(Product product) {
-        user.removeAll("wishListProducts", Arrays.asList(product));
-    }
-
-    public void save() {
-        user.saveInBackground();
+        removeAll("wishListProducts", Arrays.asList(product));
     }
 }

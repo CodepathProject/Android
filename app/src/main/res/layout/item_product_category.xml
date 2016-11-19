@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/rv_home_item_width"
-    android:layout_height="180dp"
+    android:layout_width="@dimen/category_detail_card_width"
+    android:layout_height="@dimen/category_detail_card_height"
     android:layout_margin="5dp"
     android:elevation="3dp">
     <RelativeLayout

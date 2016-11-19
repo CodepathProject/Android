@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
-import com.codepath.project.android.model.CategoryViewType;
+import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
 import com.squareup.picasso.Picasso;
 
@@ -20,9 +20,9 @@ public class ProductsAdapter extends
 
     private List<Product> mProducts;
     private Context mContext;
-    private CategoryViewType mViewType;
+    private ViewType mViewType;
 
-    public ProductsAdapter(Context context, List<Product> products, CategoryViewType viewType) {
+    public ProductsAdapter(Context context, List<Product> products, ViewType viewType) {
         mProducts = products;
         mContext = context;
         mViewType =  viewType;
@@ -48,9 +48,9 @@ public class ProductsAdapter extends
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View contactView = null;
-        if(mViewType == CategoryViewType.VERTICAL_GRID){
+        if(mViewType == ViewType.VERTICAL_GRID){
             contactView = inflater.inflate(R.layout.item_product_category, parent, false);
-        } else if(mViewType == CategoryViewType.HORIZONTAL){
+        } else if(mViewType == ViewType.HORIZONTAL){
             contactView = inflater.inflate(R.layout.item_product, parent, false);
         }
         return new ViewHolder(contactView);

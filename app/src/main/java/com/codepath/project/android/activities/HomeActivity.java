@@ -23,7 +23,7 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.adapter.ProductsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
-import com.codepath.project.android.model.CategoryViewType;
+import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity
                 = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         rvProducts.setLayoutManager(layoutManagerProducts);
         products = new ArrayList<>();
-        productsAdapter = new ProductsAdapter(HomeActivity.this, products, CategoryViewType.HORIZONTAL);
+        productsAdapter = new ProductsAdapter(HomeActivity.this, products, ViewType.HORIZONTAL);
         rvProducts.setAdapter(productsAdapter);
 
         ItemClickSupport.addTo(rvProducts).setOnItemClickListener(
@@ -120,13 +120,13 @@ public class HomeActivity extends AppCompatActivity
         LinearLayoutManager layoutManagerReviews
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         ArrayList<Product> reviews = Product.createReviewList(20);
-        ProductsAdapter reviewsAdapter = new ProductsAdapter(this, reviews, CategoryViewType.HORIZONTAL);
+        ProductsAdapter reviewsAdapter = new ProductsAdapter(this, reviews, ViewType.HORIZONTAL);
         rvReviews.setAdapter(reviewsAdapter);
         rvReviews.setLayoutManager(layoutManagerReviews);
 
         GridLayoutManager layoutManagerCategory = new GridLayoutManager(this, GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
-        ArrayList<Product> category = Product.createCategoryList(12, CategoryViewType.GRID);
-        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category, CategoryViewType.GRID);
+        ArrayList<Product> category = Product.createCategoryList(12, ViewType.GRID);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category, ViewType.GRID);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
     }

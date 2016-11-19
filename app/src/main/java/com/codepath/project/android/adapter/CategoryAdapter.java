@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.CategoryActivity;
+import com.codepath.project.android.activities.CategoryDetailActivity;
 import com.codepath.project.android.model.CategoryViewType;
 import com.codepath.project.android.model.Product;
 import com.squareup.picasso.Picasso;
@@ -69,6 +70,14 @@ public class CategoryAdapter extends
         tvProductName.setText(product.getName());
         ImageView ivProductImage = viewHolder.ivCategoryImage;
         Picasso.with(getContext()).load(product.getImageUrl()).into(ivProductImage);
+
+        ivProductImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CategoryDetailActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
 
         if(mItemLayoutType.equals(CategoryViewType.GRID)){
             if(position == (getItemCount() - 1)) {

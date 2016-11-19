@@ -26,4 +26,6 @@ public class TestData {
 
     public static final String MORE_URL = "https://pbs.twimg.com/profile_images/558750489152458752/pBBTFL0j.png";
 
+    public static final String[] tabNameList = {"Samsung","Apple","Sony","LG"};
+
 }

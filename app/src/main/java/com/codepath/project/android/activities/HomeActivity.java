@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity
                 = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         rvProducts.setLayoutManager(layoutManagerProducts);
         products = new ArrayList<>();
-        productsAdapter = new ProductsAdapter(HomeActivity.this, products);
+        productsAdapter = new ProductsAdapter(HomeActivity.this, products, CategoryViewType.HORIZONTAL);
         rvProducts.setAdapter(productsAdapter);
 
         ItemClickSupport.addTo(rvProducts).setOnItemClickListener(
@@ -120,7 +120,7 @@ public class HomeActivity extends AppCompatActivity
         LinearLayoutManager layoutManagerReviews
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         ArrayList<Product> reviews = Product.createReviewList(20);
-        ProductsAdapter reviewsAdapter = new ProductsAdapter(this, reviews);
+        ProductsAdapter reviewsAdapter = new ProductsAdapter(this, reviews, CategoryViewType.HORIZONTAL);
         rvReviews.setAdapter(reviewsAdapter);
         rvReviews.setLayoutManager(layoutManagerReviews);
 

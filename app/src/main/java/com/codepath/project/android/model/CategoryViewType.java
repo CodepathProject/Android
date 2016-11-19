@@ -5,5 +5,5 @@ package com.codepath.project.android.model;
  */
 
 public enum CategoryViewType {
-    GRID, VERTICAL;
+    GRID, VERTICAL, HORIZONTAL, VERTICAL_GRID;
 }

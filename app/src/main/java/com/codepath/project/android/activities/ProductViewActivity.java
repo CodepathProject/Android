@@ -25,6 +25,7 @@ import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
+import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
@@ -69,7 +70,7 @@ public class ProductViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_view);
         ButterKnife.bind(this);
 
-        user = new AppUser();
+        user = (AppUser) ParseUser.getCurrentUser();
 
         setUpToolbar();
         if(savedInstanceState == null) {
@@ -131,48 +132,34 @@ public class ProductViewActivity extends AppCompatActivity {
                         }
                     });
 
+                    setUpShelfWishClickListener();
+
                 } else {
                     Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
                 }
             });
         }
+    }
 
-        if(ParseUser.getCurrentUser() != null) {
-            if(user.getShelfProducts() != null && user.getShelfProducts().contains(product)) {
+    private void setUpShelfWishClickListener() {
+
+        List<Product> productList;
+
+        if(user != null) {
+            productList = user.getShelfProducts();
+            if(ifListContains(productList)) {
                 btnShelf.setText("Remove from shelf");
             }
-            if(user.getWishListProducts() != null && user.getWishListProducts().contains(product)) {
+            productList = user.getWishListProducts();
+            if(ifListContains(productList)) {
                 btnWishlist.setText("Remove from wishlist");
             }
         }
-        setUpBtnShelfClickListener();
-        setUpBtnWishlistClickListener();
-    }
 
-    private void setUpBtnWishlistClickListener() {
-        btnWishlist.setOnClickListener(v -> {
-            if(ParseUser.getCurrentUser() != null) {
-                if(user.getWishListProducts() != null && user.getWishListProducts().contains(product)) {
-                    user.removeWishListProduct(product);
-                    btnWishlist.setText("Add to wishlist");
-                    Toast.makeText(this, "Removed from wishlist", Toast.LENGTH_SHORT).show();
-                } else {
-                    user.addWishListProduct(product);
-                    btnWishlist.setText("Remove from wishlist");
-                    Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show();
-                }
-                user.save();
-            } else {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void setUpBtnShelfClickListener() {
         btnShelf.setOnClickListener(v -> {
             if(ParseUser.getCurrentUser() != null) {
-                if(user.getShelfProducts() != null && user.getShelfProducts().contains(product)) {
+                List<Product> productShelfList = user.getShelfProducts();
+                if(ifListContains(productShelfList)) {
                     user.removeShelfProduct(product);
                     btnShelf.setText("Add to shelf");
                     Toast.makeText(this, "Removed from shelf", Toast.LENGTH_SHORT).show();
@@ -181,12 +168,48 @@ public class ProductViewActivity extends AppCompatActivity {
                     btnShelf.setText("Remove from shelf");
                     Toast.makeText(this, "Added to shelf", Toast.LENGTH_SHORT).show();
                 }
-                user.save();
+                try {
+                    user.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             } else {
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
             }
         });
+
+        btnWishlist.setOnClickListener(v -> {
+            if(user != null) {
+                List<Product> productWishList = user.getWishListProducts();
+                if(ifListContains(productWishList)) {
+                    user.removeWishListProduct(product);
+                    btnWishlist.setText("Add to wishlist");
+                    Toast.makeText(this, "Removed from wishlist", Toast.LENGTH_SHORT).show();
+                } else {
+                    user.addWishListProduct(product);
+                    btnWishlist.setText("Remove from wishlist");
+                    Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+                }
+                try {
+                    user.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private boolean ifListContains(List<Product> productList) {
+        for(Product prod : productList) {
+            if (prod.getObjectId().equals(product.getObjectId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void setUpRecyclerView() {

@@ -69,7 +69,7 @@ public class ProductViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_view);
         ButterKnife.bind(this);
 
-        user = new AppUser(ParseUser.getCurrentUser());
+        user = new AppUser();
 
         setUpToolbar();
         if(savedInstanceState == null) {
@@ -137,7 +137,7 @@ public class ProductViewActivity extends AppCompatActivity {
             });
         }
 
-        if(user.getParseUser() != null) {
+        if(ParseUser.getCurrentUser() != null) {
             if(user.getShelfProducts() != null && user.getShelfProducts().contains(product)) {
                 btnShelf.setText("Remove from shelf");
             }
@@ -151,7 +151,7 @@ public class ProductViewActivity extends AppCompatActivity {
 
     private void setUpBtnWishlistClickListener() {
         btnWishlist.setOnClickListener(v -> {
-            if(user.getParseUser() != null) {
+            if(ParseUser.getCurrentUser() != null) {
                 if(user.getWishListProducts() != null && user.getWishListProducts().contains(product)) {
                     user.removeWishListProduct(product);
                     btnWishlist.setText("Add to wishlist");
@@ -171,7 +171,7 @@ public class ProductViewActivity extends AppCompatActivity {
 
     private void setUpBtnShelfClickListener() {
         btnShelf.setOnClickListener(v -> {
-            if(user.getParseUser() != null) {
+            if(ParseUser.getCurrentUser() != null) {
                 if(user.getShelfProducts() != null && user.getShelfProducts().contains(product)) {
                     user.removeShelfProduct(product);
                     btnShelf.setText("Add to shelf");

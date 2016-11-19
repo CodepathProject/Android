@@ -6,14 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AppUser {
-    private ParseUser user;
+    private static ParseUser user = ParseUser.getCurrentUser();
 
-    public AppUser(ParseUser user) {
-        this.user = user;
-    }
-
-    public ParseUser getParseUser() {
-        return this.user;
+    public static ParseUser getInstance() {
+        return user;
     }
 
     public void addShelfProduct(Product product) {

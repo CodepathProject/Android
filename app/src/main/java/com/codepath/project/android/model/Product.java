@@ -101,28 +101,6 @@ public class Product extends ParseObject {
         return productList;
     }
 
-    public static ArrayList<Product> createCategoryList(int length, ViewType type){
-        ArrayList<Product> productList = new ArrayList<Product>();
-
-        int size = (type == ViewType.GRID ) ? (length - 1) : length;
-
-        for(int i = 0; i < size; i++){
-            Product product = new Product();
-            String name = TestData.catItemName[i%4];
-            String imageUrl = TestData.catItemUrl[i%4];
-            product.setName(name);
-            product.setImageUrl(imageUrl);
-            productList.add(product);
-        }
-        if(type == ViewType.GRID) {
-            Product more = new Product();
-            more.setName("");
-            more.setImageUrl(TestData.MORE_URL);
-            productList.add(more);
-        }
-        return productList;
-    }
-
     public String getVideo() {
         // the stored videoUrl points to full youtube link
         // have to split the url for the "id"

@@ -2,6 +2,7 @@ package com.codepath.project.android;
 
 import android.app.Application;
 
+import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.parse.Parse;
@@ -14,6 +15,7 @@ public class ParseApplication extends Application {
         super.onCreate();
         ParseObject.registerSubclass(Product.class);
         ParseObject.registerSubclass(Review.class);
+        ParseObject.registerSubclass(Category.class);
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("myAppId")
                 .clientKey(null)

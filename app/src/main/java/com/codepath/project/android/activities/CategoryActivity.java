@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.CategoryAdapter;
+import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
 
@@ -34,8 +35,9 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(){
-        ArrayList<Product> category = Product.createCategoryList(12, ViewType.VERTICAL);
-        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category, ViewType.VERTICAL);
+        ArrayList<Category> categoryList = new ArrayList<>();
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this, categoryList, ViewType.VERTICAL);
+        Category.createCategoryList(12, ViewType.VERTICAL, categoryList, categoryAdapter);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(new LinearLayoutManager(this));
     }

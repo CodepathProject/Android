@@ -36,11 +36,7 @@
             android:theme="@style/AppTheme.CustomActionBar" />
         <activity android:name=".activities.DetailedReviewActivity" />
         <activity android:name=".activities.ImageFullscreenActivity" />
-<<<<<<< HEAD
-        <activity android:name=".activities.CategoryDetailActivity"></activity>
-=======
-        <activity android:name=".activities.MyProductsActivity"></activity>
->>>>>>> 53add166fa2dfd684d7390c98dcc4f8fa7f4c45e
+        <activity android:name=".activities.CategoryDetailActivity"/>
+        <activity android:name=".activities.MyProductsActivity"/>
     </application>
-
 </manifest>

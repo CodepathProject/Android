@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.CategoryActivity;
 import com.codepath.project.android.activities.CategoryDetailActivity;
-import com.codepath.project.android.model.CategoryViewType;
+import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
 import com.squareup.picasso.Picasso;
 
@@ -26,9 +26,9 @@ public class CategoryAdapter extends
 
     private List<Product> mProducts;
     private Context mContext;
-    private CategoryViewType mItemLayoutType;
+    private ViewType mItemLayoutType;
 
-    public CategoryAdapter(Context context, List<Product> products, CategoryViewType itemLayoutType) {
+    public CategoryAdapter(Context context, List<Product> products, ViewType itemLayoutType) {
         mProducts = products;
         mContext = context;
         mItemLayoutType = itemLayoutType;
@@ -53,9 +53,9 @@ public class CategoryAdapter extends
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View contactView = null;
-        if(mItemLayoutType.equals(CategoryViewType.GRID)){
+        if(mItemLayoutType.equals(ViewType.GRID)){
             contactView = inflater.inflate(R.layout.item_category, parent, false);
-        }else if(mItemLayoutType.equals(CategoryViewType.VERTICAL)){
+        }else if(mItemLayoutType.equals(ViewType.VERTICAL)){
             contactView = inflater.inflate(R.layout.item_category_vertical, parent, false);
         }
         ViewHolder viewHolder = new ViewHolder(contactView);
@@ -79,7 +79,7 @@ public class CategoryAdapter extends
             }
         });
 
-        if(mItemLayoutType.equals(CategoryViewType.GRID)){
+        if(mItemLayoutType.equals(ViewType.GRID)){
             if(position == (getItemCount() - 1)) {
                 ivProductImage.setOnClickListener(v -> {
                     Intent intent = new Intent(getContext(), CategoryActivity.class);

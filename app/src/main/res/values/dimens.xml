@@ -26,4 +26,7 @@
     <dimen name="category_item_iv_width">180dp</dimen>
     <dimen name="category_item_tv_padding">5dp</dimen>
     <dimen name="category_item_tv_size">15sp</dimen>
+
+    <dimen name="category_detail_card_height">180dp</dimen>
+    <dimen name="category_detail_card_width">200dp</dimen>
 </resources>

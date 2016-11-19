@@ -2,20 +2,22 @@ package com.codepath.project.android.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.codepath.project.android.R;
-import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.adapter.ProductsAdapter;
-import com.codepath.project.android.model.CategoryViewType;
+import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by anmallya on 11/18/2016.
@@ -23,10 +25,14 @@ import java.util.ArrayList;
 
 public class CategoryDetailFragment extends Fragment {
 
+        @BindView(R.id.rv_category_detail)
+        RecyclerView rvCategoryDetail;
+
         protected static final String ARG_PAGE = "ARG_PAGE";
         protected ArrayList<Product> productList;
         protected ProductsAdapter productsAdapter;
         protected int mPage;
+        private static final int GRID_ROW_COUNT = 2;
 
         public CategoryDetailFragment() {
         }
@@ -46,7 +52,7 @@ public class CategoryDetailFragment extends Fragment {
                 mPage = getArguments().getInt(ARG_PAGE);
             }
             productList = Product.createReviewList(24);
-            productsAdapter = new ProductsAdapter(getActivity(), productList, CategoryViewType.VERTICAL_GRID);
+            productsAdapter = new ProductsAdapter(getActivity(), productList, ViewType.VERTICAL_GRID);
         }
 
         @Override
@@ -58,13 +64,11 @@ public class CategoryDetailFragment extends Fragment {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+            ButterKnife.bind(this, view);
             setRecyclerView();
         }
 
-        private static final int GRID_ROW_COUNT = 2;
-
         private void setRecyclerView(){
-            RecyclerView rvCategoryDetail = (RecyclerView)getView().findViewById(R.id.rv_category_detail);
             GridLayoutManager layoutManagerCategoryDetail = new GridLayoutManager(getActivity(), GRID_ROW_COUNT, GridLayoutManager.VERTICAL, false);
             rvCategoryDetail.setAdapter(productsAdapter);
             rvCategoryDetail.setLayoutManager(layoutManagerCategoryDetail);

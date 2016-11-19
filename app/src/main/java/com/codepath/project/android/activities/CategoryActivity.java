@@ -2,14 +2,13 @@ package com.codepath.project.android.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.CategoryAdapter;
-import com.codepath.project.android.model.CategoryViewType;
+import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
 
 import java.util.ArrayList;
@@ -35,8 +34,8 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(){
-        ArrayList<Product> category = Product.createCategoryList(12, CategoryViewType.VERTICAL);
-        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category, CategoryViewType.VERTICAL);
+        ArrayList<Product> category = Product.createCategoryList(12, ViewType.VERTICAL);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this, category, ViewType.VERTICAL);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(new LinearLayoutManager(this));
     }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.CategoryActivity;
 import com.codepath.project.android.activities.CategoryDetailActivity;
+import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
 import com.squareup.picasso.Picasso;
@@ -24,12 +25,12 @@ import butterknife.ButterKnife;
 public class CategoryAdapter extends
         RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    private List<Product> mProducts;
+    private List<Category> mCategory;
     private Context mContext;
     private ViewType mItemLayoutType;
 
-    public CategoryAdapter(Context context, List<Product> products, ViewType itemLayoutType) {
-        mProducts = products;
+    public CategoryAdapter(Context context, List<Category> products, ViewType itemLayoutType) {
+        mCategory = products;
         mContext = context;
         mItemLayoutType = itemLayoutType;
     }
@@ -65,11 +66,11 @@ public class CategoryAdapter extends
     // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(CategoryAdapter.ViewHolder viewHolder, int position) {
-        Product product = mProducts.get(position);
+        Category category = (Category) mCategory.get(position);
         TextView tvProductName = viewHolder.tvCategoryName;
-        tvProductName.setText(product.getName());
+        tvProductName.setText(category.getName());
         ImageView ivProductImage = viewHolder.ivCategoryImage;
-        Picasso.with(getContext()).load(product.getImageUrl()).into(ivProductImage);
+        Picasso.with(getContext()).load(category.getImageUrl()).into(ivProductImage);
 
         ivProductImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +96,6 @@ public class CategoryAdapter extends
     // Returns the total count of items in the list
     @Override
     public int getItemCount() {
-        return mProducts.size();
+        return mCategory.size();
     }
 }

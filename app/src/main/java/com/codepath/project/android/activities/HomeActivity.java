@@ -2,16 +2,12 @@ package com.codepath.project.android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -20,18 +16,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
-import com.codepath.project.android.adapter.CategoryAdapter;
-import com.codepath.project.android.adapter.ProductsAdapter;
-import com.codepath.project.android.helpers.ItemClickSupport;
-import com.codepath.project.android.model.Category;
-import com.codepath.project.android.model.ViewType;
-import com.codepath.project.android.model.Product;
-import com.parse.ParseQuery;
+import com.codepath.project.android.fragments.HomeFragment;
 import com.parse.ParseUser;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -40,21 +26,10 @@ public class HomeActivity extends AppCompatActivity
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.rv_products)
-    RecyclerView rvProducts;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
-    @BindView(R.id.rv_categories)
-    RecyclerView rvCategory;
-    @BindView(R.id.rv_reviews)
-    RecyclerView rvReviews;
-
-    public static final int GRID_ROW_COUNT = 2;
-
-    ProductsAdapter productsAdapter;
-    List<Product> products;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +39,13 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         setNavigationDrawer();
-        setRecycleView();
+        addFragment();
+    }
+
+    private void addFragment(){
+        HomeFragment homeFragment = HomeFragment.newInstance(1);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, homeFragment).commit();
     }
 
     @Override
@@ -87,50 +68,6 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    private void setRecycleView() {
-        LinearLayoutManager layoutManagerProducts
-                = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        rvProducts.setLayoutManager(layoutManagerProducts);
-        products = new ArrayList<>();
-        productsAdapter = new ProductsAdapter(HomeActivity.this, products, ViewType.HORIZONTAL);
-        rvProducts.setAdapter(productsAdapter);
-
-        ItemClickSupport.addTo(rvProducts).setOnItemClickListener(
-                (recyclerView, position, v) -> {
-                    Intent intent = new Intent(HomeActivity.this, ProductViewActivity.class);
-                    intent.putExtra("productId", products.get(position).getObjectId());
-                    startActivity(intent);
-                }
-        );
-        productsAdapter.notifyDataSetChanged();
-
-        ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
-        query.findInBackground((productList, e) -> {
-            products.addAll(productList);
-            productsAdapter.notifyDataSetChanged();
-            handler.postDelayed(runnable, speedScroll);
-            rvProducts.setOnTouchListener((v, event) -> {
-                handler.removeCallbacks(runnable);
-                v.setOnTouchListener(null);
-                return false;
-            });
-        });
-
-        LinearLayoutManager layoutManagerReviews
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        ArrayList<Product> reviews = Product.createReviewList(20);
-        ProductsAdapter reviewsAdapter = new ProductsAdapter(this, reviews, ViewType.HORIZONTAL);
-        rvReviews.setAdapter(reviewsAdapter);
-        rvReviews.setLayoutManager(layoutManagerReviews);
-
-        GridLayoutManager layoutManagerCategory = new GridLayoutManager(this, GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
-        ArrayList<Category> categoryList = new ArrayList<Category>();
-        CategoryAdapter categoryAdapter = new CategoryAdapter(this, categoryList, ViewType.GRID);
-        Category.createCategoryList(12, ViewType.GRID, categoryList, categoryAdapter);
-        rvCategory.setAdapter(categoryAdapter);
-        rvCategory.setLayoutManager(layoutManagerCategory);
     }
 
     private void setSearchView(MenuItem searchItem) {
@@ -179,17 +116,4 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    final int speedScroll = 1500;
-    final Handler handler = new Handler();
-    final Runnable runnable = new Runnable() {
-        int count = 0;
-        @Override
-        public void run() {
-            if (count < products.size()) {
-                rvProducts.scrollToPosition(++count);
-                handler.postDelayed(this, speedScroll);
-            }
-        }
-    };
 }

@@ -1,70 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-    android:id="@+id/content_home"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.codepath.project.android.activities.HomeActivity"
-    tools:showIn="@layout/app_bar_home">
+    android:id="@+id/fragment_container">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/home_tv_size"
-        android:layout_margin="@dimen/tv_home_margin"
-        android:layout_alignParentTop="true"
-        android:paddingLeft="@dimen/tv_home_left_padding"
-        android:textColor="@color/black"
-        android:text = "@string/popular_categories"
-        android:id="@+id/tv_categories"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_categories"
-        android:layout_width="match_parent"
-        android:layout_margin="@dimen/home_rv_category_margin"
-        android:layout_below="@id/tv_categories"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_below="@id/rv_categories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/home_tv_size"
-        android:layout_margin="@dimen/tv_home_margin"
-        android:textColor="@color/black"
-        android:paddingLeft="@dimen/tv_home_left_padding"
-        android:text = "@string/popular_products"
-        android:id="@+id/tv_popular_products"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_products"
-        android:layout_below="@id/tv_popular_products"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/rv_home_height" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/tv_home_margin"
-        android:textSize="@dimen/home_tv_size"
-        android:paddingLeft="@dimen/tv_home_left_padding"
-        android:layout_below="@id/rv_products"
-        android:textColor="@color/black"
-        android:text = "@string/popular_reviews"
-        android:id="@+id/tv_popular_reviews"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_reviews"
-        android:layout_below="@id/tv_popular_reviews"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/rv_home_height" />
-    </RelativeLayout>
-</ScrollView>
+</FrameLayout>

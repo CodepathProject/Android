@@ -8,12 +8,12 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         setNavigationDrawer();
         addFragment();
     }
@@ -67,7 +67,11 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if(!TextUtils.isEmpty(searchView.getQuery())) {
+            searchView.setQuery("", false);
+            searchView.clearFocus();
+            return;
+        } if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -76,9 +80,7 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        setSearchView(searchItem);
+        setSearchView();
         return true;
     }
 
@@ -87,16 +89,19 @@ public class HomeActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void setSearchView(MenuItem searchItem) {
-        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.requestFocus();
+    private void setSearchView() {
+        searchView = (SearchView) findViewById(R.id.searchView);
+        //searchView.requestFocus();
         searchView.setOnSuggestionListener(this);
+        searchView.setIconifiedByDefault(false);
         mSearchViewAdapter = new SearchResultsAdapter(this, R.layout.search_result_list_item, null, columns, null, -1000);
         searchView.setSuggestionsAdapter(mSearchViewAdapter);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                System.out.println("Query submitted");
+                if (query.length() > 1) {
+                    loadSearchData(query);
+                }
                 return true;
             }
 
@@ -135,6 +140,26 @@ public class HomeActivity extends AppCompatActivity
             cursor.addRow(temp);
         }
         return cursor;
+    }
+
+    @Override
+    public boolean onSuggestionSelect(int position) {
+        return goToProductDetailView(position);
+    }
+
+    @Override
+    public boolean onSuggestionClick(int position) {
+        return goToProductDetailView(position);
+    }
+
+    private boolean goToProductDetailView(int position) {
+        Cursor cursor = (Cursor) searchView.getSuggestionsAdapter().getItem(position);
+        String productId = cursor.getString(1);
+        searchView.clearFocus();
+        Intent intent = new Intent(this, ProductViewActivity.class);
+        intent.putExtra("productId", productId);
+        startActivity(intent);
+        return true;
     }
 
     private void setNavigationDrawer() {
@@ -185,26 +210,6 @@ public class HomeActivity extends AppCompatActivity
         item.setChecked(true);
         setTitle(item.getTitle());
 
-        return true;
-    }
-
-    @Override
-    public boolean onSuggestionSelect(int position) {
-        return goToProductDetailView(position);
-    }
-
-    @Override
-    public boolean onSuggestionClick(int position) {
-        return goToProductDetailView(position);
-    }
-
-    private boolean goToProductDetailView(int position) {
-        Cursor cursor = (Cursor) searchView.getSuggestionsAdapter().getItem(position);
-        String productId = cursor.getString(1);
-        searchView.clearFocus();
-        Intent intent = new Intent(this, ProductViewActivity.class);
-        intent.putExtra("productId", productId);
-        startActivity(intent);
         return true;
     }
 }

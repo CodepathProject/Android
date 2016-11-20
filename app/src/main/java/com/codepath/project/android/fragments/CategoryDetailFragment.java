@@ -33,7 +33,7 @@ public class CategoryDetailFragment extends Fragment {
         protected ArrayList<Product> productList;
         protected ProductsAdapter productsAdapter;
         protected int mPage;
-        private static final int GRID_ROW_COUNT = 2;
+        private static final int GRID_COLUMN_COUNT = 2;
 
         public CategoryDetailFragment() {
         }
@@ -70,8 +70,7 @@ public class CategoryDetailFragment extends Fragment {
         }
 
         private void setRecyclerView(){
-            //StaggeredGridLayoutManager layoutManagerCategoryDetail = new StaggeredGridLayoutManager(getActivity(), GRID_ROW_COUNT, GridLayoutManager.VERTICAL, false);
-            StaggeredGridLayoutManager layoutManagerCategoryDetail = new StaggeredGridLayoutManager(2, 1);
+            StaggeredGridLayoutManager layoutManagerCategoryDetail = new StaggeredGridLayoutManager(GRID_COLUMN_COUNT, 1);
             rvCategoryDetail.setAdapter(productsAdapter);
             rvCategoryDetail.setLayoutManager(layoutManagerCategoryDetail);
         }

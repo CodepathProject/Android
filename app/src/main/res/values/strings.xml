@@ -11,6 +11,6 @@
 
     <string name="popular_categories">Top Categories</string>
     <string name="popular_products">Popular Products</string>
-    <string name="popular_reviews">Popular Reviews</string>
+    <string name="popular_reviews">Best Rated Products</string>
 
 </resources>

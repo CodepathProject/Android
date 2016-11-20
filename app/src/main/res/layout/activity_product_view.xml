@@ -86,11 +86,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvBrandName"
-                    android:numStars="10"
+                    android:numStars="5"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
                     android:stepSize="0.5"
-                    tools:rating="6.7" />
+                    tools:rating="3.5" />
 
                 <Button
                     android:id="@+id/btnShelf"

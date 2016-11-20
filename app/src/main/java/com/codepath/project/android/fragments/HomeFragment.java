@@ -2,7 +2,6 @@ package com.codepath.project.android.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -86,23 +85,27 @@ public class HomeFragment extends Fragment {
         productsAdapter.notifyDataSetChanged();
 
         ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
+        query.addDescendingOrder("views");
+        query.setLimit(20);
         query.findInBackground((productList, e) -> {
             products.addAll(productList);
             productsAdapter.notifyDataSetChanged();
-            handler.postDelayed(runnable, speedScroll);
-            rvProducts.setOnTouchListener((v, event) -> {
-                handler.removeCallbacks(runnable);
-                v.setOnTouchListener(null);
-                return false;
-            });
         });
 
         LinearLayoutManager layoutManagerReviews
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        ArrayList<Product> reviews = Product.createReviewList(20);
-        ProductsAdapter reviewsAdapter = new ProductsAdapter(getActivity(), reviews, ViewType.HORIZONTAL);
+        ArrayList<Product> productsBestRated = new ArrayList<>();
+        ProductsAdapter reviewsAdapter = new ProductsAdapter(getActivity(), productsBestRated, ViewType.HORIZONTAL);
         rvReviews.setAdapter(reviewsAdapter);
         rvReviews.setLayoutManager(layoutManagerReviews);
+
+        ParseQuery<Product> queryByBestRating = ParseQuery.getQuery(Product.class);
+        queryByBestRating.addDescendingOrder("averageRating");
+        queryByBestRating.setLimit(20);
+        queryByBestRating.findInBackground((productList, e) -> {
+            productsBestRated.addAll(productList);
+            reviewsAdapter.notifyDataSetChanged();
+        });
 
         GridLayoutManager layoutManagerCategory = new GridLayoutManager(getActivity(), GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
         ArrayList<Category> categoryList = new ArrayList<>();
@@ -111,18 +114,4 @@ public class HomeFragment extends Fragment {
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
     }
-
-
-    final int speedScroll = 1500;
-    final Handler handler = new Handler();
-    final Runnable runnable = new Runnable() {
-        int count = 0;
-        @Override
-        public void run() {
-            if (count < products.size()) {
-                rvProducts.scrollToPosition(++count);
-                handler.postDelayed(this, speedScroll);
-            }
-        }
-    };
 }

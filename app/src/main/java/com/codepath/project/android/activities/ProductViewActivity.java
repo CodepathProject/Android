@@ -78,7 +78,6 @@ public class ProductViewActivity extends AppCompatActivity {
 
             String productId = getIntent().getStringExtra("productId");
             ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
-            query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
             query.getInBackground(productId, (p, e) -> {
                 if (e == null) {
                     product = p;
@@ -131,7 +130,8 @@ public class ProductViewActivity extends AppCompatActivity {
                             Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
                         }
                     });
-
+                    product.incrementViews();
+                    product.saveInBackground();
                     setUpShelfWishClickListener();
 
                 } else {

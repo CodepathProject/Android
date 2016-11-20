@@ -54,6 +54,7 @@ public class Product extends ParseObject {
     public void setRating(int rating) {
         addToTotalRating(rating);
         int totalRating = getTotalRating();
+        int oldratingCount = getRatingCount();
         incrementRatingCount();
         int ratingCount = getRatingCount();
         double averageRating = (double) totalRating/ratingCount;

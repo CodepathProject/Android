@@ -21,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
@@ -50,6 +51,7 @@ public class ComposeFragment extends DialogFragment {
     @BindView(R.id.btnPost) Button btnPost;
     @BindView(R.id.ivComposeCancel) ImageView ivComposeCancel;
     @BindView(R.id.ivCamera) ImageView ivCamera;
+    @BindView(R.id.rbAverageRating) RatingBar rbAverageRating;
     @BindView(R.id.rvCapturedImages) RecyclerView rvCapturedImages;
 
     List<ParseFile> images;
@@ -108,7 +110,6 @@ public class ComposeFragment extends DialogFragment {
         Bundle bundle = this.getArguments();
         String productId = bundle.getString("productId");
         ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
         assert productId != null;
         query.getInBackground(productId.trim(), (p, e) -> {
             if(e == null) {
@@ -120,8 +121,13 @@ public class ComposeFragment extends DialogFragment {
 
         btnPost.setOnClickListener(arg0 -> {
             Review review = new Review();
-            review.setText(etReviewText.getText().toString());
+            String reviewText = etReviewText.getText().toString();
+            float rating = rbAverageRating.getRating();
+
+            review.setText(reviewText);
             product.incrementReviewCount();
+            product.setRating((int) rating);
+
             review.setProduct(product);
             review.setUser(ParseUser.getCurrentUser());
             if(images.size() > 0) {

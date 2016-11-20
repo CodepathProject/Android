@@ -99,6 +99,11 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="ratingBar" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/colorGold</item>
+        <item name="colorControlNormal">@color/colorGray</item>
+    </style>
+
     <!--
     <style name="categoryTab">
         <item name="app:tabIndicatorColor">@color/white</item>

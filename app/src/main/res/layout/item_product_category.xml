@@ -2,30 +2,68 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/category_detail_card_width"
-    android:layout_height="@dimen/category_detail_card_height"
-    android:layout_margin="5dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="10dp"
+    app:cardCornerRadius="8dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
     android:elevation="3dp">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <ImageView
             android:id="@+id/iv_product"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/rv_home_item_iv_height"
+            android:layout_height="150dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_alignParentTop="true" />
+        <RelativeLayout
+            android:background="@color/colorLightGray2"
+            android:layout_below="@id/iv_product"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_height="wrap_content">
         <TextView
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
+            android:textColor="@color/colorBlue2"
             android:id="@+id/tv_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_product"
             android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft= "true"
             android:gravity="center"
             android:ellipsize="end"
             android:maxLines="2"
             android:textSize="15sp" />
+        <RatingBar
+            android:id="@+id/rating"
+            android:layout_below="@id/tv_product_name"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:layout_marginLeft="10dp"
+            style="?android:attr/ratingBarStyleSmall"
+            android:stepSize="1"
+            android:theme="@style/ratingBar"/>
+        <TextView
+            android:textColor="@color/colorBlue2"
+            android:id="@+id/tv_total_votes"
+            android:layout_below="@id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/rating"
+            android:text="(100)"
+            android:layout_toRightOf="@id/rating"
+            android:paddingTop="5dp"
+            android:paddingLeft="5dp"
+            android:textSize="13sp" />
+        </RelativeLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

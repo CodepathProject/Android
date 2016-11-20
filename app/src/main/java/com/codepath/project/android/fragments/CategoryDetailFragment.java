@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,8 @@ public class CategoryDetailFragment extends Fragment {
         }
 
         private void setRecyclerView(){
-            GridLayoutManager layoutManagerCategoryDetail = new GridLayoutManager(getActivity(), GRID_ROW_COUNT, GridLayoutManager.VERTICAL, false);
+            //StaggeredGridLayoutManager layoutManagerCategoryDetail = new StaggeredGridLayoutManager(getActivity(), GRID_ROW_COUNT, GridLayoutManager.VERTICAL, false);
+            StaggeredGridLayoutManager layoutManagerCategoryDetail = new StaggeredGridLayoutManager(2, 1);
             rvCategoryDetail.setAdapter(productsAdapter);
             rvCategoryDetail.setLayoutManager(layoutManagerCategoryDetail);
         }

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="40dp">
 
     <RelativeLayout
         android:id="@+id/content_home"
@@ -19,8 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/home_tv_size"
+            android:layout_marginLeft="@dimen/tv_home_left_margin"
+            android:layout_marginBottom="@dimen/tv_home_bottom_margin"
+            android:layout_marginTop="@dimen/tv_home_top_margin"
             android:textStyle="bold"
-            android:layout_margin="@dimen/tv_home_margin"
             android:layout_alignParentTop="true"
             android:paddingLeft="@dimen/tv_home_left_padding"
             android:textColor="@color/black"
@@ -40,7 +43,9 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/home_tv_size"
             android:textStyle="bold"
-            android:layout_margin="@dimen/tv_home_margin"
+            android:layout_marginLeft="@dimen/tv_home_left_margin"
+            android:layout_marginBottom="@dimen/tv_home_bottom_margin"
+            android:layout_marginTop="@dimen/tv_home_top_margin"
             android:textColor="@color/black"
             android:paddingLeft="@dimen/tv_home_left_padding"
             android:text = "@string/popular_products"
@@ -49,16 +54,18 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_products"
             android:layout_below="@id/tv_popular_products"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/rv_home_height" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/tv_home_margin"
+            android:layout_marginLeft="@dimen/tv_home_left_margin"
+            android:layout_marginBottom="@dimen/tv_home_bottom_margin"
+            android:layout_marginTop="@dimen/tv_home_top_margin"
             android:textSize="@dimen/home_tv_size"
-            android:textStyle="bold"
             android:paddingLeft="@dimen/tv_home_left_padding"
+            android:textStyle="bold"
             android:layout_below="@id/rv_products"
             android:textColor="@color/black"
             android:text = "@string/popular_reviews"
@@ -67,7 +74,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_reviews"
             android:layout_below="@id/tv_popular_reviews"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/rv_home_height" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </ScrollView>

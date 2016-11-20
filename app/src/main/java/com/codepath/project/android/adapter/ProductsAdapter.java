@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
@@ -35,11 +36,15 @@ public class ProductsAdapter extends
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvProductNAme;
         public ImageView ivProductImage;
+        public RatingBar ratingBar;
+        public TextView tvRatingCount;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvProductNAme = (TextView) itemView.findViewById(R.id.tv_product_name);
             ivProductImage = (ImageView) itemView.findViewById(R.id.iv_product);
+            tvRatingCount = (TextView) itemView.findViewById(R.id.tv_total_votes);
+            ratingBar = (RatingBar) itemView.findViewById(R.id.rating);
         }
     }
 
@@ -64,6 +69,13 @@ public class ProductsAdapter extends
         tvProductName.setText(product.getName());
         ImageView ivProductImage = viewHolder.ivProductImage;
         Picasso.with(getContext()).load(product.getImageUrl()).into(ivProductImage);
+
+        if(mViewType == ViewType.VERTICAL_GRID){
+            RatingBar ratingBar = viewHolder.ratingBar;
+            ratingBar.setRating(3);
+            TextView tvRatingCount = viewHolder.tvRatingCount;
+            tvRatingCount.setText("(18)");
+        }
     }
 
     // Returns the total count of items in the list

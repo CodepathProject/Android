@@ -3,6 +3,8 @@ package com.codepath.project.android.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,7 +19,9 @@ import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.fragments.HomeFragment;
+import com.codepath.project.android.fragments.MyProductsFragment;
 import com.parse.ParseUser;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -102,18 +106,39 @@ public class HomeActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.nav_logout) {
+            ParseUser.logOut();
+            Intent logoutIntent = new Intent(this, SplashScreenActivity.class);
+            startActivity(logoutIntent);
+        }
+
+        Fragment fragment = null;
+        Class fragmentClass;
+
         switch (item.getItemId()) {
-            case R.id.nav_my_products:
-                Intent myProductsIntent = new Intent(this, MyProductsActivity.class);
-                startActivity(myProductsIntent);
+            case R.id.nav_home:
+                fragmentClass = HomeFragment.class;
                 break;
-            case R.id.nav_logout:
-                ParseUser.logOut();
-                Intent logoutIntent = new Intent(this, SplashScreenActivity.class);
-                startActivity(logoutIntent);
+            case R.id.nav_my_products:
+                fragmentClass = MyProductsFragment.class;
+                break;
+            default:
+                fragmentClass = HomeFragment.class;
                 break;
         }
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
         drawer.closeDrawer(GravityCompat.START);
+
+        item.setChecked(true);
+        setTitle(item.getTitle());
+
         return true;
     }
 }

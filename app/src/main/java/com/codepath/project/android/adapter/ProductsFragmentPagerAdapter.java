@@ -3,11 +3,11 @@ package com.codepath.project.android.adapter;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.codepath.project.android.fragments.ProductsListFragment;
 
-public class ProductsFragmentPagerAdapter extends FragmentPagerAdapter {
+public class ProductsFragmentPagerAdapter extends FragmentStatePagerAdapter {
     private String tabTitles[] = new String[] { "Shelf", "Wish List"};
     private Context context;
 

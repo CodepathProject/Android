@@ -3,32 +3,23 @@ package com.codepath.project.android.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.codepath.project.android.R;
-import com.codepath.project.android.activities.HomeActivity;
 import com.codepath.project.android.activities.ProductViewActivity;
-import com.codepath.project.android.activities.SplashScreenActivity;
 import com.codepath.project.android.adapter.CategoryAdapter;
-import com.codepath.project.android.adapter.MyProductsAdapter;
 import com.codepath.project.android.adapter.ProductsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
-import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.ViewType;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +27,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by anmallya on 11/19/2016.
- */
-
 public class HomeFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
 
-    private int mPage;
     @BindView(R.id.rv_products)
     RecyclerView rvProducts;
     @BindView(R.id.rv_categories)
@@ -68,14 +54,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
@@ -121,7 +105,7 @@ public class HomeFragment extends Fragment {
         rvReviews.setLayoutManager(layoutManagerReviews);
 
         GridLayoutManager layoutManagerCategory = new GridLayoutManager(getActivity(), GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
-        ArrayList<Category> categoryList = new ArrayList<Category>();
+        ArrayList<Category> categoryList = new ArrayList<>();
         CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), categoryList, ViewType.GRID);
         Category.createCategoryList(12, ViewType.GRID, categoryList, categoryAdapter);
         rvCategory.setAdapter(categoryAdapter);

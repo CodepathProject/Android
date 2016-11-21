@@ -114,5 +114,12 @@ public class HomeFragment extends Fragment {
         ParseHelper.createCategoryListFromProducts(categoryList, categoryAdapter);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
+        ItemClickSupport.addTo(rvCategory).setOnItemClickListener(
+                (recyclerView, position, v) -> {
+                    Intent intent = new Intent(getActivity(), ProductViewActivity.class);
+                    intent.putExtra("productId", products.get(position).getObjectId());
+                    startActivity(intent);
+                }
+        );
     }
 }

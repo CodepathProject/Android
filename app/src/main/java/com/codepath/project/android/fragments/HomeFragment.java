@@ -99,6 +99,13 @@ public class HomeFragment extends Fragment {
         ProductsAdapter reviewsAdapter = new ProductsAdapter(getActivity(), productsBestRated, ViewType.HORIZONTAL);
         rvReviews.setAdapter(reviewsAdapter);
         rvReviews.setLayoutManager(layoutManagerReviews);
+        ItemClickSupport.addTo(rvReviews).setOnItemClickListener(
+                (recyclerView, position, v) -> {
+                    Intent intent = new Intent(getActivity(), ProductViewActivity.class);
+                    intent.putExtra("productId", products.get(position).getObjectId());
+                    startActivity(intent);
+                }
+        );
 
         ParseQuery<Product> queryByBestRating = ParseQuery.getQuery(Product.class);
         queryByBestRating.addDescendingOrder("averageRating");
@@ -114,12 +121,6 @@ public class HomeFragment extends Fragment {
         ParseHelper.createCategoryListFromProducts(categoryList, categoryAdapter);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
-        ItemClickSupport.addTo(rvCategory).setOnItemClickListener(
-                (recyclerView, position, v) -> {
-                    Intent intent = new Intent(getActivity(), ProductViewActivity.class);
-                    intent.putExtra("productId", products.get(position).getObjectId());
-                    startActivity(intent);
-                }
-        );
+
     }
 }

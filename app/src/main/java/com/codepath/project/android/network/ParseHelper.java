@@ -1,7 +1,7 @@
 package com.codepath.project.android.network;
 
+import com.codepath.project.android.model.AppUser;
 import com.parse.ParseException;
-import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 public class ParseHelper {
@@ -16,7 +16,7 @@ public class ParseHelper {
     public static void newUserSignUp(String name,
                                      String password,
                                      String email) {
-        ParseUser user = new ParseUser();
+        AppUser user = new AppUser();
         user.put("firstName", name);
         user.setPassword(password);
         user.setEmail(email);

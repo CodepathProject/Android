@@ -3,7 +3,6 @@ package com.codepath.project.android.model;
 import com.parse.ParseClassName;
 import com.parse.ParseUser;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,9 +14,7 @@ public class AppUser extends ParseUser {
     }
 
     public List<Product> getShelfProducts() {
-        List<Product> products = new ArrayList<>();
-        products.addAll((List<Product>) get("shelfProducts"));
-        return products;
+        return (List<Product>) get("shelfProducts");
     }
 
     public void removeShelfProduct(Product product) {

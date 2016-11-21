@@ -204,9 +204,11 @@ public class ProductViewActivity extends AppCompatActivity {
     }
 
     private boolean ifListContains(List<Product> productList) {
-        for(Product prod : productList) {
-            if (prod.getObjectId().equals(product.getObjectId())) {
-                return true;
+        if(productList != null) {
+            for (Product prod : productList) {
+                if (prod.getObjectId().equals(product.getObjectId())) {
+                    return true;
+                }
             }
         }
         return false;

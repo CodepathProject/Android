@@ -123,5 +123,14 @@ public class HomeFragment extends Fragment {
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
 
+        ItemClickSupport.addTo(rvCategory).setOnItemClickListener(
+                (recyclerView, position, v) -> {
+                    CategoryFragment nextFrag = CategoryFragment.newInstance(categoryList.get(position).getName());
+                    this.getFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, nextFrag, "TAG")
+                            .addToBackStack(null)
+                            .commit();
+                }
+        );
     }
 }

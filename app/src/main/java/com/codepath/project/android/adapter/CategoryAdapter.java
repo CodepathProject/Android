@@ -73,16 +73,7 @@ public class CategoryAdapter extends
         TextView tvProductName = viewHolder.tvCategoryName;
         tvProductName.setText(category.getName());
         ImageView ivProductImage = viewHolder.ivCategoryImage;
-        Picasso.with(getContext()).load(category.getImageUrl()).into(ivProductImage);
-
-        ivProductImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), CategoryDetailActivity.class);
-                intent.putExtra(Constants.CATEGORY, category.getName());
-                getContext().startActivity(intent);
-            }
-        });
+        Picasso.with(getContext()).load(category.getImageUrl()).placeholder(R.drawable.placeholder).into(ivProductImage);
 
         if(mItemLayoutType.equals(ViewType.GRID) && (getItemCount()  > 8))  {
             if(position == (getItemCount() - 1)) {

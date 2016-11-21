@@ -68,7 +68,7 @@ public class ProductsAdapter extends
         TextView tvProductName = viewHolder.tvProductNAme;
         tvProductName.setText(product.getName());
         ImageView ivProductImage = viewHolder.ivProductImage;
-        Picasso.with(getContext()).load(product.getImageUrl()).into(ivProductImage);
+        Picasso.with(getContext()).load(product.getImageUrl()).placeholder(R.drawable.placeholder).into(ivProductImage);
 
         if(mViewType == ViewType.VERTICAL_GRID){
             RatingBar ratingBar = viewHolder.ratingBar;

@@ -1,6 +1,7 @@
 package com.codepath.project.android.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.DialogFragment;
@@ -82,6 +83,8 @@ public class ProductViewActivity extends AppCompatActivity {
                 if (e == null) {
                     product = p;
                     collapsingToolbar.setTitle(p.getName());
+                    collapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
+
                     Picasso.with(this).load(product.getImageUrl()).into(ivProductImage);
 
                     ivProductImage.setOnClickListener(v -> {

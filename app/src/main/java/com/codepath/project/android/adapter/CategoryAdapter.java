@@ -22,6 +22,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.codepath.project.android.data.TestData.MORE_URL;
+
 public class CategoryAdapter extends
         RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
@@ -86,6 +88,7 @@ public class CategoryAdapter extends
                     Intent intent = new Intent(getContext(), CategoryActivity.class);
                     getContext().startActivity(intent);
                 });
+                Picasso.with(getContext()).load(MORE_URL).into(ivProductImage);
                 tvProductName.setVisibility(View.INVISIBLE);
             } else{
                 tvProductName.setVisibility(View.VISIBLE);

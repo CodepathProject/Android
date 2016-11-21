@@ -51,4 +51,20 @@ public class Category extends ParseObject {
             }
         });
     }
+
+    /*
+    public static void createCategoryListFromProducts(int length, ViewType type, ArrayList<Category> categoryList, CategoryAdapter adapter){
+        ParseQuery<Product> query = new ParseQuery<Product>("Category");
+        query.findInBackground(new FindCallback<Category>() {
+            public void done(List<Category> categories, ParseException e) {
+                if (e == null) {
+                    System.out.println("success "+categories);
+                    categoryList.addAll(categories);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    System.out.println("error "+e);
+                }
+            }
+        });
+    } */
 }

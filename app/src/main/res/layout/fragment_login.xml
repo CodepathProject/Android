@@ -88,6 +88,15 @@
             style="@style/loginHelperText"
             android:layout_gravity="center"/>
 
+        <Switch
+            android:id="@+id/swSkipLogin"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Login later .. " />
+
     </LinearLayout>
 
     <LinearLayout

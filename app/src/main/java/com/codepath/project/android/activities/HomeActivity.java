@@ -171,7 +171,11 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         TextView tvUserName = (TextView) header.findViewById(R.id.tvUserName);
-        tvUserName.setText("Hello, " + ParseUser.getCurrentUser().get("firstName"));
+        if (ParseUser.getCurrentUser() == null) {
+            tvUserName.setText("Hello, Anonymous");
+        } else {
+            tvUserName.setText("Hello, " + ParseUser.getCurrentUser().get("firstName"));
+        }
     }
 
 

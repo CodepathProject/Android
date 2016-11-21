@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.HomeActivity;
@@ -27,6 +29,7 @@ public class LoginFragment extends Fragment {
     @BindView(R.id.etPassword) EditText etPassword;
     @BindView(R.id.btnLogIn) Button btnLogIn;
     @BindView(R.id.btnSignUp) Button btnSignUp;
+    @BindView(R.id.swSkipLogin) Switch swSkipLogin;
 
     private Unbinder unbinder;
 
@@ -56,6 +59,19 @@ public class LoginFragment extends Fragment {
         btnSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SignUpActivity.class);
             startActivity(intent);
+        });
+
+        swSkipLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    // go to home
+                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(intent);
+                }else{
+                    // dp nothing
+                }
+            }
         });
 
         return view;

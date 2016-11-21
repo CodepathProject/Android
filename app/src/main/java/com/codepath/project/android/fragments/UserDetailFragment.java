@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
@@ -18,6 +19,7 @@ import com.codepath.project.android.activities.SignUpActivity;
 import com.codepath.project.android.network.ParseHelper;
 import com.codepath.project.android.utils.GeneralUtils;
 import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -27,6 +29,7 @@ import butterknife.Unbinder;
 
 public class UserDetailFragment extends Fragment {
 
+    @BindView(R.id.ivProfileImage) ImageView ivProfileImage;
     @BindView(R.id.tvUserEmail) TextView tvUserEmail;
     @BindView(R.id.tvUserFirstName) TextView tvUserFirstName;
     @BindView(R.id.tvUserLastName) TextView tvUserLastName;
@@ -41,6 +44,7 @@ public class UserDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+        Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(ParseUser.getCurrentUser().getObjectId())).into(ivProfileImage);
         tvUserFirstName.setText(ParseUser.getCurrentUser().get("firstName").toString());
         //tvUserLastName.setText(ParseUser.getCurrentUser().get("lastName").toString());
         // TODO : update backend to have lastName for User Collection

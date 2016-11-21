@@ -1,5 +1,6 @@
 package com.codepath.project.android.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -12,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.adapter.ProductsAdapter;
+import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.network.ParseHelper;
@@ -81,5 +84,13 @@ public class CategoryDetailFragment extends Fragment {
             StaggeredGridLayoutManager layoutManagerCategoryDetail = new StaggeredGridLayoutManager(GRID_COLUMN_COUNT, 1);
             rvCategoryDetail.setAdapter(productsAdapter);
             rvCategoryDetail.setLayoutManager(layoutManagerCategoryDetail);
+
+            ItemClickSupport.addTo(rvCategoryDetail).setOnItemClickListener(
+                    (recyclerView, position, v) -> {
+                        Intent intent = new Intent(getActivity(), ProductViewActivity.class);
+                        intent.putExtra("productId", productList.get(position).getObjectId());
+                        startActivity(intent);
+                    }
+            );
         }
     }

@@ -21,7 +21,8 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/activity_horizontal_margin"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/llLogin"
         android:orientation="vertical">
 
         <LinearLayout
@@ -86,6 +87,15 @@
             android:text="Forgot Password?"
             style="@style/loginHelperText"
             android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llSignUp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -155,8 +165,6 @@
             android:text="Sign Up with email"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>
-
     </LinearLayout>
-
 
 </RelativeLayout>

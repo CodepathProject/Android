@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.CategoryActivity;
 import com.codepath.project.android.activities.CategoryDetailActivity;
+import com.codepath.project.android.helpers.Constants;
 import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
@@ -78,6 +79,7 @@ public class CategoryAdapter extends
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CategoryDetailActivity.class);
+                intent.putExtra(Constants.CATEGORY, category.getName());
                 getContext().startActivity(intent);
             }
         });

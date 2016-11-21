@@ -7,40 +7,36 @@ import android.support.v4.app.FragmentManager;
 import com.codepath.project.android.fragments.CategoryDetailFragment;
 import com.codepath.project.android.helpers.SmartFragmentStatePagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by anmallya on 11/18/2016.
  */
 
 public class CategoryDetailFragmentAdapter extends SmartFragmentStatePagerAdapter {
-        final int PAGE_COUNT = 4;
-
+        int mPageCount = 0;
         private Context context;
+        private List<String> mSubCategoryList;
+        private String mCategory;
 
-        public CategoryDetailFragmentAdapter(FragmentManager fm, Context context) {
+        public CategoryDetailFragmentAdapter(FragmentManager fm, Context context, String category, List<String> subCategoryList) {
             super(fm);
             this.context = context;
+            mPageCount =  subCategoryList.size();
+            mSubCategoryList = subCategoryList;
+            mCategory = category;
         }
 
         @Override
         public int getCount() {
-            return PAGE_COUNT;
+            return mPageCount;
         }
 
 
         @Override
         public Fragment getItem(int position) {
-            switch(position){
-                case 0:
-                    return CategoryDetailFragment.newInstance(0);
-                case 1:
-                    return CategoryDetailFragment.newInstance(1);
-                case 2:
-                    return CategoryDetailFragment.newInstance(2);
-                case 3:
-                    return CategoryDetailFragment.newInstance(3);
-                default:
-                    return CategoryDetailFragment.newInstance(0);
-            }
+            return CategoryDetailFragment.newInstance(mCategory, mSubCategoryList.get(position));
         }
     }
 

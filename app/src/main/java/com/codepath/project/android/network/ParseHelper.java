@@ -1,6 +1,10 @@
 package com.codepath.project.android.network;
 
+import android.util.Log;
+
 import com.codepath.project.android.adapter.CategoryAdapter;
+import com.codepath.project.android.helpers.Constants;
+import com.codepath.project.android.helpers.Utils;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.Product;
@@ -12,8 +16,11 @@ import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.codepath.project.android.helpers.Utils.sortByComparator;
 
 public class ParseHelper {
 
@@ -112,5 +119,52 @@ public class ParseHelper {
                 }
             }
         });
+    }
+
+    public static ArrayList<String> getSubCategoryList(String category){
+        HashMap<String, Integer> subCategoryMap = new HashMap<>();
+        ArrayList<String> subcategoryList = new ArrayList<>();
+        for(Product product:productList){
+            String subCat = product.getSubCategory();
+            if((subCat == null)||(!subCat.equals(category))){
+                continue;
+            }
+            String brand = product.getBrand();
+            if(brand != null) {
+                if(!subCategoryMap.containsKey(brand)){
+                    subCategoryMap.put(brand, 1);
+                }else{
+                    int count = subCategoryMap.get(brand);
+                    subCategoryMap.put(brand, ++count);
+                }
+            }
+        }
+        Map<String, Integer> sortedMap = Utils.sortByComparator(subCategoryMap, false);
+        for (Map.Entry<String, Integer> entry : sortedMap.entrySet()){
+            subcategoryList.add(entry.getKey());
+        }
+        return subcategoryList;
+    }
+
+    public static ArrayList<Product> getProductsForCategory(String category, String subCategory){
+        ArrayList<Product> filteredProductList = new ArrayList<>();
+        for(Product product:productList){
+            String subCat = product.getBrand();
+            String cat = product.getSubCategory();
+            if(subCategory.equals(Constants.ALL)){
+                if(cat != null){
+                    if(cat.equals(category)){
+                        filteredProductList.add(product);
+                    }
+                }
+            } else {
+                if ((cat != null) && (subCat != null)) {
+                    if (subCat.equals(subCategory) && cat.equals(category)) {
+                        filteredProductList.add(product);
+                    }
+                }
+            }
+        }
+        return filteredProductList;
     }
 }

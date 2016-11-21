@@ -88,14 +88,29 @@
             style="@style/loginHelperText"
             android:layout_gravity="center"/>
 
-        <Switch
-            android:id="@+id/swSkipLogin"
-            android:gravity="center"
-            android:layout_gravity="center"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Login later .. " />
+            android:gravity="right"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                style="@style/loginHelperText"
+                android:text="Login later .. "/>
+
+            <Switch
+                android:id="@+id/swSkipLogin"
+                android:layout_width="wrap_content"
+                android:gravity="bottom"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

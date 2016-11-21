@@ -10,7 +10,10 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.interceptors.ParseLogInterceptor;
 
+import java.util.ArrayList;
+
 public class ParseApplication extends Application {
+
     @Override
     public void onCreate() {
         super.onCreate();

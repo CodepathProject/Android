@@ -18,6 +18,7 @@ import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.ViewType;
+import com.codepath.project.android.network.ParseHelper;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -110,7 +111,7 @@ public class HomeFragment extends Fragment {
         GridLayoutManager layoutManagerCategory = new GridLayoutManager(getActivity(), GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
         ArrayList<Category> categoryList = new ArrayList<>();
         CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), categoryList, ViewType.GRID);
-        Category.createCategoryList(12, ViewType.GRID, categoryList, categoryAdapter);
+        ParseHelper.createCategoryListFromProducts(categoryList, categoryAdapter);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
     }

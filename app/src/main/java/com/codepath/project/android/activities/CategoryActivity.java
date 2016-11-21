@@ -11,6 +11,7 @@ import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
+import com.codepath.project.android.network.ParseHelper;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class CategoryActivity extends AppCompatActivity {
     private void setupRecyclerView(){
         ArrayList<Category> categoryList = new ArrayList<>();
         CategoryAdapter categoryAdapter = new CategoryAdapter(this, categoryList, ViewType.VERTICAL);
-        Category.createCategoryList(12, ViewType.VERTICAL, categoryList, categoryAdapter);
+        categoryList.addAll(ParseHelper.getCategoryList());
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(new LinearLayoutManager(this));
     }

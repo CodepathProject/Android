@@ -82,7 +82,7 @@ public class CategoryAdapter extends
             }
         });
 
-        if(mItemLayoutType.equals(ViewType.GRID)){
+        if(mItemLayoutType.equals(ViewType.GRID) && (getItemCount()  > 8))  {
             if(position == (getItemCount() - 1)) {
                 ivProductImage.setOnClickListener(v -> {
                     Intent intent = new Intent(getContext(), CategoryActivity.class);

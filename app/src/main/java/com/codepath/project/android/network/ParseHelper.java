@@ -1,8 +1,19 @@
 package com.codepath.project.android.network;
 
+import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.model.AppUser;
+import com.codepath.project.android.model.Category;
+import com.codepath.project.android.model.Product;
+import com.codepath.project.android.model.ViewType;
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.SignUpCallback;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ParseHelper {
 
@@ -12,6 +23,17 @@ public class ParseHelper {
     public static final String PARSE_LOGIN_SUCCESS_SNACKTOAST = "Login Successful !";
     public static final String PARSE_LOGIN_FAILED_SNACKTOAST = "Login Failed !";
     public static final String PARSE_SIGNUP_SUCCESS_SNACKTOAST = "Sign Up Successful !";
+
+    private static List<Product> productList;
+    private static List<Category> categoryList;
+
+    public static List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
 
     public static void newUserSignUp(String name,
                                      String password,
@@ -29,6 +51,64 @@ public class ParseHelper {
                 } else {
                     // Sign up didn't succeed. Look at the ParseException
                     // to figure out what went wrong
+                }
+            }
+        });
+    }
+
+    /*
+        Currently not used
+        Fetches data from category table
+    */
+    public static void createCategoryList(ArrayList<Category> categoryList, CategoryAdapter adapter){
+        ParseQuery<Category> query = new ParseQuery<Category>("Category");
+        query.findInBackground(new FindCallback<Category>() {
+            public void done(List<Category> categories, ParseException e) {
+                if (e == null) {
+                    System.out.println("success "+categories);
+                    categoryList.addAll(categories);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    System.out.println("error "+e);
+                }
+            }
+        });
+    }
+
+    /*
+        Fetches category from products table
+        Stores the product list
+    */
+    public static void createCategoryListFromProducts(ArrayList<Category> categoryList, CategoryAdapter adapter){
+           ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
+           query.findInBackground(new FindCallback<Product>() {
+            public void done(List<Product> products, ParseException e) {
+                if (e == null) {
+                    HashMap<String, Product> categoryMap = new HashMap<String, Product>();
+                    ArrayList<Category> categoryListTemp = new ArrayList<Category>();
+                    for(Product product:products){
+                        if(product.getSubCategory() != null) {
+                            if (!categoryMap.containsKey(product.getSubCategory())) {
+                                categoryMap.put(product.getSubCategory(), product);
+                            }
+                        }
+                    }
+                    System.out.println("success "+categoryMap.size());
+                    for (Map.Entry<String, Product> entry : categoryMap.entrySet())
+                    {
+                        String  categoryName = entry.getKey();
+                        String  imageUrl = entry.getValue().getImageUrl();
+                        Category category = new Category();
+                        category.setImageUrl(imageUrl);
+                        category.setName(categoryName);
+                        categoryListTemp.add(category);
+                    }
+                    ParseHelper.categoryList = categoryListTemp;
+                    ParseHelper.productList = products;
+                    categoryList.addAll(categoryListTemp);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    System.out.println("error "+e);
                 }
             }
         });

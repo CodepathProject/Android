@@ -69,6 +69,31 @@ public class HomeFragment extends Fragment {
     }
 
     private void setRecycleView() {
+        setCategories();
+        setPopularProducts();
+        setBestRatedProducts();
+    }
+
+    private void setCategories(){
+        GridLayoutManager layoutManagerCategory = new GridLayoutManager(getActivity(), GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
+        ArrayList<Category> categoryList = new ArrayList<>();
+        CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), categoryList, ViewType.GRID);
+        ParseHelper.createCategoryListFromProducts(categoryList, categoryAdapter);
+        rvCategory.setAdapter(categoryAdapter);
+        rvCategory.setLayoutManager(layoutManagerCategory);
+
+        ItemClickSupport.addTo(rvCategory).setOnItemClickListener(
+                (recyclerView, position, v) -> {
+                    CategoryFragment nextFrag = CategoryFragment.newInstance(categoryList.get(position).getName());
+                    this.getFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, nextFrag, "TAG")
+                            .addToBackStack(null)
+                            .commit();
+                }
+        );
+    }
+
+    private void setPopularProducts(){
         LinearLayoutManager layoutManagerProducts
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rvProducts.setLayoutManager(layoutManagerProducts);
@@ -92,7 +117,10 @@ public class HomeFragment extends Fragment {
             products.addAll(productList);
             productsAdapter.notifyDataSetChanged();
         });
+    }
 
+
+    private void setBestRatedProducts(){
         LinearLayoutManager layoutManagerReviews
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         ArrayList<Product> productsBestRated = new ArrayList<>();
@@ -113,23 +141,6 @@ public class HomeFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), ProductViewActivity.class);
                     intent.putExtra("productId", products.get(position).getObjectId());
                     startActivity(intent);
-                }
-        );
-
-        GridLayoutManager layoutManagerCategory = new GridLayoutManager(getActivity(), GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
-        ArrayList<Category> categoryList = new ArrayList<>();
-        CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), categoryList, ViewType.GRID);
-        ParseHelper.createCategoryListFromProducts(categoryList, categoryAdapter);
-        rvCategory.setAdapter(categoryAdapter);
-        rvCategory.setLayoutManager(layoutManagerCategory);
-
-        ItemClickSupport.addTo(rvCategory).setOnItemClickListener(
-                (recyclerView, position, v) -> {
-                    CategoryFragment nextFrag = CategoryFragment.newInstance(categoryList.get(position).getName());
-                    this.getFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, nextFrag, "TAG")
-                            .addToBackStack(null)
-                            .commit();
                 }
         );
     }

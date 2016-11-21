@@ -13,7 +13,8 @@
         android:layout_alignParentTop="true"
         android:id="@+id/ivComposeCancel"
         android:tint="@color/colorPrimary"
-        android:src="@drawable/ic_clear_black_24dp"/>
+        android:src="@drawable/ic_clear_black_24dp"
+        android:contentDescription="@string/click_to_cancel" />
 
     <LinearLayout
         android:id="@+id/llEditor"
@@ -46,7 +47,7 @@
             android:gravity="start"
             android:lines="8"
             android:textColorHint="#C8C8C8"
-            android:hint="Add your review"
+            android:hint="@string/add_your_review"
             android:textColor="@android:color/black"
             android:textSize="19sp"
             android:layout_margin="15dp"
@@ -70,14 +71,15 @@
         android:tint="@color/colorGray"
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/btnPost"
-        android:id="@+id/ivCamera" />
+        android:id="@+id/ivCamera"
+        android:contentDescription="@string/click_to_add_pics" />
 
     <Button
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:text="Submit"
+        android:text="@string/submit"
         android:layout_marginBottom="10dp"
         android:textColor="#FFFFFF"
         android:background="@color/colorPrimary"

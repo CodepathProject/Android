@@ -100,7 +100,7 @@
                 android:layout_height="match_parent"
                 android:gravity="bottom"
                 style="@style/loginHelperText"
-                android:text="Login later .. "/>
+                android:text="Skip Login .. "/>
 
             <Switch
                 android:id="@+id/swSkipLogin"

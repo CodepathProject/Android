@@ -56,7 +56,7 @@ public class UserTimelineAdapter extends
     public UserTimelineAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View contactView = inflater.inflate(R.layout.item_review, parent, false);
+        View contactView = inflater.inflate(R.layout.item_review_timeline, parent, false);
         return new ViewHolder(contactView);
     }
 

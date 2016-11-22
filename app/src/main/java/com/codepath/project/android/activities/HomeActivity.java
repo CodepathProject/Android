@@ -23,6 +23,7 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.SearchResultsAdapter;
 import com.codepath.project.android.fragments.HomeFragment;
 import com.codepath.project.android.fragments.MyProductsFragment;
+import com.codepath.project.android.fragments.UserDetailFragment;
 import com.codepath.project.android.model.Product;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -170,7 +171,11 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         TextView tvUserName = (TextView) header.findViewById(R.id.tvUserName);
-        tvUserName.setText("Hello, " + ParseUser.getCurrentUser().get("firstName"));
+        if (ParseUser.getCurrentUser() == null) {
+            tvUserName.setText("Hello, Anonymous");
+        } else {
+            tvUserName.setText("Hello, " + ParseUser.getCurrentUser().get("firstName"));
+        }
     }
 
 
@@ -193,6 +198,9 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.nav_my_products:
                 fragmentClass = MyProductsFragment.class;
+                break;
+            case R.id.nav_about_me:
+                fragmentClass = UserDetailFragment.class;
                 break;
             default:
                 fragmentClass = HomeFragment.class;

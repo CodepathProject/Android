@@ -172,13 +172,13 @@ public class HomeActivity extends AppCompatActivity
         View header = navigationView.getHeaderView(0);
         TextView tvUserName = (TextView) header.findViewById(R.id.tvUserName);
         if (ParseUser.getCurrentUser() == null) {
-            tvUserName.setText("Hello, Anonymous");
+            tvUserName.setText("Hello, Sandeep");
         } else {
             ParseUser.getCurrentUser().fetchIfNeededInBackground((object, e) -> {
                 if(object.get("firstName") != null) {
                     tvUserName.setText("Hello, " + object.get("firstName"));
                 } else {
-                    tvUserName.setText("Hello, Anonymous");
+                    tvUserName.setText("Hello, Sandeep");
                 }
             });
         }

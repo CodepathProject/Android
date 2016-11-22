@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -21,8 +20,8 @@ import com.codepath.project.android.network.ParseHelper;
 import com.codepath.project.android.utils.GeneralUtils;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
@@ -103,16 +102,13 @@ public class LoginFragment extends Fragment {
             });
         });
 
-        swSkipLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    // go to home
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
-                }else{
-                    // dp nothing
-                }
+        swSkipLogin.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked){
+                // go to home
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                startActivity(intent);
+            }else{
+                // dp nothing
             }
         });
 
@@ -138,24 +134,23 @@ public class LoginFragment extends Fragment {
                 "/me",
                 parameters,
                 HttpMethod.GET,
-                new GraphRequest.Callback() {
-                    public void onCompleted(GraphResponse response) {
-                        try {
-                            String email = response.getJSONObject().getString("email");
-                            String name = response.getJSONObject().getString("name");
-                            JSONObject picture = response.getJSONObject().getJSONObject("picture");
-                            JSONObject data = picture.getJSONObject("data");
-                            String pictureUrl = data.getString("url");
+                response -> {
+                    try {
+                        String email = response.getJSONObject().getString("email");
+                        String name = response.getJSONObject().getString("name");
+                        JSONObject picture = response.getJSONObject().getJSONObject("picture");
+                        JSONObject data = picture.getJSONObject("data");
+                        String pictureUrl = data.getString("url");
 
-                            user.setEmail(email);
-                            user.setUsername(email);
-                            user.put("firstName", name);
-                            user.put("pictureUrl", pictureUrl);
-
-                            user.saveInBackground();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        user.setEmail(email);
+                        user.setUsername(email);
+                        user.put("firstName", name);
+                        user.put("pictureUrl", pictureUrl);
+                        user.save();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
                 }
         ).executeAsync();

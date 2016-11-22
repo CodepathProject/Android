@@ -11,8 +11,8 @@ The following **required** functionality is completed:
 * [x] User can logout from the application.
 * [x] User FB login
 * [x] User Timeline
+* [x] Review Attaching images with review (Parse & S3 integration)
 * [x] Prodcut Search
-* [x] Attaching images with review (Parse & S3 integration)
 * [x] Product Adding to shelf
 * [x] Product Viewing shelf
 * [x] Product (Home -> ProductDetail Browse flow)

@@ -1,8 +1,11 @@
 package com.codepath.project.android.activities;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
 import com.codepath.project.android.R;
+import com.parse.ParseFacebookUtils;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -17,8 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
 }

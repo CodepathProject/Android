@@ -7,10 +7,9 @@ import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.interceptors.ParseLogInterceptor;
-
-import java.util.ArrayList;
 
 public class ParseApplication extends Application {
 
@@ -26,6 +25,8 @@ public class ParseApplication extends Application {
                 .clientKey(null)
                 .addNetworkInterceptor(new ParseLogInterceptor())
                 .server("https://codepath.herokuapp.com/parse/").build());
+
+        ParseFacebookUtils.initialize(this);
 
 //        byte[] data = "Working at Parse is great!".getBytes();
 //        ParseFile file = new ParseFile("resume.txt", data);

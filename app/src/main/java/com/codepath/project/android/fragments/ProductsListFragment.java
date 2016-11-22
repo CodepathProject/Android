@@ -60,10 +60,14 @@ public class ProductsListFragment extends Fragment {
             startActivity(intent);
         } else {
             if (mPage == 1) {
-                productsList.addAll(user.getShelfProducts());
+                if(user.getShelfProducts() != null) {
+                    productsList.addAll(user.getShelfProducts());
+                }
                 productsAdapter.notifyDataSetChanged();
             } else {
-                productsList.addAll(user.getWishListProducts());
+                if(user.getWishListProducts() != null) {
+                    productsList.addAll(user.getWishListProducts());
+                }
                 productsAdapter.notifyDataSetChanged();
             }
         }

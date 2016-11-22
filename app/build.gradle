@@ -54,4 +54,6 @@ dependencies {
     apt 'com.github.hotchemi:permissionsdispatcher-processor:2.2.0'
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile 'com.elmargomez.typer:typerlib:1.0.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.10.0'
+    compile 'com.parse:parsefacebookutils-v4-android:1.10.4@aar'
 }

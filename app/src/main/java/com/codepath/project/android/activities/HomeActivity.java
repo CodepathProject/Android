@@ -174,7 +174,13 @@ public class HomeActivity extends AppCompatActivity
         if (ParseUser.getCurrentUser() == null) {
             tvUserName.setText("Hello, Anonymous");
         } else {
-            tvUserName.setText("Hello, " + ParseUser.getCurrentUser().get("firstName"));
+            ParseUser.getCurrentUser().fetchIfNeededInBackground((object, e) -> {
+                if(object.get("firstName") != null) {
+                    tvUserName.setText("Hello, " + object.get("firstName"));
+                } else {
+                    tvUserName.setText("Hello, Anonymous");
+                }
+            });
         }
     }
 

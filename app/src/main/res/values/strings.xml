@@ -23,4 +23,6 @@
 
     <string name="facebook_app_id">751597271644941</string>
 
+    <string name="gcm_sender_id">id:973820282562</string>
+
 </resources>

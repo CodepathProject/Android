@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.codepath.project.android.fragments.HomeFragment;
 import com.codepath.project.android.fragments.MyProductsFragment;
 import com.codepath.project.android.fragments.UserDetailFragment;
 import com.codepath.project.android.model.Product;
+import com.parse.ParseInstallation;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -49,6 +51,8 @@ public class HomeActivity extends AppCompatActivity
 
     SearchResultsAdapter mSearchViewAdapter;
 
+    final String CHANNEL_NAME = "abcd";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,14 @@ public class HomeActivity extends AppCompatActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setNavigationDrawer();
         addFragment();
+        if(ParseUser.getCurrentUser() != null) {
+            Log.e("quest", "onCreate: yes user");
+            ParseInstallation pi = ParseInstallation.getCurrentInstallation();
+            pi.put("user", ParseUser.getCurrentUser());
+            pi.saveInBackground();
+        } else {
+            Log.e("quest", "onCreate: no user");
+        }
     }
 
     private void addFragment(){

@@ -28,4 +28,9 @@ public class TestData {
 
     public static final String[] tabNameList = {"Samsung","Apple","Sony","LG"};
 
+    public static  final String USER_PROFILE_RANDOM = "https://pbs.twimg.com/profile_images/792911867563749376/R3_7PZg_.jpg";
+
+    public static  final String USER_PROFILE_PLACEHOLDER = "http://trackback.net/wp-content/uploads/2015/02/Dummy-profile-picture.png";
+
+
 }

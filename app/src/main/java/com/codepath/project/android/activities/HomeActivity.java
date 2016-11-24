@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
@@ -26,15 +27,19 @@ import com.codepath.project.android.fragments.FeedFragment;
 import com.codepath.project.android.fragments.HomeFragment;
 import com.codepath.project.android.fragments.MyProductsFragment;
 import com.codepath.project.android.fragments.UserDetailFragment;
+import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.Product;
 import com.parse.ParseInstallation;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.codepath.project.android.data.TestData.USER_PROFILE_PLACEHOLDER;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnSuggestionListener {
@@ -183,20 +188,35 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
-        TextView tvUserName = (TextView) header.findViewById(R.id.tvUserName);
+        setNavDrawerProfileInfo(header);
+    }
+
+    private void setNavDrawerProfileInfo(View header){
+        TextView tvUserName = (TextView) header.findViewById(R.id.tvNavUserName);
+        ImageView ivUserProfile = (ImageView) header.findViewById(R.id.ivUserProfilePic);
         if (ParseUser.getCurrentUser() == null) {
-            tvUserName.setText("Hello, Sandeep");
+            tvUserName.setText(R.string.default_greeting);
+            setProfileImage(ivUserProfile, USER_PROFILE_PLACEHOLDER);
         } else {
             ParseUser.getCurrentUser().fetchIfNeededInBackground((object, e) -> {
                 if(object.get("firstName") != null) {
                     tvUserName.setText("Hello, " + object.get("firstName"));
                 } else {
-                    tvUserName.setText("Hello, Sandeep");
+                    tvUserName.setText(R.string.default_greeting);
+                }
+                if(object.get("pictureUrl") != null) {
+                    setProfileImage(ivUserProfile, object.getString("pictureUrl"));
+                } else {
+                    setProfileImage(ivUserProfile, USER_PROFILE_PLACEHOLDER);
                 }
             });
         }
     }
 
+    private void setProfileImage(ImageView iv, String imageUrl){
+        Picasso.with(this).load(imageUrl)
+                .transform(new CircleTransform()).into(iv);
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

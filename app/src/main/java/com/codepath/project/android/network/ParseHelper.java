@@ -1,6 +1,9 @@
 package com.codepath.project.android.network;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.helpers.Constants;
@@ -86,7 +89,7 @@ public class ParseHelper {
         Fetches category from products table
         Stores the product list
     */
-    public static void createCategoryListFromProducts(ArrayList<Category> categoryList, CategoryAdapter adapter){
+    public static void createCategoryListFromProducts(ArrayList<Category> categoryList, CategoryAdapter adapter, TextView tvCategories, ProgressBar pbar){
            ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
            query.findInBackground(new FindCallback<Product>() {
             public void done(List<Product> products, ParseException e) {
@@ -114,6 +117,8 @@ public class ParseHelper {
                     ParseHelper.productList = products;
                     categoryList.addAll(categoryListTemp);
                     adapter.notifyDataSetChanged();
+                    tvCategories.setVisibility(View.VISIBLE);
+                    pbar.setVisibility(View.GONE);
                 } else {
                     System.out.println("error "+e);
                 }

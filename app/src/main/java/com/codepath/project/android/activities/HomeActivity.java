@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
@@ -25,15 +26,19 @@ import com.codepath.project.android.adapter.SearchResultsAdapter;
 import com.codepath.project.android.fragments.HomeFragment;
 import com.codepath.project.android.fragments.MyProductsFragment;
 import com.codepath.project.android.fragments.UserDetailFragment;
+import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.Product;
 import com.parse.ParseInstallation;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.codepath.project.android.data.TestData.USER_PROFILE_PLACEHOLDER;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnSuggestionListener {
@@ -183,8 +188,11 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         TextView tvUserName = (TextView) header.findViewById(R.id.tvUserName);
+        ImageView ivUserProfile = (ImageView) header.findViewById(R.id.ivUserProfilePic);
         if (ParseUser.getCurrentUser() == null) {
             tvUserName.setText("Hello, Sandeep");
+            Picasso.with(this).load(USER_PROFILE_PLACEHOLDER)
+                    .transform(new CircleTransform()).into(ivUserProfile);
         } else {
             ParseUser.getCurrentUser().fetchIfNeededInBackground((object, e) -> {
                 if(object.get("firstName") != null) {
@@ -192,8 +200,16 @@ public class HomeActivity extends AppCompatActivity
                 } else {
                     tvUserName.setText("Hello, Sandeep");
                 }
+                if(object.get("pictureUrl") != null) {
+                    Picasso.with(this).load(object.getString("pictureUrl"))
+                            .transform(new CircleTransform()).into(ivUserProfile);
+                } else {
+                    Picasso.with(this).load(USER_PROFILE_PLACEHOLDER)
+                            .transform(new CircleTransform()).into(ivUserProfile);
+                }
             });
         }
+
     }
 
 

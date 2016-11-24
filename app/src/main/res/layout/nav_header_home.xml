@@ -26,6 +26,6 @@
         android:textColor="@color/white"
         android:textStyle="bold|italic"
         android:textSize="20sp"
-        android:id="@+id/tvUserName" />
+        android:id="@+id/tvNavUserName" />
 
 </LinearLayout>

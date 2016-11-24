@@ -187,31 +187,35 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
-        TextView tvUserName = (TextView) header.findViewById(R.id.tvUserName);
+        setNavDrawerProfileInfo(header);
+    }
+
+    private void setNavDrawerProfileInfo(View header){
+        TextView tvUserName = (TextView) header.findViewById(R.id.tvNavUserName);
         ImageView ivUserProfile = (ImageView) header.findViewById(R.id.ivUserProfilePic);
         if (ParseUser.getCurrentUser() == null) {
-            tvUserName.setText("Hello, Sandeep");
-            Picasso.with(this).load(USER_PROFILE_PLACEHOLDER)
-                    .transform(new CircleTransform()).into(ivUserProfile);
+            tvUserName.setText(R.string.default_greeting);
+            setProfileImage(ivUserProfile, USER_PROFILE_PLACEHOLDER);
         } else {
             ParseUser.getCurrentUser().fetchIfNeededInBackground((object, e) -> {
                 if(object.get("firstName") != null) {
                     tvUserName.setText("Hello, " + object.get("firstName"));
                 } else {
-                    tvUserName.setText("Hello, Sandeep");
+                    tvUserName.setText(R.string.default_greeting);
                 }
                 if(object.get("pictureUrl") != null) {
-                    Picasso.with(this).load(object.getString("pictureUrl"))
-                            .transform(new CircleTransform()).into(ivUserProfile);
+                    setProfileImage(ivUserProfile, object.getString("pictureUrl"));
                 } else {
-                    Picasso.with(this).load(USER_PROFILE_PLACEHOLDER)
-                            .transform(new CircleTransform()).into(ivUserProfile);
+                    setProfileImage(ivUserProfile, USER_PROFILE_PLACEHOLDER);
                 }
             });
         }
-
     }
 
+    private void setProfileImage(ImageView iv, String imageUrl){
+        Picasso.with(this).load(imageUrl)
+                .transform(new CircleTransform()).into(iv);
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

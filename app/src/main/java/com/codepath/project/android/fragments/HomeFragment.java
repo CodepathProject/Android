@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.ProductViewActivity;
@@ -36,6 +38,14 @@ public class HomeFragment extends Fragment {
     RecyclerView rvCategory;
     @BindView(R.id.rv_reviews)
     RecyclerView rvReviews;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+    @BindView(R.id.tv_categories)
+    TextView tvCategories;
+    @BindView(R.id.tv_popular_products)
+    TextView tvPopularProducts;
+    @BindView(R.id.tv_popular_reviews)
+    TextView tvPopularReviews;
 
     public static final int GRID_ROW_COUNT = 2;
 
@@ -69,6 +79,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void setRecycleView() {
+        progressBar.setVisibility(View.VISIBLE);
+        tvCategories.setVisibility(View.INVISIBLE);
+        tvPopularProducts.setVisibility(View.INVISIBLE);
+        tvPopularReviews.setVisibility(View.INVISIBLE);
         setCategories();
         setPopularProducts();
         setBestRatedProducts();
@@ -78,7 +92,7 @@ public class HomeFragment extends Fragment {
         GridLayoutManager layoutManagerCategory = new GridLayoutManager(getActivity(), GRID_ROW_COUNT, GridLayoutManager.HORIZONTAL, false);
         ArrayList<Category> categoryList = new ArrayList<>();
         CategoryAdapter categoryAdapter = new CategoryAdapter(getActivity(), categoryList, ViewType.GRID);
-        ParseHelper.createCategoryListFromProducts(categoryList, categoryAdapter);
+        ParseHelper.createCategoryListFromProducts(categoryList, categoryAdapter, tvCategories, progressBar);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
 
@@ -116,6 +130,7 @@ public class HomeFragment extends Fragment {
         query.findInBackground((productList, e) -> {
             products.addAll(productList);
             productsAdapter.notifyDataSetChanged();
+            tvPopularProducts.setVisibility(View.VISIBLE);
         });
     }
 
@@ -134,6 +149,7 @@ public class HomeFragment extends Fragment {
         queryByBestRating.findInBackground((productList, e) -> {
             productsBestRated.addAll(productList);
             reviewsAdapter.notifyDataSetChanged();
+            tvPopularReviews.setVisibility(View.VISIBLE);
         });
 
         ItemClickSupport.addTo(rvReviews).setOnItemClickListener(

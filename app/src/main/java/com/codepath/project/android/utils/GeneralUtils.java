@@ -1,6 +1,9 @@
 package com.codepath.project.android.utils;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
@@ -50,5 +53,13 @@ public class GeneralUtils {
             e.printStackTrace();
         }
         return "http://www.gravatar.com/avatar/" + hex + "?d=identicon";
+    }
+
+    public static void setTextViewDrawableColor(TextView textView, int color) {
+        for (Drawable drawable : textView.getCompoundDrawables()) {
+            if (drawable != null) {
+                drawable.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
+            }
+        }
     }
 }

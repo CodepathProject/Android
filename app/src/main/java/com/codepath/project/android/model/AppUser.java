@@ -41,11 +41,19 @@ public class AppUser extends ParseUser {
         addUnique("followUsers", user);
     }
 
+    public void removeFollowUser(ParseUser user) {
+        removeAll("followUsers", Arrays.asList(user));
+    }
+
     public List<Product> getFollowProducts() {
         return (List<Product>) get("followProducts");
     }
 
     public void setFollowProducts(Product product) {
         addUnique("followProducts", product);
+    }
+
+    public void removeFollowProduct(Product product) {
+        removeAll("followProducts", Arrays.asList(product));
     }
 }

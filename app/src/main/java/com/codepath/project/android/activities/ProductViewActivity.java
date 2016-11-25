@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
+import com.codepath.project.android.utils.GeneralUtils;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -58,6 +60,8 @@ public class ProductViewActivity extends AppCompatActivity {
     Button btnShelf;
     @BindView(R.id.btnWishlist)
     Button btnWishlist;
+    @BindView(R.id.tvFollow)
+    TextView tvFollow;
 
     ReviewsAdapter reviewsAdapter;
     List<Review> reviews;
@@ -157,6 +161,11 @@ public class ProductViewActivity extends AppCompatActivity {
             if(ifListContains(productList)) {
                 btnWishlist.setText("Remove from wishlist");
             }
+            productList = user.getFollowProducts();
+            if(ifListContains(productList)) {
+                tvFollow.setTextColor(ContextCompat.getColor(this, R.color.action_blue));
+                GeneralUtils.setTextViewDrawableColor(tvFollow, R.color.action_blue);
+            }
         }
 
         btnShelf.setOnClickListener(v -> {
@@ -193,6 +202,33 @@ public class ProductViewActivity extends AppCompatActivity {
                     user.addWishListProduct(product);
                     btnWishlist.setText("Remove from wishlist");
                     Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+                }
+                try {
+                    user.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        tvFollow.setOnClickListener(v -> {
+            if(user != null) {
+                List<Product> followProducts = user.getFollowProducts();
+                if(ifListContains(followProducts)) {
+                    user.removeFollowProduct(product);
+                    tvFollow.setText("Follow");
+                    tvFollow.setTextColor(ContextCompat.getColor(this, R.color.action_gray));
+                    GeneralUtils.setTextViewDrawableColor(tvFollow, R.color.action_gray);
+                    Toast.makeText(this, "Unfollowed", Toast.LENGTH_SHORT).show();
+                } else {
+                    user.setFollowProducts(product);
+                    tvFollow.setText("Following");
+                    tvFollow.setTextColor(ContextCompat.getColor(this, R.color.action_blue));
+                    GeneralUtils.setTextViewDrawableColor(tvFollow, R.color.action_blue);
+                    Toast.makeText(this, "Followed", Toast.LENGTH_SHORT).show();
                 }
                 try {
                     user.save();

@@ -31,11 +31,19 @@ public class Feed extends ParseObject {
         return getParseUser("fromUser");
     }
 
+    public void setFromUser(ParseUser user) {
+        put("fromUser", user);
+    }
+
     public ParseUser getToUser() {
         return getParseUser("toUser");
     }
 
     public Product getToProduct() {
         return (Product) get("toProduct");
+    }
+
+    public void setToProduct(Product product) {
+        put("toProduct", product);
     }
 }

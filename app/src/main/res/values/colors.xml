@@ -25,4 +25,7 @@
 
     <color name="rv_home_category_tv_bg">#deEFEFEF</color>
 
+    <color name="action_gray">#b2b2b2</color>
+    <color name="action_blue">#0d7ce9</color>
+
 </resources>

@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
                 (recyclerView, position, v) -> {
                     CategoryFragment nextFrag = CategoryFragment.newInstance(categoryList.get(position).getName());
                     this.getFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, nextFrag, "TAG")
+                            .add(R.id.fragment_container, nextFrag, "TAG")
                             .addToBackStack(null)
                             .commit();
                 }

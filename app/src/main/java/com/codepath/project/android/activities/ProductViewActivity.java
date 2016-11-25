@@ -244,6 +244,11 @@ public class ProductViewActivity extends AppCompatActivity {
         }
     }
 
+    public void onShowPlot(View view){
+        Intent i = new Intent(this, PlotActivity.class);
+        startActivity(i);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home, menu);

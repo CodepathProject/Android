@@ -128,6 +128,19 @@
                     android:textColor="@color/white"
                     android:textSize="11sp"
                     android:text="@string/add_to_wishlist"/>
+                <Button
+                    android:id="@+id/btnPlots"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_above="@+id/btnWishlist"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="20dp"
+                    android:clickable="true"
+                    android:backgroundTint="@color/colorAccent"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:onClick="onShowPlot"
+                    android:text="Plots"/>
 
             </RelativeLayout>
 

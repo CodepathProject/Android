@@ -141,19 +141,19 @@
                         android:gravity="center"
                         android:text="Watch"
                         android:textColor="@color/action_gray"/>
-
                     <Button
                         android:id="@+id/btnPlots"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="true"
-                        android:backgroundTint="@color/colorAccent"
-                        android:textColor="@color/white"
+                        android:drawableTop="@drawable/plot"
+                        android:drawableTint="@color/action_gray"
+                        android:textColor="@color/action_gray"
+                        android:background="@android:color/transparent"
                         android:textSize="11sp"
                         android:onClick="onShowPlot"
-                        android:text="Plots"/>
+                        android:text="Trends"/>
                 </LinearLayout>
->>>>>>> ae8f4b249810662587b822ae941debc421174682
 
             </RelativeLayout>
 

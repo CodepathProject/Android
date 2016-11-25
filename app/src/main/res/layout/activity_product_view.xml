@@ -105,39 +105,43 @@
                     android:stepSize="0.5"
                     tools:rating="3.5" />
 
-                <Button
-                    android:id="@+id/btnShelf"
-                    android:layout_width="160dp"
-                    android:layout_height="35dp"
-                    android:layout_below="@+id/rbAverageRating"
-                    android:clickable="true"
-                    android:backgroundTint="@color/colorAccent"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    android:text="@string/add_to_shelf"/>
-
-                <Button
-                    android:id="@+id/btnWishlist"
-                    android:layout_width="180dp"
-                    android:layout_height="35dp"
-                    android:layout_below="@+id/rbAverageRating"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/btnShelf"
-                    android:clickable="true"
-                    android:backgroundTint="@color/colorAccent"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    android:text="@string/add_to_wishlist"/>
-
-                <TextView
-                    android:id="@+id/tvFollow"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/btnShelf"
-                    android:drawableTop="@drawable/noun_729141_cc"
-                    android:drawableTint="@color/action_gray"
-                    android:text="Follow"
-                    android:textColor="@color/action_gray"/>
+                    android:orientation="horizontal"
+                    android:layout_margin="20dp"
+                    android:layout_below="@+id/rbAverageRating">
+                    <TextView
+                        android:id="@+id/tvFollow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/noun_729141_cc"
+                        android:drawableTint="@color/action_gray"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Follow"
+                        android:textColor="@color/action_gray"/>
+                    <TextView
+                        android:id="@+id/tvShelf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/shelf"
+                        android:drawableTint="@color/action_gray"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Shelf"
+                        android:textColor="@color/action_gray"/>
+                    <TextView
+                        android:id="@+id/tvWatch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/eye"
+                        android:drawableTint="@color/action_gray"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Watch"
+                        android:textColor="@color/action_gray"/>
+                </LinearLayout>
 
             </RelativeLayout>
 

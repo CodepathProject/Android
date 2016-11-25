@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.SearchResultsAdapter;
+import com.codepath.project.android.fragments.FeedFragment;
 import com.codepath.project.android.fragments.HomeFragment;
 import com.codepath.project.android.fragments.MyProductsFragment;
 import com.codepath.project.android.fragments.UserDetailFragment;
@@ -233,6 +234,9 @@ public class HomeActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.nav_home:
                 fragmentClass = HomeFragment.class;
+                break;
+            case R.id.nav_feed:
+                fragmentClass = FeedFragment.class;
                 break;
             case R.id.nav_my_products:
                 fragmentClass = MyProductsFragment.class;

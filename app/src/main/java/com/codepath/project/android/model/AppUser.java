@@ -32,4 +32,28 @@ public class AppUser extends ParseUser {
     public void removeWishListProduct(Product product) {
         removeAll("wishListProducts", Arrays.asList(product));
     }
+
+    public List<ParseUser> getFollowUsers() {
+        return (List<ParseUser>) get("followUsers");
+    }
+
+    public void setFollowUsers(ParseUser user) {
+        addUnique("followUsers", user);
+    }
+
+    public void removeFollowUser(ParseUser user) {
+        removeAll("followUsers", Arrays.asList(user));
+    }
+
+    public List<Product> getFollowProducts() {
+        return (List<Product>) get("followProducts");
+    }
+
+    public void setFollowProducts(Product product) {
+        addUnique("followProducts", product);
+    }
+
+    public void removeFollowProduct(Product product) {
+        removeAll("followProducts", Arrays.asList(product));
+    }
 }

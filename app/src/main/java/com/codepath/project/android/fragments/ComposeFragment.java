@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.helpers.BitmapScaler;
+import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.codepath.project.android.utils.ImageUtils;
@@ -134,6 +135,14 @@ public class ComposeFragment extends DialogFragment {
                 review.setImages(images);
             }
             review.saveInBackground();
+
+            Feed feed = new Feed();
+            feed.setType("addReview");
+            feed.setContent(reviewText);
+            feed.setFromUser(ParseUser.getCurrentUser());
+            feed.setToProduct(product);
+            feed.saveInBackground();
+
             closeKeyboardAndDismiss(view);
         });
 

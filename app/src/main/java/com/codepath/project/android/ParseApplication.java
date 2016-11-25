@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Category;
+import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.parse.Parse;
@@ -20,6 +21,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Product.class);
         ParseObject.registerSubclass(Review.class);
         ParseObject.registerSubclass(Category.class);
+        ParseObject.registerSubclass(Feed.class);
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("myAppId")
                 .clientKey(null)

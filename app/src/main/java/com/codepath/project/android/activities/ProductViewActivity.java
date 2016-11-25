@@ -154,20 +154,20 @@ public class ProductViewActivity extends AppCompatActivity {
         if(user != null) {
             productList = user.getShelfProducts();
             if(ifListContains(productList)) {
-                tvShelf.setTextColor(ContextCompat.getColor(this, R.color.action_blue));
-                DrawableCompat.setTint(tvShelf.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.action_blue));
+                tvShelf.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+                DrawableCompat.setTint(tvShelf.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorPrimary));
                 tvShelf.setText("In shelf");
             }
             productList = user.getWishListProducts();
             if(ifListContains(productList)) {
-                tvWatch.setTextColor(ContextCompat.getColor(this, R.color.action_blue));
-                DrawableCompat.setTint(tvWatch.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.action_blue));
+                tvWatch.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+                DrawableCompat.setTint(tvWatch.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorPrimary));
                 tvWatch.setText("Watching");
             }
             productList = user.getFollowProducts();
             if(ifListContains(productList)) {
-                tvFollow.setTextColor(ContextCompat.getColor(this, R.color.action_blue));
-                DrawableCompat.setTint(tvFollow.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.action_blue));
+                tvFollow.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+                DrawableCompat.setTint(tvFollow.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorPrimary));
                 tvFollow.setText("Following");
             }
         }
@@ -183,8 +183,8 @@ public class ProductViewActivity extends AppCompatActivity {
                     Toast.makeText(this, "Removed from shelf", Toast.LENGTH_SHORT).show();
                 } else {
                     user.addShelfProduct(product);
-                    tvShelf.setTextColor(ContextCompat.getColor(this, R.color.action_blue));
-                    DrawableCompat.setTint(tvShelf.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.action_blue));
+                    tvShelf.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+                    DrawableCompat.setTint(tvShelf.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorPrimary));
                     tvShelf.setText("In shelf");
                     Toast.makeText(this, "Added to shelf", Toast.LENGTH_SHORT).show();
                 }
@@ -211,8 +211,8 @@ public class ProductViewActivity extends AppCompatActivity {
                 } else {
                     user.addWishListProduct(product);
                     tvWatch.setText("Watching");
-                    tvWatch.setTextColor(ContextCompat.getColor(this, R.color.action_blue));
-                    DrawableCompat.setTint(tvWatch.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.action_blue));
+                    tvWatch.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+                    DrawableCompat.setTint(tvWatch.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorPrimary));
                     Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show();
                 }
                 try {
@@ -238,8 +238,8 @@ public class ProductViewActivity extends AppCompatActivity {
                 } else {
                     user.setFollowProducts(product);
                     tvFollow.setText("Following");
-                    tvFollow.setTextColor(ContextCompat.getColor(this, R.color.action_blue));
-                    DrawableCompat.setTint(tvFollow.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.action_blue));
+                    tvFollow.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+                    DrawableCompat.setTint(tvFollow.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorPrimary));
                     Toast.makeText(this, "Followed", Toast.LENGTH_SHORT).show();
                 }
                 try {

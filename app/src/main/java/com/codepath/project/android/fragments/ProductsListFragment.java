@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.activities.SplashScreenActivity;
 import com.codepath.project.android.adapter.MyProductsAdapter;
+import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Product;
 import com.parse.ParseUser;
@@ -53,6 +55,14 @@ public class ProductsListFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mLayoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(mLayoutManager);
+
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(
+                (rview, position, v) -> {
+                    Intent intent = new Intent(getActivity(), ProductViewActivity.class);
+                    intent.putExtra("productId", productsList.get(position).getObjectId());
+                    startActivity(intent);
+                }
+        );
 
         AppUser user = (AppUser) ParseUser.getCurrentUser();
         if (user == null) {

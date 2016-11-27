@@ -90,12 +90,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvProductName"
                     android:paddingTop="5dp"
-                    tools:text="Samsung" />
+                    tools:text="Samsung"
+                    android:textSize="18sp"/>
 
                 <RatingBar
                     android:id="@+id/rbAverageRating"
                     android:theme="@style/ratingBar"
-                    style="?android:attr/ratingBarStyleSmall"
+                    style="?android:attr/ratingBarStyleIndicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvBrandName"

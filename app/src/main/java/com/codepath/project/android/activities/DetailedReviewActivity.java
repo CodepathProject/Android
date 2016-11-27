@@ -4,16 +4,19 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.helpers.CircleTransform;
+import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Review;
 import com.codepath.project.android.utils.GeneralUtils;
 import com.parse.ParseFile;
@@ -36,6 +39,8 @@ public class DetailedReviewActivity extends AppCompatActivity {
     TextView tvReview;
     @BindView(R.id.rvReviewImage)
     RecyclerView rvReviewImage;
+    @BindView(R.id.rating)
+    RatingBar rating;
 
     ImageAdapter imageAdapter;
     List<String> imageUrl;
@@ -48,22 +53,25 @@ public class DetailedReviewActivity extends AppCompatActivity {
 
         imageUrl = new ArrayList<>();
         imageAdapter = new ImageAdapter(this, imageUrl);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvReviewImage.setLayoutManager(new GridLayoutManager(this, 2));
         rvReviewImage.setAdapter(imageAdapter);
-
-
 
         String reviewId = getIntent().getStringExtra("reviewId");
         ParseQuery<Review> query = ParseQuery.getQuery(Review.class);
         query.include("user");
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
         query.getInBackground(reviewId, (r, e) -> {
             if (e == null) {
+                AppUser user = (AppUser) r.getUser();
                 tvReview.setText(r.getText());
-                tvUserName.setText(r.getUser().getString("firstName"));
-                Picasso.with(this).load(GeneralUtils.getProfileUrl(r.getUser().getObjectId())).into(ivProfile);
+                String upperString = user.getString("firstName").substring(0,1).toUpperCase() + user.getString("firstName").substring(1);
+                tvUserName.setText(upperString);
+                rating.setRating(r.getRating());
 
+                if(!TextUtils.isEmpty(user.getImage())) {
+                    Picasso.with(this).load(user.getImage()).transform(new CircleTransform()).into(ivProfile);
+                } else {
+                    Picasso.with(this).load(GeneralUtils.getProfileUrl(user.getObjectId())).transform(new CircleTransform()).into(ivProfile);
+                }
                 if(r.getImages() != null && r.getImages().size() > 0) {
                     for(ParseFile pf: r.getImages()) {
                         imageUrl.add(pf.getUrl());

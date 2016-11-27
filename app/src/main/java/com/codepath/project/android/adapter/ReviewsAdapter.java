@@ -2,15 +2,16 @@ package com.codepath.project.android.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Review;
 import com.codepath.project.android.utils.GeneralUtils;
@@ -39,6 +40,8 @@ public class ReviewsAdapter extends
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.ivProfile) ImageView ivProfile;
         @BindView(R.id.tvReview) TextView tvReview;
+        @BindView(R.id.tvUserName) TextView tvUserName;
+        @BindView(R.id.rating) RatingBar rating;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -57,19 +60,18 @@ public class ReviewsAdapter extends
     @Override
     public void onBindViewHolder(ReviewsAdapter.ViewHolder viewHolder, int position) {
         Review review = mReviews.get(position);
-        TextView tvReview = viewHolder.tvReview;
         AppUser user = (AppUser) review.getUser();
-        String formattedText = "";
         if(user != null) {
-            formattedText += "<b>" + user.getString("firstName") + ": </b> ";
+            String upperString = user.getString("firstName").substring(0,1).toUpperCase() + user.getString("firstName").substring(1);
+            viewHolder.tvUserName.setText(upperString);
             if(!TextUtils.isEmpty(user.getImage())) {
-                Picasso.with(getContext()).load(user.getImage()).into(viewHolder.ivProfile);
+                Picasso.with(getContext()).load(user.getImage()).transform(new CircleTransform()).into(viewHolder.ivProfile);
             } else {
-                Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(user.getObjectId())).into(viewHolder.ivProfile);
+                Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(user.getObjectId())).transform(new CircleTransform()).into(viewHolder.ivProfile);
             }
         }
-        formattedText += review.getText();
-        tvReview.setText(Html.fromHtml(formattedText));
+        viewHolder.tvReview.setText(review.getText());
+        viewHolder.rating.setRating(review.getRating());
     }
 
     @Override

@@ -9,51 +9,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.codepath.project.android.activities.DetailedReviewActivity">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginTop="7dp"
+        tools:src="@drawable/quest"
+        android:contentDescription="@string/user_profile_image" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_toEndOf="@+id/ivProfile"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rlUserProfile">
+        android:layout_marginTop="7dp"
+        android:textSize="20sp"
+        tools:text="sandeep"/>
 
-        <ImageView
-            android:id="@+id/ivProfile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="7dp"
-            android:layout_marginTop="7dp"
-            tools:src="@drawable/quest" />
-
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/ivProfile"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="3dp"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            tools:text="Joe"/>
-
-        <TextView
-            android:id="@+id/tvFriendsCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvUserName"
-            android:layout_toEndOf="@+id/ivProfile"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="3dp"
-            android:textColor="@color/colorPrimary"
-            android:text="300 Friends"/>
-
-        <TextView
-            android:id="@+id/tvReviewsCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvFriendsCount"
-            android:layout_toEndOf="@+id/ivProfile"
-            android:textColor="@color/colorPrimary"
-            android:text="220 Reviews"/>
-    </RelativeLayout>
+    <RatingBar
+        android:id="@+id/rating"
+        android:layout_below="@+id/tvUserName"
+        android:layout_toEndOf="@+id/ivProfile"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:numStars="5"
+        style="?android:attr/ratingBarStyleSmall"
+        android:stepSize="1"
+        android:theme="@style/ratingBar"/>
 
     <TextView
         android:id="@+id/tvReview"
@@ -61,7 +46,7 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rlUserProfile"
+        android:layout_below="@+id/ivProfile"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         tools:text="This is an awesome phone dasdsadsa dsadas dasd asdasdasd asdas das da d sad sda das d sad asd sa d asddasdasdasddwqjknjksdnvsfjkkfjdsfndsjknfkjnsdkjnfsdjksnfjksd" />

@@ -48,4 +48,8 @@ public class Review extends ParseObject {
         }
         put("images", images);
     }
+
+    public int getRating() {
+        return Integer.parseInt(getString("rating"));
+    }
 }

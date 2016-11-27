@@ -26,5 +26,7 @@
     <string name="gcm_sender_id">id:973820282562</string>
 
     <string name="default_greeting">Hello, Sandeep</string>
+    <string name="click_to_more">click to more</string>
+    <string name="user_profile_image">user profile image</string>
 
 </resources>

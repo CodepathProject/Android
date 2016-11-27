@@ -155,7 +155,7 @@ public class HomeFragment extends Fragment {
         ItemClickSupport.addTo(rvReviews).setOnItemClickListener(
                 (recyclerView, position, v) -> {
                     Intent intent = new Intent(getActivity(), ProductViewActivity.class);
-                    intent.putExtra("productId", products.get(position).getObjectId());
+                    intent.putExtra("productId", productsBestRated.get(position).getObjectId());
                     startActivity(intent);
                 }
         );

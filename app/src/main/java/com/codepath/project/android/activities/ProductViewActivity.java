@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.ReviewsAdapter;
 import com.codepath.project.android.fragments.ComposeFragment;
+import com.codepath.project.android.helpers.Constants;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Product;
@@ -294,6 +295,7 @@ public class ProductViewActivity extends AppCompatActivity {
 
     public void onShowPlot(View view){
         Intent i = new Intent(this, PlotActivity.class);
+        i.putExtra(Constants.PRODUCT_NAME, product.getName());
         startActivity(i);
     }
 

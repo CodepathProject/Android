@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp">
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:textSize="@dimen/plot_tv_main_size"
+        android:textColor="@color/white"
+        android:text="Fire HD 8"
+        android:id="@+id/product_name"/>
+
     <com.jjoe64.graphview.GraphView
-        android:layout_margin="@dimen/plot_rl_margin"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
-        android:layout_marginTop="20dp"
+        android:layout_height="@dimen/plot_height"
+        android:layout_below="@id/product_name"
         android:id="@+id/graph" />
     
     <RelativeLayout

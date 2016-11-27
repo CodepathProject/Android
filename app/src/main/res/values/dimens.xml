@@ -32,9 +32,10 @@
     <dimen name="category_detail_card_width">190dp</dimen>
     <dimen name="rv_review_item_padding">20dp</dimen>
 
+    <dimen name="plot_height">230dp</dimen>
     <dimen name="plot_tv_main_size">20sp</dimen>
     <dimen name="plot_tv_tag_size">16sp</dimen>
-    <dimen name="plot_tv_tag_top_margin">7dp</dimen>
-    <dimen name="plot_rl_margin">20dp</dimen>
-    <dimen name="plot_line_margin">5dp</dimen>
+    <dimen name="plot_tv_tag_top_margin">4dp</dimen>
+    <dimen name="plot_rl_margin">25dp</dimen>
+    <dimen name="plot_line_margin">1dp</dimen>
 </resources>

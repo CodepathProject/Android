@@ -1,6 +1,5 @@
 package com.codepath.project.android.network;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import com.codepath.project.android.helpers.Utils;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.Product;
-import com.codepath.project.android.model.ViewType;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -19,11 +17,8 @@ import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.codepath.project.android.helpers.Utils.sortByComparator;
 
 public class ParseHelper {
 
@@ -91,6 +86,7 @@ public class ParseHelper {
     */
     public static void createCategoryListFromProducts(ArrayList<Category> categoryList, CategoryAdapter adapter, TextView tvCategories, ProgressBar pbar){
            ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
+           query.setLimit(1000);
            query.findInBackground(new FindCallback<Product>() {
             public void done(List<Product> products, ParseException e) {
                 if (e == null) {

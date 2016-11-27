@@ -3,6 +3,7 @@ package com.codepath.project.android.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Review;
 import com.codepath.project.android.utils.GeneralUtils;
-import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -57,11 +58,15 @@ public class ReviewsAdapter extends
     public void onBindViewHolder(ReviewsAdapter.ViewHolder viewHolder, int position) {
         Review review = mReviews.get(position);
         TextView tvReview = viewHolder.tvReview;
-        ParseUser user = review.getUser();
+        AppUser user = (AppUser) review.getUser();
         String formattedText = "";
         if(user != null) {
             formattedText += "<b>" + user.getString("firstName") + ": </b> ";
-            Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(user.getObjectId())).into(viewHolder.ivProfile);
+            if(!TextUtils.isEmpty(user.getImage())) {
+                Picasso.with(getContext()).load(user.getImage()).into(viewHolder.ivProfile);
+            } else {
+                Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(user.getObjectId())).into(viewHolder.ivProfile);
+            }
         }
         formattedText += review.getText();
         tvReview.setText(Html.fromHtml(formattedText));

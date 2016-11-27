@@ -49,6 +49,7 @@ public class LoginFragment extends Fragment {
     public static final List<String> mPermissions = new ArrayList<String>() {{
         add("public_profile");
         add("email");
+        add("user_friends");
     }};
 
     @Override
@@ -90,6 +91,7 @@ public class LoginFragment extends Fragment {
                 } else if (user.isNew()) {
                     Log.d("MyApp", "User signed up and logged in through Facebook!");
                     getUserDetailsFromFB(user);
+                    getFriendsDetailsFromFB();
                     Intent intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);
                 } else {
@@ -152,6 +154,21 @@ public class LoginFragment extends Fragment {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+                }
+        ).executeAsync();
+    }
+
+    private void getFriendsDetailsFromFB() {
+        // Suggested by https://disqus.com/by/dominiquecanlas/
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "email,name,picture");
+        new GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/me/friends",
+                null,
+                HttpMethod.GET,
+                response -> {
+                    System.out.println("hello");
                 }
         ).executeAsync();
     }

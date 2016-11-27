@@ -56,4 +56,8 @@ public class AppUser extends ParseUser {
     public void removeFollowProduct(Product product) {
         removeAll("followProducts", Arrays.asList(product));
     }
+
+    public String getImage() {
+        return getString("pictureUrl");
+    }
 }

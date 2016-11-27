@@ -1,60 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart1"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+    <com.jjoe64.graphview.GraphView
+        android:layout_margin="@dimen/plot_rl_margin"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/seekBar1" />
-
-    <SeekBar
-        android:id="@+id/seekBar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="8dp"
-        android:layout_toLeftOf="@+id/tvYMax"
-        android:layout_marginRight="5dp"
-        android:max="150"
-        android:paddingBottom="12dp" />
-
-    <SeekBar
-        android:id="@+id/seekBar1"
+        android:layout_height="200dip"
+        android:layout_marginTop="20dp"
+        android:id="@+id/graph" />
+    
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/seekBar2"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="35dp"
-        android:layout_toLeftOf="@+id/tvXMax"
-        android:layout_marginRight="5dp"
-        android:max="1500"
-        android:paddingBottom="12dp" />
+        android:padding="@dimen/plot_rl_margin"
+        android:id="@+id/rl1"
+        android:layout_below="@id/graph">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textSize="@dimen/plot_tv_main_size"
+            android:textColor="@color/colorRed"
+            android:text="-4.00%"
+             android:id="@+id/percent_change"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/percent_change"
+            android:textSize="@dimen/plot_tv_tag_size"
+            android:text="percent change"
+            android:layout_marginTop="@dimen/plot_tv_tag_top_margin"
+            android:textColor="@color/action_gray"
+            android:id="@+id/percent_change_tag"/>
 
-    <TextView
-        android:id="@+id/tvXMax"
-        android:layout_width="50dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:textSize="@dimen/plot_tv_main_size"
+            android:textColor="@color/black"
+            android:text="0.0087"
+            android:textStyle="bold"
+            android:id="@+id/current_price"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="current price"
+            android:textSize="@dimen/plot_tv_tag_size"
+            android:layout_marginTop="@dimen/plot_tv_tag_top_margin"
+            android:textColor="@color/action_gray"
+            android:layout_below="@id/current_price"
+            android:id="@+id/current_price_tag"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@id/rl1"
+        android:layout_marginTop="@dimen/plot_line_margin"
+        android:layout_marginBottom="@dimen/plot_line_margin"
+        android:layout_marginRight="@dimen/plot_rl_margin"
+        android:layout_marginLeft="@dimen/plot_rl_margin"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:id="@+id/line"
+        android:orientation="horizontal"
+        android:background="@color/action_gray"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/seekBar1"
-        android:layout_alignParentRight="true"
-        android:text="500"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="10dp"
-        android:gravity="right"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:padding="@dimen/plot_rl_margin"
+        android:layout_below="@id/line">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textSize="@dimen/plot_tv_main_size"
+            android:textColor="@color/black"
+            android:text="0.0087"
+            android:id="@+id/lowest_price"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/lowest_price"
+            android:textSize="@dimen/plot_tv_tag_size"
+            android:text="lowest price"
+            android:layout_marginTop="@dimen/plot_tv_tag_top_margin"
+            android:textColor="@color/action_gray"
+            android:id="@+id/lowest_price_tag"/>
 
-    <TextView
-        android:id="@+id/tvYMax"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/seekBar2"
-        android:layout_alignParentRight="true"
-        android:text="500"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="10dp"
-        android:gravity="right"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:textSize="@dimen/plot_tv_main_size"
+            android:textColor="@color/black"
+            android:text="0.0091"
+            android:id="@+id/highest_price"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="current price"
+            android:textSize="@dimen/plot_tv_tag_size"
+            android:layout_marginTop="@dimen/plot_tv_tag_top_margin"
+            android:textColor="@color/action_gray"
+            android:layout_below="@id/highest_price"
+            android:id="@+id/highest_price_tag"/>
+    </RelativeLayout>
 </RelativeLayout>

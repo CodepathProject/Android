@@ -1,5 +1,9 @@
 package com.codepath.project.android.data;
 
+import com.jjoe64.graphview.series.DataPoint;
+
+import java.util.Random;
+
 public class TestData {
 
     public static final String [] itemName = {"HP Notebook 14-ax010nr", "32GB USB Flash Drive", "32GB USB Flash Drive"};
@@ -31,6 +35,26 @@ public class TestData {
     public static  final String USER_PROFILE_RANDOM = "https://pbs.twimg.com/profile_images/792911867563749376/R3_7PZg_.jpg";
 
     public static  final String USER_PROFILE_PLACEHOLDER = "http://trackback.net/wp-content/uploads/2015/02/Dummy-profile-picture.png";
+
+    private static final int DATA_SIZE = 100;
+
+    public static DataPoint[] getDataPoint(){
+        DataPoint[] dataPoints = new DataPoint[DATA_SIZE];
+
+        for(int i = 0; i < DATA_SIZE; i++){
+            DataPoint d = new DataPoint(i, getRandom(i));
+            dataPoints[i] = d;
+        }
+        return dataPoints;
+    }
+
+    private static int getRandom(int n){
+        int max = (120 - n/2) + 1 + n/8;
+        int min = (120 - n/2) + 1 - n/8;
+
+        Random ran = new Random();
+        return ran.nextInt(max) + min;
+    }
 
 
 }

@@ -38,6 +38,7 @@ public class ProductsAdapter extends
         public ImageView ivProductImage;
         public RatingBar ratingBar;
         public TextView tvRatingCount;
+        public TextView tvProductPrice;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -45,6 +46,7 @@ public class ProductsAdapter extends
             ivProductImage = (ImageView) itemView.findViewById(R.id.iv_product);
             tvRatingCount = (TextView) itemView.findViewById(R.id.tv_total_votes);
             ratingBar = (RatingBar) itemView.findViewById(R.id.rating);
+            tvProductPrice = (TextView) itemView.findViewById(R.id.tv_product_price);
         }
     }
 
@@ -72,9 +74,11 @@ public class ProductsAdapter extends
 
         if(mViewType == ViewType.VERTICAL_GRID){
             RatingBar ratingBar = viewHolder.ratingBar;
-            ratingBar.setRating(3);
+            ratingBar.setRating((int)product.getAverageRating());
             TextView tvRatingCount = viewHolder.tvRatingCount;
-            tvRatingCount.setText("(18)");
+            tvRatingCount.setText(" "+product.getRatingCount()+" reviews");
+            TextView tvProductPrice = viewHolder.tvProductPrice;
+            tvProductPrice.setText("$"+product.getPrice());
         }
     }
 

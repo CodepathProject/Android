@@ -54,16 +54,27 @@
             android:stepSize="1"
             android:theme="@style/ratingBar"/>
         <TextView
-            android:textColor="@color/colorBlue2"
-            android:id="@+id/tv_total_votes"
+            android:textColor="@color/colorRed"
+            android:id="@+id/tv_product_price"
             android:layout_below="@id/tv_product_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/rating"
             android:text="(100)"
             android:layout_toRightOf="@id/rating"
             android:paddingTop="5dp"
-            android:paddingLeft="5dp"
+            android:gravity="right"
+            android:paddingRight="5dp"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_total_votes"
+            android:textColor="@color/colorBlue2"
+            android:layout_below="@id/tv_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:paddingTop="5dp"
             android:textSize="13sp" />
         </RelativeLayout>
     </RelativeLayout>

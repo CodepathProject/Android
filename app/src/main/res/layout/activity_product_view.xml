@@ -67,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightGray"
                 app:cardCornerRadius="8dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:elevation="3dp">
 
@@ -111,6 +110,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_margin="20dp"
+                    android:id="@+id/ll"
                     android:layout_below="@+id/rbAverageRating">
                     <TextView
                         android:id="@+id/tvFollow"
@@ -155,10 +155,24 @@
                         android:text="Trends"/>
                 </LinearLayout>
 
+                <TextView
+                    android:layout_below="@id/ll"
+                    android:id="@+id/tvAddPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:padding = "10dp"
+                    android:textAllCaps="true"
+                    android:background="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:onClick="addPrice"
+                    android:text="@string/add_price" />
+
             </RelativeLayout>
 
             </android.support.v7.widget.CardView>
-
             <TextView
                 android:id="@+id/tvReviewsTitle"
                 android:layout_width="wrap_content"

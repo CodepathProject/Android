@@ -299,6 +299,12 @@ public class ProductViewActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void addPrice(View view){
+        Intent i = new Intent(this, PriceActivity.class);
+        i.putExtra(Constants.PRODUCT_NAME, product.getName());
+        startActivity(i);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home, menu);

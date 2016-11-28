@@ -20,6 +20,8 @@
     <string name="add_your_review">Add your review</string>
     <string name="submit">Submit</string>
     <string name="click_to_add_pics">click to add pics</string>
+    <string name="add_price">Report Price</string>
+    <string name="submit_price">Enter a Price to Submit</string>
 
     <string name="facebook_app_id">751597271644941</string>
 

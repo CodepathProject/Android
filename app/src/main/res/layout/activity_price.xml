@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_price"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.codepath.project.android.activities.PriceActivity">
+    <TextView
+        android:id="@+id/tvProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"/>
+    <TextView
+        android:padding="20dp"
+        android:id="@+id/tvPriceTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightGray"
+        android:textColor="@color/action_gray"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@id/tvProductName"
+        android:text="PRICE" />
+    <EditText
+        android:padding="20dp"
+        android:id="@+id/etPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:hint="Enter Price"
+        android:layout_below="@id/tvPriceTitle"
+        android:textColorHint="@color/action_gray"
+        android:background="@android:color/transparent" />
+    <TextView
+        android:padding="20dp"
+        android:id="@+id/tvStoreTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorLightGray"
+        android:textColorHint="@color/action_gray"
+        android:textColor="@color/action_gray"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@id/etPrice"
+        android:text="STORE" />
+    <EditText
+        android:padding="20dp"
+        android:id="@+id/etStore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="Enter Store Name"
+        android:layout_below="@id/tvStoreTitle"
+        android:textColorHint="@color/action_gray"
+        android:background="@android:color/transparent"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tvAddPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding = "10dp"
+        android:textAllCaps="true"
+        android:background="@color/colorPrimary"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="@string/submit_price" />
+</RelativeLayout>

@@ -90,7 +90,8 @@
             android:name="com.parse.push.gcm_sender_id"
             android:value="@string/gcm_sender_id" />
         ;
-        <activity android:name=".activities.PlotActivity"></activity>
+        <activity android:name=".activities.PlotActivity" />
+        <activity android:name=".activities.PriceActivity"></activity>
     </application>
 
 </manifest>

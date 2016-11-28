@@ -60,4 +60,8 @@ public class AppUser extends ParseUser {
     public String getImage() {
         return getString("pictureUrl");
     }
+
+    public String getFirstName() {
+        return getString("firstName");
+    }
 }

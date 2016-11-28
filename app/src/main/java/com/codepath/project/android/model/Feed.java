@@ -46,4 +46,12 @@ public class Feed extends ParseObject {
     public void setToProduct(Product product) {
         put("toProduct", product);
     }
+
+    public int getRating() {
+        return getInt("rating");
+    }
+
+    public void setRating(int rating) {
+        put("rating", rating);
+    }
 }

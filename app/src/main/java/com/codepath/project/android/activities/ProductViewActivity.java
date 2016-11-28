@@ -74,9 +74,7 @@ public class ProductViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
         ButterKnife.bind(this);
-
         user = (AppUser) ParseUser.getCurrentUser();
-
         setUpToolbar();
         if(savedInstanceState == null) {
             setUpRecyclerView();
@@ -302,6 +300,8 @@ public class ProductViewActivity extends AppCompatActivity {
     public void addPrice(View view){
         Intent i = new Intent(this, PriceActivity.class);
         i.putExtra(Constants.PRODUCT_NAME, product.getName());
+        i.putExtra(Constants.PRODUCT_PRICE, product.getPrice());
+        i.putExtra(Constants.PRODUCT_ID, product.getObjectId());
         startActivity(i);
     }
 

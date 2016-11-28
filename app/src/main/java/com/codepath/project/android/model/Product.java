@@ -15,6 +15,14 @@ public class Product extends ParseObject {
         super();
     }
 
+    public String getPrice() {
+        return getString("price");
+    }
+
+    public void setPrice(String price) {
+        put("price", price);
+    }
+
     public String getName() {
         return getString("name");
     }
@@ -87,19 +95,6 @@ public class Product extends ParseObject {
 
     public void setImageUrl(String imageUrl) {
         put("imageUrl", imageUrl);
-    }
-
-    public static ArrayList<Product> createReviewList(int length){
-        ArrayList<Product> productList = new ArrayList<Product>();
-        for(int i = 0; i < length; i++){
-            Product product = new Product();
-            String name = TestData.reviewItemName[i%3];
-            String imageUrl = TestData.reviewItemUrl[i%3];
-            product.setName(name);
-            product.setImageUrl(imageUrl);
-            productList.add(product);
-        }
-        return productList;
     }
 
     public String getVideo() {

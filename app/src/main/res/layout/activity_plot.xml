@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:layout_width="match_parent"
@@ -12,15 +13,17 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
+        android:layout_marginBottom="30dp"
         android:textSize="@dimen/plot_tv_main_size"
         android:textColor="@color/white"
         android:text="Fire HD 8"
         android:id="@+id/product_name"/>
 
     <com.jjoe64.graphview.GraphView
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="@dimen/plot_height"
+        android:layout_margin="20dp"
         android:layout_below="@id/product_name"
         android:id="@+id/graph" />
     
@@ -123,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="current price"
+            android:text="highest price"
             android:textSize="@dimen/plot_tv_tag_size"
             android:layout_marginTop="@dimen/plot_tv_tag_top_margin"
             android:textColor="@color/action_gray"

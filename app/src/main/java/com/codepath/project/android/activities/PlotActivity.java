@@ -12,6 +12,7 @@ import com.codepath.project.android.data.TestData;
 import com.codepath.project.android.helpers.Constants;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -38,10 +39,17 @@ public class PlotActivity  extends AppCompatActivity {
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(TestData.getDataPoint());
         series.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         series.setColor(getResources().getColor(R.color.white));
+        series.setThickness(10);
+        series.setDataPointsRadius(2);
         graph.addSeries(series);
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
         graph.getGridLabelRenderer().setHighlightZeroLines(true);
-        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(true);
+        graph.getGridLabelRenderer().setHorizontalLabelsColor(getResources().getColor(R.color.white));
         graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
+
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+        staticLabelsFormatter.setHorizontalLabels(new String[] {"jan", "mar","may","jul","oct","dec"});
+        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
     }
 }

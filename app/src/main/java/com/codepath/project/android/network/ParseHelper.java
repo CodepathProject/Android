@@ -99,7 +99,6 @@ public class ParseHelper {
                             }
                         }
                     }
-                    System.out.println("success "+categoryMap.size());
                     for (Map.Entry<String, Product> entry : categoryMap.entrySet())
                     {
                         String  categoryName = entry.getKey();

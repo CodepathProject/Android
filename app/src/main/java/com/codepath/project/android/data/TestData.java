@@ -49,8 +49,8 @@ public class TestData {
     }
 
     private static int getRandom(int n){
-        int max = (120 - n/2) + 1 + n/8;
-        int min = (120 - n/2) + 1 - n/8;
+        int max = (120 - n/2) + 1 + n/24;
+        int min = (120 - n/2) + 1 - n/24;
 
         Random ran = new Random();
         return ran.nextInt(max) + min;

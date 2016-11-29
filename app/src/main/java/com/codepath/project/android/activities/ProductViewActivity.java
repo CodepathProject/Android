@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.adapter.ContactFriendsAdapter;
 import com.codepath.project.android.adapter.ReviewsAdapter;
 import com.codepath.project.android.fragments.ComposeFragment;
 import com.codepath.project.android.helpers.Constants;
@@ -62,6 +63,10 @@ public class ProductViewActivity extends AppCompatActivity {
     TextView tvWatch;
     @BindView(R.id.tvFollow)
     TextView tvFollow;
+    @BindView(R.id.rvFriends)
+    RecyclerView rvFriends;
+    @BindView(R.id.tvFriendsTitle)
+    TextView tvFriendsTitle;
 
     ReviewsAdapter reviewsAdapter;
     List<Review> reviews;
@@ -138,7 +143,7 @@ public class ProductViewActivity extends AppCompatActivity {
                     product.incrementViews();
                     product.saveInBackground();
                     setUpShelfWishClickListener();
-
+                    setFriends();
                 } else {
                     Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
                 }
@@ -337,19 +342,34 @@ public class ProductViewActivity extends AppCompatActivity {
         }
     }
 
-//    final int speedScroll = 1500;
-//    final Handler handler = new Handler();
-//    final Runnable runnable = new Runnable() {
-//        int count = 0;
-//        @Override
-//        public void run() {
-//            if (count < reviews.size()) {
-//                rvReviews.scrollToPosition(++count);
-//                handler.postDelayed(this, speedScroll);
-//            } else {
-//                count = 0;
-//                handler.postDelayed(this, speedScroll);
-//            }
-//        }
-//    };
+    private void setFriends(){
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        ArrayList<AppUser> friends = new ArrayList<>();
+        ContactFriendsAdapter friendsAdapter = new ContactFriendsAdapter(this, friends);
+        rvFriends.setAdapter(friendsAdapter);
+        rvFriends.setLayoutManager(layoutManager);
+        AppUser u1 = (AppUser) ParseUser.getCurrentUser();
+        List<ParseUser> contactFriends = u1.getFollowUsers();
+
+        ArrayList<String> idList = new ArrayList<>();
+        for(ParseUser tempuser : contactFriends) {
+            idList.add(tempuser.getObjectId());
+        }
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereContainedIn("objectId", idList);
+        query.whereEqualTo("shelfProducts", product);
+        query.findInBackground((objects, e1) -> {
+            if(objects != null && objects.size() > 0) {
+                ArrayList<AppUser> contacts = new ArrayList<>();
+                for (ParseUser puser : objects) {
+                    contacts.add((AppUser) puser);
+                }
+                friends.addAll(contacts);
+                friendsAdapter.notifyDataSetChanged();
+                rvFriends.setVisibility(View.VISIBLE);
+                tvFriendsTitle.setVisibility(View.VISIBLE);
+            }
+        });
+    }
 }

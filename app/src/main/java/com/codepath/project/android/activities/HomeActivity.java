@@ -72,6 +72,14 @@ public class HomeActivity extends AppCompatActivity
             ParseInstallation pi = ParseInstallation.getCurrentInstallation();
             pi.put("user", ParseUser.getCurrentUser());
             pi.saveInBackground();
+
+
+//            AppUser u1 = (AppUser) ParseUser.getCurrentUser();
+//            ParseQuery<ParseUser> query = ParseUser.getQuery();
+//            query.getInBackground("IOYWhjH4Mc", (object, e) -> {
+//                u1.setFollowUsers(object);
+//                u1.saveInBackground();
+//            });
         }
     }
 

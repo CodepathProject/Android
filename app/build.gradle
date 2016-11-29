@@ -58,4 +58,5 @@ dependencies {
     compile 'com.parse:parsefacebookutils-v4-android:1.10.4@aar'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.jjoe64:graphview:4.2.1'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
 }

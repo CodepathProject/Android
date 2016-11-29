@@ -51,10 +51,9 @@ public class HomeActivity extends AppCompatActivity
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-    public static String[] columns = new String[]{"_id", "productId", "name", "image"};
+    private static final String[] columns = new String[]{"_id", "productId", "name", "image"};
 
     SearchView searchView;
-
     SearchResultsAdapter mSearchViewAdapter;
 
     final String CHANNEL_NAME = "abcd";
@@ -73,8 +72,6 @@ public class HomeActivity extends AppCompatActivity
             ParseInstallation pi = ParseInstallation.getCurrentInstallation();
             pi.put("user", ParseUser.getCurrentUser());
             pi.saveInBackground();
-        } else {
-            Log.e("quest", "onCreate: no user");
         }
     }
 

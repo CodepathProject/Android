@@ -72,8 +72,6 @@ public class HomeActivity extends AppCompatActivity
             ParseInstallation pi = ParseInstallation.getCurrentInstallation();
             pi.put("user", ParseUser.getCurrentUser());
             pi.saveInBackground();
-        } else {
-            Log.e("quest", "onCreate: no user");
         }
     }
 

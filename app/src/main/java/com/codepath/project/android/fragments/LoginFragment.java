@@ -15,21 +15,26 @@ import android.widget.Toast;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.HomeActivity;
+import com.codepath.project.android.activities.LoginActivity;
 import com.codepath.project.android.activities.SignUpActivity;
 import com.codepath.project.android.network.ParseHelper;
 import com.codepath.project.android.utils.GeneralUtils;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,16 +89,15 @@ public class LoginFragment extends Fragment {
             ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(), mPermissions, (user, err) -> {
                 if (err != null) {
                     Log.d("MyApp", "Uh oh. Error occurred" + err.toString());
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
                 } else if (user == null) {
                     Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
                 } else if (user.isNew()) {
                     Log.d("MyApp", "User signed up and logged in through Facebook!");
                     getUserDetailsFromFB(user);
-                    getFriendsDetailsFromFB();
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(), "Logged in", Toast.LENGTH_SHORT)
                             .show();
@@ -130,7 +134,7 @@ public class LoginFragment extends Fragment {
     private void getUserDetailsFromFB(ParseUser user) {
         // Suggested by https://disqus.com/by/dominiquecanlas/
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "email,name,picture");
+        parameters.putString("fields", "email,name,cover,picture.type(large)");
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
                 "/me",
@@ -143,12 +147,21 @@ public class LoginFragment extends Fragment {
                         JSONObject picture = response.getJSONObject().getJSONObject("picture");
                         JSONObject data = picture.getJSONObject("data");
                         String pictureUrl = data.getString("url");
+                        String id = response.getJSONObject().getString("id");
 
+                        if(response.getJSONObject().has("cover")) {
+                            JSONObject cover = response.getJSONObject().getJSONObject("cover");
+                            user.put("coverUrl", cover.getString("source"));
+                        }
+                        user.put("fbid", id);
                         user.setEmail(email);
                         user.setUsername(email);
                         user.put("firstName", name);
                         user.put("pictureUrl", pictureUrl);
                         user.save();
+                        getFriendsDetailsFromFB(user);
+                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        startActivity(intent);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (ParseException e) {
@@ -158,7 +171,7 @@ public class LoginFragment extends Fragment {
         ).executeAsync();
     }
 
-    private void getFriendsDetailsFromFB() {
+    private void getFriendsDetailsFromFB(ParseUser user) {
         // Suggested by https://disqus.com/by/dominiquecanlas/
         Bundle parameters = new Bundle();
         parameters.putString("fields", "email,name,picture");
@@ -168,9 +181,33 @@ public class LoginFragment extends Fragment {
                 null,
                 HttpMethod.GET,
                 response -> {
-                    System.out.println("hello");
+                    try {
+                        JSONArray friendsArray = response.getJSONObject().getJSONArray("data");
+                        if(friendsArray != null && friendsArray.length() > 0) {
+                            ArrayList<String> ids = new ArrayList<>();
+                            for(int i=0; i < friendsArray.length();i++) {
+                                ids.add(friendsArray.getJSONObject(i).getString("id"));
+                            }
+                            user.put("fbFriends", ids);
+                            user.save();
+                            sendPushNotificationToFriends();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
         ).executeAsync();
     }
 
+    public void sendPushNotificationToFriends() {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("a", "b");
+        ParseCloud.callFunctionInBackground("facebookNotifyFriends", parameters, (mapObject, e) -> {
+            if (e == null){
+                System.out.println("sent");
+            }
+        });
+    }
 }

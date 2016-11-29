@@ -25,9 +25,9 @@ public class LoginActivity extends AppCompatActivity {
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
+    /*@Override
     protected void onPause() {
         super.onPause();
         finish();
-    }
+    }*/
 }

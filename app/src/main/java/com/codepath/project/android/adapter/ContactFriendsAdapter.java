@@ -1,6 +1,9 @@
 package com.codepath.project.android.adapter;
 
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -33,10 +36,14 @@ public class ContactFriendsAdapter extends
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivFriendProfile;
+        public ImageView ivMessenger;
+        public ImageView ivGmail;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivFriendProfile = (ImageView) itemView.findViewById(R.id.ivFriendProfile);
+            ivMessenger = (ImageView) itemView.findViewById(R.id.ivMessenger);
+            ivGmail = (ImageView) itemView.findViewById(R.id.ivGmail);
         }
     }
 
@@ -57,6 +64,19 @@ public class ContactFriendsAdapter extends
         } else {
             Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(user.getObjectId())).transform(new CircleTransform()).into(viewHolder.ivFriendProfile);
         }
+        viewHolder.ivMessenger.setOnClickListener(v -> {
+            Uri uri = Uri.parse("fb-messenger://user/");
+            uri = ContentUris.withAppendedId(uri, 100014431891986L);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            getContext().startActivity(intent);
+        });
+
+        viewHolder.ivGmail.setOnClickListener(v -> {
+            Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + user.getUsername()));
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Quest");
+            intent.putExtra(Intent.EXTRA_TEXT, "Question on product");
+            getContext().startActivity(intent);
+        });
     }
 
     // Returns the total count of items in the list

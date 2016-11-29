@@ -35,6 +35,9 @@ import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,6 +101,17 @@ public class ProductViewActivity extends AppCompatActivity {
                         Intent intent = new Intent(this, ImageFullscreenActivity.class);
                         String image = product.getImageUrl();
                         intent.putExtra("image", image);
+                        JSONArray imagesArray = product.getImageSetUrls();
+                        String[] images = new String[imagesArray.length()];
+                        for(int i = 0; i < imagesArray.length(); i++){
+                            try {
+                                images[i] = imagesArray.getString(i);
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+
+                        intent.putExtra("imageSet", images);
                         startActivity(intent);
                     });
 

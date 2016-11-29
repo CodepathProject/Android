@@ -14,7 +14,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
-import com.codepath.project.android.activities.HomeActivity;
+import com.codepath.project.android.activities.LoadingActivity;
 import com.codepath.project.android.activities.SignUpActivity;
 import com.codepath.project.android.network.ParseHelper;
 import com.codepath.project.android.utils.GeneralUtils;
@@ -66,8 +66,7 @@ public class LoginFragment extends Fragment {
                                 ParseHelper.PARSE_LOGIN_SUCCESS_SNACKTOAST,
                                 getActivity().getColor(R.color.colorGreen),
                                 getActivity().getColor(R.color.colorGray));
-                                Intent intent = new Intent(getActivity(), HomeActivity.class);
-                                startActivity(intent);
+                                startNextActivity();
                     } else {
                         GeneralUtils.showSnackBar(getView(),
                                 ParseHelper.PARSE_LOGIN_FAILED_SNACKTOAST,
@@ -86,35 +85,36 @@ public class LoginFragment extends Fragment {
                     Log.d("MyApp", "Uh oh. Error occurred" + err.toString());
                 } else if (user == null) {
                     Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
+                    startNextActivity();
                 } else if (user.isNew()) {
                     Log.d("MyApp", "User signed up and logged in through Facebook!");
                     getUserDetailsFromFB(user);
                     getFriendsDetailsFromFB();
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
+                    startNextActivity();
                 } else {
                     Toast.makeText(getActivity(), "Logged in", Toast.LENGTH_SHORT)
                             .show();
                     Log.d("MyApp", "User logged in through Facebook!");
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
+                    startNextActivity();
                 }
             });
         });
 
         swSkipLogin.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(isChecked){
-                // go to home
-                Intent intent = new Intent(getActivity(), HomeActivity.class);
-                startActivity(intent);
+                startNextActivity();
             }else{
                 // dp nothing
             }
         });
 
         return view;
+    }
+
+    private void startNextActivity(){
+        //Intent intent = new Intent(getActivity(), HomeActivity.class);
+        Intent intent = new Intent(getActivity(), LoadingActivity.class);
+        startActivity(intent);
     }
 
     @Override

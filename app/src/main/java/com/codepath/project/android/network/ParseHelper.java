@@ -1,9 +1,11 @@
 package com.codepath.project.android.network;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.codepath.project.android.activities.LoadingActivity;
 import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.helpers.Constants;
 import com.codepath.project.android.helpers.Utils;
@@ -36,7 +38,7 @@ public class ParseHelper {
         return categoryList;
     }
 
-    public List<Product> getProductList() {
+    public static List<Product> getProductList() {
         return productList;
     }
 
@@ -85,35 +87,40 @@ public class ParseHelper {
         Stores the product list
     */
     public static void createCategoryListFromProducts(ArrayList<Category> categoryList, CategoryAdapter adapter, TextView tvCategories, ProgressBar pbar){
-           ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
-           query.setLimit(1000);
-           query.findInBackground(new FindCallback<Product>() {
-            public void done(List<Product> products, ParseException e) {
-                if (e == null) {
-                    HashMap<String, Product> categoryMap = new HashMap<String, Product>();
-                    ArrayList<Category> categoryListTemp = new ArrayList<Category>();
-                    for(Product product:products){
-                        if(product.getSubCategory() != null) {
-                            if (!categoryMap.containsKey(product.getSubCategory())) {
-                                categoryMap.put(product.getSubCategory(), product);
-                            }
+                HashMap<String, Product> categoryMap = new HashMap<String, Product>();
+                ArrayList<Category> categoryListTemp = new ArrayList<Category>();
+                for(Product product:productList){
+                    if(product.getSubCategory() != null) {
+                        if (!categoryMap.containsKey(product.getSubCategory())) {
+                            categoryMap.put(product.getSubCategory(), product);
                         }
                     }
-                    for (Map.Entry<String, Product> entry : categoryMap.entrySet())
-                    {
-                        String  categoryName = entry.getKey();
-                        String  imageUrl = entry.getValue().getImageUrl();
-                        Category category = new Category();
-                        category.setImageUrl(imageUrl);
-                        category.setName(categoryName);
-                        categoryListTemp.add(category);
-                    }
-                    ParseHelper.categoryList = categoryListTemp;
+                }
+                for (Map.Entry<String, Product> entry : categoryMap.entrySet())
+                {
+                    String  categoryName = entry.getKey();
+                    String  imageUrl = entry.getValue().getImageUrl();
+                    Category category = new Category();
+                    category.setImageUrl(imageUrl);
+                    category.setName(categoryName);
+                    categoryListTemp.add(category);
+                }
+                ParseHelper.categoryList = categoryListTemp;
+                categoryList.addAll(categoryListTemp);
+                adapter.notifyDataSetChanged();
+                tvCategories.setVisibility(View.VISIBLE);
+                pbar.setVisibility(View.GONE);
+    }
+
+
+    public static void createProductList(Context context ){
+        ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
+        query.setLimit(1000);
+        query.findInBackground(new FindCallback<Product>() {
+            public void done(List<Product> products, ParseException e) {
+                if (e == null) {
                     ParseHelper.productList = products;
-                    categoryList.addAll(categoryListTemp);
-                    adapter.notifyDataSetChanged();
-                    tvCategories.setVisibility(View.VISIBLE);
-                    pbar.setVisibility(View.GONE);
+                    ((LoadingActivity)context).doneWithLoading();
                 } else {
                     System.out.println("error "+e);
                 }

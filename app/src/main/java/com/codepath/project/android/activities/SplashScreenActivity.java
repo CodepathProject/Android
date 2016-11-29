@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.network.ParseHelper;
 import com.parse.ParseUser;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -50,7 +51,13 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     public void startHomeActivity() {
-        Intent intent = new Intent(SplashScreenActivity.this, HomeActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+        if(ParseHelper.getProductList() != null){
+            Intent intent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+            startActivity(intent);
+        } else{
+            Intent intent = new Intent(SplashScreenActivity.this, LoadingActivity.class);
+            startActivity(intent);
+        }
     }
 }

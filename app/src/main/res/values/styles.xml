@@ -31,7 +31,7 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:backgroundTint">@color/colorRed</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorGray</item>
     </style>
 
@@ -45,24 +45,26 @@
 
     <style name="loginButton">
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:background">@color/colorRed</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="signupEditText">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:backgroundTint">@color/colorRed</item>
+        <item name="android:backgroundTint">@color/colorWhite</item>
         <item name="android:textColorHint">@color/colorGray</item>
     </style>
 
     <style name="signupButton">
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:background">@color/colorRed</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="loginLinearLayout">
@@ -82,6 +84,7 @@
     <style name="facebookText">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:background">@color/colorBlue</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="facebookView">

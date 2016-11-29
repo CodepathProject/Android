@@ -7,6 +7,12 @@
     android:background="@color/colorPrimary"
     tools:context="com.codepath.project.android.activities.SplashScreenActivity">
 
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_appicon_white"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/textView2"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

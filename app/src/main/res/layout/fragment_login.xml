@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    style="@style/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:id="@+id/loginBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/background"
+        android:background="@color/colorWhite"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/llLogin"
+        android:src="@drawable/ic_appicon_green"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
-        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/llSignUp"
         android:id="@+id/llLogin"
         android:orientation="vertical">
 
@@ -92,21 +96,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:layout_gravity="center"
+            android:layout_gravity="right"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="43dp"
                 android:gravity="bottom"
                 style="@style/loginHelperText"
-                android:text="Skip Login .. "/>
+                android:textStyle="bold"
+                android:text="SKIP LOGIN"/>
 
             <Switch
                 android:id="@+id/swSkipLogin"
                 android:layout_width="wrap_content"
                 android:gravity="top"
-                android:layout_height="match_parent"
+                android:layout_height="37dp"
                 android:layout_marginTop="20dp" />
 
         </LinearLayout>
@@ -131,26 +136,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
             <View
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_weight="4"
-                style="@style/facebookView"
-                />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="OR"
-                style="@style/loginHelperText"
-                android:layout_weight="2"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="4"
                 style="@style/facebookView"
                 />
 
@@ -164,24 +155,15 @@
             android:orientation="horizontal"
             style="@style/facebookText">
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/ivFBLogin"
-                android:src="@drawable/ic_facebook"
-                android:layout_weight="2"/>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                style="@style/facebookView"
-                />
-
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnFBLogin"
+                android:drawableLeft="@drawable/ic_facebook"
+                android:drawablePadding="5dp"
+                android:padding="5dp"
                 android:text="Log In with Facebook"
+
                 style="@style/facebookText"
                 android:layout_weight="7"/>
 

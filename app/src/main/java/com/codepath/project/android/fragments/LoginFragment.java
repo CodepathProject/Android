@@ -83,6 +83,7 @@ public class LoginFragment extends Fragment {
         btnSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SignUpActivity.class);
             startActivity(intent);
+            getActivity().finish();
         });
 
         btnFBLogin.setOnClickListener(v -> {
@@ -91,6 +92,7 @@ public class LoginFragment extends Fragment {
                     Log.d("MyApp", "Uh oh. Error occurred" + err.toString());
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
+                    getActivity().finish();
                 } else if (user == null) {
                     Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
                     startNextActivity();
@@ -121,6 +123,7 @@ public class LoginFragment extends Fragment {
         //Intent intent = new Intent(getActivity(), HomeActivity.class);
         Intent intent = new Intent(getActivity(), LoadingActivity.class);
         startActivity(intent);
+        getActivity().finish();
     }
 
     @Override

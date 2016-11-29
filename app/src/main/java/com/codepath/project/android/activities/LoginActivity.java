@@ -24,4 +24,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
+
+    /*@Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }*/
 }

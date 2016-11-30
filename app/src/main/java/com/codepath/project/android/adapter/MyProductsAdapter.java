@@ -10,12 +10,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class MyProductsAdapter extends
         RecyclerView.Adapter<MyProductsAdapter.ViewHolder> {
@@ -65,7 +64,7 @@ public class MyProductsAdapter extends
                     viewHolder.tvPrice.setText("$" + temp.getPrice());
                     viewHolder.rating.setRating((float) temp.getAverageRating());
                     ImageView ivProductImage = viewHolder.ivProductImage;
-                    Picasso.with(getContext()).load(temp.getImageUrl()).transform(new RoundedCornersTransformation(10, 10)).into(ivProductImage);
+                    Picasso.with(getContext()).load(temp.getImageUrl()).transform(new CircleTransform()).into(ivProductImage);
                 }
             });
     }

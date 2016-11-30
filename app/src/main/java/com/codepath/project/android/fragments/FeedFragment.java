@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.FeedsAdapter;
+import com.codepath.project.android.helpers.EndlessRecyclerViewScrollListener;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
 import com.parse.ParseException;
@@ -33,6 +34,7 @@ public class FeedFragment extends Fragment {
     FeedsAdapter feedsAdapter;
 
     private Unbinder unbinder;
+    int page = 0;
 
     public static FeedFragment newInstance() {
         FeedFragment fragment = new FeedFragment();
@@ -75,21 +77,18 @@ public class FeedFragment extends Fragment {
             e.printStackTrace();
         }
 
-//        ParseQuery query = ParseQuery.getQuery(Product.class);
-//        query.whereEqualTo("name", "Canon EOS Rebel T5 DSLR Digital Camera");
-//        query.getFirstInBackground(new GetCallback<ParseObject>() {
-//            public void done(ParseObject object, ParseException e) {
-//                if (object == null) {
-//                    Log.d("score", "The getFirst request failed.");
-//                } else {
-//                    Log.d("score", "Retrieved the object.");
-//                    AppUser user = (AppUser) ParseUser.getCurrentUser();
-//                    user.setFollowProducts((Product) object);
-//                    user.saveInBackground();
-//                }
-//            }
-//        });
+        fetchFeeds(0);
 
+        rvFeeds.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                page++;
+                fetchFeeds(page*10);
+            }
+        });
+    }
+
+    private void fetchFeeds(int skip) {
         AppUser user = (AppUser) ParseUser.getCurrentUser();
 
         List<ParseQuery<Feed>> queries = new ArrayList<>();
@@ -111,13 +110,15 @@ public class FeedFragment extends Fragment {
             mainQuery.include("fromUser");
             mainQuery.include("toUser");
             mainQuery.include("toProduct");
+            mainQuery.setLimit(10);
+            if(skip > 0) {
+                mainQuery.setSkip(skip);
+            }
 
             mainQuery.findInBackground((feedsList, err) -> {
                 if (err == null) {
                     feeds.addAll(feedsList);
                     feedsAdapter.notifyDataSetChanged();
-                } else {
-                    //Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
                 }
             });
         }

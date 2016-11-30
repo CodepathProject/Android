@@ -53,12 +53,15 @@ public class UserDetailFragment extends Fragment {
     List<Review> reviews;
     UserTimelineAdapter reviewsAdapter;
 
+    String userId;
+
     private Unbinder unbinder;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
+        userId = getArguments().getString("USER_ID");
         View view = inflater.inflate(R.layout.fragment_user_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
 

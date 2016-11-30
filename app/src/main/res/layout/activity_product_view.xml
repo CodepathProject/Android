@@ -15,7 +15,7 @@
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+    <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -86,6 +86,32 @@
                 android:stepSize="0.5"
                 android:theme="@style/ratingBar"
                 tools:rating="3.5" />
+
+            <TextView
+                android:id="@+id/tvReviewCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvBrandName"
+                android:layout_toRightOf="@+id/rbAverageRating"
+                android:textColor="@color/colorBlue"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:textSize="12sp"
+                tools:text="(595)" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvBrandName"
+                android:layout_toRightOf="@+id/tvReviewCount"
+                android:paddingBottom="10dp"
+                android:paddingRight="15dp"
+                android:paddingTop="5dp"
+                android:textSize="20sp"
+                android:gravity="right"
+                android:textColor="@color/colorRed"
+                tools:text="$85" />
 
             <LinearLayout
                 android:id="@+id/ll"

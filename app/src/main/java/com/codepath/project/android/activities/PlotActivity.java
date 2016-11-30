@@ -39,20 +39,6 @@ public class PlotActivity  extends AppCompatActivity {
     @BindView(R.id.highest_price)
     TextView tvHighestPrice;
 
-
-    public static String getMaxMinPrice(String currPrice, String type){
-            Double price = new Double(currPrice);
-            Random rand = new Random();
-            int randomNum = rand.nextInt(6) + 1;
-            if(type.equals("MAX")){
-                price = price * (1+randomNum*(0.01));
-            } else{
-                price = price * (1-randomNum*(0.01));
-            }
-            price = Math.floor(price * 100) / 100;
-            return (new Double(price)).toString();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +48,8 @@ public class PlotActivity  extends AppCompatActivity {
         String productPrice = getIntent().getStringExtra(Constants.PRODUCT_PRICE);
         tvProductName.setText(productName);
         tvCurrentPrice.setText(productPrice);
-        tvHighestPrice.setText(getMaxMinPrice(productPrice,"MAX"));
-        tvLowestPrice.setText(getMaxMinPrice(productPrice,"MIN"));
+        tvHighestPrice.setText(TestData.getMaxMinPrice(productPrice,"MAX"));
+        tvLowestPrice.setText(TestData.getMaxMinPrice(productPrice,"MIN"));
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(TestData.getDataPoint());
         series.setBackgroundColor(getResources().getColor(R.color.colorPrimary));

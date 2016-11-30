@@ -56,5 +56,17 @@ public class TestData {
         return ran.nextInt(max) + min;
     }
 
+    public static String getMaxMinPrice(String currPrice, String type){
+        Double price = new Double(currPrice);
+        Random rand = new Random();
+        int randomNum = rand.nextInt(6) + 1;
+        if(type.equals("MAX")){
+            price = price * (1+randomNum*(0.01));
+        } else{
+            price = price * (1-randomNum*(0.01));
+        }
+        price = Math.floor(price * 100) / 100;
+        return (new Double(price)).toString();
+    }
 
 }

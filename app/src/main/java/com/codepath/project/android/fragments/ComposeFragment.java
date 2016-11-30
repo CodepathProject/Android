@@ -4,6 +4,7 @@ package com.codepath.project.android.fragments;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import com.parse.ParseUser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +54,7 @@ public class ComposeFragment extends DialogFragment {
     @BindView(R.id.btnPost) Button btnPost;
     @BindView(R.id.ivComposeCancel) ImageView ivComposeCancel;
     @BindView(R.id.ivCamera) ImageView ivCamera;
+    @BindView(R.id.ivGallery) ImageView ivGallery;
     @BindView(R.id.rbAverageRating) RatingBar rbAverageRating;
     @BindView(R.id.rvCapturedImages) RecyclerView rvCapturedImages;
 
@@ -148,6 +151,8 @@ public class ComposeFragment extends DialogFragment {
 
         ivCamera.setOnClickListener(v -> onCameraClick());
 
+        ivGallery.setOnClickListener(v -> onGalleryClick());
+
         imageCaptureAdapter = new ImageCaptureAdapter(getActivity(), bitmaps);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rvCapturedImages.setLayoutManager(mLayoutManager);
@@ -174,6 +179,16 @@ public class ComposeFragment extends DialogFragment {
         }
     }
 
+    @NeedsPermission({Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    public void onGalleryClick() {
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            // Bring up gallery to select a photo
+            startActivityForResult(intent, 1033);
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1034) {
@@ -193,7 +208,42 @@ public class ComposeFragment extends DialogFragment {
                     imageCaptureAdapter.notifyDataSetChanged();
                 }
             }
+        } else {
+            if (data != null) {
+                Uri photoUri = data.getData();
+                Bitmap selectedImage;
+                try {
+                    selectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), photoUri);
+                    Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(selectedImage, 500);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    byte[] bytearray= stream.toByteArray();
+
+                    if (bytearray != null){
+                        ParseFile file = new ParseFile("abcd.jpg", bytearray);
+                        images.add(file);
+                        bitmaps.add(resizedBitmap);
+                        imageCaptureAdapter.notifyDataSetChanged();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+    }
+
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getActivity().getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
     }
 
     public Uri getPhotoFileUri(String fileName) {

@@ -368,23 +368,25 @@ public class ProductViewActivity extends AppCompatActivity {
         List<ParseUser> contactFriends = u1.getFollowUsers();
 
         ArrayList<String> idList = new ArrayList<>();
-        for(ParseUser tempuser : contactFriends) {
-            idList.add(tempuser.getObjectId());
-        }
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereContainedIn("objectId", idList);
-        query.whereEqualTo("shelfProducts", product);
-        query.findInBackground((objects, e1) -> {
-            if(objects != null && objects.size() > 0) {
-                ArrayList<AppUser> contacts = new ArrayList<>();
-                for (ParseUser puser : objects) {
-                    contacts.add((AppUser) puser);
-                }
-                friends.addAll(contacts);
-                friendsAdapter.notifyDataSetChanged();
-                rvFriends.setVisibility(View.VISIBLE);
-                tvFriendsTitle.setVisibility(View.VISIBLE);
+        if(contactFriends != null && contactFriends.size() > 0) {
+            for (ParseUser tempuser : contactFriends) {
+                idList.add(tempuser.getObjectId());
             }
-        });
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            query.whereContainedIn("objectId", idList);
+            query.whereEqualTo("shelfProducts", product);
+            query.findInBackground((objects, e1) -> {
+                if (objects != null && objects.size() > 0) {
+                    ArrayList<AppUser> contacts = new ArrayList<>();
+                    for (ParseUser puser : objects) {
+                        contacts.add((AppUser) puser);
+                    }
+                    friends.addAll(contacts);
+                    friendsAdapter.notifyDataSetChanged();
+                    rvFriends.setVisibility(View.VISIBLE);
+                    tvFriendsTitle.setVisibility(View.VISIBLE);
+                }
+            });
+        }
     }
 }

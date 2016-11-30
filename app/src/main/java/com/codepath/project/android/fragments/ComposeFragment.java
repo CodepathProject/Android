@@ -14,6 +14,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,6 +105,9 @@ public class ComposeFragment extends DialogFragment {
 
         ivComposeCancel.setOnClickListener(v -> closeKeyboardAndDismiss(view));
 
+        btnPost.setEnabled(false);
+        btnPost.getBackground().setAlpha(128);
+
         String title = getArguments().getString("title", "Compose review");
         getDialog().setTitle(title);
         etReviewText.requestFocus();
@@ -137,6 +143,7 @@ public class ComposeFragment extends DialogFragment {
             if(images.size() > 0) {
                 review.setImages(images);
             }
+            review.setRating(Integer.toString(Math.round(rating)));
             review.saveInBackground();
 
             Feed feed = new Feed();
@@ -144,9 +151,42 @@ public class ComposeFragment extends DialogFragment {
             feed.setContent(reviewText);
             feed.setFromUser(ParseUser.getCurrentUser());
             feed.setToProduct(product);
+            feed.setRating(Math.round(rating));
             feed.saveInBackground();
 
             closeKeyboardAndDismiss(view);
+        });
+
+        etReviewText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //This sets a textview to the current length
+                if(s.length() > 0 && rbAverageRating.getRating() > 0){
+                    btnPost.setEnabled(true);
+                    btnPost.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                } else {
+                    btnPost.setEnabled(false);
+                    btnPost.getBackground().setAlpha(128);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        rbAverageRating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            if(!TextUtils.isEmpty(etReviewText.getText()) && rbAverageRating.getRating() > 0){
+                btnPost.setEnabled(true);
+                btnPost.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            } else {
+                btnPost.setEnabled(false);
+                btnPost.getBackground().setAlpha(128);
+            }
         });
 
         ivCamera.setOnClickListener(v -> onCameraClick(v));

@@ -45,11 +45,10 @@
     <TextView
         android:id="@+id/tvReview"
         android:layout_below="@+id/ivProfile"
-        android:layout_toStartOf="@+id/ivMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="25dp"
         android:ellipsize="end"
         android:maxLines="4"
         android:textSize="16sp"

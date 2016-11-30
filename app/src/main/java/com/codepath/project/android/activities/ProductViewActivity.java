@@ -313,6 +313,7 @@ public class ProductViewActivity extends AppCompatActivity {
     public void onShowPlot(View view){
         Intent i = new Intent(this, PlotActivity.class);
         i.putExtra(Constants.PRODUCT_NAME, product.getName());
+        i.putExtra(Constants.PRODUCT_PRICE, product.getPrice());
         startActivity(i);
     }
 

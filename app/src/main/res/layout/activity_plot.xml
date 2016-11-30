@@ -13,8 +13,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="40dp"
         android:textSize="@dimen/plot_tv_main_size"
+        android:fontFamily="sans-serif-light"
         android:textColor="@color/white"
         android:text="Fire HD 8"
         android:id="@+id/product_name"/>
@@ -30,6 +31,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:padding="@dimen/plot_rl_margin"
         android:id="@+id/rl1"
         android:layout_below="@id/graph">
@@ -40,7 +42,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:textSize="@dimen/plot_tv_main_size"
-            android:textColor="@color/colorRed"
+            android:textColor="@color/white"
             android:text="-4.00%"
              android:id="@+id/percent_change"/>
         <TextView
@@ -60,7 +62,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:textSize="@dimen/plot_tv_main_size"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="0.0087"
             android:textStyle="bold"
             android:id="@+id/current_price"/>
@@ -99,7 +101,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:textSize="@dimen/plot_tv_main_size"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="0.0087"
             android:id="@+id/lowest_price"/>
         <TextView
@@ -119,7 +121,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:textSize="@dimen/plot_tv_main_size"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="0.0091"
             android:id="@+id/highest_price"/>
         <TextView

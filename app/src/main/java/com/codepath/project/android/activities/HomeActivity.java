@@ -247,7 +247,9 @@ public class HomeActivity extends AppCompatActivity
                 fragmentClass = MyProductsFragment.class;
                 break;
             case R.id.nav_about_me:
-                fragmentClass = UserDetailFragment.class;
+                fragmentClass = HomeFragment.class;
+                startUserDetailActivity(ParseUser.getCurrentUser().getString("username").toString());
+                //fragmentClass = UserDetailFragment.class;
                 break;
             default:
                 fragmentClass = HomeFragment.class;
@@ -266,5 +268,11 @@ public class HomeActivity extends AppCompatActivity
         setTitle(item.getTitle());
 
         return true;
+    }
+
+    public void startUserDetailActivity(String userId) {
+        Intent intent = new Intent(HomeActivity.this, UserDetailActivity.class);
+        intent.putExtra("USER_ID", userId);
+        startActivity(intent);
     }
 }

@@ -248,7 +248,7 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.nav_about_me:
                 fragmentClass = HomeFragment.class;
-                startUserDetailActivity(ParseUser.getCurrentUser().getObjectId().toString());
+                startUserDetailActivity(ParseUser.getCurrentUser().getString("username").toString());
                 //fragmentClass = UserDetailFragment.class;
                 break;
             default:

@@ -28,6 +28,8 @@ import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Review;
 import com.codepath.project.android.network.ParseHelper;
 import com.codepath.project.android.utils.GeneralUtils;
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -61,19 +63,28 @@ public class UserDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        userId = getArguments().getString("USER_ID");
         View view = inflater.inflate(R.layout.fragment_user_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
-
-        Picasso.with(getContext())
-                .load(GeneralUtils
-                .getProfileUrl(ParseUser.getCurrentUser().getObjectId()))
-                .into(ivProfileImage);
-        tvUserFirstName.setText(ParseUser.getCurrentUser().get("firstName").toString());
-        //tvUserLastName.setText(ParseUser.getCurrentUser().get("lastName").toString());
-        // TODO : update backend to have lastName for User Collection
-        tvUserEmail.setText(ParseUser.getCurrentUser().getEmail().toString());
-        setUpRecyclerView();
+        userId = getArguments().getString("USER_ID");
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("username", userId);
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> objects, ParseException e) {
+                if (e == null) {
+                    // The query was successful.
+                    Picasso.with(getContext())
+                            .load(objects.get(0).getString("pictureUrl"))
+                            .into(ivProfileImage);
+                    tvUserFirstName.setText(objects.get(0).get("firstName").toString());
+                    //tvUserLastName.setText(ParseUser.getCurrentUser().get("lastName").toString());
+                    // TODO : update backend to have lastName for User Collection
+                    tvUserEmail.setText(objects.get(0).getEmail().toString());
+                    setUpRecyclerView(objects.get(0));
+                } else {
+                    // Something went wrong.
+                }
+            }
+        });
 
         return view;
     }
@@ -88,7 +99,7 @@ public class UserDetailFragment extends Fragment {
         unbinder.unbind();
     }
 
-    private void setUpRecyclerView() {
+    private void setUpRecyclerView(ParseUser parseUser) {
         reviews = new ArrayList<>();
         reviewsAdapter = new UserTimelineAdapter(getContext(), reviews);
         rvReviews.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).build());
@@ -105,7 +116,7 @@ public class UserDetailFragment extends Fragment {
                     startActivity(intent);*/
                 }
         );
-        ParseUser currentUser = (AppUser) ParseUser.getCurrentUser();
+        //ParseUser currentUser = (AppUser) ParseUser.getCurrentUser();
         ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
         reviewQuery.include("user");
         reviewQuery.setLimit(1000);

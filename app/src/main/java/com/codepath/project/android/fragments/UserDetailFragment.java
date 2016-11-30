@@ -1,5 +1,6 @@
 package com.codepath.project.android.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -51,6 +52,7 @@ public class UserDetailFragment extends Fragment {
     @BindView(R.id.tvUserEmail) TextView tvUserEmail;
     @BindView(R.id.tvUserFirstName) TextView tvUserFirstName;
     @BindView(R.id.rvUserTimeline) RecyclerView rvReviews;
+    @BindView(R.id.followUser) ImageView followUser;
 
     List<Review> reviews;
     UserTimelineAdapter reviewsAdapter;
@@ -71,6 +73,8 @@ public class UserDetailFragment extends Fragment {
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
+                    if (ParseUser.getCurrentUser().getUsername().equals(objects.get(0).getUsername()))
+                        followUser.setVisibility(View.GONE);
                     // The query was successful.
                     Picasso.with(getContext())
                             .load(objects.get(0).getString("pictureUrl"))

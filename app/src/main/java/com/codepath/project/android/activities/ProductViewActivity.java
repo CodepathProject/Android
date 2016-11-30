@@ -66,6 +66,10 @@ public class ProductViewActivity extends AppCompatActivity {
     TextView tvWatch;
     @BindView(R.id.tvFollow)
     TextView tvFollow;
+    @BindView(R.id.tvPrice)
+    TextView tvPrice;
+    @BindView(R.id.tvReviewCount)
+    TextView tvReviewCount;
     @BindView(R.id.rvFriends)
     RecyclerView rvFriends;
     @BindView(R.id.tvFriendsTitle)
@@ -119,6 +123,8 @@ public class ProductViewActivity extends AppCompatActivity {
                     tvProductName.setText(product.getName());
                     tvBrandName.setText(product.getBrand());
                     rbAverageRating.setRating((float) product.getAverageRating());
+                    tvReviewCount.setText("("+product.getRatingCount()+")");
+                    tvPrice.setText("$"+product.getPrice());
 
 //                    YouTubePlayerFragment youtubeFragment = (YouTubePlayerFragment)
 //                            getFragmentManager().findFragmentById(R.id.youtubeFragment);

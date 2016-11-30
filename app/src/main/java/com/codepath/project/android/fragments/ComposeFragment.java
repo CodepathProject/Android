@@ -149,9 +149,9 @@ public class ComposeFragment extends DialogFragment {
             closeKeyboardAndDismiss(view);
         });
 
-        ivCamera.setOnClickListener(v -> onCameraClick());
+        ivCamera.setOnClickListener(v -> onCameraClick(v));
 
-        ivGallery.setOnClickListener(v -> onGalleryClick());
+        ivGallery.setOnClickListener(v -> onGalleryClick(v));
 
         imageCaptureAdapter = new ImageCaptureAdapter(getActivity(), bitmaps);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -171,7 +171,9 @@ public class ComposeFragment extends DialogFragment {
     }
 
     @NeedsPermission({Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    public void onCameraClick() {
+    public void onCameraClick(View v) {
+        InputMethodManager imm =(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, getPhotoFileUri("photo-codepath.jpg")); // set the image file name
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -180,7 +182,9 @@ public class ComposeFragment extends DialogFragment {
     }
 
     @NeedsPermission({Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    public void onGalleryClick() {
+    public void onGalleryClick(View v) {
+        InputMethodManager imm =(InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         Intent intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {

@@ -1,6 +1,7 @@
 package com.codepath.project.android.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -118,13 +119,12 @@ public class DetailedReviewActivity extends AppCompatActivity {
             String image = mImages.get(position);
             Picasso.with(mContext).load(image).placeholder(R.drawable.placeholder).into(viewHolder.ivReviewImage);
 
-//            viewHolder.ivReviewImage.setOnClickListener(v -> {
-//                Intent intent = new Intent(mContext, ImageFullscreenActivity.class);
-//                intent.putExtra("image", image);
-//                String[] images = mImages.toArray(new String[mImages.size()]);
-//                intent.putExtra("imageSet", images);
-//                startActivity(intent);
-//            });
+            viewHolder.ivReviewImage.setOnClickListener(v -> {
+                Intent intent = new Intent(mContext, ImageFullscreenActivity.class);
+                String[] images = mImages.toArray(new String[mImages.size()]);
+                intent.putExtra("imageSet", images);
+                startActivity(intent);
+            });
         }
 
         @Override

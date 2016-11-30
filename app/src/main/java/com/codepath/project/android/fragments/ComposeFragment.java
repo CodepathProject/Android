@@ -105,9 +105,6 @@ public class ComposeFragment extends DialogFragment {
 
         ivComposeCancel.setOnClickListener(v -> closeKeyboardAndDismiss(view));
 
-        btnPost.setEnabled(false);
-        btnPost.getBackground().setAlpha(128);
-
         String title = getArguments().getString("title", "Compose review");
         getDialog().setTitle(title);
         etReviewText.requestFocus();
@@ -168,10 +165,8 @@ public class ComposeFragment extends DialogFragment {
                 //This sets a textview to the current length
                 if(s.length() > 0 && rbAverageRating.getRating() > 0){
                     btnPost.setEnabled(true);
-                    btnPost.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 } else {
                     btnPost.setEnabled(false);
-                    btnPost.getBackground().setAlpha(128);
                 }
             }
 
@@ -182,10 +177,8 @@ public class ComposeFragment extends DialogFragment {
         rbAverageRating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
             if(!TextUtils.isEmpty(etReviewText.getText()) && rbAverageRating.getRating() > 0){
                 btnPost.setEnabled(true);
-                btnPost.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             } else {
                 btnPost.setEnabled(false);
-                btnPost.getBackground().setAlpha(128);
             }
         });
 

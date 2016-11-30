@@ -95,6 +95,7 @@
         android:textColor="#FFFFFF"
         android:background="@color/colorPrimary"
         android:clickable="true"
+        android:enabled="false"
         android:id="@+id/btnPost" />
 
 </RelativeLayout>

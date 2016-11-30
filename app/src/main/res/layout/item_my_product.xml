@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/activity_horizontal_margin"
+    android:padding="8dp"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="?attr/selectableItemBackground"
@@ -19,11 +19,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/ivProduct"
+        android:layout_toStartOf="@+id/tvPrice"
         android:gravity="center_vertical"
-        android:paddingLeft="20dp"
+        android:layout_marginStart="10dp"
         android:textSize="16sp"
         android:fontFamily="sans-serif-light"
         android:textColor="@color/black"
-        android:text="Samsung Galaxy S7 Edge"/>
+        tools:text="Samsung Galaxy S7 Edge"/>
+
+    <RatingBar
+        android:id="@+id/rating"
+        android:layout_below="@id/tvProductName"
+        android:layout_toEndOf="@+id/ivProduct"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        style="?android:attr/ratingBarStyleSmall"
+        android:stepSize="1"
+        android:theme="@style/ratingBar"/>
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/black"
+        tools:text="$500"/>
 
 </RelativeLayout>

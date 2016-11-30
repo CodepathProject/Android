@@ -242,7 +242,7 @@ public class ComposeFragment extends DialogFragment {
                 Bitmap takenImage = ImageUtils.rotateBitmapOrientation(takenPhotoUri.getPath());
                 Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(takenImage, 500);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                 byte[] bytearray= stream.toByteArray();
 
                 if (bytearray != null){
@@ -260,7 +260,7 @@ public class ComposeFragment extends DialogFragment {
                     selectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), photoUri);
                     Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(selectedImage, 500);
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                     byte[] bytearray= stream.toByteArray();
 
                     if (bytearray != null){

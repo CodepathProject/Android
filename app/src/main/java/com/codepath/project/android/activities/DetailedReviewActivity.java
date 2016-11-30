@@ -116,7 +116,15 @@ public class DetailedReviewActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ImageAdapter.ViewHolder viewHolder, int position) {
             String image = mImages.get(position);
-            Picasso.with(mContext).load(image).into(viewHolder.ivReviewImage);
+            Picasso.with(mContext).load(image).placeholder(R.drawable.placeholder).into(viewHolder.ivReviewImage);
+
+//            viewHolder.ivReviewImage.setOnClickListener(v -> {
+//                Intent intent = new Intent(mContext, ImageFullscreenActivity.class);
+//                intent.putExtra("image", image);
+//                String[] images = mImages.toArray(new String[mImages.size()]);
+//                intent.putExtra("imageSet", images);
+//                startActivity(intent);
+//            });
         }
 
         @Override

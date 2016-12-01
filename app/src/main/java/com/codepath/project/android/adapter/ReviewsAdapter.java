@@ -1,6 +1,7 @@
 package com.codepath.project.android.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.HomeActivity;
+import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Review;
@@ -69,6 +72,12 @@ public class ReviewsAdapter extends
             } else {
                 Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(user.getObjectId())).transform(new CircleTransform()).into(viewHolder.ivProfile);
             }
+            viewHolder.ivProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startUserDetailActivity(user.getUsername());
+                }
+            });
         }
         viewHolder.tvReview.setText(review.getText());
         viewHolder.rating.setRating(review.getRating());
@@ -77,6 +86,12 @@ public class ReviewsAdapter extends
     @Override
     public int getItemCount() {
         return mReviews.size();
+    }
+
+    public void startUserDetailActivity(String userId) {
+        Intent intent = new Intent(getContext(), UserDetailActivity.class);
+        intent.putExtra("USER_ID", userId);
+        getContext().startActivity(intent);
     }
 
 }

@@ -12,7 +12,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
-import com.codepath.project.android.activities.HomeActivity;
 import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
@@ -72,12 +71,7 @@ public class ReviewsAdapter extends
             } else {
                 Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(user.getObjectId())).transform(new CircleTransform()).into(viewHolder.ivProfile);
             }
-            viewHolder.ivProfile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startUserDetailActivity(user.getUsername());
-                }
-            });
+            viewHolder.ivProfile.setOnClickListener(v -> startUserDetailActivity(user.getObjectId()));
         }
         viewHolder.tvReview.setText(review.getText());
         viewHolder.rating.setRating(review.getRating());

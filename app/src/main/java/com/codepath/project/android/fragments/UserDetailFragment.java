@@ -1,45 +1,26 @@
 package com.codepath.project.android.fragments;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
-import com.codepath.project.android.activities.DetailedReviewActivity;
-import com.codepath.project.android.activities.HomeActivity;
-import com.codepath.project.android.activities.ProductViewActivity;
-import com.codepath.project.android.activities.SignUpActivity;
 import com.codepath.project.android.adapter.FeedsAdapter;
-import com.codepath.project.android.adapter.ReviewsAdapter;
-import com.codepath.project.android.adapter.UserTimelineAdapter;
-import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
-import com.codepath.project.android.model.Review;
-import com.codepath.project.android.network.ParseHelper;
-import com.codepath.project.android.utils.GeneralUtils;
-import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,24 +54,32 @@ public class UserDetailFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         userId = getArguments().getString("USER_ID");
         ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("username", userId);
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> objects, ParseException e) {
-                if (e == null) {
-                    if (ParseUser.getCurrentUser().getUsername().equals(objects.get(0).getUsername()))
-                        followUser.setVisibility(View.GONE);
-                    // The query was successful.
-                    Picasso.with(getContext())
-                            .load(objects.get(0).getString("pictureUrl"))
-                            .into(ivProfileImage);
-                    tvUserFirstName.setText(objects.get(0).get("firstName").toString());
-                    //tvUserLastName.setText(ParseUser.getCurrentUser().get("lastName").toString());
-                    // TODO : update backend to have lastName for User Collection
-                    tvUserEmail.setText(objects.get(0).getEmail().toString());
-                    setUpRecyclerView(objects.get(0));
+        query.getInBackground(userId, (object, e) -> {
+            if (e == null) {
+                if (ParseUser.getCurrentUser() == object) {
+                    followUser.setVisibility(View.GONE);
                 } else {
-                    // Something went wrong.
+                    AppUser currentUser = (AppUser) ParseUser.getCurrentUser();
+                    followUser.setOnClickListener(v -> {
+                        if(ifListContains(currentUser.getFollowUsers(), object)) {
+                            currentUser.removeFollowUser(object);
+                            Toast.makeText(getActivity(), "Unfollowed", Toast.LENGTH_SHORT).show();;
+                        } else {
+                            currentUser.setFollowUsers(object);
+                            Toast.makeText(getActivity(), "Followed", Toast.LENGTH_SHORT).show();;
+                        }
+                        currentUser.saveInBackground();
+                    });
                 }
+                // The query was successful.
+                Picasso.with(getContext())
+                        .load(object.getString("pictureUrl"))
+                        .into(ivProfileImage);
+                tvUserFirstName.setText(object.get("firstName").toString());
+                //tvUserLastName.setText(ParseUser.getCurrentUser().get("lastName").toString());
+                // TODO : update backend to have lastName for User Collection
+                tvUserEmail.setText(object.getEmail().toString());
+                setUpRecyclerView(object);
             }
         });
 
@@ -211,6 +200,22 @@ public class UserDetailFragment extends Fragment {
                 }
             });
         }
+    }
+
+    private boolean ifListContains(List<ParseUser> userList, ParseUser user) {
+        if(userList != null) {
+            for (ParseUser u1 : userList) {
+//                try {
+//                    u1.fetchIfNeeded();
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+                if (u1.getObjectId().equals(user.getObjectId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

@@ -1,7 +1,9 @@
 package com.codepath.project.android.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.adapter.FeedsAdapter;
 import com.codepath.project.android.helpers.EndlessRecyclerViewScrollListener;
+import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
 import com.parse.ParseException;
@@ -29,6 +33,8 @@ public class FeedFragment extends Fragment {
 
     @BindView(R.id.rvFeeds)
     RecyclerView rvFeeds;
+    @BindView(R.id.swipeContainer)
+    SwipeRefreshLayout swipeContainer;
 
     ArrayList<Feed> feeds = new ArrayList<>();
     FeedsAdapter feedsAdapter;
@@ -84,6 +90,19 @@ public class FeedFragment extends Fragment {
                 fetchFeeds(page*10);
             }
         });
+
+        ItemClickSupport.addTo(rvFeeds).setOnItemClickListener(
+                (rview, position, v) -> {
+                    Intent intent = new Intent(getActivity(), ProductViewActivity.class);
+                    intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());
+                    startActivity(intent);
+                }
+        );
+
+        swipeContainer.setOnRefreshListener(() -> {
+            fetchFeeds(0);
+        });
+
     }
 
     private void fetchFeeds(int skip) {
@@ -117,6 +136,7 @@ public class FeedFragment extends Fragment {
                 if (err == null) {
                     feeds.addAll(feedsList);
                     feedsAdapter.notifyDataSetChanged();
+                    swipeContainer.setRefreshing(false);
                 }
             });
         }

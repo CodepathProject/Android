@@ -20,8 +20,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
-
 public class FeedsAdapter extends
         RecyclerView.Adapter<FeedsAdapter.ViewHolder> {
 
@@ -87,7 +85,7 @@ public class FeedsAdapter extends
             Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(fromUser.getObjectId())).transform(new CircleTransform()).into(viewHolder.ivProfile);
         }
         if(toProduct != null) {
-            Picasso.with(getContext()).load(toProduct.getImageUrl()).transform(new RoundedCornersTransformation(10, 10)).into(viewHolder.ivProductImage);
+            Picasso.with(getContext()).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
         }
         viewHolder.tvUserName.setText(fromUserName);
     }

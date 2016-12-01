@@ -22,10 +22,12 @@ import com.codepath.project.android.activities.DetailedReviewActivity;
 import com.codepath.project.android.activities.HomeActivity;
 import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.activities.SignUpActivity;
+import com.codepath.project.android.adapter.FeedsAdapter;
 import com.codepath.project.android.adapter.ReviewsAdapter;
 import com.codepath.project.android.adapter.UserTimelineAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
+import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Review;
 import com.codepath.project.android.network.ParseHelper;
 import com.codepath.project.android.utils.GeneralUtils;
@@ -51,11 +53,13 @@ public class UserDetailFragment extends Fragment {
     @BindView(R.id.ivProfileImage) ImageView ivProfileImage;
     @BindView(R.id.tvUserEmail) TextView tvUserEmail;
     @BindView(R.id.tvUserFirstName) TextView tvUserFirstName;
-    @BindView(R.id.rvUserTimeline) RecyclerView rvReviews;
+    @BindView(R.id.rvUserTimeline) RecyclerView rvFeeds;
     @BindView(R.id.followUser) ImageView followUser;
 
-    List<Review> reviews;
-    UserTimelineAdapter reviewsAdapter;
+    /*List<Review> reviews;
+    UserTimelineAdapter reviewsAdapter;*/
+    ArrayList<Feed> feeds = new ArrayList<>();
+    FeedsAdapter feedsAdapter;
 
     String userId;
 
@@ -103,7 +107,7 @@ public class UserDetailFragment extends Fragment {
         unbinder.unbind();
     }
 
-    private void setUpRecyclerView(ParseUser parseUser) {
+    /*private void setUpRecyclerView(ParseUser parseUser) {
         reviews = new ArrayList<>();
         reviewsAdapter = new UserTimelineAdapter(getContext(), reviews);
         rvReviews.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).build());
@@ -115,9 +119,9 @@ public class UserDetailFragment extends Fragment {
 
         ItemClickSupport.addTo(rvReviews).setOnItemClickListener(
                 (recyclerView, position, v) -> {
-                    /*Intent intent = new Intent(ProductViewActivity.this, DetailedReviewActivity.class);
+                    *//*Intent intent = new Intent(ProductViewActivity.this, DetailedReviewActivity.class);
                     intent.putExtra("reviewId", reviews.get(position).getObjectId());
-                    startActivity(intent);*/
+                    startActivity(intent);*//*
                 }
         );
         //ParseUser currentUser = (AppUser) ParseUser.getCurrentUser();
@@ -128,21 +132,85 @@ public class UserDetailFragment extends Fragment {
         //reviewQuery.whereEqualTo("_p_user", ParseUser.getCurrentUser().getObjectId().toString());
         reviewQuery.findInBackground((reviewList, err) -> {
             if (err == null) {
-                /*ArrayList<Review> filteredReviewList = new ArrayList();
+                *//*ArrayList<Review> filteredReviewList = new ArrayList();
                 for (int i = 0; i < reviewList.size(); i++) {
                     String str = reviewList.get(i).getUser().getUsername().toString();
                     Log.d("testsss", str);
-                    *//*if (reviewObject.getUser().getUsername().toString().equals(currentUser.getUsername())) {
+                    *//**//*if (reviewObject.getUser().getUsername().toString().equals(currentUser.getUsername())) {
                         filteredReviewList.add(reviewObject);
-                    }*//*
+                    }*//**//*
                 }
-*/
+*//*
                 reviews.addAll(reviewList);
                 reviewsAdapter.notifyDataSetChanged();
            } else {
                 //Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
             }
         });
+    }*/
+    private void setUpRecyclerView(ParseUser parseUser) {
+        feeds = new ArrayList<>();
+        feedsAdapter = new FeedsAdapter(getContext(), feeds);
+        rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).build());
+        rvFeeds.setAdapter(feedsAdapter);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        mLayoutManager.scrollToPosition(0);
+        rvFeeds.setLayoutManager(mLayoutManager);
+        rvFeeds.setNestedScrollingEnabled(false);
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        try {
+            currentUser.fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+//        ParseQuery query = ParseQuery.getQuery(Product.class);
+//        query.whereEqualTo("name", "Canon EOS Rebel T5 DSLR Digital Camera");
+//        query.getFirstInBackground(new GetCallback<ParseObject>() {
+//            public void done(ParseObject object, ParseException e) {
+//                if (object == null) {
+//                    Log.d("score", "The getFirst request failed.");
+//                } else {
+//                    Log.d("score", "Retrieved the object.");
+//                    AppUser user = (AppUser) ParseUser.getCurrentUser();
+//                    user.setFollowProducts((Product) object);
+//                    user.saveInBackground();
+//                }
+//            }
+//        });
+
+        AppUser user = (AppUser) ParseUser.getCurrentUser();
+
+        List<ParseQuery<Feed>> queries = new ArrayList<>();
+
+        if(user.getFollowUsers() != null) {
+            ParseQuery<Feed> followsUserQuery = ParseQuery.getQuery(Feed.class);
+            followsUserQuery.whereContainedIn("fromUser", user.getFollowUsers());
+            queries.add(followsUserQuery);
+        }
+
+        if(user.getFollowProducts() != null) {
+            ParseQuery<Feed> followsProductQuery = ParseQuery.getQuery(Feed.class);
+            followsProductQuery.whereContainedIn("toProduct", user.getFollowProducts());
+            queries.add(followsProductQuery);
+        }
+
+        if(queries.size() > 0) {
+            ParseQuery<Feed> mainQuery = ParseQuery.or(queries);
+            mainQuery.include("fromUser");
+            mainQuery.include("toUser");
+            mainQuery.include("toProduct");
+
+            mainQuery.findInBackground((feedsList, err) -> {
+                if (err == null) {
+                    feeds.addAll(feedsList);
+                    feedsAdapter.notifyDataSetChanged();
+                } else {
+                    //Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 }

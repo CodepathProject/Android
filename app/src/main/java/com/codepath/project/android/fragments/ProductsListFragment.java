@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.ProductViewActivity;
@@ -50,6 +52,8 @@ public class ProductsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_products_list, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvMyProducts);
+        TextView tvHeading = (TextView) view.findViewById(R.id.tvHeading);
+        TextView tvHeadingTitle = (TextView) view.findViewById(R.id.tvHeadingTitle);
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
         recyclerView.setAdapter(productsAdapter);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -79,6 +83,22 @@ public class ProductsListFragment extends Fragment {
                     productsList.addAll(user.getWishListProducts());
                 }
                 productsAdapter.notifyDataSetChanged();
+            }
+            final Double sum = 0.0;
+            if(productsList != null && productsList.size() > 0) {
+                for (Product p : productsList) {
+                    p.fetchIfNeededInBackground((object, e) -> {
+                        Product t = (Product) object;
+                        Double tempSum = 0.0;
+                        if(!TextUtils.isEmpty(tvHeading.getText().toString())) {
+                            tempSum = Double.parseDouble(tvHeading.getText().toString());
+                        }
+                        tempSum += Double.parseDouble(t.getPrice());
+                        tvHeading.setText(tempSum.toString());
+                    });
+                }
+            } else {
+                tvHeadingTitle.setText("List is empty. Add products to list");
             }
         }
         return view;

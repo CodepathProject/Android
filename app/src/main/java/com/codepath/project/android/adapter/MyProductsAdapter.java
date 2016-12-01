@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.Product;
 import com.squareup.picasso.Picasso;
 
@@ -30,13 +32,17 @@ public class MyProductsAdapter extends
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvProductNAme;
+        public TextView tvProductName;
         public ImageView ivProductImage;
+        public TextView tvPrice;
+        public RatingBar rating;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvProductNAme = (TextView) itemView.findViewById(R.id.tvProductName);
+            tvProductName = (TextView) itemView.findViewById(R.id.tvProductName);
             ivProductImage = (ImageView) itemView.findViewById(R.id.ivProduct);
+            tvPrice = (TextView) itemView.findViewById(R.id.tvPrice);
+            rating = (RatingBar) itemView.findViewById(R.id.rating);
         }
     }
 
@@ -54,10 +60,11 @@ public class MyProductsAdapter extends
             product.fetchIfNeededInBackground((object, e) -> {
                 if(e == null) {
                     Product temp = (Product) object;
-                    TextView tvProductName = viewHolder.tvProductNAme;
-                    tvProductName.setText(temp.getName());
+                    viewHolder.tvProductName.setText(temp.getName());
+                    viewHolder.tvPrice.setText("$" + temp.getPrice());
+                    viewHolder.rating.setRating((float) temp.getAverageRating());
                     ImageView ivProductImage = viewHolder.ivProductImage;
-                    Picasso.with(getContext()).load(temp.getImageUrl()).into(ivProductImage);
+                    Picasso.with(getContext()).load(temp.getImageUrl()).transform(new CircleTransform()).into(ivProductImage);
                 }
             });
     }

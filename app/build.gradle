@@ -59,4 +59,5 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'com.jjoe64:graphview:4.2.1'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
+    compile 'jp.wasabeef:picasso-transformations:2.1.0'
 }

@@ -92,24 +92,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvBrandName"
-                android:layout_toRightOf="@+id/rbAverageRating"
+                android:layout_toEndOf="@+id/rbAverageRating"
                 android:textColor="@color/colorBlue"
-                android:paddingLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:paddingTop="5dp"
                 android:textSize="12sp"
                 tools:text="(595)" />
 
             <TextView
                 android:id="@+id/tvPrice"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvBrandName"
-                android:layout_toRightOf="@+id/tvReviewCount"
-                android:paddingBottom="10dp"
-                android:paddingRight="15dp"
-                android:paddingTop="5dp"
+                android:layout_below="@+id/tvProductName"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
                 android:textSize="20sp"
-                android:gravity="right"
                 android:textColor="@color/colorRed"
                 tools:text="$85" />
 
@@ -129,7 +127,7 @@
                     android:drawableTint="@color/action_gray"
                     android:drawableTop="@drawable/noun_729141_cc"
                     android:gravity="center"
-                    android:text="Follow"
+                    android:text="@string/follow"
                     android:textColor="@color/action_gray" />
 
                 <TextView
@@ -140,7 +138,7 @@
                     android:drawableTint="@color/action_gray"
                     android:drawableTop="@drawable/shelf"
                     android:gravity="center"
-                    android:text="Shelf"
+                    android:text="@string/shelf"
                     android:textColor="@color/action_gray" />
 
                 <TextView
@@ -151,7 +149,7 @@
                     android:drawableTint="@color/action_gray"
                     android:drawableTop="@drawable/eye"
                     android:gravity="center"
-                    android:text="Watch"
+                    android:text="@string/watch"
                     android:textColor="@color/action_gray" />
 
                 <TextView
@@ -164,7 +162,7 @@
                     android:drawableTop="@drawable/plot"
                     android:gravity="center"
                     android:onClick="onShowPlot"
-                    android:text="Trends" />
+                    android:text="@string/trends" />
             </LinearLayout>
 
             <TextView
@@ -189,7 +187,7 @@
                 android:layout_below="@id/tvAddPrice"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="25dp"
-                android:text="Owned by your friends"
+                android:text="@string/owned_by_your_friends"
                 android:textSize="20sp"
                 android:visibility="gone" />
 

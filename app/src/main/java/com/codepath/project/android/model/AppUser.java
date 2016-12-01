@@ -37,6 +37,14 @@ public class AppUser extends ParseUser {
         return (List<ParseUser>) get("followUsers");
     }
 
+    public boolean isFollowsUser(ParseUser user) {
+        List<ParseUser> p = getFollowUsers();
+        if(getFollowUsers().contains(user)) {
+            return true;
+        }
+        return false;
+    }
+
     public void setFollowUsers(ParseUser user) {
         addUnique("followUsers", user);
     }

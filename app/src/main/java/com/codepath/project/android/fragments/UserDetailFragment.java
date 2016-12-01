@@ -63,10 +63,10 @@ public class UserDetailFragment extends Fragment {
                     followUser.setOnClickListener(v -> {
                         if(ifListContains(currentUser.getFollowUsers(), object)) {
                             currentUser.removeFollowUser(object);
-                            Toast.makeText(getActivity(), "Unfollowed", Toast.LENGTH_SHORT).show();;
+                            Toast.makeText(getActivity(), "Unfollowed", Toast.LENGTH_SHORT).show();
                         } else {
                             currentUser.setFollowUsers(object);
-                            Toast.makeText(getActivity(), "Followed", Toast.LENGTH_SHORT).show();;
+                            Toast.makeText(getActivity(), "Followed", Toast.LENGTH_SHORT).show();
                         }
                         currentUser.saveInBackground();
                     });

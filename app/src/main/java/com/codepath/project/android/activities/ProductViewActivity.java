@@ -123,7 +123,7 @@ public class ProductViewActivity extends AppCompatActivity {
                     tvProductName.setText(product.getName());
                     tvBrandName.setText(product.getBrand());
                     rbAverageRating.setRating((float) product.getAverageRating());
-                    tvReviewCount.setText("("+product.getRatingCount()+")");
+                    tvReviewCount.setText(""+product.getRatingCount());
                     tvPrice.setText("$"+product.getPrice());
 
 //                    YouTubePlayerFragment youtubeFragment = (YouTubePlayerFragment)

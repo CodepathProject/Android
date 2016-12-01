@@ -63,8 +63,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textStyle="bold"
-                android:paddingLeft = "25dp"
-                android:paddingRight = "25dp"
+                android:paddingLeft = "@dimen/product_margin"
+                android:paddingRight = "@dimen/product_margin"
                 android:paddingTop = "20dp"
                 android:paddingBottom = "20dp"
                 android:fontFamily="sans-serif-light"
@@ -77,8 +77,8 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginLeft="@dimen/product_margin"
+                android:layout_marginRight="@dimen/product_margin"
                 android:layout_below="@id/tvProductName"
                 android:layout_height="0.5dp"
                 android:orientation="horizontal"/>
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/line"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="@dimen/product_margin"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:textSize="18sp"
@@ -100,8 +100,8 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginLeft="@dimen/product_margin"
+                android:layout_marginRight="@dimen/product_margin"
                 android:layout_below="@id/tvBrandName"
                 android:layout_height="0.5dp"
                 android:orientation="horizontal"/>
@@ -166,8 +166,8 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginLeft="@dimen/product_margin"
+                android:layout_marginRight="@dimen/product_margin"
                 android:layout_below="@id/ll"
                 android:layout_height="0.5dp"
                 android:orientation="horizontal"/>
@@ -177,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/line3"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="@dimen/product_margin"
                 android:textSize="20sp"
                 android:textColor="@color/colorRed"
                 tools:text="$85" />
@@ -190,7 +190,7 @@
                 android:layout_below="@+id/tvPrice"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="@dimen/product_margin"
                 android:numStars="5"
                 android:stepSize="0.5"
                 android:theme="@style/ratingBar"
@@ -213,16 +213,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tvReviewCount"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/line3"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="25dp"
-                android:background="@color/colorPrimary"
+                android:layout_marginRight="@dimen/product_margin"
+                android:background="@drawable/rounded_corner"
                 android:gravity="center"
                 android:onClick="addPrice"
                 android:padding="10dp"
                 android:text="@string/add_price"
-                android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
@@ -244,14 +243,30 @@
                 android:layout_below="@id/tvFriendsTitle"
                 android:layout_marginTop="10dp" />
 
+
+            <LinearLayout
+                android:id="@+id/line4"
+                android:background="@color/action_gray"
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="@dimen/product_margin"
+                android:layout_marginRight="@dimen/product_margin"
+                android:layout_below="@id/rvFriends"
+                android:layout_height="0.5dp"
+                android:orientation="horizontal"/>
+
+
             <TextView
                 android:id="@+id/tvReviewsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rvFriends"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="15dp"
+                android:layout_below="@id/line4"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="@dimen/product_margin"
                 android:text="@string/reviews"
+                android:fontFamily="sans-serif-light"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -261,6 +276,8 @@
                 android:layout_below="@id/tvReviewsTitle"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginLeft="@dimen/product_margin"
+                android:layout_marginRight="@dimen/product_margin"
                 android:background="@color/colorLightGray"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:elevation="3dp"
@@ -270,6 +287,7 @@
                     android:id="@+id/rvReviews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/tvReviewsTitle"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp" />
             </android.support.v7.widget.CardView>

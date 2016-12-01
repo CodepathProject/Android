@@ -14,10 +14,13 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
+import com.codepath.project.android.model.Product;
 import com.codepath.project.android.utils.GeneralUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class FeedsAdapter extends
         RecyclerView.Adapter<FeedsAdapter.ViewHolder> {
@@ -39,6 +42,7 @@ public class FeedsAdapter extends
         public ImageView ivProfile;
         public TextView tvUserName;
         public RatingBar rating;
+        public ImageView ivProductImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -46,6 +50,7 @@ public class FeedsAdapter extends
             ivProfile = (ImageView) itemView.findViewById(R.id.ivProfile);
             tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
             rating = (RatingBar) itemView.findViewById(R.id.rating);
+            ivProductImage = (ImageView) itemView.findViewById(R.id.ivProductImage);
         }
     }
 
@@ -63,6 +68,7 @@ public class FeedsAdapter extends
         Feed feed = mFeeds.get(position);
         TextView tvContent = viewHolder.tvContent;
         AppUser fromUser = (AppUser) feed.getFromUser();
+        Product toProduct = feed.getToProduct();
         viewHolder.rating.setVisibility(View.GONE);
         String fromUserName = fromUser.getString("firstName").substring(0,1).toUpperCase() + fromUser.getString("firstName").substring(1);
         if(feed.getType().equals("followUser")) {
@@ -79,6 +85,9 @@ public class FeedsAdapter extends
             Picasso.with(getContext()).load(fromUser.getImage()).transform(new CircleTransform()).into(viewHolder.ivProfile);
         } else {
             Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(fromUser.getObjectId())).transform(new CircleTransform()).into(viewHolder.ivProfile);
+        }
+        if(toProduct != null) {
+            Picasso.with(getContext()).load(toProduct.getImageUrl()).transform(new RoundedCornersTransformation(10, 10)).into(viewHolder.ivProductImage);
         }
         viewHolder.tvUserName.setText(fromUserName);
     }

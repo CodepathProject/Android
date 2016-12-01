@@ -34,11 +34,9 @@ public class FeedFragment extends Fragment {
     FeedsAdapter feedsAdapter;
 
     private Unbinder unbinder;
-    int page = 0;
 
     public static FeedFragment newInstance() {
-        FeedFragment fragment = new FeedFragment();
-        return fragment;
+        return new FeedFragment();
     }
 
     @Override

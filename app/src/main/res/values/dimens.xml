@@ -38,4 +38,7 @@
     <dimen name="plot_tv_tag_top_margin">4dp</dimen>
     <dimen name="plot_rl_margin">25dp</dimen>
     <dimen name="plot_line_margin">1dp</dimen>
+
+
+    <dimen name="product_margin">25dp</dimen>
 </resources>

@@ -18,6 +18,7 @@
 
         <ImageView
             android:id="@+id/iv_product"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
@@ -25,11 +26,20 @@
             android:paddingTop="10dp"
             android:contentDescription="@string/product_image" />
 
+        <View
+            android:id="@+id/primerdivisor"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/iv_product"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="#AAB8C2" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_product"
-            android:background="@color/colorLightGray2"
+            android:layout_below="@id/primerdivisor"
+            android:background="@color/white"
             android:gravity="center"
             android:padding="10dp">
 

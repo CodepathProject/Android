@@ -33,5 +33,10 @@
     <string name="click_to_more">click to more</string>
     <string name="user_profile_image">user profile image</string>
     <string name="contact_friend">contact friend</string>
+    <string name="follow">Follow</string>
+    <string name="shelf">Shelf</string>
+    <string name="watch">Watch</string>
+    <string name="trends">Trends</string>
+    <string name="owned_by_your_friends">Owned by your friends</string>
 
 </resources>

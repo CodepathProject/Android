@@ -128,6 +128,7 @@ public class FeedFragment extends Fragment {
             mainQuery.include("toUser");
             mainQuery.include("toProduct");
             mainQuery.setLimit(10);
+            mainQuery.addDescendingOrder("createdAt");
             if(skip > 0) {
                 mainQuery.setSkip(skip);
             }

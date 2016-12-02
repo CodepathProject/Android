@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.helpers.CircleTransform;
@@ -38,12 +39,14 @@ public class ContactFriendsAdapter extends
         public ImageView ivFriendProfile;
         public ImageView ivMessenger;
         public ImageView ivGmail;
+        public TextView tvFriendName;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivFriendProfile = (ImageView) itemView.findViewById(R.id.ivFriendProfile);
             ivMessenger = (ImageView) itemView.findViewById(R.id.ivMessenger);
             ivGmail = (ImageView) itemView.findViewById(R.id.ivGmail);
+            tvFriendName = (TextView) itemView.findViewById(R.id.tvFriendName);
         }
     }
 
@@ -59,6 +62,7 @@ public class ContactFriendsAdapter extends
     @Override
     public void onBindViewHolder(ContactFriendsAdapter.ViewHolder viewHolder, int position) {
         AppUser user = mUsers.get(position);
+        viewHolder.tvFriendName.setText(user.getFirstName());
         if (!TextUtils.isEmpty(user.getImage())) {
             Picasso.with(getContext()).load(user.getImage()).transform(new CircleTransform()).into(viewHolder.ivFriendProfile);
         } else {

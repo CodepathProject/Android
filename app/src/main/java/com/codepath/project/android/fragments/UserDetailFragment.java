@@ -1,5 +1,6 @@
 package com.codepath.project.android.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.adapter.FeedsAdapter;
+import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
 import com.parse.ParseException;
@@ -37,8 +40,6 @@ public class UserDetailFragment extends Fragment {
     @BindView(R.id.rvUserTimeline) RecyclerView rvFeeds;
     @BindView(R.id.followUser) ImageView followUser;
 
-    /*List<Review> reviews;
-    UserTimelineAdapter reviewsAdapter;*/
     ArrayList<Feed> feeds = new ArrayList<>();
     FeedsAdapter feedsAdapter;
 
@@ -56,7 +57,7 @@ public class UserDetailFragment extends Fragment {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.getInBackground(userId, (object, e) -> {
             if (e == null) {
-                if (ParseUser.getCurrentUser() == object) {
+                if (ParseUser.getCurrentUser().getObjectId().equals(object.getObjectId())) {
                     followUser.setVisibility(View.GONE);
                 } else {
                     AppUser currentUser = (AppUser) ParseUser.getCurrentUser();
@@ -71,17 +72,22 @@ public class UserDetailFragment extends Fragment {
                         currentUser.saveInBackground();
                     });
                 }
-                // The query was successful.
                 Picasso.with(getContext())
                         .load(object.getString("pictureUrl"))
                         .into(ivProfileImage);
                 tvUserFirstName.setText(object.get("firstName").toString());
-                //tvUserLastName.setText(ParseUser.getCurrentUser().get("lastName").toString());
-                // TODO : update backend to have lastName for User Collection
                 tvUserEmail.setText(object.getEmail().toString());
                 setUpRecyclerView(object);
             }
         });
+
+        ItemClickSupport.addTo(rvFeeds).setOnItemClickListener(
+                (rview, position, v) -> {
+                    Intent intent = new Intent(getActivity(), ProductViewActivity.class);
+                    intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());
+                    startActivity(intent);
+                }
+        );
 
         return view;
     }
@@ -96,47 +102,6 @@ public class UserDetailFragment extends Fragment {
         unbinder.unbind();
     }
 
-    /*private void setUpRecyclerView(ParseUser parseUser) {
-        reviews = new ArrayList<>();
-        reviewsAdapter = new UserTimelineAdapter(getContext(), reviews);
-        rvReviews.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).build());
-        rvReviews.setAdapter(reviewsAdapter);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        mLayoutManager.scrollToPosition(0);
-        rvReviews.setLayoutManager(mLayoutManager);
-        rvReviews.setNestedScrollingEnabled(false);
-
-        ItemClickSupport.addTo(rvReviews).setOnItemClickListener(
-                (recyclerView, position, v) -> {
-                    *//*Intent intent = new Intent(ProductViewActivity.this, DetailedReviewActivity.class);
-                    intent.putExtra("reviewId", reviews.get(position).getObjectId());
-                    startActivity(intent);*//*
-                }
-        );
-        //ParseUser currentUser = (AppUser) ParseUser.getCurrentUser();
-        ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
-        reviewQuery.include("user");
-        reviewQuery.setLimit(1000);
-        //reviewQuery.whereMatchesQuery("_p_user", innerQuery);
-        //reviewQuery.whereEqualTo("_p_user", ParseUser.getCurrentUser().getObjectId().toString());
-        reviewQuery.findInBackground((reviewList, err) -> {
-            if (err == null) {
-                *//*ArrayList<Review> filteredReviewList = new ArrayList();
-                for (int i = 0; i < reviewList.size(); i++) {
-                    String str = reviewList.get(i).getUser().getUsername().toString();
-                    Log.d("testsss", str);
-                    *//**//*if (reviewObject.getUser().getUsername().toString().equals(currentUser.getUsername())) {
-                        filteredReviewList.add(reviewObject);
-                    }*//**//*
-                }
-*//*
-                reviews.addAll(reviewList);
-                reviewsAdapter.notifyDataSetChanged();
-           } else {
-                //Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
     private void setUpRecyclerView(ParseUser parseUser) {
         feeds = new ArrayList<>();
         feedsAdapter = new FeedsAdapter(getContext(), feeds);
@@ -154,62 +119,23 @@ public class UserDetailFragment extends Fragment {
             e.printStackTrace();
         }
 
-//        ParseQuery query = ParseQuery.getQuery(Product.class);
-//        query.whereEqualTo("name", "Canon EOS Rebel T5 DSLR Digital Camera");
-//        query.getFirstInBackground(new GetCallback<ParseObject>() {
-//            public void done(ParseObject object, ParseException e) {
-//                if (object == null) {
-//                    Log.d("score", "The getFirst request failed.");
-//                } else {
-//                    Log.d("score", "Retrieved the object.");
-//                    AppUser user = (AppUser) ParseUser.getCurrentUser();
-//                    user.setFollowProducts((Product) object);
-//                    user.saveInBackground();
-//                }
-//            }
-//        });
-
-        AppUser user = (AppUser) ParseUser.getCurrentUser();
-
-        List<ParseQuery<Feed>> queries = new ArrayList<>();
-
-        if(user.getFollowUsers() != null) {
-            ParseQuery<Feed> followsUserQuery = ParseQuery.getQuery(Feed.class);
-            followsUserQuery.whereContainedIn("fromUser", user.getFollowUsers());
-            queries.add(followsUserQuery);
-        }
-
-        if(user.getFollowProducts() != null) {
-            ParseQuery<Feed> followsProductQuery = ParseQuery.getQuery(Feed.class);
-            followsProductQuery.whereContainedIn("toProduct", user.getFollowProducts());
-            queries.add(followsProductQuery);
-        }
-
-        if(queries.size() > 0) {
-            ParseQuery<Feed> mainQuery = ParseQuery.or(queries);
-            mainQuery.include("fromUser");
-            mainQuery.include("toUser");
-            mainQuery.include("toProduct");
-
-            mainQuery.findInBackground((feedsList, err) -> {
-                if (err == null) {
-                    feeds.addAll(feedsList);
-                    feedsAdapter.notifyDataSetChanged();
-                } else {
-                    //Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+        ParseQuery<Feed> query = ParseQuery.getQuery(Feed.class);
+        query.whereEqualTo("fromUser", parseUser);
+        query.include("fromUser");
+        query.include("toUser");
+        query.include("toProduct");
+        query.setLimit(10);
+        query.findInBackground((feedsList, err) -> {
+            if (err == null) {
+                feeds.addAll(feedsList);
+                feedsAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private boolean ifListContains(List<ParseUser> userList, ParseUser user) {
         if(userList != null) {
             for (ParseUser u1 : userList) {
-//                try {
-//                    u1.fetchIfNeeded();
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
                 if (u1.getObjectId().equals(user.getObjectId())) {
                     return true;
                 }

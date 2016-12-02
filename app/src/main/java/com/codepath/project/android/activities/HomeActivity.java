@@ -26,7 +26,6 @@ import com.codepath.project.android.adapter.SearchResultsAdapter;
 import com.codepath.project.android.fragments.FeedFragment;
 import com.codepath.project.android.fragments.HomeFragment;
 import com.codepath.project.android.fragments.MyProductsFragment;
-import com.codepath.project.android.fragments.UserDetailFragment;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.Product;
 import com.parse.ParseInstallation;
@@ -248,7 +247,7 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.nav_about_me:
                 fragmentClass = HomeFragment.class;
-                startUserDetailActivity(ParseUser.getCurrentUser().getString("username").toString());
+                startUserDetailActivity(ParseUser.getCurrentUser().getObjectId());
                 //fragmentClass = UserDetailFragment.class;
                 break;
             default:

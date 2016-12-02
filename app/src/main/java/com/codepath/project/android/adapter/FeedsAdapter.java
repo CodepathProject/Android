@@ -72,9 +72,10 @@ public class FeedsAdapter extends
         viewHolder.rating.setVisibility(View.GONE);
         String fromUserName = fromUser.getString("firstName").substring(0,1).toUpperCase() + fromUser.getString("firstName").substring(1);
         if(feed.getType().equals("followUser")) {
-            tvContent.setText(feed.getFromUser().getUsername() + " followed " + feed.getToUser().getUsername());
+            tvContent.setText(((AppUser) feed.getFromUser()).getFirstName() + " followed " + feed.getToUser().getUsername());
         } else if(feed.getType().equals("addPrice")) {
-            tvContent.setText(feed.getFromUser().getUsername() + " reported " + feed.getToProduct().getName() + " price: " + feed.getContent());
+            fromUserName += " reported price on " + feed.getToProduct().getName();
+            tvContent.setText("Product price: $" + feed.getContent());
         } else if(feed.getType().equals("addReview")) {
             fromUserName += " reviewed " + feed.getToProduct().getName();
             tvContent.setText(feed.getContent());

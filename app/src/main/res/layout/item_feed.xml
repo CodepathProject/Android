@@ -42,7 +42,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:numStars="5"
-            android:visibility="gone"
             style="?android:attr/ratingBarStyleSmall"
             android:stepSize="1"
             android:theme="@style/ratingBar"/>
@@ -54,7 +53,8 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/tvUserName"
             android:layout_marginTop="10dp"
-            tools:text="10 min ago"/>
+            android:textColor="@color/colorGray"
+            tools:text="10m"/>
 
     </RelativeLayout>
 

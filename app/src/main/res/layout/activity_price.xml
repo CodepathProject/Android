@@ -22,28 +22,53 @@
         android:paddingTop="20dp"
         android:paddingBottom="5dp"
         android:paddingRight="10dp"
-        android:singleLine="true"
         android:ellipsize="end"
-        android:paddingLeft="10dp"
+        android:paddingLeft="15dp"
         android:background="@color/white"
         android:layout_below="@id/toolbar"/>
 
-    <TextView
-        android:id="@+id/tvProductPrice"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:paddingTop="5dp"
-        android:textColor="@color/colorGray"
-        android:paddingBottom="10dp"
-        android:paddingRight="10dp"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:paddingLeft="10dp"
-        android:background="@color/white"
-        android:layout_below="@id/tvProductName"/>
+        android:layout_below="@id/tvProductName"
+        android:id="@+id/ll"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/tvProductPriceTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:paddingTop="15dp"
+            android:textColor="@color/colorPrimary"
+            android:paddingBottom="20dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:paddingLeft="15dp"
+            android:background="@color/white"
+            android:text="Current Price: " />
+
+        <TextView
+            android:id="@+id/tvProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:paddingTop="5dp"
+            android:textColor="@color/colorPrimary"
+            android:paddingBottom="20dp"
+            android:paddingRight="10dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:layout_alignBaseline="@id/tvProductPriceTag"
+            android:ellipsize="end"
+            android:paddingLeft="5dp"
+            android:background="@color/white"
+            android:layout_below="@id/tvProductName" />
+
+    </LinearLayout>
+
     <TextView
-        android:paddingTop="20dp"
+        android:paddingTop="30dp"
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
         android:id="@+id/tvPriceTitle"
@@ -51,7 +76,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorLightGray"
         android:textColor="@color/colorGray"
-        android:layout_below="@id/tvProductPrice"
+        android:layout_below="@id/ll"
         android:textSize="13sp"
         android:text="PRICE" />
     <EditText
@@ -64,11 +89,12 @@
         android:layout_height="wrap_content"
         android:hint="Enter Price"
         android:inputType="number"
+        android:fontFamily="sans-serif-light"
         android:layout_below="@id/tvPriceTitle"
         android:textColorHint="@color/action_gray"
         android:background="@color/white" />
     <TextView
-        android:paddingTop="20dp"
+        android:paddingTop="30dp"
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
         android:id="@+id/tvStoreTitle"
@@ -89,6 +115,7 @@
         android:layout_height="wrap_content"
         android:hint="Enter Store Name"
         android:textSize="20sp"
+        android:fontFamily="sans-serif-light"
         android:layout_below="@id/tvStoreTitle"
         android:textColorHint="@color/action_gray"
         android:background="@color/white" />

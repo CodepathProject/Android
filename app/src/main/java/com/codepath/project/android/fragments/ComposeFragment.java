@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
@@ -37,6 +38,7 @@ import com.codepath.project.android.utils.ImageUtils;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -60,9 +62,10 @@ public class ComposeFragment extends DialogFragment {
     @BindView(R.id.ivGallery) ImageView ivGallery;
     @BindView(R.id.rbAverageRating) RatingBar rbAverageRating;
     @BindView(R.id.rvCapturedImages) RecyclerView rvCapturedImages;
+    @BindView(R.id.ivProductImage) ImageView ivProductImage;
+    @BindView(R.id.tvProductName) TextView tvProductName;
 
     List<ParseFile> images;
-
     List<Bitmap> bitmaps;
 
     Product product;
@@ -121,6 +124,8 @@ public class ComposeFragment extends DialogFragment {
         query.getInBackground(productId.trim(), (p, e) -> {
             if(e == null) {
                 product = p;
+                tvProductName.setText(p.getName());
+                Picasso.with(getContext()).load(p.getImageUrl()).placeholder(R.drawable.placeholder).into(ivProductImage);
             } else {
                 Toast.makeText(getActivity(), "parse error", Toast.LENGTH_SHORT).show();
             }

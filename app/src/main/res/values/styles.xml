@@ -108,7 +108,7 @@
 
     <style name="ratingBar" parent="Theme.AppCompat">
         <item name="colorControlActivated">@color/colorGold</item>
-        <item name="colorControlNormal">@color/colorGray</item>
+        <item name="colorControlNormal">@color/colorLightGray3</item>
     </style>
 
     <!--

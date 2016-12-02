@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.utils.GeneralUtils;
@@ -81,6 +82,13 @@ public class ContactFriendsAdapter extends
             intent.putExtra(Intent.EXTRA_TEXT, "Question on product");
             getContext().startActivity(intent);
         });
+        viewHolder.ivFriendProfile.setOnClickListener(v -> startUserDetailActivity(user.getObjectId()));
+    }
+
+    public void startUserDetailActivity(String userId) {
+        Intent intent = new Intent(getContext(), UserDetailActivity.class);
+        intent.putExtra("USER_ID", userId);
+        getContext().startActivity(intent);
     }
 
     // Returns the total count of items in the list

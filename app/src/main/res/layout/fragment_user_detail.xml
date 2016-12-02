@@ -91,10 +91,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignStart="@+id/tvUserFirstName"
                         android:layout_below="@+id/tvAboutMe"
-                        android:paddingBottom="20dp"
-                        android:paddingEnd="20dp"
+                        android:layout_marginBottom="20dp"
                         android:paddingTop="10dp"
                         android:textColor="#606060"
+                        android:textStyle="bold"
                         tools:text="200 FOLLOWING" />
 
                     <TextView
@@ -103,11 +103,11 @@
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/tvFollowing"
                         android:layout_toEndOf="@+id/tvFollowing"
-                        android:paddingBottom="20dp"
-                        android:paddingEnd="20dp"
+                        android:layout_marginBottom="20dp"
                         android:paddingStart="20dp"
                         android:paddingTop="10dp"
                         android:textColor="#606060"
+                        android:textStyle="bold"
                         tools:text="200 FOLLOWERS" />
 
                 </RelativeLayout>
@@ -136,11 +136,13 @@
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/svReviews"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

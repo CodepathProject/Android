@@ -63,7 +63,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-        <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/ic_search_black_24dp"/>
+        <meta-data
+            android:name="com.parse.push.notification_icon"
+            android:resource="@drawable/ic_search_black_24dp" />
 
         <service android:name="com.parse.PushService" />
 
@@ -93,7 +95,8 @@
         ;
         <activity android:name=".activities.PlotActivity" />
         <activity android:name=".activities.PriceActivity" />
-        <activity android:name=".activities.LoadingActivity"></activity>
+        <activity android:name=".activities.LoadingActivity" />
+        <activity android:name=".activities.FollowActivity"></activity>
     </application>
 
 </manifest>

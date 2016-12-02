@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.FollowActivity;
 import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.adapter.FeedsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
@@ -36,6 +37,8 @@ public class UserDetailFragment extends Fragment {
 
     @BindView(R.id.ivProfileImage) ImageView ivProfileImage;
     @BindView(R.id.tvUserFirstName) TextView tvUserFirstName;
+    @BindView(R.id.tvFollowing) TextView tvFollowing;
+    @BindView(R.id.tvFollowers) TextView tvFollowers;
     @BindView(R.id.rvUserTimeline) RecyclerView rvFeeds;
     @BindView(R.id.followUser) ImageView followUser;
 
@@ -75,6 +78,18 @@ public class UserDetailFragment extends Fragment {
                         .load(object.getString("pictureUrl"))
                         .into(ivProfileImage);
                 tvUserFirstName.setText(object.get("firstName").toString());
+                AppUser currentUser = (AppUser) object;
+                if(currentUser.getFollowUsers() != null && currentUser.getFollowUsers().size() > 0) {
+                    tvFollowing.setText(currentUser.getFollowUsers().size() + " FOLLOWING");
+                    tvFollowing.setOnClickListener(v -> {
+                        Intent intent = new Intent(getActivity(), FollowActivity.class);
+                        intent.putExtra("USER_ID", currentUser.getObjectId());
+                        startActivity(intent);
+                    });
+                } else {
+                    tvFollowing.setText("0 FOLLOWING");
+                }
+
                 setUpRecyclerView(object);
             }
         });

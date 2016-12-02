@@ -110,13 +110,6 @@
                         android:textColor="#606060"
                         tools:text="200 FOLLOWERS" />
 
-                    <View
-                        android:id="@+id/primerdivisor"
-                        android:layout_width="fill_parent"
-                        android:layout_height="1dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/tvFollowers"
-                        android:background="#AAB8C2" />
                 </RelativeLayout>
 
                 <ImageView
@@ -151,6 +144,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <View
+                android:id="@+id/primerdivisor"
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorLightGray" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvUserTimeline"
                 android:layout_width="match_parent"

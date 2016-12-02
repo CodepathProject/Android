@@ -103,7 +103,7 @@ public class UserDetailFragment extends Fragment {
     private void setUpRecyclerView(ParseUser parseUser) {
         feeds = new ArrayList<>();
         feedsAdapter = new FeedsAdapter(getContext(), feeds);
-        rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).build());
+        rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.feed_divider).build());
         rvFeeds.setAdapter(feedsAdapter);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mLayoutManager.scrollToPosition(0);

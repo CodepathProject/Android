@@ -41,6 +41,7 @@ public class FeedsAdapter extends
         public TextView tvUserName;
         public RatingBar rating;
         public ImageView ivProductImage;
+        public TextView tvTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -49,6 +50,7 @@ public class FeedsAdapter extends
             tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
             rating = (RatingBar) itemView.findViewById(R.id.rating);
             ivProductImage = (ImageView) itemView.findViewById(R.id.ivProductImage);
+            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
         }
     }
 
@@ -88,6 +90,7 @@ public class FeedsAdapter extends
             Picasso.with(getContext()).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
         }
         viewHolder.tvUserName.setText(fromUserName);
+        viewHolder.tvTime.setText(GeneralUtils.getRelativeTimeAgo(feed.getCreatedAt().toString()));
     }
 
     // Returns the total count of items in the list

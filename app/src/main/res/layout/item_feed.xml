@@ -47,6 +47,15 @@
             android:stepSize="1"
             android:theme="@style/ratingBar"/>
 
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/tvUserName"
+            android:layout_marginTop="10dp"
+            tools:text="10 min ago"/>
+
     </RelativeLayout>
 
     <TextView

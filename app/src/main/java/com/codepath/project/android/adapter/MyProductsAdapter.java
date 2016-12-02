@@ -37,6 +37,7 @@ public class MyProductsAdapter extends
         public ImageView ivProductImage;
         public TextView tvPrice;
         public RatingBar rating;
+        public TextView tvRatingCount;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -44,6 +45,7 @@ public class MyProductsAdapter extends
             ivProductImage = (ImageView) itemView.findViewById(R.id.ivProduct);
             tvPrice = (TextView) itemView.findViewById(R.id.tvPrice);
             rating = (RatingBar) itemView.findViewById(R.id.rating);
+            tvRatingCount = (TextView) itemView.findViewById(R.id.tvRatingCount);
         }
     }
 
@@ -64,6 +66,7 @@ public class MyProductsAdapter extends
                     viewHolder.tvProductName.setText(temp.getName());
                     viewHolder.tvPrice.setText("$" + temp.getPrice());
                     viewHolder.rating.setRating((float) temp.getAverageRating());
+                    viewHolder.tvRatingCount.setText("("+temp.getRatingCount()+")");
                     ImageView ivProductImage = viewHolder.ivProductImage;
                     Picasso.with(getContext()).load(temp.getImageUrl()).transform(new RoundedCornersTransformation(10, 10)).into(ivProductImage);
                 }

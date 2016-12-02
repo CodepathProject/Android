@@ -60,11 +60,11 @@ public class PlotActivity  extends AppCompatActivity {
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
         graph.getGridLabelRenderer().setHighlightZeroLines(true);
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(true);
-        graph.getGridLabelRenderer().setHorizontalLabelsColor(getResources().getColor(R.color.white));
+        graph.getGridLabelRenderer().setHorizontalLabelsColor(getResources().getColor(R.color.action_gray));
         graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
 
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-        staticLabelsFormatter.setHorizontalLabels(new String[] {"jan", "mar","may","jul","oct","dec"});
+        staticLabelsFormatter.setHorizontalLabels(new String[] {"Jan", "Mar","May","Jul","Oct","Dec"});
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
     }
 }

@@ -34,8 +34,8 @@
 
     <dimen name="plot_height">230dp</dimen>
     <dimen name="plot_tv_main_size">20sp</dimen>
-    <dimen name="plot_tv_tag_size">16sp</dimen>
-    <dimen name="plot_tv_tag_top_margin">4dp</dimen>
+    <dimen name="plot_tv_tag_size">14sp</dimen>
+    <dimen name="plot_tv_tag_top_margin">3dp</dimen>
     <dimen name="plot_rl_margin">25dp</dimen>
     <dimen name="plot_line_margin">1dp</dimen>
 

@@ -42,7 +42,7 @@ public class TestData {
         DataPoint[] dataPoints = new DataPoint[DATA_SIZE];
 
         for(int i = 0; i < DATA_SIZE; i++){
-            DataPoint d = new DataPoint(i, getRandom(i));
+            DataPoint d = new DataPoint(i, getRandom2(i));
             dataPoints[i] = d;
         }
         return dataPoints;
@@ -54,6 +54,12 @@ public class TestData {
 
         Random ran = new Random();
         return ran.nextInt(max) + min;
+    }
+
+    private static int getRandom2(int n){
+        int min = (120 - 2*(n/3));
+        Random ran = new Random();
+        return ran.nextInt(10) - 6 + min;
     }
 
     public static String getMaxMinPrice(String currPrice, String type){

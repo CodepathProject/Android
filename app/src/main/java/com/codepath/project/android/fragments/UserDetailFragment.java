@@ -35,7 +35,6 @@ import butterknife.Unbinder;
 public class UserDetailFragment extends Fragment {
 
     @BindView(R.id.ivProfileImage) ImageView ivProfileImage;
-    @BindView(R.id.tvUserEmail) TextView tvUserEmail;
     @BindView(R.id.tvUserFirstName) TextView tvUserFirstName;
     @BindView(R.id.rvUserTimeline) RecyclerView rvFeeds;
     @BindView(R.id.followUser) ImageView followUser;
@@ -76,7 +75,6 @@ public class UserDetailFragment extends Fragment {
                         .load(object.getString("pictureUrl"))
                         .into(ivProfileImage);
                 tvUserFirstName.setText(object.get("firstName").toString());
-                tvUserEmail.setText(object.getEmail().toString());
                 setUpRecyclerView(object);
             }
         });

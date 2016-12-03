@@ -27,7 +27,8 @@
                 android:fontFamily="sans-serif-light"
                 android:layout_alignParentTop="true"
                 android:paddingLeft="@dimen/tv_home_left_padding"
-                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textColor="@color/colorGray"
                 android:text = "@string/popular_categories"
                 android:id="@+id/tv_categories"/>
 
@@ -46,7 +47,8 @@
                 android:layout_marginLeft="@dimen/tv_home_left_margin"
                 android:layout_marginBottom="@dimen/tv_home_bottom_margin"
                 android:layout_marginTop="@dimen/tv_home_top_margin"
-                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textColor="@color/colorGray"
                 android:fontFamily="sans-serif-light"
                 android:paddingLeft="@dimen/tv_home_left_padding"
                 android:text = "@string/popular_products"
@@ -68,7 +70,8 @@
                 android:paddingLeft="@dimen/tv_home_left_padding"
                 android:fontFamily="sans-serif-light"
                 android:layout_below="@id/rv_products"
-                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textColor="@color/colorGray"
                 android:text = "@string/popular_reviews"
                 android:id="@+id/tv_popular_reviews"/>
 

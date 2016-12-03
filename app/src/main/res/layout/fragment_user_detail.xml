@@ -97,6 +97,7 @@
                         android:layout_below="@+id/tvAboutMe"
                         android:layout_marginBottom="20dp"
                         android:paddingTop="10dp"
+                        android:textSize="17sp"
                         android:textColor="#606060"
                         android:textStyle="bold"
                         tools:text="200 FOLLOWING" />
@@ -110,6 +111,7 @@
                         android:layout_marginBottom="20dp"
                         android:paddingStart="20dp"
                         android:paddingTop="10dp"
+                        android:textSize="17sp"
                         android:textColor="#606060"
                         android:textStyle="bold"
                         tools:text="200 FOLLOWERS" />
@@ -146,14 +148,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <View
                 android:id="@+id/primerdivisor"
-                android:layout_width="fill_parent"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:background="@color/colorLightGray" />
 

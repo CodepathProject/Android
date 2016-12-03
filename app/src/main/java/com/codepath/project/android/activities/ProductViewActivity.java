@@ -201,8 +201,8 @@ public class ProductViewActivity extends AppCompatActivity {
                 List<Product> productShelfList = user.getShelfProducts();
                 if(ifListContains(productShelfList)) {
                     user.removeShelfProduct(product);
-                    tvShelf.setTextColor(ContextCompat.getColor(this, R.color.action_gray));
-                    DrawableCompat.setTint(tvShelf.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.action_gray));
+                    tvShelf.setTextColor(ContextCompat.getColor(this, R.color.colorGray));
+                    DrawableCompat.setTint(tvShelf.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorGray));
                     tvShelf.setText("Shelf");
                     Toast.makeText(this, "Removed from shelf", Toast.LENGTH_SHORT).show();
                 } else {
@@ -229,8 +229,8 @@ public class ProductViewActivity extends AppCompatActivity {
                 if(ifListContains(productWishList)) {
                     user.removeWishListProduct(product);
                     tvWatch.setText("Watch");
-                    tvWatch.setTextColor(ContextCompat.getColor(this, R.color.action_gray));
-                    DrawableCompat.setTint(tvWatch.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.action_gray));
+                    tvWatch.setTextColor(ContextCompat.getColor(this, R.color.colorGray));
+                    DrawableCompat.setTint(tvWatch.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorGray));
                     Toast.makeText(this, "Removed from wishlist", Toast.LENGTH_SHORT).show();
                 } else {
                     user.addWishListProduct(product);
@@ -256,8 +256,8 @@ public class ProductViewActivity extends AppCompatActivity {
                 if(ifListContains(followProducts)) {
                     user.removeFollowProduct(product);
                     tvFollow.setText("Follow");
-                    tvFollow.setTextColor(ContextCompat.getColor(this, R.color.action_gray));
-                    DrawableCompat.setTint(tvFollow.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.action_gray));
+                    tvFollow.setTextColor(ContextCompat.getColor(this, R.color.colorGray));
+                    DrawableCompat.setTint(tvFollow.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorGray));
                     Toast.makeText(this, "Unfollowed", Toast.LENGTH_SHORT).show();
                 } else {
                     user.setFollowProducts(product);

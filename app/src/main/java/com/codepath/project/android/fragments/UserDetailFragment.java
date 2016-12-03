@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,7 +42,7 @@ public class UserDetailFragment extends Fragment {
     @BindView(R.id.tvFollowing) TextView tvFollowing;
     @BindView(R.id.tvFollowers) TextView tvFollowers;
     @BindView(R.id.rvUserTimeline) RecyclerView rvFeeds;
-    @BindView(R.id.followUser) ImageView followUser;
+    @BindView(R.id.followUser) TextView followUser;
 
     ArrayList<Feed> feeds = new ArrayList<>();
     FeedsAdapter feedsAdapter;
@@ -63,12 +65,24 @@ public class UserDetailFragment extends Fragment {
                     followUser.setVisibility(View.GONE);
                 } else {
                     AppUser currentUser = (AppUser) ParseUser.getCurrentUser();
+                    List<ParseUser> followUsers = currentUser.getFollowUsers();
+                    if(ifListContains(followUsers, object)) {
+                        followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                        DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                        followUser.setText("Following");
+                    }
                     followUser.setOnClickListener(v -> {
                         if(ifListContains(currentUser.getFollowUsers(), object)) {
                             currentUser.removeFollowUser(object);
+                            followUser.setText("Follow");
+                            followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorGray));
+                            DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorGray));
                             Toast.makeText(getActivity(), "Unfollowed", Toast.LENGTH_SHORT).show();
                         } else {
                             currentUser.setFollowUsers(object);
+                            followUser.setText("Following");
+                            followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                            DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorPrimary));
                             Toast.makeText(getActivity(), "Followed", Toast.LENGTH_SHORT).show();
                         }
                         currentUser.saveInBackground();

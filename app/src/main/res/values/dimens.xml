@@ -43,5 +43,5 @@
 
     <dimen name="product_margin">25dp</dimen>
 
-    <dimen name="feed_divider">5dp</dimen>
+    <dimen name="feed_divider">10dp</dimen>
 </resources>

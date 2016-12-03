@@ -65,4 +65,5 @@ dependencies {
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
+    compile 'com.tkurimura:flickabledialog:0.9.0'
 }

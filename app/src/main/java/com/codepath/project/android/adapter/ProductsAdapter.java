@@ -72,13 +72,17 @@ public class ProductsAdapter extends
         ImageView ivProductImage = viewHolder.ivProductImage;
         Picasso.with(getContext()).load(product.getImageUrl()).placeholder(R.drawable.placeholder).into(ivProductImage);
 
+        TextView tvProductPrice = viewHolder.tvProductPrice;
+        tvProductPrice.setText("$"+product.getPrice());
+
         if(mViewType == ViewType.VERTICAL_GRID){
             RatingBar ratingBar = viewHolder.ratingBar;
             ratingBar.setRating((int)product.getAverageRating());
             TextView tvRatingCount = viewHolder.tvRatingCount;
             tvRatingCount.setText(" "+product.getRatingCount()+" reviews");
-            TextView tvProductPrice = viewHolder.tvProductPrice;
-            tvProductPrice.setText("$"+product.getPrice());
+        } else{
+            TextView tvRatingCount = viewHolder.tvRatingCount;
+            tvRatingCount.setText(" "+product.getRatingCount()+" reviews");
         }
     }
 

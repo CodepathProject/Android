@@ -1,9 +1,9 @@
 package com.codepath.project.android.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,13 +28,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 
 public class FeedFragment extends Fragment {
 
     @BindView(R.id.rvFeeds)
     RecyclerView rvFeeds;
     @BindView(R.id.swipeContainer)
-    SwipeRefreshLayout swipeContainer;
+    WaveSwipeRefreshLayout swipeContainer;
 
     ArrayList<Feed> feeds = new ArrayList<>();
     FeedsAdapter feedsAdapter;
@@ -67,6 +68,8 @@ public class FeedFragment extends Fragment {
     private void setUpRecyclerView() {
         feeds = new ArrayList<>();
         feedsAdapter = new FeedsAdapter(getContext(), feeds);
+        swipeContainer.setColorSchemeColors(Color.WHITE, Color.WHITE);
+        swipeContainer.setWaveColor(Color.rgb(0,96,58));
         rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.feed_divider).build());
         rvFeeds.setAdapter(feedsAdapter);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

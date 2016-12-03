@@ -28,6 +28,9 @@ android {
 repositories {
     jcenter()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven {
+        url "https://jitpack.io"
+    }
 }
 
 dependencies {
@@ -61,4 +64,5 @@ dependencies {
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.7'
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+    compile 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
 }

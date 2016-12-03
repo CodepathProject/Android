@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.FollowActivity;
@@ -77,13 +76,11 @@ public class UserDetailFragment extends Fragment {
                             followUser.setText("Follow");
                             followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorGray));
                             DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorGray));
-                            Toast.makeText(getActivity(), "Unfollowed", Toast.LENGTH_SHORT).show();
                         } else {
                             currentUser.setFollowUsers(object);
                             followUser.setText("Following");
                             followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                             DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorPrimary));
-                            Toast.makeText(getActivity(), "Followed", Toast.LENGTH_SHORT).show();
                         }
                         currentUser.saveInBackground();
                     });

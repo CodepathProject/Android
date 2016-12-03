@@ -88,21 +88,14 @@
 
             <LinearLayout
                 android:id="@+id/line2"
-                android:background="@color/action_gray"
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="@dimen/product_margin"
-                android:layout_marginRight="@dimen/product_margin"
                 android:layout_below="@id/tvBrandName"
-                android:layout_height="0.5dp"
-                android:orientation="horizontal"/>
+                style="@style/product_detail_line_separator"/>
             <LinearLayout
                 android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/line2"
-                android:layout_margin="20dp"
+                android:layout_margin="15dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -158,15 +151,8 @@
 
             <LinearLayout
                 android:id="@+id/line3"
-                android:background="@color/action_gray"
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="@dimen/product_margin"
-                android:layout_marginRight="@dimen/product_margin"
                 android:layout_below="@id/ll"
-                android:layout_height="0.5dp"
-                android:orientation="horizontal"/>
+                style="@style/product_detail_line_separator"/>
             <TextView
                 android:id="@+id/tvPrice"
                 android:layout_width="wrap_content"
@@ -223,15 +209,10 @@
 
             <LinearLayout
                 android:id="@+id/line4"
-                android:background="@color/action_gray"
-                android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="@dimen/product_margin"
-                android:layout_marginRight="@dimen/product_margin"
                 android:layout_below="@id/tvAddPrice"
-                android:layout_height="0.5dp"
-                android:orientation="horizontal"/>
+                style="@style/product_detail_line_separator"
+                android:layout_marginTop="20dp"
+                />
 
             <TextView
                 android:id="@+id/tvFriendsTitle"
@@ -267,15 +248,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
             <LinearLayout
                 android:id="@+id/line6"
-                android:background="@color/action_gray"
-                android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="@dimen/product_margin"
-                android:layout_marginRight="@dimen/product_margin"
                 android:layout_below="@id/tvReviewsTitle"
-                android:layout_height="0.5dp"
-                android:orientation="horizontal"/>
+                style="@style/product_detail_line_separator"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvReviews"

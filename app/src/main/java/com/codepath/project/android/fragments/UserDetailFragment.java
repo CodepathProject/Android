@@ -22,6 +22,7 @@ import com.codepath.project.android.adapter.FeedsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
+import com.codepath.project.android.model.Recommend;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
@@ -84,6 +85,20 @@ public class UserDetailFragment extends Fragment {
                                 feed.setFromUser(ParseUser.getCurrentUser());
                                 feed.setToUser(object);
                                 feed.saveInBackground();
+                                AppUser otherUser = (AppUser) object;
+                                ParseQuery<Recommend> recQuery = ParseQuery.getQuery(Recommend.class);
+                                recQuery.whereEqualTo("user", otherUser);
+                                recQuery.getFirstInBackground((object1, e1) -> {
+                                    if(object1 == null) {
+                                        Recommend r = new Recommend();
+                                        r.setUser(otherUser);
+                                        r.setFollowingUsers(currentUser);
+                                        r.saveInBackground();
+                                    } else {
+                                        object1.setFollowingUsers(currentUser);
+                                        object1.saveInBackground();
+                                    }
+                                });
                                 currentUser.setFollowUsers(object);
                                 followUser.setText("Following");
                                 followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));

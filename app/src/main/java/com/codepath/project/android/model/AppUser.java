@@ -64,4 +64,16 @@ public class AppUser extends ParseUser {
     public String getFirstName() {
         return getString("firstName");
     }
+
+    public List<ParseUser> getFollowingUsers() {
+        return (List<ParseUser>) get("followingUsers");
+    }
+
+    public void setFollowingUsers(ParseUser user) {
+        addUnique("followingUsers", user);
+    }
+
+    public void removeFollowingUser(ParseUser user) {
+        removeAll("followingUsers", Arrays.asList(user));
+    }
 }

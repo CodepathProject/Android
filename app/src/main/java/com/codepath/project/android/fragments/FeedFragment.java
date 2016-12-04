@@ -24,6 +24,7 @@ import com.parse.ParseUser;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -128,6 +129,7 @@ public class FeedFragment extends Fragment {
         if(user.getFollowProducts() != null) {
             ParseQuery<Feed> followsProductQuery = ParseQuery.getQuery(Feed.class);
             followsProductQuery.whereContainedIn("toProduct", user.getFollowProducts());
+            followsProductQuery.whereNotContainedIn("fromUser", Arrays.asList(ParseUser.getCurrentUser()));
             queries.add(followsProductQuery);
         }
 

@@ -69,7 +69,6 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
         imageAdapter = new ImageAdapter(this, imageUrl);
         rvReviewImage.setLayoutManager(new GridLayoutManager(this, 2));
         rvReviewImage.setAdapter(imageAdapter);
-
         String reviewId = getIntent().getStringExtra("reviewId");
         ParseQuery<Review> query = ParseQuery.getQuery(Review.class);
         query.include("user");
@@ -92,6 +91,8 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
                     tvLikeCount.setText("");
                 }
                 AppUser user = (AppUser) r.getUser();
+                setListenerOnProfilePic(user.getObjectId());
+
                 tvReview.setText(r.getText());
                 String upperString = user.getString("firstName").substring(0,1).toUpperCase() + user.getString("firstName").substring(1);
                 tvUserName.setText(upperString);
@@ -110,6 +111,17 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
                 imageAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(DetailedReviewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setListenerOnProfilePic(String userId) {
+        ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailedReviewActivity.this, UserDetailActivity.class);
+                intent.putExtra("USER_ID", userId);
+                startActivity(intent);
             }
         });
     }

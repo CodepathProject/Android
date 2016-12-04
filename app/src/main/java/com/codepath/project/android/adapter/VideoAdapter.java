@@ -1,6 +1,7 @@
 package com.codepath.project.android.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +11,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.YoutubeActivity;
+import com.codepath.project.android.helpers.Constants;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Video;
+import com.codepath.project.android.utils.GeneralUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -55,10 +59,18 @@ public class VideoAdapter extends
 
         @Override
         public void onBindViewHolder(VideoAdapter.ViewHolder viewHolder, int position) {
-            Object product = mVideo.get(position);
-            Video video = (Video) product;
+            Object videoObject = mVideo.get(position);
+            Video video = (Video) videoObject;
             ImageView ivVideoThumbnail = viewHolder.ivThumbnail;
             Picasso.with(getContext()).load(video.getThumbnail()).transform(new RoundedCornersTransformation(25, 25)).into(ivVideoThumbnail);
+            ivVideoThumbnail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getContext(), YoutubeActivity.class);
+                    i.putExtra(Constants.YOUTUBE_VIDEO_KEY, GeneralUtils.getYoutubeKey(video.getUrl()));
+                    getContext().startActivity(i);
+                }
+            });
         }
 
         // Returns the total count of items in the list

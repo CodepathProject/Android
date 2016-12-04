@@ -126,4 +126,9 @@ public class GeneralUtils {
     public static int daysBetween(Date d1, Date d2) {
         return (int) ((d2.getTime() - d1.getTime()) / DateUtils.DAY_IN_MILLIS);
     }
+
+    public static String getYoutubeKey(String videoUrl){
+        int index = videoUrl.indexOf("=");
+        return videoUrl.substring(index+1, videoUrl.length());
+    }
 }

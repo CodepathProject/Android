@@ -66,8 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 app:cardCornerRadius="4dp"
-                android:id="@+id/cv1"
-                app:cardElevation="3dp">
+                android:id="@+id/cv1">
              <include
                  layout="@layout/content_product_header"
                  android:layout_width="match_parent"

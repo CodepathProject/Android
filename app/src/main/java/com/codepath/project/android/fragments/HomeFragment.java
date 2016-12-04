@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.tv_popular_reviews)
     TextView tvPopularReviews;
 
-    public static final int GRID_ROW_COUNT = 2;
+    public static final int GRID_ROW_COUNT = 1;
 
     ProductsAdapter productsAdapter;
     List<Product> products;

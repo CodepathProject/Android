@@ -18,21 +18,55 @@
             android:layout_height="@dimen/rv_home_item_iv_height"
             android:layout_alignParentTop="true"
             android:background="@color/white"
-            android:padding="10dp"
-            android:scaleType="centerInside" />
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/tv_product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_product"
-            android:background="@color/colorLightGray2"
             android:ellipsize="end"
             android:fontFamily="sans-serif-light"
-            android:gravity="center"
-            android:padding="10dp"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:singleLine="true"
-            android:textColor="@color/colorBlue"
+            android:textColor="@color/black"
             android:textSize="@dimen/rv_home_item_tv_size" />
+
+        <TextView
+            android:id="@+id/tv_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_product_name"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="15dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/rv_home_item_tv_size" />
+
+        <TextView
+            android:id="@+id/tv_total_votes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_product_name"
+            android:layout_toRightOf="@id/tv_product_price"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
+            android:gravity="right"
+            android:paddingRight="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="15dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/rv_home_item_tv_size" />
+
+
     </RelativeLayout>
 </android.support.v7.widget.CardView>

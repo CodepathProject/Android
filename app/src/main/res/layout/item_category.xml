@@ -13,30 +13,28 @@
 
     <ImageView
         android:id="@+id/iv_category"
-        android:padding="10dp"
         android:layout_width="@dimen/category_item_iv_width"
         android:scaleType="centerCrop"
         android:layout_height="@dimen/category_item_iv_height"/>
-
+<!--
     <View
         android:id = "@+id/empty_view"
         android:layout_height = "15dp"
         android:layout_width = "match_parent"
         android:visibility="invisible"
-        android:layout_alignBottom="@id/iv_category" />
+        android:layout_alignBottom="@id/iv_category" />-->
 
     <TextView
         android:id="@+id/tv_category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/empty_view"
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
-        android:background="@color/rv_home_category_tv_bg"
+        android:layout_below="@id/iv_category"
+        android:gravity="left"
         android:paddingTop = "@dimen/category_item_tv_padding"
         android:paddingBottom = "@dimen/category_item_tv_padding"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:fontFamily="sans-serif-light"
         android:textSize="@dimen/category_item_tv_size" />

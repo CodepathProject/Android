@@ -58,7 +58,7 @@ public class VideoAdapter extends
             Object product = mVideo.get(position);
             Video video = (Video) product;
             ImageView ivVideoThumbnail = viewHolder.ivThumbnail;
-            Picasso.with(getContext()).load(video.getThumbnail()).transform(new RoundedCornersTransformation(10, 10)).into(ivVideoThumbnail);
+            Picasso.with(getContext()).load(video.getThumbnail()).transform(new RoundedCornersTransformation(25, 25)).into(ivVideoThumbnail);
         }
 
         // Returns the total count of items in the list

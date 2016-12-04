@@ -44,6 +44,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static java.lang.Math.min;
+
 public class ProductViewActivity extends AppCompatActivity {
 
     @BindView(R.id.ivProductImage)
@@ -80,6 +82,8 @@ public class ProductViewActivity extends AppCompatActivity {
 
     Product product;
     AppUser user;
+
+    private static final int REVIEWS_TO_SHOW_COUNT = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +152,8 @@ public class ProductViewActivity extends AppCompatActivity {
                     reviewQuery.whereEqualTo("product", product);
                     reviewQuery.findInBackground((reviewList, err) -> {
                         if (err == null) {
-                            reviews.addAll(reviewList);
+                            List<Review> firstNReviews = reviewList.subList(0, min(reviewList.size(), REVIEWS_TO_SHOW_COUNT));
+                            reviews.addAll(firstNReviews);
                             reviewsAdapter.notifyDataSetChanged();
 //                            handler.postDelayed(runnable, speedScroll);
 //                            rvReviews.setOnTouchListener((v, event) -> {

@@ -104,22 +104,6 @@
                 android:fontFamily="sans-serif-light"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/showAllReview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rvFriends"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="@dimen/product_margin"
-                android:layout_toRightOf="@id/tvReviewsTitle"
-                android:layout_alignParentRight="true"
-                android:text="Show All"
-                android:fontFamily="sans-serif-light"
-                android:onClick="onShowAllReviews"
-                android:gravity="right"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
             <LinearLayout
                 android:id="@+id/line6"
                 android:layout_below="@id/tvReviewsTitle"
@@ -134,6 +118,24 @@
                     android:layout_marginLeft="@dimen/product_margin"
                     android:layout_marginRight="@dimen/product_margin"
                     android:paddingRight="8dp" />
+            <LinearLayout
+                android:id="@+id/line7"
+                android:layout_below="@id/rvReviews"
+                style="@style/product_detail_line_separator"/>
+
+            <TextView
+                android:id="@+id/showAllReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line7"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="@dimen/product_margin"
+                android:text="Show all reviews"
+                android:fontFamily="sans-serif-light"
+                android:onClick="onShowAllReviews"
+                android:gravity="center"
+                android:textSize="15sp" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 

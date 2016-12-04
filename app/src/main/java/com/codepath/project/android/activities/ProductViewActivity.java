@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.ContactFriendsAdapter;
 import com.codepath.project.android.adapter.ReviewsAdapter;
+import com.codepath.project.android.adapter.VideoAdapter;
 import com.codepath.project.android.fragments.ComposeFragment;
 import com.codepath.project.android.helpers.Constants;
 import com.codepath.project.android.helpers.ItemClickSupport;
@@ -30,6 +31,7 @@ import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
+import com.codepath.project.android.model.Video;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -77,6 +79,8 @@ public class ProductViewActivity extends AppCompatActivity {
     RecyclerView rvFriends;
     @BindView(R.id.tvFriendsTitle)
     TextView tvFriendsTitle;
+    @BindView(R.id.rvVideo)
+    RecyclerView rvVideo;
 
     ReviewsAdapter reviewsAdapter;
     List<Review> reviews;
@@ -95,7 +99,6 @@ public class ProductViewActivity extends AppCompatActivity {
         setUpToolbar();
         if(savedInstanceState == null) {
             setUpRecyclerView();
-
             String productId = getIntent().getStringExtra("productId");
             ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
             query.getInBackground(productId, (p, e) -> {
@@ -122,7 +125,7 @@ public class ProductViewActivity extends AppCompatActivity {
                         intent.putExtra("imageSet", images);
                         startActivity(intent);
                     });
-
+                    setVideos();
                     getSupportActionBar().setTitle(product.getName());
                     tvProductName.setText(product.getName());
                     tvBrandName.setText(product.getBrand());
@@ -368,6 +371,15 @@ public class ProductViewActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    private void setVideos(){
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        VideoAdapter videoAdapter = new VideoAdapter(this, Video.geVideoArray(product.getVideoSetUrls()));
+        rvVideo.setAdapter(videoAdapter);
+        rvVideo.setLayoutManager(layoutManager);
+    }
+
 
     private void setFriends(){
         LinearLayoutManager layoutManager

@@ -52,8 +52,8 @@ public class ReviewsActivity extends AppCompatActivity {
 
     private void setToolbar(){
         setSupportActionBar(toolbar);
-        getSupportActionBar().setElevation(5);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setElevation(5);
     }
 
     private void getAllReviews(){

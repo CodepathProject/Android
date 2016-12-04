@@ -391,4 +391,10 @@ public class ProductViewActivity extends AppCompatActivity {
             });
         }
     }
+
+    public void onShowAllReviews(View view){
+        Intent i = new Intent(this, ReviewsActivity.class);
+        i.putExtra(Constants.PRODUCT_ID, getIntent().getStringExtra("productId"));
+        startActivity(i);
+    }
 }

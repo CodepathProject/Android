@@ -104,6 +104,22 @@
                 android:fontFamily="sans-serif-light"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
+            <TextView
+                android:id="@+id/showAllReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rvFriends"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="@dimen/product_margin"
+                android:layout_toRightOf="@id/tvReviewsTitle"
+                android:layout_alignParentRight="true"
+                android:text="Show All"
+                android:fontFamily="sans-serif-light"
+                android:onClick="onShowAllReviews"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
             <LinearLayout
                 android:id="@+id/line6"
                 android:layout_below="@id/tvReviewsTitle"

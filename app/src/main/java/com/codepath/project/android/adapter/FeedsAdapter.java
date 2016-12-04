@@ -38,7 +38,7 @@ public class FeedsAdapter extends
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvContent;
         public ImageView ivProfile;
-        public TextView tvProductName;
+        public TextView tvDestName;
         public TextView tvUserName;
         public RatingBar rating;
         public ImageView ivProductImage;
@@ -53,7 +53,7 @@ public class FeedsAdapter extends
             rating = (RatingBar) itemView.findViewById(R.id.rating);
             ivProductImage = (ImageView) itemView.findViewById(R.id.ivProductImage);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
-            tvProductName = (TextView) itemView.findViewById(R.id.tvProductName);
+            tvDestName = (TextView) itemView.findViewById(R.id.tvDestName);
             tvUserAction  = (TextView) itemView.findViewById(R.id.tvUserAction);
         }
     }
@@ -62,7 +62,7 @@ public class FeedsAdapter extends
     public FeedsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_feed2, parent, false);
+        View view = inflater.inflate(R.layout.item_feed, parent, false);
         return new ViewHolder(view);
     }
 
@@ -73,22 +73,43 @@ public class FeedsAdapter extends
         TextView tvContent = viewHolder.tvContent;
         AppUser fromUser = (AppUser) feed.getFromUser();
         Product toProduct = feed.getToProduct();
+        AppUser toUser = (AppUser) feed.getToUser();
         viewHolder.rating.setVisibility(View.GONE);
+        tvContent.setVisibility(View.GONE);
         String fromUserName = fromUser.getString("firstName").substring(0,1).toUpperCase() + fromUser.getString("firstName").substring(1);
         if(feed.getType().equals("followUser")) {
-            tvContent.setText(((AppUser) feed.getFromUser()).getFirstName() + " followed " + feed.getToUser().getUsername());
+            viewHolder.tvUserAction.setText(" followed a user");
+            String upperString = toUser.getString("firstName").substring(0,1).toUpperCase() + toUser.getString("firstName").substring(1);
+            viewHolder.tvDestName.setText(upperString);
+            Picasso.with(getContext()).load(toUser.getImage()).into(viewHolder.ivProductImage);
+        } else if(feed.getType().equals("followProduct")) {
+            viewHolder.tvUserAction.setText(" followed a product");
+            viewHolder.tvDestName.setText(toProduct.getName());
+            Picasso.with(getContext()).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
+        } else if(feed.getType().equals("likeReview")) {
+            tvContent.setVisibility(View.VISIBLE);
+            tvContent.setVisibility(View.VISIBLE);
+            tvContent.setText(feed.getContent());
+            viewHolder.tvUserAction.setText(" liked a review");
+            viewHolder.rating.setRating(feed.getRating());
+            viewHolder.tvDestName.setText(toProduct.getName());
+            Picasso.with(getContext()).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
         } else if(feed.getType().equals("addPrice")) {
-            //fromUserName += " reported price on " + feed.getToProduct().getName();
+            tvContent.setVisibility(View.VISIBLE);
             tvContent.setText("Product price: $" + feed.getContent());
             viewHolder.tvUserAction.setText(" reported a price");
+            viewHolder.tvDestName.setText(toProduct.getName());
+            Picasso.with(getContext()).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
         } else if(feed.getType().equals("addReview")) {
             //fromUserName += " reviewed " + feed.getToProduct().getName();
             tvContent.setText(feed.getContent());
+            tvContent.setVisibility(View.VISIBLE);
             viewHolder.tvUserAction.setText(" reviewed a product");
             viewHolder.rating.setVisibility(View.VISIBLE);
             viewHolder.rating.setRating(feed.getRating());
+            viewHolder.tvDestName.setText(toProduct.getName());
+            Picasso.with(getContext()).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
         }
-        viewHolder.tvProductName.setText(toProduct.getName());
         viewHolder.tvUserName.setText(fromUserName);
         viewHolder.tvTime.setText(GeneralUtils.getRelativeTimeAgo(feed.getCreatedAt().toString()));
         setImage(fromUser, toProduct, viewHolder);
@@ -99,9 +120,6 @@ public class FeedsAdapter extends
             Picasso.with(getContext()).load(fromUser.getImage()).transform(new CircleTransform()).into(viewHolder.ivProfile);
         } else {
             Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(fromUser.getObjectId())).transform(new CircleTransform()).into(viewHolder.ivProfile);
-        }
-        if(toProduct != null) {
-            Picasso.with(getContext()).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
         }
     }
 

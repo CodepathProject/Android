@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.LoginActivity;
 import com.codepath.project.android.activities.ProductViewActivity;
+import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.adapter.FeedsAdapter;
 import com.codepath.project.android.helpers.EndlessRecyclerViewScrollListener;
 import com.codepath.project.android.helpers.ItemClickSupport;
@@ -103,8 +104,14 @@ public class FeedFragment extends Fragment {
 
         ItemClickSupport.addTo(rvFeeds).setOnItemClickListener(
                 (rview, position, v) -> {
-                    Intent intent = new Intent(getActivity(), ProductViewActivity.class);
-                    intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());
+                    Intent intent;
+                    if(feeds.get(position).getType().equals("followUser")) {
+                        intent = new Intent(getActivity(), UserDetailActivity.class);
+                        intent.putExtra("USER_ID", feeds.get(position).getToUser().getObjectId());
+                    } else {
+                        intent = new Intent(getActivity(), ProductViewActivity.class);
+                        intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());
+                    }
                     startActivity(intent);
                 }
         );

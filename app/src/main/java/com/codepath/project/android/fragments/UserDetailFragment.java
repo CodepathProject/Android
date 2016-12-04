@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.FollowActivity;
 import com.codepath.project.android.activities.ProductViewActivity;
+import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.adapter.FeedsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
@@ -95,7 +96,8 @@ public class UserDetailFragment extends Fragment {
                 Picasso.with(getContext())
                         .load(object.getString("pictureUrl"))
                         .into(ivProfileImage);
-                tvUserFirstName.setText(object.get("firstName").toString());
+                String upperString = object.getString("firstName").substring(0,1).toUpperCase() + object.getString("firstName").substring(1);
+                tvUserFirstName.setText(upperString);
                 AppUser currentUser = (AppUser) object;
                 if(currentUser.getFollowUsers() != null && currentUser.getFollowUsers().size() > 0) {
                     tvFollowing.setText(currentUser.getFollowUsers().size() + " FOLLOWING");
@@ -114,8 +116,14 @@ public class UserDetailFragment extends Fragment {
 
         ItemClickSupport.addTo(rvFeeds).setOnItemClickListener(
                 (rview, position, v) -> {
-                    Intent intent = new Intent(getActivity(), ProductViewActivity.class);
-                    intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());
+                    Intent intent;
+                    if(feeds.get(position).getType().equals("followUser")) {
+                        intent = new Intent(getActivity(), UserDetailActivity.class);
+                        intent.putExtra("USER_ID", feeds.get(position).getToUser().getObjectId());
+                    } else {
+                        intent = new Intent(getActivity(), ProductViewActivity.class);
+                        intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());
+                    }
                     startActivity(intent);
                 }
         );

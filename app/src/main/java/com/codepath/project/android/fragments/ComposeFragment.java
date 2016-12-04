@@ -146,7 +146,6 @@ public class ComposeFragment extends DialogFragment {
                 review.setImages(images);
             }
             review.setRating(Integer.toString(Math.round(rating)));
-            review.saveInBackground();
 
             Feed feed = new Feed();
             feed.setType("addReview");
@@ -154,6 +153,7 @@ public class ComposeFragment extends DialogFragment {
             feed.setFromUser(ParseUser.getCurrentUser());
             feed.setToProduct(product);
             feed.setRating(Math.round(rating));
+            feed.setReview(review);
             feed.saveInBackground();
 
             closeKeyboardAndDismiss(view);

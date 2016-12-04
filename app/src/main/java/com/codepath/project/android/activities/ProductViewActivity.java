@@ -163,7 +163,9 @@ public class ProductViewActivity extends AppCompatActivity {
                     product.incrementViews();
                     product.saveInBackground();
                     setUpShelfWishClickListener();
-                    setFriends();
+                    if(ParseUser.getCurrentUser() != null) {
+                        setFriends();
+                    }
                 } else {
                     Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
                 }

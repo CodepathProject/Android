@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.LoginActivity;
 import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.adapter.FeedsAdapter;
 import com.codepath.project.android.helpers.EndlessRecyclerViewScrollListener;
@@ -56,7 +57,12 @@ public class FeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         unbinder = ButterKnife.bind(this, view);
-        setUpRecyclerView();
+        if(ParseUser.getCurrentUser() != null) {
+            setUpRecyclerView();
+        } else {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
         return view;
     }
 

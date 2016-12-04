@@ -20,8 +20,11 @@ import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Review;
 import com.codepath.project.android.utils.GeneralUtils;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailedReviewActivity extends AppCompatActivity {
+public class DetailedReviewActivity extends AppCompatActivity implements OnLikeListener {
 
     @BindView(R.id.ivProfile)
     ImageView ivProfile;
@@ -42,15 +45,21 @@ public class DetailedReviewActivity extends AppCompatActivity {
     RecyclerView rvReviewImage;
     @BindView(R.id.rating)
     RatingBar rating;
+    @BindView(R.id.button)
+    LikeButton likeButton;
 
     ImageAdapter imageAdapter;
     List<String> imageUrl;
+
+    Review review;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_review);
         ButterKnife.bind(this);
+
+        likeButton.setOnLikeListener(this);
 
         imageUrl = new ArrayList<>();
         imageAdapter = new ImageAdapter(this, imageUrl);
@@ -62,6 +71,7 @@ public class DetailedReviewActivity extends AppCompatActivity {
         query.include("user");
         query.getInBackground(reviewId, (r, e) -> {
             if (e == null) {
+                review = r;
                 AppUser user = (AppUser) r.getUser();
                 tvReview.setText(r.getText());
                 String upperString = user.getString("firstName").substring(0,1).toUpperCase() + user.getString("firstName").substring(1);
@@ -83,6 +93,16 @@ public class DetailedReviewActivity extends AppCompatActivity {
                 Toast.makeText(DetailedReviewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void liked(LikeButton likeButton) {
+        review.addUnique("likedBy", ParseUser.getCurrentUser());
+    }
+
+    @Override
+    public void unLiked(LikeButton likeButton) {
+
     }
 
     public class ImageAdapter  extends

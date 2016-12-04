@@ -47,6 +47,8 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
     RatingBar rating;
     @BindView(R.id.button)
     LikeButton likeButton;
+    @BindView(R.id.tvLikeCount)
+    TextView tvLikeCount;
 
     ImageAdapter imageAdapter;
     List<String> imageUrl;
@@ -72,6 +74,22 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
         query.getInBackground(reviewId, (r, e) -> {
             if (e == null) {
                 review = r;
+                if(ParseUser.getCurrentUser() != null) {
+                    AppUser user = (AppUser) ParseUser.getCurrentUser();
+                    List<Review> reviewList = user.getLikedReviews();
+                    if(reviewList != null && ifListContains(reviewList, review)) {
+                        likeButton.setLiked(true);
+                    } else {
+                        likeButton.setLiked(false);
+                    }
+                } else {
+                    likeButton.setLiked(false);
+                }
+                if(r.getLikesCount() > 0) {
+                    tvLikeCount.setText(Integer.toString(r.getLikesCount()) + " people like this");
+                } else {
+                    tvLikeCount.setText("");
+                }
                 AppUser user = (AppUser) r.getUser();
                 tvReview.setText(r.getText());
                 String upperString = user.getString("firstName").substring(0,1).toUpperCase() + user.getString("firstName").substring(1);
@@ -97,12 +115,51 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
 
     @Override
     public void liked(LikeButton likeButton) {
-        review.addUnique("likedBy", ParseUser.getCurrentUser());
+        if(ParseUser.getCurrentUser() == null) {
+            Intent intent = new Intent(this, SplashScreenActivity.class);
+            startActivity(intent);
+        } else {
+            AppUser user = (AppUser) ParseUser.getCurrentUser();
+            user.setLikedReviews(review);
+            user.saveInBackground();
+            int likes = review.getLikesCount();
+            likes++;
+            review.increment("likes");
+            tvLikeCount.setText(Integer.toString(likes)+ " people like this");
+            review.saveInBackground();
+        }
     }
 
     @Override
     public void unLiked(LikeButton likeButton) {
+        if(ParseUser.getCurrentUser() == null) {
+            Intent intent = new Intent(this, SplashScreenActivity.class);
+            startActivity(intent);
+        } else {
+            AppUser user = (AppUser) ParseUser.getCurrentUser();
+            user.removeLikedReviews(review);
+            user.saveInBackground();
+            int likes = review.getLikesCount();
+            likes--;
+            if(likes > 0) {
+                tvLikeCount.setText(Integer.toString(likes)+ " people like this");
+            } else {
+                tvLikeCount.setText("");
+            }
+            review.increment("likes", -1);
+            review.saveInBackground();
+        }
+    }
 
+    private boolean ifListContains(List<Review> reviewList, Review review) {
+        if(reviewList != null) {
+            for (Review r1 : reviewList) {
+                if (r1.getObjectId().equals(review.getObjectId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public class ImageAdapter  extends

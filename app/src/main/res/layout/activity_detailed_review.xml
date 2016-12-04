@@ -79,12 +79,13 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/tvLikeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rvReviewImage"
         android:layout_toEndOf="@+id/button"
         android:layout_marginTop="35dp"
         android:textSize="18sp"
-        android:text="10 people like this"/>
+        tools:text="0 people like this"/>
 
 </RelativeLayout>

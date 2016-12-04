@@ -56,4 +56,8 @@ public class Review extends ParseObject {
     public void setRating(String rating) {
         put("rating", rating);
     }
+
+    public int getLikesCount() {
+        return getInt("likes");
+    }
 }

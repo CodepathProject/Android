@@ -18,10 +18,12 @@ import android.widget.Toast;
 import com.codepath.project.android.R;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
+import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Review;
 import com.codepath.project.android.utils.GeneralUtils;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -75,9 +77,8 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
             if (e == null) {
                 review = r;
                 if(ParseUser.getCurrentUser() != null) {
-                    AppUser user = (AppUser) ParseUser.getCurrentUser();
-                    List<Review> reviewList = user.getLikedReviews();
-                    if(reviewList != null && ifListContains(reviewList, review)) {
+                    List<ParseUser> likedUsers = r.getLikedUsers();
+                    if(likedUsers != null && ifListContains(likedUsers, ParseUser.getCurrentUser())) {
                         likeButton.setLiked(true);
                     } else {
                         likeButton.setLiked(false);
@@ -119,14 +120,25 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
             Intent intent = new Intent(this, SplashScreenActivity.class);
             startActivity(intent);
         } else {
-            AppUser user = (AppUser) ParseUser.getCurrentUser();
-            user.setLikedReviews(review);
-            user.saveInBackground();
             int likes = review.getLikesCount();
             likes++;
             review.increment("likes");
+            review.setLikedUsers(ParseUser.getCurrentUser());
             tvLikeCount.setText(Integer.toString(likes)+ " people like this");
-            review.saveInBackground();
+            try {
+                review.save();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Feed feed = new Feed();
+            feed.setReview(review);
+            feed.setContent(review.getText());
+            feed.setRating(Math.round(review.getRating()));
+            feed.setToProduct(review.getProduct());
+            feed.setFromUser(ParseUser.getCurrentUser());
+            feed.setType("likeReview");
+            feed.saveInBackground();
         }
     }
 
@@ -136,11 +148,9 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
             Intent intent = new Intent(this, SplashScreenActivity.class);
             startActivity(intent);
         } else {
-            AppUser user = (AppUser) ParseUser.getCurrentUser();
-            user.removeLikedReviews(review);
-            user.saveInBackground();
             int likes = review.getLikesCount();
             likes--;
+            review.removeLikedUsers(ParseUser.getCurrentUser());
             if(likes > 0) {
                 tvLikeCount.setText(Integer.toString(likes)+ " people like this");
             } else {
@@ -151,10 +161,10 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
         }
     }
 
-    private boolean ifListContains(List<Review> reviewList, Review review) {
-        if(reviewList != null) {
-            for (Review r1 : reviewList) {
-                if (r1.getObjectId().equals(review.getObjectId())) {
+    private boolean ifListContains(List<ParseUser> userList, ParseUser user) {
+        if(userList != null) {
+            for (ParseUser u1 : userList) {
+                if (u1.getObjectId().equals(user.getObjectId())) {
                     return true;
                 }
             }

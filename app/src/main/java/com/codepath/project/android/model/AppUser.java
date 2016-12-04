@@ -64,16 +64,4 @@ public class AppUser extends ParseUser {
     public String getFirstName() {
         return getString("firstName");
     }
-
-    public List<Review> getLikedReviews() {
-        return (List<Review>) get("likedReview");
-    }
-
-    public void setLikedReviews(Review review) {
-        addUnique("likedReview", review);
-    }
-
-    public void removeLikedReviews(Review review) {
-        removeAll("likedReview", Arrays.asList(review));
-    }
 }

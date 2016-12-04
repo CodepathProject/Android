@@ -5,6 +5,7 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.Arrays;
 import java.util.List;
 
 @ParseClassName("Review")
@@ -59,5 +60,17 @@ public class Review extends ParseObject {
 
     public int getLikesCount() {
         return getInt("likes");
+    }
+
+    public List<ParseUser> getLikedUsers() {
+        return (List<ParseUser>) get("likedUsers");
+    }
+
+    public void setLikedUsers(ParseUser user) {
+        addUnique("likedUsers", user);
+    }
+
+    public void removeLikedUsers(ParseUser user) {
+        removeAll("likedUsers", Arrays.asList(user));
     }
 }

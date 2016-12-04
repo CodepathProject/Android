@@ -35,6 +35,7 @@ import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.codepath.project.android.utils.ImageUtils;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -146,6 +147,11 @@ public class ComposeFragment extends DialogFragment {
                 review.setImages(images);
             }
             review.setRating(Integer.toString(Math.round(rating)));
+            try {
+                review.save();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             Feed feed = new Feed();
             feed.setType("addReview");

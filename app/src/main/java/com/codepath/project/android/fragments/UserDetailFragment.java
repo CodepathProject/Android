@@ -78,6 +78,11 @@ public class UserDetailFragment extends Fragment {
                                 followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorGray));
                                 DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorGray));
                             } else {
+                                Feed feed = new Feed();
+                                feed.setType("followUser");
+                                feed.setFromUser(ParseUser.getCurrentUser());
+                                feed.setToUser(object);
+                                feed.saveInBackground();
                                 currentUser.setFollowUsers(object);
                                 followUser.setText("Following");
                                 followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));

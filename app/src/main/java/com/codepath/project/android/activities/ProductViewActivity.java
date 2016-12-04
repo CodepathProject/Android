@@ -27,6 +27,7 @@ import com.codepath.project.android.fragments.ComposeFragment;
 import com.codepath.project.android.helpers.Constants;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
+import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.parse.ParseException;
@@ -261,6 +262,11 @@ public class ProductViewActivity extends AppCompatActivity {
                     tvFollow.setTextColor(ContextCompat.getColor(this, R.color.colorGray));
                     DrawableCompat.setTint(tvFollow.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorGray));
                 } else {
+                    Feed feed = new Feed();
+                    feed.setType("followProduct");
+                    feed.setFromUser(ParseUser.getCurrentUser());
+                    feed.setToProduct(product);
+                    feed.saveInBackground();
                     user.setFollowProducts(product);
                     tvFollow.setText("Following");
                     tvFollow.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));

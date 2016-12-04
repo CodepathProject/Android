@@ -39,6 +39,10 @@ public class Feed extends ParseObject {
         return getParseUser("toUser");
     }
 
+    public void setToUser(ParseUser user) {
+        put("toUser", user);
+    }
+
     public Product getToProduct() {
         return (Product) get("toProduct");
     }

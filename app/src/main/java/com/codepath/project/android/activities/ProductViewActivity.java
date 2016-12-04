@@ -102,7 +102,6 @@ public class ProductViewActivity extends AppCompatActivity {
                     product = p;
                     collapsingToolbar.setTitle(p.getName());
                     collapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
-
                     Picasso.with(this).load(product.getImageUrl()).into(ivProductImage);
 
                     ivProductImage.setOnClickListener(v -> {

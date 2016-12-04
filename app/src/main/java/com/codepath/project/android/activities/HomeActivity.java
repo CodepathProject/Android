@@ -55,8 +55,6 @@ public class HomeActivity extends AppCompatActivity
     SearchView searchView;
     SearchResultsAdapter mSearchViewAdapter;
 
-    final String CHANNEL_NAME = "abcd";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -247,7 +245,12 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.nav_about_me:
                 fragmentClass = HomeFragment.class;
-                startUserDetailActivity(ParseUser.getCurrentUser().getObjectId());
+                if (ParseUser.getCurrentUser() == null) {
+                    Intent intent = new Intent(this, SplashScreenActivity.class);
+                    startActivity(intent);
+                } else {
+                    startUserDetailActivity(ParseUser.getCurrentUser().getObjectId());
+                }
                 //fragmentClass = UserDetailFragment.class;
                 break;
             default:

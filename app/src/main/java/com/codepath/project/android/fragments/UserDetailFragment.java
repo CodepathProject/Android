@@ -21,7 +21,6 @@ import com.codepath.project.android.adapter.FeedsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
-import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
@@ -57,33 +56,36 @@ public class UserDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
         userId = getArguments().getString("USER_ID");
+
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.getInBackground(userId, (object, e) -> {
             if (e == null) {
-                if (ParseUser.getCurrentUser().getObjectId().equals(object.getObjectId())) {
+                if (ParseUser.getCurrentUser() == null || ParseUser.getCurrentUser().getObjectId().equals(object.getObjectId())) {
                     followUser.setVisibility(View.GONE);
                 } else {
-                    AppUser currentUser = (AppUser) ParseUser.getCurrentUser();
-                    List<ParseUser> followUsers = currentUser.getFollowUsers();
-                    if(ifListContains(followUsers, object)) {
-                        followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-                        DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorPrimary));
-                        followUser.setText("Following");
-                    }
-                    followUser.setOnClickListener(v -> {
-                        if(ifListContains(currentUser.getFollowUsers(), object)) {
-                            currentUser.removeFollowUser(object);
-                            followUser.setText("Follow");
-                            followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorGray));
-                            DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorGray));
-                        } else {
-                            currentUser.setFollowUsers(object);
-                            followUser.setText("Following");
+                    if(ParseUser.getCurrentUser() != null) {
+                        AppUser currentUser = (AppUser) ParseUser.getCurrentUser();
+                        List<ParseUser> followUsers = currentUser.getFollowUsers();
+                        if (ifListContains(followUsers, object)) {
                             followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                             DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                            followUser.setText("Following");
                         }
-                        currentUser.saveInBackground();
-                    });
+                        followUser.setOnClickListener(v -> {
+                            if (ifListContains(currentUser.getFollowUsers(), object)) {
+                                currentUser.removeFollowUser(object);
+                                followUser.setText("Follow");
+                                followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorGray));
+                                DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorGray));
+                            } else {
+                                currentUser.setFollowUsers(object);
+                                followUser.setText("Following");
+                                followUser.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                                DrawableCompat.setTint(followUser.getCompoundDrawables()[1], ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                            }
+                            currentUser.saveInBackground();
+                        });
+                    }
                 }
                 Picasso.with(getContext())
                         .load(object.getString("pictureUrl"))
@@ -135,13 +137,6 @@ public class UserDetailFragment extends Fragment {
         mLayoutManager.scrollToPosition(0);
         rvFeeds.setLayoutManager(mLayoutManager);
         rvFeeds.setNestedScrollingEnabled(false);
-
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        try {
-            currentUser.fetchIfNeeded();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         ParseQuery<Feed> query = ParseQuery.getQuery(Feed.class);
         query.whereEqualTo("fromUser", parseUser);

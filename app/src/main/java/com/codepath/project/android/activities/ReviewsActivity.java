@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
@@ -44,8 +45,15 @@ public class ReviewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews);
         ButterKnife.bind(this);
+        setToolbar();
         getAllReviews();
         setUpRecyclerView();
+    }
+
+    private void setToolbar(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(5);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     private void getAllReviews(){
@@ -54,6 +62,8 @@ public class ReviewsActivity extends AppCompatActivity {
         query.getInBackground(productId, (p, e) -> {
             if (e == null) {
                 product = p;
+                TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+                mTitle.setText(product.getName());
                 ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
                 reviewQuery.include("user");
                 reviewQuery.whereEqualTo("product", product);

@@ -12,7 +12,17 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_collapseMode="pin"
         android:background="@color/colorPrimary"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toolbar Title"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:id="@+id/toolbar_title" />
+    </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvReviews"
         android:layout_width="match_parent"

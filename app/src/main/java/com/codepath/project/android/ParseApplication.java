@@ -6,6 +6,7 @@ import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Product;
+import com.codepath.project.android.model.Recommend;
 import com.codepath.project.android.model.Review;
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
@@ -17,6 +18,7 @@ public class ParseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ParseObject.registerSubclass(Recommend.class);
         ParseObject.registerSubclass(AppUser.class);
         ParseObject.registerSubclass(Product.class);
         ParseObject.registerSubclass(Review.class);

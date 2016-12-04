@@ -62,7 +62,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/category_item_margin"
+                android:layout_margin="12dp"
                 app:cardCornerRadius="4dp"
                 android:id="@+id/cv1"
                 app:cardElevation="3dp">

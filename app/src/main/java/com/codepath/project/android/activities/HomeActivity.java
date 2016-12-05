@@ -202,7 +202,8 @@ public class HomeActivity extends AppCompatActivity
         } else {
             ParseUser.getCurrentUser().fetchIfNeededInBackground((object, e) -> {
                 if(object.get("firstName") != null) {
-                    tvUserName.setText("Hello, " + object.get("firstName"));
+                    String upperString = object.getString("firstName").substring(0,1).toUpperCase() + object.getString("firstName").substring(1);
+                    tvUserName.setText("Hello, " + upperString);
                 } else {
                     tvUserName.setText(R.string.default_greeting);
                 }

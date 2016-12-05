@@ -61,7 +61,8 @@ public class RecommendedFriendsAdapter extends
     public void onBindViewHolder(RecommendedFriendsAdapter.ViewHolder viewHolder, int position) {
         AppUser user = mUsers.get(position);
         user.fetchIfNeededInBackground((object, e) -> {
-            viewHolder.tvFriendName.setText(user.getFirstName());
+            String upperString = user.getString("firstName").substring(0,1).toUpperCase() + user.getString("firstName").substring(1);
+            viewHolder.tvFriendName.setText(upperString);
             if (!TextUtils.isEmpty(user.getImage())) {
                 Picasso.with(getContext()).load(user.getImage()).transform(new CircleTransform()).into(viewHolder.ivFriendProfile);
             } else {

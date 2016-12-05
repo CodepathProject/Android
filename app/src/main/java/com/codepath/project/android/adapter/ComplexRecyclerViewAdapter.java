@@ -95,6 +95,9 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             vh1.rvFriends.setNestedScrollingEnabled(false);
             vh1.rvFriends.setLayoutManager(mLayoutManager);
             friendsAdapter.notifyDataSetChanged();
+        } else {
+            vh1.tvTitle.setVisibility(View.GONE);
+            vh1.rvFriends.setVisibility(View.GONE);
         }
     }
 

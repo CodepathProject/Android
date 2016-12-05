@@ -35,6 +35,14 @@ public class FeedsAdapter extends
         return mContext;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if(position == 1) {
+            return 1;
+        }
+        return 0;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvContent;
         public ImageView ivProfile;

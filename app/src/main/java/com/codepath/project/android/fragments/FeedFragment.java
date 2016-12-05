@@ -1,7 +1,6 @@
 package com.codepath.project.android.fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,18 +13,19 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.activities.LoginActivity;
 import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.activities.UserDetailActivity;
-import com.codepath.project.android.adapter.FeedsAdapter;
+import com.codepath.project.android.adapter.ComplexRecyclerViewAdapter;
 import com.codepath.project.android.helpers.EndlessRecyclerViewScrollListener;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
+import com.codepath.project.android.model.Recommend;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,7 +41,9 @@ public class FeedFragment extends Fragment {
     WaveSwipeRefreshLayout swipeContainer;
 
     ArrayList<Feed> feeds = new ArrayList<>();
-    FeedsAdapter feedsAdapter;
+    ComplexRecyclerViewAdapter feedsAdapter;
+
+    ArrayList<AppUser> friendsToFollow = new ArrayList<>();
 
     private Unbinder unbinder;
 
@@ -75,15 +77,15 @@ public class FeedFragment extends Fragment {
 
     private void setUpRecyclerView() {
         feeds = new ArrayList<>();
-        feedsAdapter = new FeedsAdapter(getContext(), feeds);
-        swipeContainer.setColorSchemeColors(Color.WHITE, Color.WHITE);
-        swipeContainer.setWaveColor(Color.rgb(0,96,58));
+        feedsAdapter = new ComplexRecyclerViewAdapter(getContext(), feeds, friendsToFollow);
+//        swipeContainer.setColorSchemeColors(Color.WHITE, Color.WHITE);
+//        swipeContainer.setWaveColor(Color.rgb(0,96,58));
         rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.feed_divider).build());
         rvFeeds.setAdapter(feedsAdapter);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mLayoutManager.scrollToPosition(0);
-        rvFeeds.setLayoutManager(mLayoutManager);
         rvFeeds.setNestedScrollingEnabled(false);
+        rvFeeds.setLayoutManager(mLayoutManager);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         try {
@@ -105,21 +107,37 @@ public class FeedFragment extends Fragment {
         ItemClickSupport.addTo(rvFeeds).setOnItemClickListener(
                 (rview, position, v) -> {
                     Intent intent;
-                    if(feeds.get(position).getType().equals("followUser")) {
+                    if(feeds.get(position-1).getType().equals("followUser")) {
                         intent = new Intent(getActivity(), UserDetailActivity.class);
-                        intent.putExtra("USER_ID", feeds.get(position).getToUser().getObjectId());
+                        intent.putExtra("USER_ID", feeds.get(position-1).getToUser().getObjectId());
                     } else {
                         intent = new Intent(getActivity(), ProductViewActivity.class);
-                        intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());
+                        intent.putExtra("productId", feeds.get(position-1).getToProduct().getObjectId());
                     }
                     startActivity(intent);
                 }
         );
 
-        swipeContainer.setOnRefreshListener(() -> {
-            fetchFeeds(0);
-        });
+        swipeContainer.setOnRefreshListener(() -> fetchFeeds(0));
 
+        setUpFriends();
+    }
+
+    public void setUpFriends() {
+        ParseQuery<Recommend> recQuery = ParseQuery.getQuery(Recommend.class);
+        recQuery.whereEqualTo("user", ParseUser.getCurrentUser());
+        recQuery.getFirstInBackground((object1, e1) -> {
+            if(e1 == null) {
+                if (object1 != null) {
+                    if(object1.getFollowingUsers() != null && object1.getFollowingUsers().size() > 0) {
+                        for (ParseUser puser : object1.getFollowingUsers()) {
+                            friendsToFollow.add((AppUser) puser);
+                        }
+                        feedsAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
     }
 
     private void fetchFeeds(int skip) {
@@ -136,7 +154,7 @@ public class FeedFragment extends Fragment {
         if(user.getFollowProducts() != null) {
             ParseQuery<Feed> followsProductQuery = ParseQuery.getQuery(Feed.class);
             followsProductQuery.whereContainedIn("toProduct", user.getFollowProducts());
-            followsProductQuery.whereNotContainedIn("fromUser", Arrays.asList(ParseUser.getCurrentUser()));
+            followsProductQuery.whereNotContainedIn("fromUser", Collections.singletonList(ParseUser.getCurrentUser()));
             queries.add(followsProductQuery);
         }
 

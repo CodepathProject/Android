@@ -97,7 +97,7 @@
                         android:layout_below="@+id/tvAboutMe"
                         android:layout_marginBottom="20dp"
                         android:paddingTop="10dp"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
                         android:textColor="#606060"
                         android:textStyle="bold"
                         tools:text="200 FOLLOWING" />
@@ -111,7 +111,7 @@
                         android:layout_marginBottom="20dp"
                         android:paddingStart="20dp"
                         android:paddingTop="10dp"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
                         android:textColor="#606060"
                         android:textStyle="bold"
                         tools:text="200 FOLLOWERS" />
@@ -120,8 +120,8 @@
 
                 <ImageView
                     android:id="@+id/ivProfileImage"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_above="@+id/layoutBottom"
                     android:layout_marginBottom="-40dp"
                     android:layout_marginStart="10dp"

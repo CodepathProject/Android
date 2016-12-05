@@ -34,6 +34,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class UserDetailFragment extends Fragment {
 
@@ -109,7 +110,7 @@ public class UserDetailFragment extends Fragment {
                     }
                 }
                 Picasso.with(getContext())
-                        .load(object.getString("pictureUrl"))
+                        .load(object.getString("pictureUrl")).transform(new RoundedCornersTransformation(10, 10))
                         .into(ivProfileImage);
                 String upperString = object.getString("firstName").substring(0,1).toUpperCase() + object.getString("firstName").substring(1);
                 tvUserFirstName.setText(upperString);

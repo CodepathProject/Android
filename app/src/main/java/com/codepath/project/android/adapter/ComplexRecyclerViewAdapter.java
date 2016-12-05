@@ -183,9 +183,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         viewHolder.ivProfile.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, UserDetailActivity.class);
             intent.putExtra("USER_ID", fromUser.getObjectId());
-            ActivityOptionsCompat options = ActivityOptionsCompat.
-                    makeSceneTransitionAnimation((Activity) mContext, v.findViewById(R.id.ivProfile), "ivProfile");
-            mContext.startActivity(intent, options.toBundle());
+            mContext.startActivity(intent);
         });
     }
 }

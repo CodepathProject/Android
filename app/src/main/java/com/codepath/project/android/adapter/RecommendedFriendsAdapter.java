@@ -82,7 +82,7 @@ public class RecommendedFriendsAdapter extends
     public void startUserDetailActivity(String userId) {
         Intent intent = new Intent(getContext(), UserDetailActivity.class);
         intent.putExtra("USER_ID", userId);
-        getContext().startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     @Override

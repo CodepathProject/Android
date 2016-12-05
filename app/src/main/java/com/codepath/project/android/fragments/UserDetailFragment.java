@@ -19,6 +19,7 @@ import com.codepath.project.android.activities.FollowActivity;
 import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.adapter.FeedsAdapter;
+import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
@@ -34,7 +35,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class UserDetailFragment extends Fragment {
 
@@ -110,7 +110,7 @@ public class UserDetailFragment extends Fragment {
                     }
                 }
                 Picasso.with(getContext())
-                        .load(object.getString("pictureUrl")).transform(new RoundedCornersTransformation(10, 10))
+                        .load(object.getString("pictureUrl")).transform(new CircleTransform())
                         .into(ivProfileImage);
                 String upperString = object.getString("firstName").substring(0,1).toUpperCase() + object.getString("firstName").substring(1);
                 tvUserFirstName.setText(upperString);

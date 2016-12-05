@@ -3,6 +3,7 @@ package com.codepath.project.android.fragments;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -312,9 +313,24 @@ public class LoginFragment extends Fragment {
     }
 
     public void setupImage(ImageView iv) {
+        Random randomGenerator = new Random();
+        int indexMain = randomGenerator.nextInt(2000);
+        int indexInner = randomGenerator.nextInt(500) + 300;
         Picasso.with(getContext())
                 .load(getRandomImage())
                 .placeholder(R.drawable.placeholder)
                 .into(iv);
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            int i=0;
+            public void run() {
+                Picasso.with(getContext())
+                        .load(getRandomImage())
+                        .placeholder(R.drawable.placeholder)
+                        .into(iv);
+                handler.postDelayed(this, indexInner);  //for interval...
+            }
+        };
+        handler.postDelayed(runnable, indexMain); //for initial delay..
     }
 }

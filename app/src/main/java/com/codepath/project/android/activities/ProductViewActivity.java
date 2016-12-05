@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,9 +83,11 @@ public class ProductViewActivity extends AppCompatActivity {
     @BindView(R.id.rvVideo)
     RecyclerView rvVideo;
 
+    @BindView(R.id.lineFriends)
+    LinearLayout lineFriends;
+
     ReviewsAdapter reviewsAdapter;
     List<Review> reviews;
-
     Product product;
     AppUser user;
 
@@ -104,70 +107,11 @@ public class ProductViewActivity extends AppCompatActivity {
             query.getInBackground(productId, (p, e) -> {
                 if (e == null) {
                     product = p;
-                    collapsingToolbar.setTitle(p.getName());
-                    collapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
-                    Picasso.with(this).load(product.getImageUrl()).into(ivProductImage);
-
-                    ivProductImage.setOnClickListener(v -> {
-                        Intent intent = new Intent(this, ImageFullscreenActivity.class);
-                        String image = product.getImageUrl();
-                        intent.putExtra("image", image);
-                        JSONArray imagesArray = product.getImageSetUrls();
-                        String[] images = new String[imagesArray.length()];
-                        for(int i = 0; i < imagesArray.length(); i++){
-                            try {
-                                images[i] = imagesArray.getString(i);
-                            } catch (JSONException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
-
-                        intent.putExtra("imageSet", images);
-                        startActivity(intent);
-                    });
+                    setCollapsedToolbar();
+                    setProductImage();
                     setVideos();
-                    getSupportActionBar().setTitle(product.getName());
-                    tvProductName.setText(product.getName());
-                    tvBrandName.setText(product.getBrand());
-                    rbAverageRating.setRating((float) product.getAverageRating());
-                    tvReviewCount.setText(""+product.getRatingCount());
-                    tvPrice.setText("$"+product.getPrice());
-
-//                    YouTubePlayerFragment youtubeFragment = (YouTubePlayerFragment)
-//                            getFragmentManager().findFragmentById(R.id.youtubeFragment);
-//                    youtubeFragment.initialize("AIzaSyCk70hKeShEmA5EDKGNDDaejcUvdb2pNW0",
-//                            new YouTubePlayer.OnInitializedListener() {
-//                                @Override
-//                                public void onInitializationSuccess(YouTubePlayer.Provider provider,
-//                                                                    YouTubePlayer youTubePlayer, boolean b) {
-//                                    //youTubePlayer.cueVideo(product.getVideo());
-//                                    youTubePlayer.loadVideo(product.getVideo());
-//                                }
-//                                @Override
-//                                public void onInitializationFailure(YouTubePlayer.Provider provider,
-//                                                                    YouTubeInitializationResult youTubeInitializationResult) {
-//
-//                                }
-//                            });
-
-                    ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
-                    reviewQuery.include("user");
-                    reviewQuery.whereEqualTo("product", product);
-                    reviewQuery.findInBackground((reviewList, err) -> {
-                        if (err == null) {
-                            List<Review> firstNReviews = reviewList.subList(0, min(reviewList.size(), REVIEWS_TO_SHOW_COUNT));
-                            reviews.addAll(firstNReviews);
-                            reviewsAdapter.notifyDataSetChanged();
-//                            handler.postDelayed(runnable, speedScroll);
-//                            rvReviews.setOnTouchListener((v, event) -> {
-//                                handler.removeCallbacks(runnable);
-//                                v.setOnTouchListener(null);
-//                                return false;
-//                            });
-                        } else {
-                            Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    setProductAttributes();
+                    fetchFirstNReviews();
                     product.incrementViews();
                     product.saveInBackground();
                     setUpShelfWishClickListener();
@@ -179,6 +123,55 @@ public class ProductViewActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void fetchFirstNReviews(){
+        ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
+        reviewQuery.include("user");
+        reviewQuery.whereEqualTo("product", product);
+        reviewQuery.addDescendingOrder("updatedAt");
+        reviewQuery.findInBackground((reviewList, err) -> {
+            if (err == null) {
+                List<Review> firstNReviews = reviewList.subList(0, min(reviewList.size(), REVIEWS_TO_SHOW_COUNT));
+                reviews.addAll(firstNReviews);
+                reviewsAdapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(ProductViewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setProductAttributes(){
+        tvProductName.setText(product.getName());
+        tvBrandName.setText(product.getBrand());
+        rbAverageRating.setRating((float) product.getAverageRating());
+        tvReviewCount.setText(""+product.getRatingCount());
+        tvPrice.setText("$"+product.getPrice());
+    }
+
+    private void setCollapsedToolbar(){
+        collapsingToolbar.setTitle(product.getName());
+        collapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
+    }
+
+    private void setProductImage() {
+        Picasso.with(this).load(product.getImageUrl()).into(ivProductImage);
+        ivProductImage.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ImageFullscreenActivity.class);
+            String image = product.getImageUrl();
+            intent.putExtra("image", image);
+            JSONArray imagesArray = product.getImageSetUrls();
+            String[] images = new String[imagesArray.length()];
+            for(int i = 0; i < imagesArray.length(); i++){
+                try {
+                    images[i] = imagesArray.getString(i);
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            intent.putExtra("imageSet", images);
+            startActivity(intent);
+        });
     }
 
     private void setUpShelfWishClickListener() {
@@ -355,9 +348,7 @@ public class ProductViewActivity extends AppCompatActivity {
     }
 
     public void onAddReview(View view) {
-
         ParseUser user = ParseUser.getCurrentUser();
-
         if(user != null) {
             Bundle bundle = new Bundle();
             bundle.putString("productId", product.getObjectId());
@@ -372,6 +363,11 @@ public class ProductViewActivity extends AppCompatActivity {
         }
     }
 
+    public void onNewReviewAdded(){
+        reviews.clear();
+        fetchFirstNReviews();
+    }
+
     private void setVideos(){
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -379,7 +375,6 @@ public class ProductViewActivity extends AppCompatActivity {
         rvVideo.setAdapter(videoAdapter);
         rvVideo.setLayoutManager(layoutManager);
     }
-
 
     private void setFriends(){
         LinearLayoutManager layoutManager
@@ -407,8 +402,10 @@ public class ProductViewActivity extends AppCompatActivity {
                     }
                     friends.addAll(contacts);
                     friendsAdapter.notifyDataSetChanged();
+                    lineFriends.setVisibility(View.VISIBLE);
                     rvFriends.setVisibility(View.VISIBLE);
                     tvFriendsTitle.setVisibility(View.VISIBLE);
+
                 }
             });
         }

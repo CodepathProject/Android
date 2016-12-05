@@ -82,7 +82,7 @@ public class ReviewsAdapter extends
         return mReviews.size();
     }
 
-    public void startUserDetailActivity(String userId) {
+    private void startUserDetailActivity(String userId) {
         Intent intent = new Intent(getContext(), UserDetailActivity.class);
         intent.putExtra("USER_ID", userId);
         getContext().startActivity(intent);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,8 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
     LikeButton likeButton;
     @BindView(R.id.tvLikeCount)
     TextView tvLikeCount;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     ImageAdapter imageAdapter;
     List<String> imageUrl;
@@ -62,20 +65,22 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_review);
         ButterKnife.bind(this);
-
+        setToolbar();
         likeButton.setOnLikeListener(this);
 
         imageUrl = new ArrayList<>();
         imageAdapter = new ImageAdapter(this, imageUrl);
         rvReviewImage.setLayoutManager(new GridLayoutManager(this, 2));
         rvReviewImage.setAdapter(imageAdapter);
-
         String reviewId = getIntent().getStringExtra("reviewId");
         ParseQuery<Review> query = ParseQuery.getQuery(Review.class);
         query.include("user");
+        query.include("product");
         query.getInBackground(reviewId, (r, e) -> {
             if (e == null) {
                 review = r;
+                TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+                mTitle.setText(review.getProduct().getName());
                 if(ParseUser.getCurrentUser() != null) {
                     List<ParseUser> likedUsers = r.getLikedUsers();
                     if(likedUsers != null && ifListContains(likedUsers, ParseUser.getCurrentUser())) {
@@ -92,6 +97,8 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
                     tvLikeCount.setText("");
                 }
                 AppUser user = (AppUser) r.getUser();
+                setListenerOnProfilePic(user.getObjectId());
+
                 tvReview.setText(r.getText());
                 String upperString = user.getString("firstName").substring(0,1).toUpperCase() + user.getString("firstName").substring(1);
                 tvUserName.setText(upperString);
@@ -112,6 +119,23 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
                 Toast.makeText(DetailedReviewActivity.this, "parse error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void setListenerOnProfilePic(String userId) {
+        ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailedReviewActivity.this, UserDetailActivity.class);
+                intent.putExtra("USER_ID", userId);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setToolbar(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setElevation(5);
     }
 
     @Override

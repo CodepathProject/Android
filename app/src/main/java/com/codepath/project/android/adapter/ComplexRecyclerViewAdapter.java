@@ -19,6 +19,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
+
 public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Feed> items;
     private List<AppUser> mUsers;
@@ -94,6 +96,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             mLayoutManager.scrollToPosition(0);
             vh1.rvFriends.setNestedScrollingEnabled(false);
             vh1.rvFriends.setLayoutManager(mLayoutManager);
+            vh1.rvFriends.setItemAnimator(new SlideInLeftAnimator());
             friendsAdapter.notifyDataSetChanged();
         } else {
             vh1.tvTitle.setVisibility(View.GONE);

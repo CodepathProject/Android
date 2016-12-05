@@ -66,4 +66,5 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
     compile 'com.github.jd-alexander:LikeButton:0.2.0'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.5'
 }

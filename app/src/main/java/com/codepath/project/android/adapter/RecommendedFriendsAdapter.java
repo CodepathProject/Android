@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,11 +38,13 @@ public class RecommendedFriendsAdapter extends
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivFriendProfile;
         public TextView tvFriendName;
+        public Button btnFollow;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivFriendProfile = (ImageView) itemView.findViewById(R.id.ivFriendProfile);
             tvFriendName = (TextView) itemView.findViewById(R.id.tvFriendName);
+            btnFollow = (Button) itemView.findViewById(R.id.btnFollow);
         }
     }
 
@@ -67,6 +70,11 @@ public class RecommendedFriendsAdapter extends
             viewHolder.ivFriendProfile.setOnClickListener(v ->
                     startUserDetailActivity(user.getObjectId())
             );
+            viewHolder.btnFollow.setOnClickListener(v -> {
+                mUsers.remove(position);
+                this.notifyItemRemoved(position);
+                notifyItemRangeChanged(position, mUsers.size());
+            });
         });
     }
 

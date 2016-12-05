@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:textColor="@color/white"
-        android:textStyle="bold"
+        android:singleLine="true"
         android:textSize="18sp"
         android:id="@+id/toolbar_title" />
     </android.support.v7.widget.Toolbar>

@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,6 +82,9 @@ public class ProductViewActivity extends AppCompatActivity {
     TextView tvFriendsTitle;
     @BindView(R.id.rvVideo)
     RecyclerView rvVideo;
+
+    @BindView(R.id.lineFriends)
+    LinearLayout lineFriends;
 
     ReviewsAdapter reviewsAdapter;
     List<Review> reviews;
@@ -398,8 +402,10 @@ public class ProductViewActivity extends AppCompatActivity {
                     }
                     friends.addAll(contacts);
                     friendsAdapter.notifyDataSetChanged();
+                    lineFriends.setVisibility(View.VISIBLE);
                     rvFriends.setVisibility(View.VISIBLE);
                     tvFriendsTitle.setVisibility(View.VISIBLE);
+
                 }
             });
         }

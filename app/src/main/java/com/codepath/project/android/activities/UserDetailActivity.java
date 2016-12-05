@@ -1,18 +1,12 @@
 package com.codepath.project.android.activities;
 
-import android.support.annotation.IdRes;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.fragments.UserDetailFragment;
-
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.util.List;
 
 public class UserDetailActivity extends AppCompatActivity {
 

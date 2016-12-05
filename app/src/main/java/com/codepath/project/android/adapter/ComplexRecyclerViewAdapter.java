@@ -1,7 +1,10 @@
 package com.codepath.project.android.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -136,7 +139,11 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             tvContent.setOnClickListener(v -> {
                 Intent intent = new Intent(mContext, DetailedReviewActivity.class);
                 intent.putExtra("reviewId", feed.getReview().getObjectId());
-                mContext.startActivity(intent);
+                Pair<View, String> p1 = Pair.create(viewHolder.ivProfile, "ivProfile");
+                Pair<View, String> p2 = Pair.create(viewHolder.tvContent, "tvReview");
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation((Activity) mContext, p1, p2);
+                mContext.startActivity(intent, options.toBundle());
             });
         } else if(feed.getType().equals("addPrice")) {
             tvContent.setVisibility(View.VISIBLE);
@@ -155,7 +162,11 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             tvContent.setOnClickListener(v -> {
                 Intent intent = new Intent(mContext, DetailedReviewActivity.class);
                 intent.putExtra("reviewId", feed.getReview().getObjectId());
-                mContext.startActivity(intent);
+                Pair<View, String> p1 = Pair.create(viewHolder.ivProfile, "ivProfile");
+                Pair<View, String> p2 = Pair.create(viewHolder.tvContent, "tvReview");
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation((Activity) mContext, p1, p2);
+                mContext.startActivity(intent, options.toBundle());
             });
         }
         viewHolder.tvUserName.setText(fromUserName);
@@ -172,7 +183,9 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         viewHolder.ivProfile.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, UserDetailActivity.class);
             intent.putExtra("USER_ID", fromUser.getObjectId());
-            mContext.startActivity(intent);
+            ActivityOptionsCompat options = ActivityOptionsCompat.
+                    makeSceneTransitionAnimation((Activity) mContext, v.findViewById(R.id.ivProfile), "ivProfile");
+            mContext.startActivity(intent, options.toBundle());
         });
     }
 }

@@ -2,6 +2,7 @@ package com.codepath.project.android.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -110,11 +111,14 @@ public class FeedFragment extends Fragment {
                     if(feeds.get(position-1).getType().equals("followUser")) {
                         intent = new Intent(getActivity(), UserDetailActivity.class);
                         intent.putExtra("USER_ID", feeds.get(position-1).getToUser().getObjectId());
+                        startActivity(intent);
                     } else {
                         intent = new Intent(getActivity(), ProductViewActivity.class);
                         intent.putExtra("productId", feeds.get(position-1).getToProduct().getObjectId());
+                        ActivityOptionsCompat options = ActivityOptionsCompat.
+                                makeSceneTransitionAnimation(getActivity(), v.findViewById(R.id.ivProductImage), "ivProductImage");
+                        startActivity(intent, options.toBundle());
                     }
-                    startActivity(intent);
                 }
         );
 

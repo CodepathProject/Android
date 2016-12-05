@@ -2,6 +2,7 @@ package com.codepath.project.android.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -119,7 +120,9 @@ public class HomeFragment extends Fragment {
                 (recyclerView, position, v) -> {
                     Intent intent = new Intent(getActivity(), ProductViewActivity.class);
                     intent.putExtra("productId", products.get(position).getObjectId());
-                    startActivity(intent);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation(getActivity(), v.findViewById(R.id.iv_product), "ivProductImage");
+                    startActivity(intent, options.toBundle());
                 }
         );
         productsAdapter.notifyDataSetChanged();
@@ -156,7 +159,9 @@ public class HomeFragment extends Fragment {
                 (recyclerView, position, v) -> {
                     Intent intent = new Intent(getActivity(), ProductViewActivity.class);
                     intent.putExtra("productId", productsBestRated.get(position).getObjectId());
-                    startActivity(intent);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation(getActivity(), v.findViewById(R.id.iv_product), "ivProductImage");
+                    startActivity(intent, options.toBundle());
                 }
         );
     }

@@ -125,6 +125,7 @@ public class ProductViewActivity extends AppCompatActivity {
         ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
         reviewQuery.include("user");
         reviewQuery.whereEqualTo("product", product);
+        reviewQuery.addDescendingOrder("updatedAt");
         reviewQuery.findInBackground((reviewList, err) -> {
             if (err == null) {
                 List<Review> firstNReviews = reviewList.subList(0, min(reviewList.size(), REVIEWS_TO_SHOW_COUNT));
@@ -143,6 +144,7 @@ public class ProductViewActivity extends AppCompatActivity {
         tvReviewCount.setText(""+product.getRatingCount());
         tvPrice.setText("$"+product.getPrice());
     }
+
     private void setCollapsedToolbar(){
         collapsingToolbar.setTitle(product.getName());
         collapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
@@ -355,6 +357,11 @@ public class ProductViewActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void onNewReviewAdded(){
+        reviews.clear();
+        fetchFirstNReviews();
     }
 
     private void setVideos(){

@@ -67,6 +67,7 @@ public class ReviewsActivity extends AppCompatActivity {
                 ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
                 reviewQuery.include("user");
                 reviewQuery.whereEqualTo("product", product);
+                reviewQuery.addDescendingOrder("updatedAt");
                 reviewQuery.findInBackground((reviewList, err) -> {
                     if (err == null) {
                         reviews.addAll(reviewList);

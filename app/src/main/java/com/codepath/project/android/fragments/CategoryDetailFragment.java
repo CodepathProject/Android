@@ -2,12 +2,10 @@ package com.codepath.project.android.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +14,8 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.adapter.ProductsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
-import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.model.Product;
+import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.network.ParseHelper;
 
 import java.util.ArrayList;
@@ -89,7 +87,9 @@ public class CategoryDetailFragment extends Fragment {
                     (recyclerView, position, v) -> {
                         Intent intent = new Intent(getActivity(), ProductViewActivity.class);
                         intent.putExtra("productId", productList.get(position).getObjectId());
-                        startActivity(intent);
+                        ActivityOptionsCompat options = ActivityOptionsCompat.
+                                makeSceneTransitionAnimation(getActivity(), v.findViewById(R.id.iv_product), "ivProductImage");
+                        startActivity(intent, options.toBundle());
                     }
             );
         }

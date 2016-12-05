@@ -2,11 +2,14 @@ package com.codepath.project.android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -94,7 +97,11 @@ public class ReviewsActivity extends AppCompatActivity {
                 (recyclerView, position, v) -> {
                     Intent intent = new Intent(ReviewsActivity.this, DetailedReviewActivity.class);
                     intent.putExtra("reviewId", reviews.get(position).getObjectId());
-                    startActivity(intent);
+                    Pair<View, String> p1 = Pair.create(v.findViewById(R.id.ivProfile), "ivProfile");
+                    Pair<View, String> p2 = Pair.create(v.findViewById(R.id.tvReview), "tvReview");
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation(this, p1, p2);
+                    startActivity(intent, options.toBundle());
                 }
         );
     }

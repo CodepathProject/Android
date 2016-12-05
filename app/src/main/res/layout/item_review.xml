@@ -13,6 +13,7 @@
 
     <ImageView
         android:id="@+id/ivProfile"
+        android:transitionName="ivProfile"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="7dp"
@@ -46,6 +47,7 @@
 
     <TextView
         android:id="@+id/tvReview"
+        android:transitionName="tvReview"
         android:layout_below="@+id/ivProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -305,7 +307,11 @@ public class ProductViewActivity extends AppCompatActivity {
                 (recyclerView, position, v) -> {
                     Intent intent = new Intent(ProductViewActivity.this, DetailedReviewActivity.class);
                     intent.putExtra("reviewId", reviews.get(position).getObjectId());
-                    startActivity(intent);
+                    Pair<View, String> p1 = Pair.create(v.findViewById(R.id.ivProfile), "ivProfile");
+                    Pair<View, String> p2 = Pair.create(v.findViewById(R.id.tvReview), "tvReview");
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation(this, p1, p2);
+                    startActivity(intent, options.toBundle());
                 }
         );
     }

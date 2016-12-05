@@ -13,6 +13,115 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <GridLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:rowCount="4"
+        android:columnCount="3"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:id="@+id/icon2"
+            android:background="#AAAAAA"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:scaleType="centerCrop" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:id="@+id/icon3"
+            android:background="#AAAAAA"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:scaleType="centerCrop" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/icon4"
+            android:background="#AAAAAA"
+            android:layout_row="0"
+            android:layout_column="2" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/icon5"
+            android:background="#AAAAAA"
+            android:layout_row="1"
+            android:layout_column="0" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/icon6"
+            android:background="#AAAAAA"
+            android:layout_row="1"
+            android:layout_column="1" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/icon7"
+            android:background="#AAAAAA"
+            android:layout_row="1"
+            android:layout_column="2" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:id="@+id/icon8"
+            android:background="#AAAAAA"
+            android:scaleType="centerCrop"
+            android:layout_row="2"
+            android:layout_column="0" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:id="@+id/icon9"
+            android:background="#AAAAAA"
+            android:scaleType="centerCrop"
+            android:layout_row="2"
+            android:layout_column="1" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:id="@+id/icon10"
+            android:scaleType="centerCrop"
+            android:background="#AAAAAA"
+            android:layout_row="2"
+            android:layout_column="2" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:id="@+id/icon11"
+            android:scaleType="centerCrop"
+            android:background="#AAAAAA"
+            android:layout_row="3"
+            android:layout_column="0" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:id="@+id/icon12"
+            android:scaleType="centerCrop"
+            android:background="#AAAAAA"
+            android:layout_row="3"
+            android:layout_column="1" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:id="@+id/icon13"
+            android:scaleType="centerCrop"
+            android:background="#AAAAAA"
+            android:layout_row="3"
+            android:layout_column="2" />
+    </GridLayout>
+
+
+
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"

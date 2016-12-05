@@ -1,6 +1,7 @@
 package com.codepath.project.android.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.DetailedReviewActivity;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
@@ -102,6 +104,11 @@ public class FeedsAdapter extends
             viewHolder.rating.setRating(feed.getRating());
             viewHolder.tvDestName.setText(toProduct.getName());
             Picasso.with(getContext()).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
+            tvContent.setOnClickListener(v -> {
+                Intent intent = new Intent(mContext, DetailedReviewActivity.class);
+                intent.putExtra("reviewId", feed.getReview().getObjectId());
+                mContext.startActivity(intent);
+            });
         } else if(feed.getType().equals("addPrice")) {
             tvContent.setVisibility(View.VISIBLE);
             tvContent.setText("Product price: $" + feed.getContent());
@@ -117,6 +124,11 @@ public class FeedsAdapter extends
             viewHolder.rating.setRating(feed.getRating());
             viewHolder.tvDestName.setText(toProduct.getName());
             Picasso.with(getContext()).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
+            tvContent.setOnClickListener(v -> {
+                Intent intent = new Intent(mContext, DetailedReviewActivity.class);
+                intent.putExtra("reviewId", feed.getReview().getObjectId());
+                mContext.startActivity(intent);
+            });
         }
         viewHolder.tvUserName.setText(fromUserName);
         viewHolder.tvTime.setText(GeneralUtils.getRelativeTimeAgo(feed.getCreatedAt().toString()));

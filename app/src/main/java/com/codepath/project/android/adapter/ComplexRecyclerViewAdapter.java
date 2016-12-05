@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.DetailedReviewActivity;
 import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
@@ -132,6 +133,11 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             viewHolder.rating.setRating(feed.getRating());
             viewHolder.tvDestName.setText(toProduct.getName());
             Picasso.with(mContext).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
+            tvContent.setOnClickListener(v -> {
+                Intent intent = new Intent(mContext, DetailedReviewActivity.class);
+                intent.putExtra("reviewId", feed.getReview().getObjectId());
+                mContext.startActivity(intent);
+            });
         } else if(feed.getType().equals("addPrice")) {
             tvContent.setVisibility(View.VISIBLE);
             tvContent.setText("Product price: $" + feed.getContent());
@@ -146,6 +152,11 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             viewHolder.rating.setRating(feed.getRating());
             viewHolder.tvDestName.setText(toProduct.getName());
             Picasso.with(mContext).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
+            tvContent.setOnClickListener(v -> {
+                Intent intent = new Intent(mContext, DetailedReviewActivity.class);
+                intent.putExtra("reviewId", feed.getReview().getObjectId());
+                mContext.startActivity(intent);
+            });
         }
         viewHolder.tvUserName.setText(fromUserName);
         viewHolder.tvTime.setText(GeneralUtils.getRelativeTimeAgo(feed.getCreatedAt().toString()));

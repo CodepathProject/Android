@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,6 +83,9 @@ public class ProductViewActivity extends AppCompatActivity {
     @BindView(R.id.rvVideo)
     RecyclerView rvVideo;
 
+    @BindView(R.id.lineFriends)
+    LinearLayout lineFriends;
+
     ReviewsAdapter reviewsAdapter;
     List<Review> reviews;
     Product product;
@@ -125,6 +129,7 @@ public class ProductViewActivity extends AppCompatActivity {
         ParseQuery<Review> reviewQuery = ParseQuery.getQuery(Review.class);
         reviewQuery.include("user");
         reviewQuery.whereEqualTo("product", product);
+        reviewQuery.addDescendingOrder("updatedAt");
         reviewQuery.findInBackground((reviewList, err) -> {
             if (err == null) {
                 List<Review> firstNReviews = reviewList.subList(0, min(reviewList.size(), REVIEWS_TO_SHOW_COUNT));
@@ -143,6 +148,7 @@ public class ProductViewActivity extends AppCompatActivity {
         tvReviewCount.setText(""+product.getRatingCount());
         tvPrice.setText("$"+product.getPrice());
     }
+
     private void setCollapsedToolbar(){
         collapsingToolbar.setTitle(product.getName());
         collapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
@@ -357,6 +363,11 @@ public class ProductViewActivity extends AppCompatActivity {
         }
     }
 
+    public void onNewReviewAdded(){
+        reviews.clear();
+        fetchFirstNReviews();
+    }
+
     private void setVideos(){
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -391,8 +402,10 @@ public class ProductViewActivity extends AppCompatActivity {
                     }
                     friends.addAll(contacts);
                     friendsAdapter.notifyDataSetChanged();
+                    lineFriends.setVisibility(View.VISIBLE);
                     rvFriends.setVisibility(View.VISIBLE);
                     tvFriendsTitle.setVisibility(View.VISIBLE);
+
                 }
             });
         }

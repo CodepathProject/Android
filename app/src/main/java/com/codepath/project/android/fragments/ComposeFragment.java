@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.helpers.BitmapScaler;
 import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Product;
@@ -161,7 +162,7 @@ public class ComposeFragment extends DialogFragment {
             feed.setRating(Math.round(rating));
             feed.setReview(review);
             feed.saveInBackground();
-
+            ((ProductViewActivity)getActivity()).onNewReviewAdded();
             closeKeyboardAndDismiss(view);
         });
 

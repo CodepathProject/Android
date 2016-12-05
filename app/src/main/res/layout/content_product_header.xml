@@ -132,12 +132,11 @@
         tools:text="(595)" />
     <TextView
         android:id="@+id/tvAddPrice"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tvReviewCount"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/line3"
-        android:layout_marginLeft="40dp"
+        android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/product_margin"
         android:background="@drawable/rounded_corner"
         android:gravity="center"

@@ -22,14 +22,7 @@
         android:columnCount="3"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:id="@+id/icon2"
-            android:background="#AAAAAA"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:scaleType="centerCrop" />
+
         <ImageView
             android:layout_width="150dp"
             android:layout_height="200dp"
@@ -118,6 +111,15 @@
             android:background="#AAAAAA"
             android:layout_row="3"
             android:layout_column="2" />
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:id="@+id/icon2"
+            android:background="#AAAAAA"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:scaleType="centerCrop" />
     </GridLayout>
 
 
@@ -127,6 +129,7 @@
         android:layout_height="120dp"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/llLogin"
+        android:background="#90000000"
         android:src="@drawable/ic_appicon_green"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -135,6 +138,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_above="@+id/llSignUp"
+        android:background="#90000000"
         android:id="@+id/llLogin"
         android:orientation="vertical">
 
@@ -149,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_mail"/>
+                android:src="@drawable/ic_email"/>
 
             <EditText
                 android:layout_width="0dp"
@@ -174,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_padlock"/>
+                android:src="@drawable/ic_password"/>
 
             <EditText
                 android:layout_width="0dp"
@@ -198,6 +202,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Forgot Password?"
+            android:textColor="@color/white"
             style="@style/loginHelperText"
             android:layout_gravity="center"/>
 
@@ -214,6 +219,7 @@
                 android:gravity="bottom"
                 style="@style/loginHelperText"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:text="SKIP LOGIN"/>
 
             <Switch

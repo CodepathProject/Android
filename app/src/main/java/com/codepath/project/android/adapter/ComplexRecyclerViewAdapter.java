@@ -1,6 +1,7 @@
 package com.codepath.project.android.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
@@ -137,7 +139,6 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             viewHolder.tvDestName.setText(toProduct.getName());
             Picasso.with(mContext).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
         } else if(feed.getType().equals("addReview")) {
-            //fromUserName += " reviewed " + feed.getToProduct().getName();
             tvContent.setText(feed.getContent());
             tvContent.setVisibility(View.VISIBLE);
             viewHolder.tvUserAction.setText(" reviewed a product");
@@ -157,5 +158,10 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         } else {
             Picasso.with(mContext).load(GeneralUtils.getProfileUrl(fromUser.getObjectId())).transform(new CircleTransform()).into(viewHolder.ivProfile);
         }
+        viewHolder.ivProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, UserDetailActivity.class);
+            intent.putExtra("USER_ID", fromUser.getObjectId());
+            mContext.startActivity(intent);
+        });
     }
 }

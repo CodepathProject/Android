@@ -132,21 +132,22 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rvFriends"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="@dimen/product_margin"
                 android:text="@string/reviews"
                 android:fontFamily="sans-serif-light"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
                 android:layout_alignParentRight="true"
                 android:onClick="onAddReview"
                 android:layout_below="@id/rvFriends"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="@dimen/product_margin"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_add_black_24dp"
                 android:tint="@color/colorPrimary" />

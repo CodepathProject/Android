@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/line2"
-        android:layout_margin="15dp"
+        android:layout_margin="5dp"
         android:orientation="horizontal">
 
         <TextView
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTint="@color/colorGray"
+            android:drawableTint="@color/colorLightGray3"
             android:drawableTop="@drawable/noun_729141_cc"
             android:gravity="center"
             android:text="@string/follow"
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTint="@color/colorGray"
+            android:drawableTint="@color/colorLightGray3"
             android:drawableTop="@drawable/shelf"
             android:gravity="center"
             android:text="@string/shelf"
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTint="@color/colorGray"
+            android:drawableTint="@color/colorLightGray3"
             android:drawableTop="@drawable/eye"
             android:gravity="center"
             android:text="@string/watch"
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:drawableTint="@color/colorGray"
+            android:drawableTint="@color/colorLightGray3"
             android:drawableTop="@drawable/plot"
             android:gravity="center"
             android:onClick="onShowPlot"
@@ -95,6 +95,7 @@
     <LinearLayout
         android:id="@+id/line3"
         android:layout_below="@id/ll"
+        android:layout_marginBottom="5dp"
         style="@style/product_detail_line_separator"/>
     <TextView
         android:id="@+id/tvPrice"

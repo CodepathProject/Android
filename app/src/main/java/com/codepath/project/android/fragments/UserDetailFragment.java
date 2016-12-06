@@ -124,7 +124,7 @@ public class UserDetailFragment extends Fragment {
                         startActivity(intent);
                     });
                 } else {
-                    tvFollowing.setText("0 FOLLOWING");
+                    tvFollowing.setText("0");
                 }
 
                 setUpRecyclerView(object);

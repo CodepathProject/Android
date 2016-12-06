@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginStart="10dp"
                         android:paddingTop="50dp"
                         android:textColor="#606060"
@@ -87,8 +87,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignStart="@+id/tvUserFirstName"
                         android:layout_below="@+id/tvUserFirstName"
-                        android:text="I am a techie with interest in cameras particularly. I am a big photography nerd who generally takes pictures of camera's using camera's (Inception in its own way)"
-                        android:textColor="@color/colorGray" />
+                        android:fontFamily="sans-serif-light"
+                        android:text="@string/default_about_me"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/tvFollowing"
@@ -101,21 +102,51 @@
                         android:textSize="16sp"
                         android:textColor="#606060"
                         android:textStyle="bold"
-                        tools:text="200 FOLLOWING" />
+                        android:fontFamily="sans-serif-light"
+                        tools:text="200" />
+
+                    <TextView
+                        android:id="@+id/tvFollowingLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvAboutMe"
+                        android:layout_marginBottom="20dp"
+                        android:layout_toRightOf="@id/tvFollowing"
+                        android:layout_alignBaseline="@id/tvFollowing"
+                        android:paddingTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="13sp"
+                        android:textColor="#606060"
+                        android:fontFamily="sans-serif-light"
+                        android:text="FOLLOWING" />
 
                     <TextView
                         android:id="@+id/tvFollowers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/tvFollowing"
-                        android:layout_toEndOf="@+id/tvFollowing"
                         android:layout_marginBottom="20dp"
+                        android:layout_below="@+id/tvAboutMe"
+                        android:layout_toRightOf="@id/tvFollowingLabel"
                         android:paddingStart="20dp"
                         android:paddingTop="10dp"
                         android:textSize="16sp"
                         android:textColor="#606060"
                         android:textStyle="bold"
-                        tools:text="200 FOLLOWERS" />
+                        tools:text="200" />
+
+                    <TextView
+                        android:id="@+id/tvFollowersLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:textSize="13sp"
+                        android:textColor="#606060"
+                        android:layout_alignBaseline="@id/tvFollowers"
+                        android:fontFamily="sans-serif-light"
+                        android:layout_marginLeft="5dp"
+                        tools:text="FOLLOWERS"
+                        android:layout_below="@+id/tvAboutMe"
+                        android:layout_toEndOf="@+id/tvFollowers" />
 
                 </RelativeLayout>
 

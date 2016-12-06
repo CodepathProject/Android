@@ -117,7 +117,7 @@ public class UserDetailFragment extends Fragment {
                 tvUserFirstName.setText(upperString);
                 AppUser currentUser = (AppUser) object;
                 if(currentUser.getFollowUsers() != null && currentUser.getFollowUsers().size() > 0) {
-                    tvFollowing.setText(currentUser.getFollowUsers().size() + " FOLLOWING");
+                    tvFollowing.setText(currentUser.getFollowUsers().size() + "");
                     tvFollowing.setOnClickListener(v -> {
                         Intent intent = new Intent(getActivity(), FollowActivity.class);
                         intent.putExtra("USER_ID", currentUser.getObjectId());

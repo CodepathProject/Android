@@ -45,6 +45,7 @@ public class UserDetailFragment extends Fragment {
     @BindView(R.id.ivProfileImage) ImageView ivProfileImage;
     @BindView(R.id.tvUserFirstName) TextView tvUserFirstName;
     @BindView(R.id.tvFollowing) TextView tvFollowing;
+    @BindView(R.id.tvFollowingLabel) TextView tvFollowingLabel;
     @BindView(R.id.tvFollowers) TextView tvFollowers;
     @BindView(R.id.rvUserTimeline) RecyclerView rvFeeds;
     @BindView(R.id.followUser) TextView followUser;
@@ -135,6 +136,12 @@ public class UserDetailFragment extends Fragment {
                 if(currentUser.getFollowUsers() != null && currentUser.getFollowUsers().size() > 0) {
                     tvFollowing.setText(currentUser.getFollowUsers().size() + "");
                     tvFollowing.setOnClickListener(v -> {
+                        Intent intent = new Intent(getActivity(), FollowActivity.class);
+                        intent.putExtra("USER_ID", currentUser.getObjectId());
+                        startActivity(intent);
+                    });
+
+                    tvFollowingLabel.setOnClickListener(v -> {
                         Intent intent = new Intent(getActivity(), FollowActivity.class);
                         intent.putExtra("USER_ID", currentUser.getObjectId());
                         startActivity(intent);

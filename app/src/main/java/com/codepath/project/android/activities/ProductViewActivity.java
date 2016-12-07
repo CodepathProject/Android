@@ -1,7 +1,9 @@
 package com.codepath.project.android.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -11,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -39,6 +42,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.json.JSONArray;
@@ -84,7 +88,6 @@ public class ProductViewActivity extends AppCompatActivity {
     TextView tvFriendsTitle;
     @BindView(R.id.rvVideo)
     RecyclerView rvVideo;
-
     @BindView(R.id.lineFriends)
     LinearLayout lineFriends;
 
@@ -157,7 +160,30 @@ public class ProductViewActivity extends AppCompatActivity {
     }
 
     private void setProductImage() {
-        Picasso.with(this).load(product.getImageUrl()).into(ivProductImage);
+        Picasso.with(this).load(product.getImageUrl()).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                ivProductImage.setImageBitmap(bitmap);
+                Palette.from(bitmap).maximumColorCount(15).generate(palette -> {
+                    Palette.Swatch vibrant = palette.getVibrantSwatch();
+                    if (vibrant != null) {
+                        collapsingToolbar.setContentScrimColor(palette.getMutedColor(vibrant.getRgb()));
+                        collapsingToolbar.setStatusBarScrimColor(palette.getDarkMutedColor(vibrant.getRgb()));
+                        supportStartPostponedEnterTransition();
+                    }
+                });
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        });
         ivProductImage.setOnClickListener(v -> {
             Intent intent = new Intent(this, ImageFullscreenActivity.class);
             String image = product.getImageUrl();

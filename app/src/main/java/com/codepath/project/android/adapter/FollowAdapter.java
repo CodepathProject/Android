@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.UserDetailActivity;
+import com.codepath.project.android.helpers.CircleTransform;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
@@ -48,7 +49,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
         viewHolder.ivProfileImg.setImageResource(android.R.color.transparent);
         user.fetchIfNeededInBackground((object, e) -> {
             viewHolder.tvUserName.setText(object.getString("firstName"));
-            Picasso.with(getContext()).load(object.getString("pictureUrl")).into(viewHolder.ivProfileImg);
+            Picasso.with(getContext()).load(object.getString("pictureUrl")).transform(new CircleTransform()).into(viewHolder.ivProfileImg);
         });
 
         viewHolder.rlFollowItem.setOnClickListener(v -> {

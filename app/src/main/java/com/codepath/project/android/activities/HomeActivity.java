@@ -264,7 +264,11 @@ public class HomeActivity extends AppCompatActivity
             e.printStackTrace();
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        fragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+                .replace(R.id.fragment_container, fragment)
+                .commit();
         drawer.closeDrawer(GravityCompat.START);
 
         item.setChecked(true);

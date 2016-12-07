@@ -67,4 +67,11 @@ public class PlotActivity  extends AppCompatActivity {
         staticLabelsFormatter.setHorizontalLabels(new String[] {"Jan", "Mar","May","Jul","Oct","Dec"});
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
     }
+
+    @Override
+    public void onBackPressed() {
+        // finish() is called in super: we only override this method to be able to override the transition
+        super.onBackPressed();
+        overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
+    }
 }

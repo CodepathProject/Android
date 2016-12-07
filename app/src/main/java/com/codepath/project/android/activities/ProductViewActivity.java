@@ -355,6 +355,7 @@ public class ProductViewActivity extends AppCompatActivity {
         i.putExtra(Constants.PRODUCT_NAME, product.getName());
         i.putExtra(Constants.PRODUCT_PRICE, product.getPrice());
         startActivity(i);
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
     }
 
     public void addPrice(View view){
@@ -363,6 +364,7 @@ public class ProductViewActivity extends AppCompatActivity {
         i.putExtra(Constants.PRODUCT_PRICE, product.getPrice());
         i.putExtra(Constants.PRODUCT_ID, product.getObjectId());
         startActivity(i);
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
     }
 
     @Override
@@ -449,4 +451,6 @@ public class ProductViewActivity extends AppCompatActivity {
         i.putExtra(Constants.PRODUCT_ID, getIntent().getStringExtra("productId"));
         startActivity(i);
     }
+
+
 }

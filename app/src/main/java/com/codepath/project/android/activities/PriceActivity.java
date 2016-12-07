@@ -100,4 +100,11 @@ public class PriceActivity extends AppCompatActivity {
             updatePrice(price, store);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        // finish() is called in super: we only override this method to be able to override the transition
+        super.onBackPressed();
+        overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
+    }
 }

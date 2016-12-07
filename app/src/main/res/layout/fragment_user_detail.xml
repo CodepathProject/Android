@@ -154,8 +154,8 @@
                 <ImageView
                     android:id="@+id/ivProfileImage"
                     android:transitionName="ivProfile"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_above="@+id/layoutBottom"
                     android:layout_marginBottom="-40dp"
                     android:layout_marginStart="10dp"

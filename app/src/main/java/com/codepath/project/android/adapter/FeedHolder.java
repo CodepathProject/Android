@@ -7,6 +7,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.like.LikeButton;
 
 public class FeedHolder extends RecyclerView.ViewHolder {
 
@@ -18,7 +19,8 @@ public class FeedHolder extends RecyclerView.ViewHolder {
     public TextView tvDestName;
     public TextView tvUserAction;
     public RatingBar rating;
-
+    public LikeButton likeButton;
+    public TextView tvLikeCount;
 
     public FeedHolder(View v) {
         super(v);
@@ -30,5 +32,7 @@ public class FeedHolder extends RecyclerView.ViewHolder {
         tvTime = (TextView) v.findViewById(R.id.tvTime);
         tvDestName = (TextView) v.findViewById(R.id.tvDestName);
         tvUserAction  = (TextView) v.findViewById(R.id.tvUserAction);
+        likeButton = (LikeButton) v.findViewById(R.id.likeButton);
+        tvLikeCount = (TextView) v.findViewById(R.id.tvLikeCount);
     }
 }

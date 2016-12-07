@@ -19,7 +19,7 @@
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_appicon_green"
+        android:icon="@drawable/citycons_magnify"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

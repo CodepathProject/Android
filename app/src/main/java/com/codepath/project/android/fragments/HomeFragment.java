@@ -101,9 +101,11 @@ public class HomeFragment extends Fragment {
                 (recyclerView, position, v) -> {
                     CategoryFragment nextFrag = CategoryFragment.newInstance(categoryList.get(position).getName());
                     this.getFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
                             .add(R.id.fragment_container, nextFrag, "TAG")
                             .addToBackStack(null)
                             .commit();
+
                 }
         );
     }

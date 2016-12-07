@@ -2,6 +2,7 @@ package com.codepath.project.android.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,22 +68,27 @@ public class ProductsAdapter extends
     @Override
     public void onBindViewHolder(ProductsAdapter.ViewHolder viewHolder, int position) {
         Product product = mProducts.get(position);
-        TextView tvProductName = viewHolder.tvProductNAme;
-        tvProductName.setText(product.getName());
+
         ImageView ivProductImage = viewHolder.ivProductImage;
         Picasso.with(getContext()).load(product.getImageUrl()).placeholder(R.drawable.placeholder).into(ivProductImage);
+        TextView tvRatingCount = viewHolder.tvRatingCount;
+        tvRatingCount.setText(" "+product.getRatingCount()+" reviews");
 
-        TextView tvProductPrice = viewHolder.tvProductPrice;
-        tvProductPrice.setText("$"+product.getPrice());
 
         if(mViewType == ViewType.VERTICAL_GRID){
             RatingBar ratingBar = viewHolder.ratingBar;
             ratingBar.setRating((int)product.getAverageRating());
-            TextView tvRatingCount = viewHolder.tvRatingCount;
-            tvRatingCount.setText(" "+product.getRatingCount()+" reviews");
+            TextView tvProductName = viewHolder.tvProductNAme;
+
+            String sourceString = "<font color='black'>"+"<b>" + "$"+product.getPrice() + "</b> "+"</font>"+"&nbsp;"+product.getName();
+            tvProductName.setText(Html.fromHtml(sourceString));
+
         } else{
-            TextView tvRatingCount = viewHolder.tvRatingCount;
-            tvRatingCount.setText(" "+product.getRatingCount()+" reviews");
+            TextView tvProductPrice = viewHolder.tvProductPrice;
+            tvProductPrice.setText("$"+product.getPrice());
+
+            TextView tvProductName = viewHolder.tvProductNAme;
+            tvProductName.setText(product.getName());
         }
     }
 

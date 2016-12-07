@@ -16,22 +16,6 @@
             android:id="@+id/nav_my_products"
             android:title="My Products"
             android:icon="@drawable/ic_myproducts"/>
-        <item
-            android:id="@+id/nav_add_review"
-            android:title="Add Review"
-            android:icon="@drawable/ic_addreview"/>
-        <item
-            android:id="@+id/nav_search"
-            android:title="Search"
-            android:icon="@drawable/ic_search"/>
-        <item
-            android:id="@+id/nav_recent_reviews"
-            android:title="Recent Reviews"
-            android:icon="@drawable/ic_recentreviews"/>
-        <item
-            android:id="@+id/nav_current_deals"
-            android:title="Current Deals"
-            android:icon="@drawable/ic_currentdeals"/>
     </group>
 
     <group android:checkableBehavior="single"

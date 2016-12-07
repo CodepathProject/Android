@@ -167,6 +167,7 @@ public class FeedFragment extends Fragment {
             mainQuery.include("fromUser");
             mainQuery.include("toUser");
             mainQuery.include("toProduct");
+            mainQuery.include("review");
             mainQuery.setLimit(10);
             mainQuery.addDescendingOrder("createdAt");
             if(skip > 0) {

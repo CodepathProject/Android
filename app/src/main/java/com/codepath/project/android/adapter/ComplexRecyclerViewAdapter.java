@@ -15,12 +15,16 @@ import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.DetailedReviewActivity;
+import com.codepath.project.android.activities.SplashScreenActivity;
 import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.utils.GeneralUtils;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
+import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -172,6 +176,82 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         viewHolder.tvUserName.setText(fromUserName);
         viewHolder.tvTime.setText(GeneralUtils.getRelativeTimeAgo(feed.getCreatedAt().toString()));
         setImage(fromUser, viewHolder);
+        setUpOnLikeClickListener(viewHolder, feed);
+    }
+
+    private void setUpOnLikeClickListener(FeedHolder viewHolder, Feed feed) {
+
+        if(feed.getType().equals("followProduct") || feed.getType().equals("followUser") || feed.getType().equals("addPrice")) {
+            viewHolder.likeButton.setVisibility(View.GONE);
+            viewHolder.tvLikeCount.setVisibility(View.GONE);
+            return;
+        }
+
+        viewHolder.likeButton.setVisibility(View.VISIBLE);
+        viewHolder.tvLikeCount.setVisibility(View.VISIBLE);
+
+        if(ParseUser.getCurrentUser() != null) {
+            List<ParseUser> likedUsers = feed.getReview().getLikedUsers();
+            if(likedUsers != null && ifListContains(likedUsers, ParseUser.getCurrentUser())) {
+                viewHolder.likeButton.setLiked(true);
+            } else {
+                viewHolder.likeButton.setLiked(false);
+            }
+        } else {
+            viewHolder.likeButton.setLiked(false);
+        }
+        if(feed.getReview().getLikesCount() > 0) {
+            viewHolder.tvLikeCount.setText(Integer.toString(feed.getReview().getLikesCount()) + " people like this");
+        } else {
+            viewHolder.tvLikeCount.setText("");
+        }
+
+        viewHolder.likeButton.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                if(ParseUser.getCurrentUser() == null) {
+                    Intent intent = new Intent(mContext, SplashScreenActivity.class);
+                    mContext.startActivity(intent);
+                } else {
+                    int likes = feed.getReview().getLikesCount();
+                    likes++;
+                    feed.getReview().increment("likes");
+                    feed.getReview().setLikedUsers(ParseUser.getCurrentUser());
+                    viewHolder.tvLikeCount.setText(Integer.toString(likes)+ " people like this");
+                    feed.getReview().saveInBackground();
+                }
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                if(ParseUser.getCurrentUser() == null) {
+                    Intent intent = new Intent(mContext, SplashScreenActivity.class);
+                    mContext.startActivity(intent);
+                } else {
+                    int likes = feed.getReview().getLikesCount();
+                    likes--;
+                    feed.getReview().increment("likes", -1);
+                    feed.getReview().removeLikedUsers(ParseUser.getCurrentUser());
+                    if(likes > 0) {
+                        viewHolder.tvLikeCount.setText(Integer.toString(likes)+ " people like this");
+                    } else {
+                        viewHolder.tvLikeCount.setText("");
+                    }
+                    feed.getReview().saveInBackground();
+                }
+            }
+        });
+    }
+
+    private boolean ifListContains(List<ParseUser> userList, ParseUser user) {
+        if(userList != null) {
+            for (ParseUser u1 : userList) {
+                if (u1.getObjectId().equals(user.getObjectId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void setImage(AppUser fromUser, FeedHolder viewHolder){

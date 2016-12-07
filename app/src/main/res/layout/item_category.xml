@@ -16,13 +16,6 @@
         android:layout_width="@dimen/category_item_iv_width"
         android:scaleType="centerCrop"
         android:layout_height="@dimen/category_item_iv_height"/>
-<!--
-    <View
-        android:id = "@+id/empty_view"
-        android:layout_height = "15dp"
-        android:layout_width = "match_parent"
-        android:visibility="invisible"
-        android:layout_alignBottom="@id/iv_category" />-->
 
     <TextView
         android:id="@+id/tv_category_name"

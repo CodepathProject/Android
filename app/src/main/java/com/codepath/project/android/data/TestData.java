@@ -75,4 +75,27 @@ public class TestData {
         return (new Double(price)).toString();
     }
 
+    public static String getCategoryImage(String category){
+        switch (category) {
+            case ("Television"):
+                return "https://images-na.ssl-images-amazon.com/images/I/71ZFHJ6u9dL._SL1500_.jpg";
+            case ("Laptop"):
+                return "https://images-na.ssl-images-amazon.com/images/G/01/img16/consumer-electronics/vertical-store/pc/evergreen/pcvs_os_windows_short-tile_v4c.jpg";
+            case ("Speaker"):
+                return "http://i2.wp.com/cdn.bgr.com/2016/12/deals-taotronics-stereo-20w-wireless-portable-speaker.jpg";
+            case ("Monitor"):
+                //return "https://images-na.ssl-images-amazon.com/images/I/61kLoHKVN0L._SL1500_.jpg";
+                 return "https://images-na.ssl-images-amazon.com/images/I/71qUfTdM19L._SL1500_.jpg";
+            case ("Printer"):
+                return "https://images-na.ssl-images-amazon.com/images/I/71vqwRc60pL._SL1500_.jpg";
+            case ("Camera"):
+                return "https://images-na.ssl-images-amazon.com/images/I/81Ds3GA1DvL._SL1500_.jpg";
+            case ("Tablet"):
+                return "https://images-na.ssl-images-amazon.com/images/I/61XZBdl6CtL._SL1000_.jpg";
+            case ("Headphone"):
+                return "http://g-ec2.images-amazon.com/images/G/01/img16/consumer-electronics/other/35373-US-CE-Bose_160x160.jpg";
+            default:
+                return "https://images-na.ssl-images-amazon.com/images/I/71ZFHJ6u9dL._SL1500_.jpg";
+        }
+    }
 }

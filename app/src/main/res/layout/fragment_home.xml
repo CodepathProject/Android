@@ -35,8 +35,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_categories"
                 android:layout_width="match_parent"
-                android:layout_margin="@dimen/home_rv_category_margin"
                 android:layout_below="@id/tv_categories"
+                android:paddingLeft="@dimen/tv_home_left_padding"
                 android:layout_height="wrap_content" />
 
             <TextView
@@ -57,6 +57,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_products"
                 android:layout_below="@id/tv_popular_products"
+                android:paddingLeft="@dimen/tv_home_left_padding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -79,6 +80,7 @@
                 android:id="@+id/rv_reviews"
                 android:layout_below="@id/tv_popular_reviews"
                 android:layout_width="wrap_content"
+                android:paddingLeft="@dimen/tv_home_left_padding"
                 android:layout_height="wrap_content"
                 android:paddingBottom="100dp"/>
         </RelativeLayout>

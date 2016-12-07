@@ -5,185 +5,249 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tvLogIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/white"
+        android:layout_alignParentEnd="true"
+        android:text="Log in"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_margin="20dp"/>
+
     <ImageView
         android:id="@+id/ivIcon"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/citycons_magnify"/>
 
     <TextView
+        android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivIcon"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:textColor="@color/white"
-        android:textSize="30sp"
-        android:text="Welcome to Quest"/>
-    <LinearLayout
+        android:textSize="33sp"
+        android:text="Welcome to Quest."/>
+
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:paddingTop="20dp"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:layout_above="@+id/llSignUp"
-        android:background="#90000000"
-        android:id="@+id/llLogin"
-        android:orientation="vertical">
+        android:layout_height="50dp"
+        android:layout_below="@+id/tvWelcome"
+        android:id="@+id/btnFBLogin"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textSize="20sp"
+        android:text="Continue with Facebook"
+        android:textColor="@color/colorPrimary"
+        android:textAllCaps="false"
+        android:background="@drawable/rounded_corner_fb_login" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            style="@style/loginLinearLayout">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_email"/>
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="9"
-                android:inputType="textEmailAddress"
-                android:id="@+id/etEmail"
-                style="@style/loginEditText"
-                android:hint="Email"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            style="@style/loginLinearLayout">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_password"/>
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="9"
-                android:inputType="textPassword"
-                android:id="@+id/etPassword"
-                style="@style/loginEditText"
-                android:hint="Password"/>
-
-        </LinearLayout>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnLogIn"
-            style="@style/loginButton"
-            android:text="Log In"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Forgot Password?"
-            android:textColor="@color/white"
-            style="@style/loginHelperText"
-            android:layout_gravity="center"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_gravity="right"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="43dp"
-                android:gravity="bottom"
-                style="@style/loginHelperText"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:text="SKIP LOGIN"/>
-
-            <Switch
-                android:id="@+id/swSkipLogin"
-                android:layout_width="wrap_content"
-                android:gravity="top"
-                android:layout_height="37dp"
-                android:layout_marginTop="20dp" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/llSignUp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnFBLogin"
+        android:id="@+id/btnSignUp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textAllCaps="false"
+        android:text="Create Account"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_corner_login" />
 
-        android:layout_margin="10dp"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
+    <Switch
+        android:id="@+id/swSkipLogin"
+        android:layout_width="wrap_content"
+        android:gravity="top"
+        android:layout_height="37dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btnSignUp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="30dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                style="@style/facebookView"
-                />
+        android:textColor="@color/colorDivider"
+        android:textSize="15sp"
+        android:text="By signing up, you agree to the Terms and Conditions and Privacy Policy. You also agree to receive product-related emails from Quest from which you can unsubscribe at any time."/>
 
 
-        </LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:paddingTop="20dp"-->
+        <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+        <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
+        <!--android:layout_below="@+id/tvWelcome"-->
+        <!--android:background="#90000000"-->
+        <!--android:id="@+id/llLogin"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--style="@style/loginLinearLayout">-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:src="@drawable/ic_email"/>-->
+
+            <!--<EditText-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="9"-->
+                <!--android:inputType="textEmailAddress"-->
+                <!--android:id="@+id/etEmail"-->
+                <!--style="@style/loginEditText"-->
+                <!--android:hint="Email"/>-->
+
+        <!--</LinearLayout>-->
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            style="@style/facebookText">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--style="@style/loginLinearLayout">-->
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnFBLogin"
-                android:drawableLeft="@drawable/ic_facebook"
-                android:drawablePadding="5dp"
-                android:padding="5dp"
-                android:text="Log In with Facebook"
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:src="@drawable/ic_password"/>-->
 
-                style="@style/facebookText"
-                android:layout_weight="7"/>
+            <!--<EditText-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="9"-->
+                <!--android:inputType="textPassword"-->
+                <!--android:id="@+id/etPassword"-->
+                <!--style="@style/loginEditText"-->
+                <!--android:hint="Password"/>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnSignUp"
-            style="@style/loginButton"
-            android:text="Sign Up with email"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-    </LinearLayout>
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/btnLogIn"-->
+            <!--style="@style/loginButton"-->
+            <!--android:text="Log In"/>-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Forgot Password?"-->
+            <!--android:textColor="@color/white"-->
+            <!--style="@style/loginHelperText"-->
+            <!--android:layout_gravity="center"/>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="right"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="43dp"-->
+                <!--android:gravity="bottom"-->
+                <!--style="@style/loginHelperText"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:text="SKIP LOGIN"/>-->
+
+            <!--<Switch-->
+                <!--android:id="@+id/swSkipLogin"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:gravity="top"-->
+                <!--android:layout_height="37dp"-->
+                <!--android:layout_marginTop="20dp" />-->
+
+        <!--</LinearLayout>-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/llSignUp"-->
+
+        <!--android:layout_margin="10dp"-->
+        <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+        <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
+        <!--android:paddingTop="@dimen/activity_horizontal_margin"-->
+        <!--android:paddingBottom="@dimen/activity_horizontal_margin"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp">-->
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--style="@style/facebookView"-->
+                <!--/>-->
+
+
+        <!--</LinearLayout>-->
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--style="@style/facebookText">-->
+
+            <!--<Button-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/btnFBLogin"-->
+                <!--android:drawableLeft="@drawable/ic_facebook"-->
+                <!--android:drawablePadding="5dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:text="Log In with Facebook"-->
+
+                <!--style="@style/facebookText"-->
+                <!--android:layout_weight="7"/>-->
+
+        <!--</LinearLayout>-->
+
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/btnSignUp"-->
+            <!--style="@style/loginButton"-->
+            <!--android:text="Sign Up with email"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"/>-->
+    <!--</LinearLayout>-->
 
 </RelativeLayout>

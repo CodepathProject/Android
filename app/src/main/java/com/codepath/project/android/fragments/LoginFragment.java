@@ -9,16 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.LoadingActivity;
 import com.codepath.project.android.activities.LoginActivity;
+import com.codepath.project.android.activities.NewLoginActivity;
 import com.codepath.project.android.activities.SignUpActivity;
-import com.codepath.project.android.network.ParseHelper;
-import com.codepath.project.android.utils.GeneralUtils;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;
@@ -42,9 +41,9 @@ import butterknife.Unbinder;
 
 public class LoginFragment extends Fragment {
 
-    @BindView(R.id.etEmail) EditText etEmail;
-    @BindView(R.id.etPassword) EditText etPassword;
-    @BindView(R.id.btnLogIn) Button btnLogIn;
+//    @BindView(R.id.etEmail) EditText etEmail;
+//    @BindView(R.id.etPassword) EditText etPassword;
+    @BindView(R.id.tvLogIn) TextView tvLogIn;
     @BindView(R.id.btnSignUp) Button btnSignUp;
     @BindView(R.id.swSkipLogin) Switch swSkipLogin;
     @BindView(R.id.btnFBLogin) Button btnFBLogin;
@@ -64,22 +63,12 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         unbinder = ButterKnife.bind(this, view);
-        btnLogIn.setOnClickListener(v -> ParseUser.logInInBackground(etEmail.getText().toString(),
-                                    etPassword.getText().toString(),
-                (user, e) -> {
-                    if (user != null) {
-                        GeneralUtils.showSnackBar(getView(),
-                                ParseHelper.PARSE_LOGIN_SUCCESS_SNACKTOAST,
-                                getActivity().getColor(R.color.colorGreen),
-                                getActivity().getColor(R.color.colorGray));
-                                startNextActivity();
-                    } else {
-                        GeneralUtils.showSnackBar(getView(),
-                                ParseHelper.PARSE_LOGIN_FAILED_SNACKTOAST,
-                                getActivity().getColor(R.color.colorRed),
-                                getActivity().getColor(R.color.colorGray));
-                    }
-                }));
+
+        tvLogIn.setOnClickListener(v1 -> {
+            Intent intent = new Intent(getActivity(), NewLoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        });
         btnSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SignUpActivity.class);
             startActivity(intent);

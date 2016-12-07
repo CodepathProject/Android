@@ -45,5 +45,5 @@
 
     <dimen name="feed_divider">10dp</dimen>
 
-    <integer  name="animation_duration">400</integer>
+    <integer name="animation_duration">400</integer>
 </resources>

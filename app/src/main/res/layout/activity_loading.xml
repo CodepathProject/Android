@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context="com.codepath.project.android.activities.SplashScreenActivity">
-<!--
+
     <pl.droidsonroids.gif.GifTextView
         android:id="@+id/gif"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/loading10"
+        android:background="@drawable/pacman"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        /> -->
+        />
 </RelativeLayout>

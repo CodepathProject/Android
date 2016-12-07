@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,14 +33,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 
 public class FeedFragment extends Fragment {
 
     @BindView(R.id.rvFeeds)
     RecyclerView rvFeeds;
     @BindView(R.id.swipeContainer)
-    WaveSwipeRefreshLayout swipeContainer;
+    SwipeRefreshLayout swipeContainer;
 
     ArrayList<Feed> feeds = new ArrayList<>();
     ComplexRecyclerViewAdapter feedsAdapter;

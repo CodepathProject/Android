@@ -38,11 +38,25 @@ public class TestData {
 
     private static final int DATA_SIZE = 100;
 
+
+    private static final int [] priceList = {122, 123, 123, 125, 125, 126, 130, 129, 127, 126, 126 };
+
+    /*
     public static DataPoint[] getDataPoint(){
         DataPoint[] dataPoints = new DataPoint[DATA_SIZE];
 
         for(int i = 0; i < DATA_SIZE; i++){
             DataPoint d = new DataPoint(i, getRandom2(i));
+            dataPoints[i] = d;
+        }
+        return dataPoints;
+    }*/
+
+    public static DataPoint[] getDataPoint(){
+        DataPoint[] dataPoints = new DataPoint[priceList.length];
+
+        for(int i = 0; i < priceList.length; i++){
+            DataPoint d = new DataPoint(i, priceList[i]);
             dataPoints[i] = d;
         }
         return dataPoints;
@@ -85,7 +99,7 @@ public class TestData {
                 return "http://i2.wp.com/cdn.bgr.com/2016/12/deals-taotronics-stereo-20w-wireless-portable-speaker.jpg";
             case ("Monitor"):
                 //return "https://images-na.ssl-images-amazon.com/images/I/61kLoHKVN0L._SL1500_.jpg";
-                 return "https://images-na.ssl-images-amazon.com/images/I/71qUfTdM19L._SL1500_.jpg";
+                return "https://images-na.ssl-images-amazon.com/images/I/71qUfTdM19L._SL1500_.jpg";
             case ("Printer"):
                 return "https://images-na.ssl-images-amazon.com/images/I/71vqwRc60pL._SL1500_.jpg";
             case ("Camera"):

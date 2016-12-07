@@ -112,6 +112,7 @@ public class FeedFragment extends Fragment {
                         intent = new Intent(getActivity(), UserDetailActivity.class);
                         intent.putExtra("USER_ID", feeds.get(position-1).getToUser().getObjectId());
                         startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                     } else {
                         intent = new Intent(getActivity(), ProductViewActivity.class);
                         intent.putExtra("productId", feeds.get(position-1).getToProduct().getObjectId());

@@ -281,5 +281,6 @@ public class HomeActivity extends AppCompatActivity
         Intent intent = new Intent(HomeActivity.this, UserDetailActivity.class);
         intent.putExtra("USER_ID", userId);
         startActivity(intent);
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
     }
 }

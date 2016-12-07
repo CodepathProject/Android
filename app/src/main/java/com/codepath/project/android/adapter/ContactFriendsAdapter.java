@@ -13,9 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
+import com.codepath.project.android.activities.HomeActivity;
+import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
+import com.codepath.project.android.model.Product;
 import com.codepath.project.android.utils.GeneralUtils;
 import com.squareup.picasso.Picasso;
 
@@ -89,6 +92,7 @@ public class ContactFriendsAdapter extends
         Intent intent = new Intent(getContext(), UserDetailActivity.class);
         intent.putExtra("USER_ID", userId);
         getContext().startActivity(intent);
+        ((ProductViewActivity)mContext).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
     }
 
     // Returns the total count of items in the list

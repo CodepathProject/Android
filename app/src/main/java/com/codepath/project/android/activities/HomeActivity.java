@@ -229,6 +229,7 @@ public class HomeActivity extends AppCompatActivity
             ParseUser.logOut();
             Intent logoutIntent = new Intent(this, SplashScreenActivity.class);
             startActivity(logoutIntent);
+            finish();
         }
 
         Fragment fragment = null;

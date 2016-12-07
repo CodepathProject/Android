@@ -31,36 +31,41 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivIcon"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginTop="20dp"
         android:textColor="@color/white"
-        android:textSize="33sp"
+        android:textSize="30sp"
         android:text="Welcome to Quest."/>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/tvWelcome"
         android:id="@+id/btnFBLogin"
         android:layout_marginTop="40dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="Continue with Facebook"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-light"
         android:textColor="@color/colorPrimary"
         android:textAllCaps="false"
         android:background="@drawable/rounded_corner_fb_login" />
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/btnFBLogin"
         android:id="@+id/btnSignUp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:textAllCaps="false"
         android:text="Create Account"
-        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-light"
+        android:textSize="18sp"
         android:textColor="@color/white"
         android:background="@drawable/rounded_corner_login" />
 
@@ -80,9 +85,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/colorDivider"
+        android:textColor="@color/action_gray"
+        android:fontFamily="sans-serif-light"
         android:textSize="15sp"
-        android:text="By signing up, you agree to the Terms and Conditions and Privacy Policy. You also agree to receive product-related emails from Quest from which you can unsubscribe at any time."/>
+        android:text="By signing up, you agree to the Terms and Conditions and Privacy Policy."/>
 
 
 

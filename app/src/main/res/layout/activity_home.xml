@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:paddingStart="20dp"
-        app:itemTextColor="@color/colorPrimaryDark"
+        app:itemTextColor="@color/colorGray"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home"
         app:menu="@menu/activity_home_drawer" />

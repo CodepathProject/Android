@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.codepath.project.android.activities.LoadingActivity;
 import com.codepath.project.android.adapter.CategoryAdapter;
+import com.codepath.project.android.data.TestData;
 import com.codepath.project.android.helpers.Constants;
 import com.codepath.project.android.helpers.Utils;
 import com.codepath.project.android.model.AppUser;
@@ -101,7 +102,8 @@ public class ParseHelper {
                     String  categoryName = entry.getKey();
                     String  imageUrl = entry.getValue().getImageUrl();
                     Category category = new Category();
-                    category.setImageUrl(imageUrl);
+                    //category.setImageUrl(imageUrl);
+                    category.setImageUrl(TestData.getCategoryImage(categoryName));
                     category.setName(categoryName);
                     categoryListTemp.add(category);
                 }

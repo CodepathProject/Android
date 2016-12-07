@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.LoadingActivity;
@@ -91,8 +90,6 @@ public class LoginFragment extends Fragment {
                     Log.d("MyApp", "User signed up and logged in through Facebook!");
                     getUserDetailsFromFB(user);
                 } else {
-                    Toast.makeText(getActivity(), "Logged in", Toast.LENGTH_SHORT)
-                            .show();
                     Log.d("MyApp", "User logged in through Facebook!");
                     startNextActivity();
                 }

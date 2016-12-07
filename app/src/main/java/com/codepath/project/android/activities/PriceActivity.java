@@ -1,9 +1,7 @@
 package com.codepath.project.android.activities;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -14,12 +12,12 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.helpers.Constants;
 import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Product;
-import com.codepath.project.android.model.Review;
-import com.jjoe64.graphview.GraphView;
-import com.parse.ParseObject;
+import com.parse.ParseCloud;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,9 +32,13 @@ public class PriceActivity extends AppCompatActivity {
     EditText etPrice;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.etStore)
+    EditText etStore;
 
     private String productPrice;
     private String productId;
+
+    private Product prod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +56,11 @@ public class PriceActivity extends AppCompatActivity {
     }
 
 
-    private void updatePrice(String newPrice){
+    private void updatePrice(String newPrice, String store){
         ParseQuery<Product> query = ParseQuery.getQuery(Product.class);
         query.getInBackground(productId, (product, e) -> {
             if (e == null) {
+                prod = product;
                 product.setPrice(newPrice);
                 product.saveInBackground();
                 Feed feed = new Feed();
@@ -66,6 +69,18 @@ public class PriceActivity extends AppCompatActivity {
                 feed.setFromUser(ParseUser.getCurrentUser());
                 feed.setToProduct(product);
                 feed.saveInBackground();
+
+                Map<String, String> parameters = new HashMap<>();
+                parameters.put("price", "$" + newPrice);
+                parameters.put("store", store);
+                parameters.put("name", product.getName());
+                parameters.put("productId", productId);
+                ParseCloud.callFunctionInBackground("pricePush", parameters, (mapObject, e1) -> {
+                    if (e1 == null){
+                        System.out.println("sent");
+                    }
+                });
+
                 finish();
             } else {
                 Toast.makeText(PriceActivity.this, "parse error", Toast.LENGTH_SHORT).show();
@@ -76,12 +91,13 @@ public class PriceActivity extends AppCompatActivity {
 
     public void onSubmitPrice(View view){
         String price = etPrice.getText().toString();
+        String store = etStore.getText().toString();
         if(price.length() == 0){
             Toast.makeText(PriceActivity.this, "Price cannot be null", Toast.LENGTH_SHORT).show();
             return;
         }
         if(new Double(price) < new Double(productPrice)){
-            updatePrice(price);
+            updatePrice(price, store);
         }
     }
 }

@@ -26,7 +26,7 @@
     <dimen name="category_item_iv_height">160dp</dimen>
     <dimen name="category_item_iv_width">160dp</dimen>
     <dimen name="category_item_tv_padding">10dp</dimen>
-    <dimen name="category_item_tv_size">16sp</dimen>
+    <dimen name="category_item_tv_size">17sp</dimen>
 
     <dimen name="category_detail_card_height">220dp</dimen>
     <dimen name="category_detail_card_width">190dp</dimen>

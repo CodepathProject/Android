@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Recommend;
+import com.codepath.project.android.utils.GeneralUtils;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
@@ -39,6 +41,7 @@ import butterknife.Unbinder;
 
 public class UserDetailFragment extends Fragment {
 
+    @BindView(R.id.ivBackgroundImage) ImageView ivBackgroundImage;
     @BindView(R.id.ivProfileImage) ImageView ivProfileImage;
     @BindView(R.id.tvUserFirstName) TextView tvUserFirstName;
     @BindView(R.id.tvFollowing) TextView tvFollowing;
@@ -110,9 +113,22 @@ public class UserDetailFragment extends Fragment {
                         });
                     }
                 }
-                Picasso.with(getContext())
-                        .load(object.getString("pictureUrl")).transform(new CircleTransform())
-                        .into(ivProfileImage);
+
+                if(!TextUtils.isEmpty(object.getString("pictureUrl"))) {
+                    Picasso.with(getContext())
+                            .load(object.getString("pictureUrl")).transform(new CircleTransform())
+                            .into(ivProfileImage);
+                } else {
+                    Picasso.with(getContext())
+                            .load(GeneralUtils.getProfileUrl(object.getObjectId())).transform(new CircleTransform())
+                            .into(ivProfileImage);
+                }
+
+                if(!TextUtils.isEmpty(object.getString("coverUrl"))) {
+                    Picasso.with(getContext())
+                            .load(object.getString("coverUrl")).transform(new CircleTransform())
+                            .into(ivBackgroundImage);
+                }
                 String upperString = object.getString("firstName").substring(0,1).toUpperCase() + object.getString("firstName").substring(1);
                 tvUserFirstName.setText(upperString);
                 AppUser currentUser = (AppUser) object;

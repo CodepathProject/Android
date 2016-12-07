@@ -160,6 +160,7 @@ public class UserDetailFragment extends Fragment {
                     if(feeds.get(position).getType().equals("followUser")) {
                         intent = new Intent(getActivity(), UserDetailActivity.class);
                         intent.putExtra("USER_ID", feeds.get(position).getToUser().getObjectId());
+                        getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                     } else {
                         intent = new Intent(getActivity(), ProductViewActivity.class);
                         intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());

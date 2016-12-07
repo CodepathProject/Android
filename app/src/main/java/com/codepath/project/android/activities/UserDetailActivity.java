@@ -22,5 +22,12 @@ public class UserDetailActivity extends AppCompatActivity {
         fragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.fragmentUserDetail, fragment).commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        // finish() is called in super: we only override this method to be able to override the transition
+        super.onBackPressed();
+        overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
+    }
 }
 

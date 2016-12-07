@@ -129,6 +129,7 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
                 Intent intent = new Intent(DetailedReviewActivity.this, UserDetailActivity.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
+                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
             }
         });
     }

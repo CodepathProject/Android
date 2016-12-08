@@ -123,7 +123,12 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         AppUser toUser = (AppUser) feed.getToUser();
         viewHolder.rating.setVisibility(View.GONE);
         tvContent.setVisibility(View.GONE);
-        String fromUserName = fromUser.getString("firstName").substring(0,1).toUpperCase() + fromUser.getString("firstName").substring(1);
+        String fromUserName;
+        if(fromUser != null) {
+            fromUserName = fromUser.getString("firstName").substring(0, 1).toUpperCase() + fromUser.getString("firstName").substring(1);
+        } else {
+            fromUserName = "Batman";
+        }
         if(feed.getType().equals("followUser")) {
             viewHolder.tvUserAction.setText(" followed a user");
             String upperString = toUser.getString("firstName").substring(0,1).toUpperCase() + toUser.getString("firstName").substring(1);
@@ -256,7 +261,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     private void setImage(AppUser fromUser, FeedHolder viewHolder){
-        if(!TextUtils.isEmpty(fromUser.getImage())) {
+        if(fromUser != null && !TextUtils.isEmpty(fromUser.getImage())) {
             Picasso.with(mContext).load(fromUser.getImage()).transform(new CircleTransform()).into(viewHolder.ivProfile);
         } else {
             Picasso.with(mContext).load(GeneralUtils.getProfileUrl(fromUser.getObjectId())).transform(new CircleTransform()).into(viewHolder.ivProfile);

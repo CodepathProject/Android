@@ -18,6 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -157,17 +159,31 @@ public class ProductViewActivity extends AppCompatActivity {
         collapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
     }
 
+    public static int darker (int color, float factor) {
+        int a = Color.alpha( color );
+        int r = Color.red( color );
+        int g = Color.green( color );
+        int b = Color.blue( color );
+
+        return Color.argb( a,
+                Math.max( (int)(r * factor), 0 ),
+                Math.max( (int)(g * factor), 0 ),
+                Math.max( (int)(b * factor), 0 ) );
+    }
+
     private void setProductImage() {
         Picasso.with(this).load(product.getImageUrl()).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 ivProductImage.setImageBitmap(bitmap);
-                Palette.from(bitmap).maximumColorCount(15).generate(palette -> {
+                Palette.from(bitmap).maximumColorCount(25).generate(palette -> {
                     Palette.Swatch vibrant = palette.getVibrantSwatch();
                     if (vibrant != null) {
+                        Window window = getWindow();
+                        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                        window.setStatusBarColor(darker(palette.getMutedColor(vibrant.getRgb()), 0.8f));
                         collapsingToolbar.setContentScrimColor(palette.getMutedColor(vibrant.getRgb()));
-                        collapsingToolbar.setStatusBarScrimColor(palette.getDarkMutedColor(vibrant.getRgb()));
-                        supportStartPostponedEnterTransition();
                     }
                 });
             }

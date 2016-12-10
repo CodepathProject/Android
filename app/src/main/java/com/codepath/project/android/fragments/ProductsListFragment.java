@@ -2,6 +2,7 @@ package com.codepath.project.android.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -64,7 +65,9 @@ public class ProductsListFragment extends Fragment {
                 (rview, position, v) -> {
                     Intent intent = new Intent(getActivity(), ProductViewActivity.class);
                     intent.putExtra("productId", productsList.get(position).getObjectId());
-                    startActivity(intent);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation(getActivity(), v.findViewById(R.id.ivProduct), "ivProductImage");
+                    startActivity(intent, options.toBundle());
                 }
         );
 

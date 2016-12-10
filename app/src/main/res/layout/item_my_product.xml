@@ -10,6 +10,7 @@
 
     <ImageView
         android:id="@+id/ivProduct"
+        android:transitionName="ivProductImage"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         tools:src="@drawable/quest"

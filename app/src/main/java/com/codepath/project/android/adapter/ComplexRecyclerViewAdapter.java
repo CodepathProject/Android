@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.DetailedReviewActivity;
-import com.codepath.project.android.activities.HomeActivity;
 import com.codepath.project.android.activities.SplashScreenActivity;
 import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.helpers.CircleTransform;
@@ -262,7 +261,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             Intent intent = new Intent(mContext, UserDetailActivity.class);
             intent.putExtra("USER_ID", fromUser.getObjectId());
             mContext.startActivity(intent);
-            ((HomeActivity)mContext).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+            ((Activity)mContext).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         });
     }
 }

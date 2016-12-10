@@ -3,6 +3,7 @@ package com.codepath.project.android.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -20,7 +21,7 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.activities.FollowActivity;
 import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.activities.UserDetailActivity;
-import com.codepath.project.android.adapter.FeedsAdapter;
+import com.codepath.project.android.adapter.ComplexRecyclerViewAdapter;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.helpers.ItemClickSupport;
 import com.codepath.project.android.model.AppUser;
@@ -51,7 +52,7 @@ public class UserDetailFragment extends Fragment {
     @BindView(R.id.followUser) TextView followUser;
 
     ArrayList<Feed> feeds = new ArrayList<>();
-    FeedsAdapter feedsAdapter;
+    ComplexRecyclerViewAdapter feedsAdapter;
 
     String userId;
 
@@ -157,15 +158,18 @@ public class UserDetailFragment extends Fragment {
         ItemClickSupport.addTo(rvFeeds).setOnItemClickListener(
                 (rview, position, v) -> {
                     Intent intent;
-                    if(feeds.get(position).getType().equals("followUser")) {
+                    if(feeds.get(position-1).getType().equals("followUser")) {
                         intent = new Intent(getActivity(), UserDetailActivity.class);
-                        intent.putExtra("USER_ID", feeds.get(position).getToUser().getObjectId());
+                        intent.putExtra("USER_ID", feeds.get(position-1).getToUser().getObjectId());
+                        startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                     } else {
                         intent = new Intent(getActivity(), ProductViewActivity.class);
-                        intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());
+                        intent.putExtra("productId", feeds.get(position-1).getToProduct().getObjectId());
+                        ActivityOptionsCompat options = ActivityOptionsCompat.
+                                makeSceneTransitionAnimation(getActivity(), v.findViewById(R.id.ivProductImage), "ivProductImage");
+                        startActivity(intent, options.toBundle());
                     }
-                    startActivity(intent);
                 }
         );
 
@@ -184,7 +188,7 @@ public class UserDetailFragment extends Fragment {
 
     private void setUpRecyclerView(ParseUser parseUser) {
         feeds = new ArrayList<>();
-        feedsAdapter = new FeedsAdapter(getContext(), feeds);
+        feedsAdapter = new ComplexRecyclerViewAdapter(getContext(), feeds, null);
         rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.feed_divider).build());
         rvFeeds.setAdapter(feedsAdapter);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -197,6 +201,7 @@ public class UserDetailFragment extends Fragment {
         query.include("fromUser");
         query.include("toUser");
         query.include("toProduct");
+        query.include("review");
         query.setLimit(10);
         query.findInBackground((feedsList, err) -> {
             if (err == null) {

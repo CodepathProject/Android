@@ -79,8 +79,6 @@ public class FeedFragment extends Fragment {
     private void setUpRecyclerView() {
         feeds = new ArrayList<>();
         feedsAdapter = new ComplexRecyclerViewAdapter(getContext(), feeds, friendsToFollow);
-//        swipeContainer.setColorSchemeColors(Color.WHITE, Color.WHITE);
-//        swipeContainer.setWaveColor(Color.rgb(0,96,58));
         rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.feed_divider).build());
         rvFeeds.setAdapter(feedsAdapter);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

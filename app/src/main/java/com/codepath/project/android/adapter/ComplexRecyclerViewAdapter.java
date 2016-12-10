@@ -3,8 +3,6 @@ package com.codepath.project.android.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -149,11 +147,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             tvContent.setOnClickListener(v -> {
                 Intent intent = new Intent(mContext, DetailedReviewActivity.class);
                 intent.putExtra("reviewId", feed.getReview().getObjectId());
-                Pair<View, String> p1 = Pair.create(viewHolder.ivProfile, "ivProfile");
-                Pair<View, String> p2 = Pair.create(viewHolder.tvContent, "tvReview");
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation((Activity) mContext, p1, p2);
-                mContext.startActivity(intent, options.toBundle());
+                mContext.startActivity(intent);
+                ((Activity)mContext).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
             });
         } else if(feed.getType().equals("addPrice")) {
             tvContent.setVisibility(View.VISIBLE);
@@ -172,11 +167,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             tvContent.setOnClickListener(v -> {
                 Intent intent = new Intent(mContext, DetailedReviewActivity.class);
                 intent.putExtra("reviewId", feed.getReview().getObjectId());
-                Pair<View, String> p1 = Pair.create(viewHolder.ivProfile, "ivProfile");
-                Pair<View, String> p2 = Pair.create(viewHolder.tvContent, "tvReview");
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation((Activity) mContext, p1, p2);
-                mContext.startActivity(intent, options.toBundle());
+                mContext.startActivity(intent);
+                ((Activity)mContext).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
             });
         }
         viewHolder.tvUserName.setText(fromUserName);

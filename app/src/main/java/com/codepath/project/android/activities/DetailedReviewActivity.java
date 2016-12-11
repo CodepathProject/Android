@@ -36,6 +36,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class DetailedReviewActivity extends AppCompatActivity implements OnLikeListener {
 
@@ -234,7 +235,7 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
         @Override
         public void onBindViewHolder(ImageAdapter.ViewHolder viewHolder, int position) {
             String image = mImages.get(position);
-            Picasso.with(mContext).load(image).placeholder(R.drawable.placeholder).into(viewHolder.ivReviewImage);
+            Picasso.with(mContext).load(image).placeholder(R.drawable.placeholder).transform(new RoundedCornersTransformation(10, 10)).into(viewHolder.ivReviewImage);
 
             viewHolder.ivReviewImage.setOnClickListener(v -> {
                 Intent intent = new Intent(mContext, ImageFullscreenActivity.class);

@@ -246,8 +246,8 @@ public class ProductViewActivity extends AppCompatActivity {
                 List<Product> productShelfList = user.getShelfProducts();
                 if(ifListContains(productShelfList)) {
                     user.removeShelfProduct(product);
-                    tvShelf.setTextColor(ContextCompat.getColor(this, R.color.colorGray));
-                    DrawableCompat.setTint(tvShelf.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorGray));
+                    tvShelf.setTextColor(ContextCompat.getColor(this, R.color.colorLightGray3));
+                    DrawableCompat.setTint(tvShelf.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorLightGray3));
                     tvShelf.setText("Shelf");
                 } else {
                     user.addShelfProduct(product);
@@ -272,8 +272,8 @@ public class ProductViewActivity extends AppCompatActivity {
                 if(ifListContains(productWishList)) {
                     user.removeWishListProduct(product);
                     tvWatch.setText("Watch");
-                    tvWatch.setTextColor(ContextCompat.getColor(this, R.color.colorGray));
-                    DrawableCompat.setTint(tvWatch.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorGray));
+                    tvWatch.setTextColor(ContextCompat.getColor(this, R.color.colorLightGray3));
+                    DrawableCompat.setTint(tvWatch.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorLightGray3));
                 } else {
                     user.addWishListProduct(product);
                     tvWatch.setText("Watching");
@@ -297,8 +297,8 @@ public class ProductViewActivity extends AppCompatActivity {
                 if(ifListContains(followProducts)) {
                     user.removeFollowProduct(product);
                     tvFollow.setText("Follow");
-                    tvFollow.setTextColor(ContextCompat.getColor(this, R.color.colorGray));
-                    DrawableCompat.setTint(tvFollow.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorGray));
+                    tvFollow.setTextColor(ContextCompat.getColor(this, R.color.colorLightGray3));
+                    DrawableCompat.setTint(tvFollow.getCompoundDrawables()[1], ContextCompat.getColor(this, R.color.colorLightGray3));
                 } else {
                     Feed feed = new Feed();
                     feed.setType("followProduct");

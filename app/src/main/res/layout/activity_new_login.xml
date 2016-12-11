@@ -46,7 +46,7 @@
         android:drawableStart="@drawable/ic_password"
         android:layout_below="@+id/etEmail"/>
 
-    <Button
+    <com.codepath.project.android.views.QuestTextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/etPassword"
@@ -57,6 +57,7 @@
         android:textAllCaps="false"
         android:text="Submit"
         android:textSize="20sp"
+        android:gravity="center"
         android:textColor="@color/white"
         android:background="@drawable/rounded_corner_login" />
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.project.android.R;
@@ -20,7 +21,7 @@ public class NewLoginActivity extends AppCompatActivity {
     @BindView(R.id.etPassword)
     EditText etPassword;
     @BindView(R.id.btnSubmit)
-    Button btnSubmit;
+    TextView btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

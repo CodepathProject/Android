@@ -23,7 +23,6 @@ import com.codepath.project.android.model.Recommend;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,7 +80,7 @@ public class FeedFragment extends Fragment implements PtrHandler {
     private void setUpRecyclerView() {
         feeds = new ArrayList<>();
         feedsAdapter = new ComplexRecyclerViewAdapter(getContext(), feeds, friendsToFollow);
-        rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.feed_divider).build());
+        //rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.feed_divider).build());
         rvFeeds.setAdapter(feedsAdapter);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mLayoutManager.scrollToPosition(0);
@@ -90,6 +89,8 @@ public class FeedFragment extends Fragment implements PtrHandler {
 
         swipeContainer.setPtrHandler(this);
         swipeContainer.setLastUpdateTimeRelateObject(this);
+
+        //feeds.
 
         rvFeeds.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -111,6 +112,8 @@ public class FeedFragment extends Fragment implements PtrHandler {
         fetchFeeds(0);
 
         rvFeeds.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+
+
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 page++;
@@ -121,14 +124,17 @@ public class FeedFragment extends Fragment implements PtrHandler {
         ItemClickSupport.addTo(rvFeeds).setOnItemClickListener(
                 (rview, position, v) -> {
                     Intent intent;
-                    if(feeds.get(position-1).getType().equals("followUser")) {
+                    if(position > 0) {
+                        position--;
+                    }
+                    if(feeds.get(position).getType().equals("followUser")) {
                         intent = new Intent(getActivity(), UserDetailActivity.class);
-                        intent.putExtra("USER_ID", feeds.get(position-1).getToUser().getObjectId());
+                        intent.putExtra("USER_ID", feeds.get(position).getToUser().getObjectId());
                         startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                     } else {
                         intent = new Intent(getActivity(), ProductViewActivity.class);
-                        intent.putExtra("productId", feeds.get(position-1).getToProduct().getObjectId());
+                        intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());
                         ActivityOptionsCompat options = ActivityOptionsCompat.
                                 makeSceneTransitionAnimation(getActivity(), v.findViewById(R.id.ivProductImage), "ivProductImage");
                         startActivity(intent, options.toBundle());

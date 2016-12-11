@@ -49,7 +49,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
+        if (position == 1) {
             return USER;
         } else {
             return FEED;
@@ -102,18 +102,22 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             vh1.rvFriends.setAdapter(friendsAdapter);
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
             mLayoutManager.scrollToPosition(0);
-            vh1.rvFriends.setNestedScrollingEnabled(false);
+            //vh1.rvFriends.setNestedScrollingEnabled(false);
             vh1.rvFriends.setLayoutManager(mLayoutManager);
             vh1.rvFriends.setItemAnimator(new SlideInLeftAnimator());
             friendsAdapter.notifyDataSetChanged();
         } else {
             vh1.tvTitle.setVisibility(View.GONE);
             vh1.rvFriends.setVisibility(View.GONE);
+            vh1.primerdivisor.setVisibility(View.GONE);
         }
     }
 
     private void configureFeedHolder(FeedHolder viewHolder, int position) {
-        Feed feed = items.get(position-1);
+        if(position > 0) {
+            position--;
+        }
+        Feed feed = items.get(position);
         TextView tvContent = viewHolder.tvContent;
         AppUser fromUser = (AppUser) feed.getFromUser();
         Product toProduct = feed.getToProduct();

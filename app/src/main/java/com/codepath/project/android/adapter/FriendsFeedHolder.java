@@ -10,10 +10,12 @@ public class FriendsFeedHolder extends RecyclerView.ViewHolder {
 
     public RecyclerView rvFriends;
     public TextView tvTitle;
+    public View primerdivisor;
 
     public FriendsFeedHolder(View v) {
         super(v);
         rvFriends = (RecyclerView) v.findViewById(R.id.rvFriends);
         tvTitle = (TextView) v.findViewById(R.id.tvTitle);
+        primerdivisor = (View) v.findViewById(R.id.primerdivisor);
     }
 }

@@ -31,7 +31,6 @@ import com.codepath.project.android.utils.GeneralUtils;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,6 @@ public class UserDetailFragment extends Fragment {
     @BindView(R.id.tvUserFirstName) TextView tvUserFirstName;
     @BindView(R.id.tvFollowing) TextView tvFollowing;
     @BindView(R.id.tvFollowingLabel) TextView tvFollowingLabel;
-    @BindView(R.id.tvFollowers) TextView tvFollowers;
     @BindView(R.id.rvUserTimeline) RecyclerView rvFeeds;
     @BindView(R.id.followUser) TextView followUser;
 
@@ -158,14 +156,17 @@ public class UserDetailFragment extends Fragment {
         ItemClickSupport.addTo(rvFeeds).setOnItemClickListener(
                 (rview, position, v) -> {
                     Intent intent;
-                    if(feeds.get(position-1).getType().equals("followUser")) {
+                    if(position > 0) {
+                        position--;
+                    }
+                    if(feeds.get(position).getType().equals("followUser")) {
                         intent = new Intent(getActivity(), UserDetailActivity.class);
-                        intent.putExtra("USER_ID", feeds.get(position-1).getToUser().getObjectId());
+                        intent.putExtra("USER_ID", feeds.get(position).getToUser().getObjectId());
                         startActivity(intent);
                         getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                     } else {
                         intent = new Intent(getActivity(), ProductViewActivity.class);
-                        intent.putExtra("productId", feeds.get(position-1).getToProduct().getObjectId());
+                        intent.putExtra("productId", feeds.get(position).getToProduct().getObjectId());
                         ActivityOptionsCompat options = ActivityOptionsCompat.
                                 makeSceneTransitionAnimation(getActivity(), v.findViewById(R.id.ivProductImage), "ivProductImage");
                         startActivity(intent, options.toBundle());
@@ -189,7 +190,7 @@ public class UserDetailFragment extends Fragment {
     private void setUpRecyclerView(ParseUser parseUser) {
         feeds = new ArrayList<>();
         feedsAdapter = new ComplexRecyclerViewAdapter(getContext(), feeds, null);
-        rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.feed_divider).build());
+        //rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.feed_divider).build());
         rvFeeds.setAdapter(feedsAdapter);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mLayoutManager.scrollToPosition(0);

@@ -10,7 +10,6 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.ViewType;
-import com.codepath.project.android.model.Product;
 import com.codepath.project.android.network.ParseHelper;
 
 import java.util.ArrayList;
@@ -24,8 +23,7 @@ public class CategoryActivity extends AppCompatActivity {
     RecyclerView rvCategory;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    @Override
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);

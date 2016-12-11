@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
@@ -40,11 +38,8 @@ import butterknife.Unbinder;
 
 public class LoginFragment extends Fragment {
 
-//    @BindView(R.id.etEmail) EditText etEmail;
-//    @BindView(R.id.etPassword) EditText etPassword;
     @BindView(R.id.tvLogIn) TextView tvLogIn;
     @BindView(R.id.btnSignUp) TextView btnSignUp;
-    @BindView(R.id.swSkipLogin) Switch swSkipLogin;
     @BindView(R.id.btnFBLogin) TextView btnFBLogin;
 
 
@@ -95,15 +90,6 @@ public class LoginFragment extends Fragment {
                 }
             });
         });
-
-        swSkipLogin.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked){
-                startNextActivity();
-            }else{
-                // dp nothing
-            }
-        });
-
 
         return view;
     }
@@ -165,7 +151,6 @@ public class LoginFragment extends Fragment {
     }
 
     private void getFriendsDetailsFromFB(ParseUser user) {
-        // Suggested by https://disqus.com/by/dominiquecanlas/
         Bundle parameters = new Bundle();
         parameters.putString("fields", "email,name,picture");
         new GraphRequest(

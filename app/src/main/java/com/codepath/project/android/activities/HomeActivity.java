@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,18 +64,9 @@ public class HomeActivity extends AppCompatActivity
         setNavigationDrawer();
         addFragment();
         if(ParseUser.getCurrentUser() != null) {
-            Log.e("quest", "onCreate: yes user");
             ParseInstallation pi = ParseInstallation.getCurrentInstallation();
             pi.put("user", ParseUser.getCurrentUser());
             pi.saveInBackground();
-
-
-//            AppUser u1 = (AppUser) ParseUser.getCurrentUser();
-//            ParseQuery<ParseUser> query = ParseUser.getQuery();
-//            query.getInBackground("IOYWhjH4Mc", (object, e) -> {
-//                u1.setFollowUsers(object);
-//                u1.saveInBackground();
-//            });
         }
     }
 

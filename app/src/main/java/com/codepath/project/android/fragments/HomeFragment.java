@@ -150,18 +150,19 @@ public class HomeFragment extends Fragment {
             List<ParseUser> followUsers = cuser.getFollowUsers();
             if (followUsers != null && followUsers.size() > 0) {
                 ParseObject.fetchAllIfNeededInBackground(followUsers, (objects, e) -> {
-                    List<ParseUser> followUsers1 = objects;
                     ConcurrentMap<String, Integer> productMap = new ConcurrentHashMap<>();
-                    for (ParseUser u1 : followUsers1) {
+                    for (ParseUser u1 : objects) {
                         AppUser a1 = (AppUser) u1;
                         List<Product> plist = a1.getShelfProducts();
-                        for (Product p1 : plist) {
-                            if (!productMap.containsKey(p1.getObjectId())) {
-                                productMap.put(p1.getObjectId(), 1);
-                            } else {
-                                Integer val = productMap.get(p1.getObjectId());
-                                val++;
-                                productMap.replace(p1.getObjectId(), val);
+                        if(plist != null && plist.size() > 0) {
+                            for (Product p1 : plist) {
+                                if (!productMap.containsKey(p1.getObjectId())) {
+                                    productMap.put(p1.getObjectId(), 1);
+                                } else {
+                                    Integer val = productMap.get(p1.getObjectId());
+                                    val++;
+                                    productMap.replace(p1.getObjectId(), val);
+                                }
                             }
                         }
                     }

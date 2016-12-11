@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
 
     <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvLogIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:textColor="@color/white"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="20dp"
         android:text="Log in"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_margin="20dp"/>
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ivIcon"
@@ -23,7 +23,7 @@
         android:layout_height="80dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="60dp"
-        android:src="@drawable/citycons_magnify"/>
+        android:src="@drawable/citycons_magnify" />
 
     <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvWelcome"
@@ -31,231 +31,54 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivIcon"
         android:layout_marginLeft="30dp"
-        android:fontFamily="sans-serif-light"
         android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Welcome to Quest."
         android:textColor="@color/white"
-        android:textSize="30sp"
-        android:text="Welcome to Quest."/>
+        android:textSize="30sp" />
 
     <com.codepath.project.android.views.QuestTextView
+        android:id="@+id/btnFBLogin"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/tvWelcome"
-        android:id="@+id/btnFBLogin"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:textSize="18sp"
-        android:text="Continue with Facebook"
-        android:textStyle="bold"
-        android:gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_corner_fb_login"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Continue with Facebook"
         android:textAllCaps="false"
-        android:background="@drawable/rounded_corner_fb_login" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <com.codepath.project.android.views.QuestTextView
+        android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/btnFBLogin"
-        android:id="@+id/btnSignUp"
-        android:gravity="center"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:textAllCaps="false"
-        android:text="Create Account"
-        android:textStyle="bold"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_corner_login"
         android:fontFamily="sans-serif-light"
-        android:textSize="18sp"
+        android:gravity="center"
+        android:text="Create Account"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:background="@drawable/rounded_corner_login" />
-
-    <Switch
-        android:id="@+id/swSkipLogin"
-        android:layout_width="wrap_content"
-        android:gravity="top"
-        android:layout_height="37dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/btnSignUp"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="30dp"/>
-
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <com.codepath.project.android.views.QuestTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/colorLightGray3"
+        android:layout_margin="30dp"
         android:fontFamily="sans-serif-light"
-        android:textSize="14sp"
-        android:text="By signing up, you agree to the Terms and Conditions and Privacy Policy."/>
-
-
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:paddingTop="20dp"-->
-        <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
-        <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_below="@+id/tvWelcome"-->
-        <!--android:background="#90000000"-->
-        <!--android:id="@+id/llLogin"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--style="@style/loginLinearLayout">-->
-
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:src="@drawable/ic_email"/>-->
-
-            <!--<EditText-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="9"-->
-                <!--android:inputType="textEmailAddress"-->
-                <!--android:id="@+id/etEmail"-->
-                <!--style="@style/loginEditText"-->
-                <!--android:hint="Email"/>-->
-
-        <!--</LinearLayout>-->
-
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--style="@style/loginLinearLayout">-->
-
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:src="@drawable/ic_password"/>-->
-
-            <!--<EditText-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="9"-->
-                <!--android:inputType="textPassword"-->
-                <!--android:id="@+id/etPassword"-->
-                <!--style="@style/loginEditText"-->
-                <!--android:hint="Password"/>-->
-
-        <!--</LinearLayout>-->
-
-        <!--<Button-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/btnLogIn"-->
-            <!--style="@style/loginButton"-->
-            <!--android:text="Log In"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Forgot Password?"-->
-            <!--android:textColor="@color/white"-->
-            <!--style="@style/loginHelperText"-->
-            <!--android:layout_gravity="center"/>-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="right"-->
-            <!--android:layout_gravity="right"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="43dp"-->
-                <!--android:gravity="bottom"-->
-                <!--style="@style/loginHelperText"-->
-                <!--android:textStyle="bold"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:text="SKIP LOGIN"/>-->
-
-            <!--<Switch-->
-                <!--android:id="@+id/swSkipLogin"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:gravity="top"-->
-                <!--android:layout_height="37dp"-->
-                <!--android:layout_marginTop="20dp" />-->
-
-        <!--</LinearLayout>-->
-
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/llSignUp"-->
-
-        <!--android:layout_margin="10dp"-->
-        <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
-        <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
-        <!--android:paddingTop="@dimen/activity_horizontal_margin"-->
-        <!--android:paddingBottom="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:layout_marginBottom="5dp">-->
-
-            <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--style="@style/facebookView"-->
-                <!--/>-->
-
-
-        <!--</LinearLayout>-->
-
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--style="@style/facebookText">-->
-
-            <!--<Button-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/btnFBLogin"-->
-                <!--android:drawableLeft="@drawable/ic_facebook"-->
-                <!--android:drawablePadding="5dp"-->
-                <!--android:padding="5dp"-->
-                <!--android:text="Log In with Facebook"-->
-
-                <!--style="@style/facebookText"-->
-                <!--android:layout_weight="7"/>-->
-
-        <!--</LinearLayout>-->
-
-        <!--<Button-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/btnSignUp"-->
-            <!--style="@style/loginButton"-->
-            <!--android:text="Sign Up with email"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:layout_marginBottom="5dp"/>-->
-    <!--</LinearLayout>-->
+        android:text="By signing up, you agree to the Terms and Conditions and Privacy Policy."
+        android:textColor="@color/colorLightGray3"
+        android:textSize="14sp" />
 
 </RelativeLayout>

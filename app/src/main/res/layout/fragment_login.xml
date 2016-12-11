@@ -37,7 +37,7 @@
         android:textSize="30sp"
         android:text="Welcome to Quest."/>
 
-    <Button
+    <com.codepath.project.android.views.QuestTextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/tvWelcome"
@@ -48,16 +48,18 @@
         android:textSize="18sp"
         android:text="Continue with Facebook"
         android:textStyle="bold"
+        android:gravity="center"
         android:fontFamily="sans-serif-light"
         android:textColor="@color/colorPrimary"
         android:textAllCaps="false"
         android:background="@drawable/rounded_corner_fb_login" />
 
-    <Button
+    <com.codepath.project.android.views.QuestTextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/btnFBLogin"
         android:id="@+id/btnSignUp"
+        android:gravity="center"
         android:layout_marginTop="15dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
@@ -80,7 +82,7 @@
         android:layout_margin="30dp"/>
 
 
-    <com.codepath.project.android.views.QuestTextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"

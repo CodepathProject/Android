@@ -43,9 +43,9 @@ public class LoginFragment extends Fragment {
 //    @BindView(R.id.etEmail) EditText etEmail;
 //    @BindView(R.id.etPassword) EditText etPassword;
     @BindView(R.id.tvLogIn) TextView tvLogIn;
-    @BindView(R.id.btnSignUp) Button btnSignUp;
+    @BindView(R.id.btnSignUp) TextView btnSignUp;
     @BindView(R.id.swSkipLogin) Switch swSkipLogin;
-    @BindView(R.id.btnFBLogin) Button btnFBLogin;
+    @BindView(R.id.btnFBLogin) TextView btnFBLogin;
 
 
     private Unbinder unbinder;

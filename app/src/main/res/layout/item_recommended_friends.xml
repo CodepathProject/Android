@@ -27,7 +27,7 @@
             android:contentDescription="@string/contact_friend"
             tools:src="@drawable/quest" />
 
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvFriendName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -13,7 +13,7 @@
         android:layout_height="60dp"
         android:contentDescription="@string/product_image" />
 
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tv_category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

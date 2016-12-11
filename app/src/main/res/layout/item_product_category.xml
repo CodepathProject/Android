@@ -43,7 +43,7 @@
             android:gravity="center"
             android:padding="10dp">
 
-            <TextView
+            <com.codepath.project.android.views.QuestTextView
                 android:id="@+id/tv_product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                 android:textColor="@color/colorRed"
                 android:textSize="15sp" /> -->
 
-            <TextView
+            <com.codepath.project.android.views.QuestTextView
                 android:id="@+id/tv_total_votes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

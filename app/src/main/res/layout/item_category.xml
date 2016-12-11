@@ -17,7 +17,7 @@
         android:scaleType="centerCrop"
         android:layout_height="@dimen/category_item_iv_height"/>
 
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tv_category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

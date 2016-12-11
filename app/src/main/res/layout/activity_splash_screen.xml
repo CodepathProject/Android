@@ -13,7 +13,7 @@
         android:src="@drawable/citycons_magnify"
         android:layout_centerInParent="true"
         android:layout_above="@+id/textView2"/>
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -25,7 +25,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

@@ -13,7 +13,7 @@
         android:id="@+id/llHeader"
         android:gravity="right">
 
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvHeadingTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:fontFamily="sans-serif-light"
             android:text="Total: $"/>
 
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

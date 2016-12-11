@@ -10,7 +10,7 @@
     android:background="@color/colorPrimary"
     tools:context="com.codepath.project.android.activities.NewLoginActivity">
 
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvLogInTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

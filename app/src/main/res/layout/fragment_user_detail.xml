@@ -52,7 +52,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_below="@id/ivBackgroundImage">
 
-                    <TextView
+                    <com.codepath.project.android.views.QuestTextView
                         android:id="@+id/tvUserFirstName"
                         android:transitionName="tvUserName"
                         android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
                         android:textStyle="bold"
                         tools:text="Sandeep Raveesh" />
 
-                    <TextView
+                    <com.codepath.project.android.views.QuestTextView
                         android:id="@+id/followUser"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                         android:fontFamily="sans-serif-light"
                         android:textColor="@color/colorGray" />
 
-                    <TextView
+                    <com.codepath.project.android.views.QuestTextView
                         android:id="@+id/tvAboutMe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                         android:text="@string/default_about_me"
                         android:textColor="@color/black" />
 
-                    <TextView
+                    <com.codepath.project.android.views.QuestTextView
                         android:id="@+id/tvFollowing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                         android:fontFamily="sans-serif-light"
                         tools:text="200" />
 
-                    <TextView
+                    <com.codepath.project.android.views.QuestTextView
                         android:id="@+id/tvFollowingLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

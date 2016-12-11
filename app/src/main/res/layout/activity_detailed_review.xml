@@ -13,7 +13,7 @@
         app:layout_collapseMode="pin"
         android:background="@color/colorPrimary"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
@@ -40,7 +40,7 @@
         tools:src="@drawable/quest"
         android:contentDescription="@string/user_profile_image" />
 
-    <TextView
+        <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvUserName"
         android:layout_toEndOf="@+id/ivProfile"
         android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
         android:stepSize="1"
         android:theme="@style/ratingBar"/>
 
-    <TextView
+        <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvReview"
         android:transitionName="tvReview"
         android:layout_below="@+id/ivProfile"
@@ -108,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <TextView
+        <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvLikeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

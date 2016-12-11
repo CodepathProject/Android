@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvLogIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:layout_marginTop="60dp"
         android:src="@drawable/citycons_magnify"/>
 
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
         android:layout_margin="30dp"/>
 
 
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"

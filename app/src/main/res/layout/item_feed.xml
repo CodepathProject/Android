@@ -27,7 +27,7 @@
             tools:src="@drawable/quest"
             android:contentDescription="@string/user_profile_image" />
 
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvUserName"
             android:transitionName="tvUserName"
             android:layout_toEndOf="@+id/ivProfile"
@@ -40,7 +40,7 @@
             android:fontFamily="sans-serif-light"
             android:textColor="@color/black"
             tools:text="sandeep"/>
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvUserAction"
             android:layout_toEndOf="@+id/tvUserName"
             android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
             android:fontFamily="sans-serif-light"
             android:textColor="@color/black"
             tools:text="sandeep"/>
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                 android:contentDescription="@string/contact_friend"
                 tools:src="@drawable/quest" />
 
-            <TextView
+            <com.codepath.project.android.views.QuestTextView
                 android:id="@+id/tvDestName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvLikeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

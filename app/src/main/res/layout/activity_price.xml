@@ -14,7 +14,7 @@
         android:titleTextColor="@color/white"
         style="@style/custom_toolbar"
         android:background="@color/colorPrimary"/>
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvProductName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         android:id="@+id/ll"
         android:orientation="horizontal"
         android:background="@color/white">
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvProductPriceTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             android:background="@color/white"
             android:text="Current Price: " />
 
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvProductPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
 
     </LinearLayout>
 
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:paddingTop="30dp"
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
@@ -94,7 +94,7 @@
         android:layout_below="@id/tvPriceTitle"
         android:textColorHint="@color/action_gray"
         android:background="@color/white" />
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:paddingTop="30dp"
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
@@ -120,7 +120,7 @@
         android:layout_below="@id/tvStoreTitle"
         android:textColorHint="@color/action_gray"
         android:background="@color/white" />
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:layout_alignParentBottom="true"
         android:id="@+id/tvAddPrice"
         android:onClick="onSubmitPrice"

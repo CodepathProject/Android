@@ -32,7 +32,7 @@
             tools:context="com.codepath.project.android.activities.HomeActivity"
             tools:showIn="@layout/app_bar_home">
 
-            <TextView
+            <com.codepath.project.android.views.QuestTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/home_tv_size"
@@ -54,7 +54,7 @@
                 android:paddingLeft="@dimen/tv_home_left_padding"
                 android:layout_height="wrap_content" />
 
-            <TextView
+            <com.codepath.project.android.views.QuestTextView
                 android:layout_below="@id/rv_categories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <TextView
+            <com.codepath.project.android.views.QuestTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/tv_home_left_margin"

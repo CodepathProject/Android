@@ -3,7 +3,7 @@
     android:paddingBottom="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvProductName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         android:fontFamily="sans-serif-light"
         android:textColor="@color/colorDarkGray"
         tools:text="Samsung Galaxy S7" />
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvBrandName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         android:layout_margin="5dp"
         android:orientation="horizontal">
 
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvFollow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             android:fontFamily="sans-serif-light"
             android:textColor="@color/colorGray" />
 
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvShelf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
             android:fontFamily="sans-serif-light"
             android:textColor="@color/colorGray" />
 
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvWatch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
             android:fontFamily="sans-serif-light"
             android:textColor="@color/colorGray" />
 
-        <TextView
+        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvPlots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
         android:layout_below="@id/ll"
         android:layout_marginBottom="5dp"
         style="@style/product_detail_line_separator"/>
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
         android:stepSize="0.5"
         android:theme="@style/ratingBar"
         tools:rating="3.5" />
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvReviewCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
         android:textSize="13sp"
         android:fontFamily="sans-serif-light"
         tools:text="(595)" />
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvAddPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

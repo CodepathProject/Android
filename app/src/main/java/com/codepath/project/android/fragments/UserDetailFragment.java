@@ -1,8 +1,10 @@
 package com.codepath.project.android.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -48,6 +50,8 @@ public class UserDetailFragment extends Fragment {
     @BindView(R.id.tvFollowingLabel) TextView tvFollowingLabel;
     @BindView(R.id.rvUserTimeline) RecyclerView rvFeeds;
     @BindView(R.id.followUser) TextView followUser;
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbar;
 
     ArrayList<Feed> feeds = new ArrayList<>();
     ComplexRecyclerViewAdapter feedsAdapter;
@@ -149,6 +153,8 @@ public class UserDetailFragment extends Fragment {
                     tvFollowing.setText("0");
                 }
 
+                collapsingToolbar.setTitle(upperString);
+                collapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
                 setUpRecyclerView(object);
             }
         });

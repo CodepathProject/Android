@@ -88,7 +88,7 @@
                 android:id="@+id/lineVideo"
                 android:layout_below="@id/tvVideoTitle"
                 style="@style/product_detail_line_separator"
-                android:layout_marginBottom="1dp"/>
+                android:layout_marginBottom="20dp"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvVideo"
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rvVideo"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/owned_by_your_friends"
                 android:layout_marginLeft="@dimen/product_margin"
                 android:fontFamily="sans-serif-light"

@@ -62,7 +62,8 @@ public class VideoAdapter extends
             Object videoObject = mVideo.get(position);
             Video video = (Video) videoObject;
             ImageView ivVideoThumbnail = viewHolder.ivThumbnail;
-            Picasso.with(getContext()).load(video.getThumbnail()).transform(new RoundedCornersTransformation(25, 25)).into(ivVideoThumbnail);
+            //Picasso.with(getContext()).load(video.getThumbnail()).transform(new RoundedCornersTransformation(25, 25)).into(ivVideoThumbnail);
+            Picasso.with(getContext()).load(video.getThumbnail()).transform(new RoundedCornersTransformation(5, 5)).into(ivVideoThumbnail);
             ivVideoThumbnail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

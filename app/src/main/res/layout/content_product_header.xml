@@ -14,7 +14,7 @@
         android:paddingTop = "15dp"
         android:paddingBottom = "5dp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/colorDarkGray"
+        android:textColor="@color/black"
         tools:text="Samsung Galaxy S7" />
     <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvBrandName"

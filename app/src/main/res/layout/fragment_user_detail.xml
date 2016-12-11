@@ -61,7 +61,7 @@
                         android:layout_marginBottom="10dp"
                         android:layout_marginStart="15dp"
                         android:paddingTop="50dp"
-                        android:textColor="#606060"
+                        android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         tools:text="Sandeep Raveesh" />
@@ -90,7 +90,7 @@
                         android:textSize="15sp"
                         android:fontFamily="sans-serif-light"
                         android:text="@string/default_about_me"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/colorGray" />
 
                     <com.codepath.project.android.views.QuestTextView
                         android:id="@+id/tvFollowing"

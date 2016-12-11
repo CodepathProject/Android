@@ -13,12 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
-import com.codepath.project.android.activities.HomeActivity;
 import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
-import com.codepath.project.android.model.Product;
 import com.codepath.project.android.utils.GeneralUtils;
 import com.squareup.picasso.Picasso;
 
@@ -66,7 +64,8 @@ public class ContactFriendsAdapter extends
     @Override
     public void onBindViewHolder(ContactFriendsAdapter.ViewHolder viewHolder, int position) {
         AppUser user = mUsers.get(position);
-        viewHolder.tvFriendName.setText(user.getFirstName());
+        String upperString = user.getFirstName().substring(0,1).toUpperCase() + user.getFirstName().substring(1);
+        viewHolder.tvFriendName.setText(upperString);
         if (!TextUtils.isEmpty(user.getImage())) {
             Picasso.with(getContext()).load(user.getImage()).transform(new CircleTransform()).into(viewHolder.ivFriendProfile);
         } else {

@@ -82,14 +82,14 @@
         android:layout_margin="30dp"/>
 
 
-    <TextView
+    <com.codepath.project.android.views.QuestTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/action_gray"
+        android:textColor="@color/colorLightGray3"
         android:fontFamily="sans-serif-light"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:text="By signing up, you agree to the Terms and Conditions and Privacy Policy."/>
 
 

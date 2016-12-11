@@ -11,31 +11,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.activities.ProductViewActivity;
 import com.codepath.project.android.adapter.CategoryAdapter;
 import com.codepath.project.android.adapter.ProductsAdapter;
+import com.codepath.project.android.adapter.RecommendedProductsAdapter;
 import com.codepath.project.android.helpers.ItemClickSupport;
+import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Category;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.ViewType;
 import com.codepath.project.android.network.ParseHelper;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
 
-public class HomeFragment extends Fragment implements PtrHandler {
+public class HomeFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
 
     @BindView(R.id.rv_products)
@@ -44,6 +48,8 @@ public class HomeFragment extends Fragment implements PtrHandler {
     RecyclerView rvCategory;
     @BindView(R.id.rv_reviews)
     RecyclerView rvReviews;
+    @BindView(R.id.rv_recommended_products)
+    RecyclerView rvRecommendedProducts;
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.tv_categories)
@@ -52,10 +58,8 @@ public class HomeFragment extends Fragment implements PtrHandler {
     TextView tvPopularProducts;
     @BindView(R.id.tv_popular_reviews)
     TextView tvPopularReviews;
-    @BindView(R.id.swipeContainer)
-    PtrClassicFrameLayout swipeContainer;
-    @BindView(R.id.scrollView)
-    ScrollView mScrollView;
+    @BindView(R.id.tv_recommended_products)
+    TextView tvRecommendedProducts;
 
     public static final int GRID_ROW_COUNT = 1;
 
@@ -85,8 +89,6 @@ public class HomeFragment extends Fragment implements PtrHandler {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
-        swipeContainer.setPtrHandler(this);
-        swipeContainer.setLastUpdateTimeRelateObject(this);
         setRecycleView();
     }
 
@@ -96,6 +98,7 @@ public class HomeFragment extends Fragment implements PtrHandler {
         tvPopularProducts.setVisibility(View.INVISIBLE);
         tvPopularReviews.setVisibility(View.INVISIBLE);
         setCategories();
+        setRecommendedProducts();
         setPopularProducts();
         setBestRatedProducts();
     }
@@ -107,16 +110,6 @@ public class HomeFragment extends Fragment implements PtrHandler {
         ParseHelper.createCategoryListFromProducts(categoryList, categoryAdapter, tvCategories, progressBar);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
-
-        rvCategory.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            }
-
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                swipeContainer.setEnabled(layoutManagerCategory.findFirstCompletelyVisibleItemPosition() == 0);
-            }
-        });
 
         ItemClickSupport.addTo(rvCategory).setOnItemClickListener(
                 (recyclerView, position, v) -> {
@@ -131,6 +124,72 @@ public class HomeFragment extends Fragment implements PtrHandler {
         );
     }
 
+    private void setRecommendedProducts(){
+        LinearLayoutManager layoutManagerProducts
+                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        rvRecommendedProducts.setLayoutManager(layoutManagerProducts);
+        List<Product> recProducts = new ArrayList<>();
+        RecommendedProductsAdapter recommendedProductsAdapter = new RecommendedProductsAdapter(getActivity(), recProducts, ViewType.HORIZONTAL);
+        rvRecommendedProducts.setAdapter(recommendedProductsAdapter);
+
+        tvRecommendedProducts.setVisibility(View.GONE);
+
+        ItemClickSupport.addTo(rvRecommendedProducts).setOnItemClickListener(
+                (recyclerView, position, v) -> {
+                    Intent intent = new Intent(getActivity(), ProductViewActivity.class);
+                    intent.putExtra("productId", recProducts.get(position).getObjectId());
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation(getActivity(), v.findViewById(R.id.iv_product), "ivProductImage");
+                    startActivity(intent, options.toBundle());
+                }
+        );
+        recommendedProductsAdapter.notifyDataSetChanged();
+
+        if(ParseUser.getCurrentUser() != null) {
+            AppUser cuser = (AppUser) ParseUser.getCurrentUser();
+            List<ParseUser> followUsers = cuser.getFollowUsers();
+            if (followUsers != null && followUsers.size() > 0) {
+                ParseObject.fetchAllIfNeededInBackground(followUsers, (objects, e) -> {
+                    List<ParseUser> followUsers1 = objects;
+                    ConcurrentMap<String, Integer> productMap = new ConcurrentHashMap<>();
+                    for (ParseUser u1 : followUsers1) {
+                        AppUser a1 = (AppUser) u1;
+                        List<Product> plist = a1.getShelfProducts();
+                        for (Product p1 : plist) {
+                            if (!productMap.containsKey(p1.getObjectId())) {
+                                productMap.put(p1.getObjectId(), 1);
+                            } else {
+                                Integer val = productMap.get(p1.getObjectId());
+                                val++;
+                                productMap.replace(p1.getObjectId(), val);
+                            }
+                        }
+                    }
+
+                    if(productMap.size() == 0) {
+                        return;
+                    }
+
+                    tvRecommendedProducts.setVisibility(View.VISIBLE);
+                    List<Map.Entry<String, Integer>> listOfentrySet = new ArrayList<>(productMap.entrySet());
+
+                    Collections.sort(listOfentrySet, new SortByValue());
+
+                    for (Map.Entry<String, Integer> map : listOfentrySet) {
+                        String id = map.getKey();
+                        Integer pCount = map.getValue();
+                        ParseQuery<Product> q = ParseQuery.getQuery(Product.class);
+                        q.getInBackground(id, (object, e1) -> {
+                            object.put("tempCount", pCount);
+                            recProducts.add(object);
+                            recommendedProductsAdapter.notifyDataSetChanged();
+                        });
+                    }
+                });
+            }
+        }
+    }
+
     private void setPopularProducts(){
         LinearLayoutManager layoutManagerProducts
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -138,16 +197,6 @@ public class HomeFragment extends Fragment implements PtrHandler {
         products = new ArrayList<>();
         productsAdapter = new ProductsAdapter(getActivity(), products, ViewType.HORIZONTAL);
         rvProducts.setAdapter(productsAdapter);
-
-        rvProducts.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            }
-
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                swipeContainer.setEnabled(layoutManagerProducts.findFirstCompletelyVisibleItemPosition() == 0);
-            }
-        });
 
         ItemClickSupport.addTo(rvProducts).setOnItemClickListener(
                 (recyclerView, position, v) -> {
@@ -167,7 +216,6 @@ public class HomeFragment extends Fragment implements PtrHandler {
             products.addAll(productList);
             productsAdapter.notifyDataSetChanged();
             tvPopularProducts.setVisibility(View.VISIBLE);
-            swipeContainer.refreshComplete();
         });
     }
 
@@ -189,16 +237,6 @@ public class HomeFragment extends Fragment implements PtrHandler {
             tvPopularReviews.setVisibility(View.VISIBLE);
         });
 
-        rvReviews.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            }
-
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                swipeContainer.setEnabled(layoutManagerReviews.findFirstCompletelyVisibleItemPosition() == 0);
-            }
-        });
-
         ItemClickSupport.addTo(rvReviews).setOnItemClickListener(
                 (recyclerView, position, v) -> {
                     Intent intent = new Intent(getActivity(), ProductViewActivity.class);
@@ -210,13 +248,10 @@ public class HomeFragment extends Fragment implements PtrHandler {
         );
     }
 
-    @Override
-    public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-        return PtrDefaultHandler.checkContentCanBePulledDown(frame, mScrollView, header);
-    }
-
-    @Override
-    public void onRefreshBegin(PtrFrameLayout frame) {
-        setRecycleView();
+    class SortByValue implements Comparator<Map.Entry<String, Integer>> {
+        @Override
+        public int compare( Map.Entry<String,Integer> entry1, Map.Entry<String,Integer> entry2){
+            return (entry2.getValue()).compareTo(entry1.getValue());
+        }
     }
 }

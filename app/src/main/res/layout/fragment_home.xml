@@ -1,29 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<in.srain.cube.views.ptr.PtrClassicFrameLayout
-    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swipeContainer"
-    android:layout_marginBottom="10dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    cube_ptr:ptr_duration_to_close="200"
-    cube_ptr:ptr_duration_to_close_header="1000"
-    cube_ptr:ptr_keep_header_when_refresh="true"
-    cube_ptr:ptr_pull_to_fresh="false"
-    cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
-    cube_ptr:ptr_resistance="1.7" >
-
-<RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
         android:id="@+id/scrollView"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <RelativeLayout
             android:id="@+id/content_home"
             android:layout_width="match_parent"
@@ -33,6 +20,28 @@
             tools:showIn="@layout/app_bar_home">
 
             <com.codepath.project.android.views.QuestTextView
+                android:id="@+id/tv_categories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/tv_home_bottom_margin"
+                android:layout_marginLeft="@dimen/tv_home_left_margin"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="@dimen/tv_home_left_padding"
+                android:text="@string/popular_categories"
+                android:textColor="@color/black"
+                android:textSize="@dimen/home_tv_size"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_categories"
+                android:paddingLeft="@dimen/tv_home_left_padding" />
+
+            <com.codepath.project.android.views.QuestTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/home_tv_size"
@@ -40,22 +49,22 @@
                 android:layout_marginBottom="@dimen/tv_home_bottom_margin"
                 android:layout_marginTop="20dp"
                 android:fontFamily="sans-serif-light"
-                android:layout_alignParentTop="true"
                 android:paddingLeft="@dimen/tv_home_left_padding"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text = "@string/popular_categories"
-                android:id="@+id/tv_categories"/>
+                android:text = "@string/recommended_products"
+                android:layout_below="@+id/rv_categories"
+                android:id="@+id/tv_recommended_products"/>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_categories"
+                android:id="@+id/rv_recommended_products"
                 android:layout_width="match_parent"
-                android:layout_below="@id/tv_categories"
+                android:layout_below="@id/tv_recommended_products"
                 android:paddingLeft="@dimen/tv_home_left_padding"
                 android:layout_height="wrap_content" />
 
             <com.codepath.project.android.views.QuestTextView
-                android:layout_below="@id/rv_categories"
+                android:layout_below="@id/rv_recommended_products"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/home_tv_size"
@@ -71,41 +80,40 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_products"
-                android:layout_below="@id/tv_popular_products"
-                android:paddingLeft="@dimen/tv_home_left_padding"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.codepath.project.android.views.QuestTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/tv_home_left_margin"
-                android:layout_marginBottom="@dimen/tv_home_bottom_margin"
-                android:layout_marginTop="@dimen/tv_home_top_margin"
-                android:textSize="@dimen/home_tv_size"
-                android:paddingLeft="@dimen/tv_home_left_padding"
-                android:fontFamily="sans-serif-light"
+                android:layout_below="@id/tv_popular_products"
+                android:paddingLeft="@dimen/tv_home_left_padding" />
+
+            <com.codepath.project.android.views.QuestTextView
+                android:id="@+id/tv_popular_reviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/rv_products"
-                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/tv_home_bottom_margin"
+                android:layout_marginLeft="@dimen/tv_home_left_margin"
+                android:layout_marginTop="@dimen/tv_home_top_margin"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="@dimen/tv_home_left_padding"
+                android:text="@string/popular_reviews"
                 android:textColor="@color/black"
-                android:text = "@string/popular_reviews"
-                android:id="@+id/tv_popular_reviews"/>
+                android:textSize="@dimen/home_tv_size"
+                android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_reviews"
-                android:layout_below="@id/tv_popular_reviews"
                 android:layout_width="wrap_content"
-                android:paddingLeft="@dimen/tv_home_left_padding"
                 android:layout_height="wrap_content"
-                android:paddingBottom="100dp"/>
+                android:layout_below="@id/tv_popular_reviews"
+                android:paddingBottom="100dp"
+                android:paddingLeft="@dimen/tv_home_left_padding" />
         </RelativeLayout>
     </ScrollView>
+
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
 </RelativeLayout>
-
-</in.srain.cube.views.ptr.PtrClassicFrameLayout>

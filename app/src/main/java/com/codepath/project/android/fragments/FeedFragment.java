@@ -80,7 +80,6 @@ public class FeedFragment extends Fragment implements PtrHandler {
     private void setUpRecyclerView() {
         feeds = new ArrayList<>();
         feedsAdapter = new ComplexRecyclerViewAdapter(getContext(), feeds, friendsToFollow);
-        //rvFeeds.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).sizeResId(R.dimen.feed_divider).build());
         rvFeeds.setAdapter(feedsAdapter);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mLayoutManager.scrollToPosition(0);
@@ -89,8 +88,6 @@ public class FeedFragment extends Fragment implements PtrHandler {
 
         swipeContainer.setPtrHandler(this);
         swipeContainer.setLastUpdateTimeRelateObject(this);
-
-        //feeds.
 
         rvFeeds.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -112,8 +109,6 @@ public class FeedFragment extends Fragment implements PtrHandler {
         fetchFeeds(0);
 
         rvFeeds.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
-
-
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 page++;

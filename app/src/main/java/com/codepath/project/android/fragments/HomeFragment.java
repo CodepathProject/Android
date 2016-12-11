@@ -108,6 +108,16 @@ public class HomeFragment extends Fragment implements PtrHandler {
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(layoutManagerCategory);
 
+        rvCategory.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            }
+
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                swipeContainer.setEnabled(layoutManagerCategory.findFirstCompletelyVisibleItemPosition() == 0);
+            }
+        });
+
         ItemClickSupport.addTo(rvCategory).setOnItemClickListener(
                 (recyclerView, position, v) -> {
                     CategoryFragment nextFrag = CategoryFragment.newInstance(categoryList.get(position).getName());
@@ -128,6 +138,16 @@ public class HomeFragment extends Fragment implements PtrHandler {
         products = new ArrayList<>();
         productsAdapter = new ProductsAdapter(getActivity(), products, ViewType.HORIZONTAL);
         rvProducts.setAdapter(productsAdapter);
+
+        rvProducts.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            }
+
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                swipeContainer.setEnabled(layoutManagerProducts.findFirstCompletelyVisibleItemPosition() == 0);
+            }
+        });
 
         ItemClickSupport.addTo(rvProducts).setOnItemClickListener(
                 (recyclerView, position, v) -> {
@@ -167,6 +187,16 @@ public class HomeFragment extends Fragment implements PtrHandler {
             productsBestRated.addAll(productList);
             reviewsAdapter.notifyDataSetChanged();
             tvPopularReviews.setVisibility(View.VISIBLE);
+        });
+
+        rvReviews.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            }
+
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                swipeContainer.setEnabled(layoutManagerReviews.findFirstCompletelyVisibleItemPosition() == 0);
+            }
         });
 
         ItemClickSupport.addTo(rvReviews).setOnItemClickListener(

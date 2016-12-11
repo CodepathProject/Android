@@ -181,6 +181,7 @@
                 android:text="Show all reviews"
                 android:fontFamily="sans-serif-light"
                 android:onClick="onShowAllReviews"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textSize="18sp" />

@@ -68,4 +68,5 @@ dependencies {
     compile 'com.github.jd-alexander:LikeButton:0.2.0'
     compile 'jp.wasabeef:recyclerview-animators:2.2.5'
     compile 'com.android.support:palette-v7:24.2.1'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
 }

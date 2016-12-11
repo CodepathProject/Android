@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,13 +32,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 
-public class FeedFragment extends Fragment {
+public class FeedFragment extends Fragment implements PtrHandler {
 
     @BindView(R.id.rvFeeds)
     RecyclerView rvFeeds;
     @BindView(R.id.swipeContainer)
-    SwipeRefreshLayout swipeContainer;
+    PtrClassicFrameLayout swipeContainer;
 
     ArrayList<Feed> feeds = new ArrayList<>();
     ComplexRecyclerViewAdapter feedsAdapter;
@@ -86,6 +88,9 @@ public class FeedFragment extends Fragment {
         rvFeeds.setNestedScrollingEnabled(false);
         rvFeeds.setLayoutManager(mLayoutManager);
 
+        swipeContainer.setPtrHandler(this);
+        swipeContainer.setLastUpdateTimeRelateObject(this);
+
         ParseUser currentUser = ParseUser.getCurrentUser();
         try {
             currentUser.fetchIfNeeded();
@@ -120,8 +125,6 @@ public class FeedFragment extends Fragment {
                     }
                 }
         );
-
-        swipeContainer.setOnRefreshListener(() -> fetchFeeds(0));
 
         setUpFriends();
     }
@@ -177,9 +180,19 @@ public class FeedFragment extends Fragment {
                 if (err == null) {
                     feeds.addAll(feedsList);
                     feedsAdapter.notifyDataSetChanged();
-                    swipeContainer.setRefreshing(false);
+                    swipeContainer.refreshComplete();
                 }
             });
         }
+    }
+
+    @Override
+    public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+        return true;
+    }
+
+    @Override
+    public void onRefreshBegin(PtrFrameLayout frame) {
+        fetchFeeds(0);
     }
 }

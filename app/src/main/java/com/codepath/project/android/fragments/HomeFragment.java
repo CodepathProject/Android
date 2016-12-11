@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
@@ -29,8 +30,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements PtrHandler {
     public static final String ARG_PAGE = "ARG_PAGE";
 
     @BindView(R.id.rv_products)
@@ -47,6 +52,10 @@ public class HomeFragment extends Fragment {
     TextView tvPopularProducts;
     @BindView(R.id.tv_popular_reviews)
     TextView tvPopularReviews;
+    @BindView(R.id.swipeContainer)
+    PtrClassicFrameLayout swipeContainer;
+    @BindView(R.id.scrollView)
+    ScrollView mScrollView;
 
     public static final int GRID_ROW_COUNT = 1;
 
@@ -76,6 +85,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
+        swipeContainer.setPtrHandler(this);
+        swipeContainer.setLastUpdateTimeRelateObject(this);
         setRecycleView();
     }
 
@@ -136,6 +147,7 @@ public class HomeFragment extends Fragment {
             products.addAll(productList);
             productsAdapter.notifyDataSetChanged();
             tvPopularProducts.setVisibility(View.VISIBLE);
+            swipeContainer.refreshComplete();
         });
     }
 
@@ -166,5 +178,15 @@ public class HomeFragment extends Fragment {
                     startActivity(intent, options.toBundle());
                 }
         );
+    }
+
+    @Override
+    public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+        return PtrDefaultHandler.checkContentCanBePulledDown(frame, mScrollView, header);
+    }
+
+    @Override
+    public void onRefreshBegin(PtrFrameLayout frame) {
+        setRecycleView();
     }
 }

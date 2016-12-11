@@ -91,6 +91,16 @@ public class FeedFragment extends Fragment implements PtrHandler {
         swipeContainer.setPtrHandler(this);
         swipeContainer.setLastUpdateTimeRelateObject(this);
 
+        rvFeeds.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            }
+
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                swipeContainer.setEnabled(mLayoutManager.findFirstCompletelyVisibleItemPosition() == 0);
+            }
+        });
+
         ParseUser currentUser = ParseUser.getCurrentUser();
         try {
             currentUser.fetchIfNeeded();
@@ -195,4 +205,5 @@ public class FeedFragment extends Fragment implements PtrHandler {
     public void onRefreshBegin(PtrFrameLayout frame) {
         fetchFeeds(0);
     }
+
 }

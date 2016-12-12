@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.helpers.CircleTransform;
+import com.codepath.project.android.helpers.ThemeUtils;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Review;
@@ -65,6 +66,7 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_detailed_review);
         ButterKnife.bind(this);
         setToolbar();

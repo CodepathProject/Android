@@ -15,6 +15,8 @@ import com.parse.interceptors.ParseLogInterceptor;
 
 public class ParseApplication extends Application {
 
+    public static int currentPosition;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -31,14 +33,5 @@ public class ParseApplication extends Application {
                 .server("https://codepath.herokuapp.com/parse/").build());
 
         ParseFacebookUtils.initialize(this);
-
-//        byte[] data = "Working at Parse is great!".getBytes();
-//        ParseFile file = new ParseFile("resume.txt", data);
-//        file.saveInBackground();
-//
-//        ParseObject jobApplication = new ParseObject("JobApplication");
-//        jobApplication.put("applicantName", "Joe Smith");
-//        jobApplication.put("applicantResumeFile", file);
-//        jobApplication.saveInBackground();
     }
 }

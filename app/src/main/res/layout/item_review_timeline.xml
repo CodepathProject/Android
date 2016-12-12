@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="4"
-        android:textColor="@android:color/black"
+        style="?textSubheader"
         android:textSize="16sp"
         tools:text="This is an awesome phone dasdsadsa dsadas dasd asdasdasd asdas das da d sad sda das d sad asd sa d asddasdasdasddwqjknjksdnvsfjkkfjdsfndsjknfkjnsdkjnfsdjksnfjksd" />
 

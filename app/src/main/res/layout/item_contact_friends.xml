@@ -6,6 +6,7 @@
     android:layout_marginStart="10dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
+    style="?cvBackground"
     app:cardCornerRadius="5dp">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivFriendProfile"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/black"
+            style="?textSubheader"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"/>
 

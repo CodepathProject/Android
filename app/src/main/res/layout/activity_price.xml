@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:paddingTop="5dp"
-            android:textColor="@color/black"
+            style="?textSubheader"
             android:paddingBottom="20dp"
             android:paddingRight="10dp"
             android:textStyle="bold"
@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorLightGray"
-        android:textColor="@color/colorGray"
+        style="?textRegular"
         android:layout_below="@id/ll"
         android:textSize="13sp"
         android:text="PRICE" />
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@color/colorLightGray"
-        android:textColor="@color/colorGray"
+        style="?textRegular"
         android:layout_below="@id/etPrice"
         android:textSize="13sp"
         android:text="STORE" />

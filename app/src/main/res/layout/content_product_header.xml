@@ -14,7 +14,7 @@
         android:paddingTop = "15dp"
         android:paddingBottom = "5dp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/black"
+        style="?textSubheader"
         tools:text="Samsung Galaxy S7" />
     <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvBrandName"
@@ -64,7 +64,7 @@
             android:gravity="center"
             android:text="@string/shelf"
             android:fontFamily="sans-serif-light"
-            android:textColor="@color/colorGray" />
+            style="?textRegular" />
 
         <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvWatch"
@@ -76,7 +76,7 @@
             android:gravity="center"
             android:text="@string/watch"
             android:fontFamily="sans-serif-light"
-            android:textColor="@color/colorGray" />
+            style="?textRegular" />
 
         <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvPlots"
@@ -90,7 +90,7 @@
             android:onClick="onShowPlot"
             android:text="@string/trends"
             android:fontFamily="sans-serif-light"
-            android:textColor="@color/colorGray"/>
+            style="?textRegular"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/line3"
@@ -106,7 +106,7 @@
         android:layout_marginLeft="@dimen/product_margin"
         android:textSize="20sp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/black"
+        style="?textSubheader"
         android:textStyle="bold"
         tools:text="$85" />
     <RatingBar
@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvPrice"
         android:layout_toEndOf="@+id/rbAverageRating"
-        android:textColor="@color/black"
+        style="?textSubheader"
         android:layout_marginStart="5dp"
         android:paddingTop="5dp"
         android:textSize="13sp"

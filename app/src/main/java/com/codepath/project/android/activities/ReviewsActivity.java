@@ -14,6 +14,7 @@ import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.ReviewsAdapter;
 import com.codepath.project.android.helpers.Constants;
 import com.codepath.project.android.helpers.ItemClickSupport;
+import com.codepath.project.android.helpers.ThemeUtils;
 import com.codepath.project.android.model.Product;
 import com.codepath.project.android.model.Review;
 import com.parse.ParseQuery;
@@ -38,6 +39,7 @@ public class ReviewsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_reviews);
         ButterKnife.bind(this);
         setToolbar();

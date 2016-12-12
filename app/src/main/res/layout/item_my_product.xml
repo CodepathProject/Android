@@ -26,7 +26,7 @@
         android:layout_marginStart="10dp"
         android:textSize="16sp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/black"
+        style="?textSubheader"
         tools:text="Samsung Galaxy S7 Edge"/>
 
     <RatingBar
@@ -54,7 +54,7 @@
         android:layout_alignBaseline="@id/rating"
         android:textSize="12sp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/colorBlue"
+        style="?textRegular"
         tools:text="1213"/>
 
     <com.codepath.project.android.views.QuestTextView

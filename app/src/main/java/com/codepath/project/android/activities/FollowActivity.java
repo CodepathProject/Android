@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.FollowAdapter;
+import com.codepath.project.android.helpers.ThemeUtils;
 import com.codepath.project.android.model.AppUser;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -31,6 +32,7 @@ public class FollowActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_follow);
         ButterKnife.bind(this);
 

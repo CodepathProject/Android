@@ -33,6 +33,7 @@ import com.codepath.project.android.adapter.VideoAdapter;
 import com.codepath.project.android.fragments.ComposeFragment;
 import com.codepath.project.android.helpers.Constants;
 import com.codepath.project.android.helpers.ItemClickSupport;
+import com.codepath.project.android.helpers.ThemeUtils;
 import com.codepath.project.android.model.AppUser;
 import com.codepath.project.android.model.Feed;
 import com.codepath.project.android.model.Product;
@@ -101,6 +102,7 @@ public class ProductViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_product_view);
         ButterKnife.bind(this);
         user = (AppUser) ParseUser.getCurrentUser();

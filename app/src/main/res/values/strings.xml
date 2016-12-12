@@ -42,4 +42,9 @@
 
     <string name="default_about_me">I am a techie with interest in cameras particularly. I am a big photography nerd who generally takes pictures of camera\'s using camera\'s (Inception in its own way)</string>
     <string name="recommended_products">Recommended products</string>
+
+    <string-array name="theme_array">
+        <item>Default</item>
+        <item>Night-Mode</item>
+    </string-array>
 </resources>

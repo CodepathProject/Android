@@ -8,24 +8,29 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.codepath.project.android.ParseApplication;
 import com.codepath.project.android.R;
 import com.codepath.project.android.adapter.SearchResultsAdapter;
 import com.codepath.project.android.fragments.FeedFragment;
 import com.codepath.project.android.fragments.HomeFragment;
 import com.codepath.project.android.fragments.MyProductsFragment;
 import com.codepath.project.android.helpers.CircleTransform;
+import com.codepath.project.android.helpers.ThemeUtils;
 import com.codepath.project.android.model.Product;
 import com.parse.ParseInstallation;
 import com.parse.ParseQuery;
@@ -57,16 +62,40 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setNavigationDrawer();
         addFragment();
+        setNightMode();
         if(ParseUser.getCurrentUser() != null) {
             ParseInstallation pi = ParseInstallation.getCurrentInstallation();
             pi.put("user", ParseUser.getCurrentUser());
             pi.saveInBackground();
+        }
+    }
+
+    private void setNightMode() {
+        Menu menu = navigationView.getMenu();
+        MenuItem menuItem = menu.findItem(R.id.nav_switch);
+        LinearLayout relativeLayout= (LinearLayout) MenuItemCompat.getActionView(menuItem);
+        SwitchCompat switchCompat = (SwitchCompat) relativeLayout.findViewById(R.id.switchMode);
+
+        switchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            int position = 0;
+            if(isChecked) {
+                position = 1;
+            }
+            if (ParseApplication.currentPosition != position) {
+                ThemeUtils.changeToTheme(this, position);
+            }
+            ParseApplication.currentPosition = position;
+        });
+
+        if(ParseApplication.currentPosition == 1) {
+            switchCompat.setChecked(true);
         }
     }
 

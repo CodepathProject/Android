@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/root1"
+    style="?pageBackground"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_category_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="2dp"
-        android:background="#efefef"/>
+        style="?catBackground" />
 </RelativeLayout>

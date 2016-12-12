@@ -146,6 +146,10 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="cat_background_wh">
+        <item name="android:background">#efefef</item>
+    </style>
+
     <!--<style name="divider_wh">-->
         <!--<item name="android:background">@color/colorLightGray4</item>-->
     <!--</style>-->
@@ -189,6 +193,10 @@
     </style>
 
     <style name="appbar_background_nm">
+        <item name="android:background">#404040</item>
+    </style>
+
+    <style name="cat_background_nm">
         <item name="android:background">#404040</item>
     </style>
 

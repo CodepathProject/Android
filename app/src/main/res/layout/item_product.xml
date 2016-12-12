@@ -39,18 +39,16 @@
 
         <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tv_product_price"
-            style="?textSubheader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_product_name"
-            android:ellipsize="end"
             android:fontFamily="sans-serif-light"
             android:gravity="left"
             android:paddingLeft="10dp"
             android:paddingTop="3dp"
             android:paddingBottom="10dp"
             android:textStyle="bold"
-            android:singleLine="true"
+            style="?textSubheader"
             android:textSize="@dimen/rv_home_item_tv_size" />
 
         <com.codepath.project.android.views.QuestTextView

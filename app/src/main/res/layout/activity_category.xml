@@ -5,6 +5,7 @@
     android:id="@+id/activity_category"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="?pageBackground"
     tools:context="com.codepath.project.android.activities.CategoryActivity">
 
     <android.support.v7.widget.Toolbar

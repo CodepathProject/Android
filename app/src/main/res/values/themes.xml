@@ -5,6 +5,7 @@
         <item name="pageBackground">@style/page_background_wh</item>
         <item name="cvBackground">@style/cv_background_wh</item>
         <item name="appbarBackground">@style/appbar_background_wh</item>
+        <item name="catBackground">@style/cat_background_wh</item>
         <!--<item name="divider">@style/divider_wh</item>-->
         <item name="navBackground">@style/nav_background_wh</item>
         <item name="textSubheader">@style/text_subheader_wh</item>
@@ -21,6 +22,7 @@
         <item name="pageBackground">@style/page_background_nm</item>
         <item name="cvBackground">@style/cv_background_nm</item>
         <item name="appbarBackground">@style/appbar_background_nm</item>
+        <item name="catBackground">@style/cat_background_nm</item>
         <!--<item name="divider">@style/divider_nm</item>-->
         <item name="navBackground">@style/nav_background_nm</item>
         <item name="textSubheader">@style/text_subheader_nm</item>

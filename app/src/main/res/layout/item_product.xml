@@ -53,7 +53,7 @@
 
         <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tv_total_votes"
-            style="?textSubheader"
+            style="?textRegular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_product_name"

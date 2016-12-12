@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.fragments.UserDetailFragment;
+import com.codepath.project.android.helpers.ThemeUtils;
 
 public class UserDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_user_detail);
         String userId = getIntent().getStringExtra("USER_ID");
         Bundle bundle = new Bundle();

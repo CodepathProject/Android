@@ -67,7 +67,8 @@
         android:layout_marginStart="10dp"
         android:textSize="18sp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/colorRed"
+        android:textStyle="bold"
+        style="?textSubheader"
         tools:text="$500"/>
 
 </RelativeLayout>

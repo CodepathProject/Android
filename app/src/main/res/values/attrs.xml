@@ -4,7 +4,8 @@
     <attr name="cvBackground" format="reference" />
     <attr name="appbarBackground" format="reference" />
     <attr name="catBackground" format="reference" />
-    <!--<attr name="divider" format="reference" />-->
+    <attr name="likeDivider" format="reference" />
+    <attr name="feedDivider" format="reference" />
     <attr name="navBackground" format="reference" />
     <attr name="textSubheader" format="reference" />
     <attr name="textLarge" format="reference" />

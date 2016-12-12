@@ -46,9 +46,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:fontFamily="sans-serif-light"
-            android:textColor="@color/black"
+            style="?textRegular"
             tools:text="sandeep"/>
         <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tvTime"
@@ -140,8 +140,13 @@
 
     <LinearLayout
         android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
         android:layout_below="@+id/tvContent"
-        style="@style/product_detail_line_separator"
+        style="?likeDivider"
+        android:layout_marginLeft="@dimen/product_margin"
+        android:layout_marginRight="@dimen/product_margin"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"/>
 
@@ -174,6 +179,6 @@
         android:layout_width="fill_parent"
         android:layout_height="10dp"
         android:layout_alignParentStart="true"
-        android:background="@color/colorLightGray4" />
+        style="?feedDivider" />
 
 </RelativeLayout>

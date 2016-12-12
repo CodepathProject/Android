@@ -150,9 +150,13 @@
         <item name="android:background">#efefef</item>
     </style>
 
-    <!--<style name="divider_wh">-->
-        <!--<item name="android:background">@color/colorLightGray4</item>-->
-    <!--</style>-->
+    <style name="divider_wh">
+        <item name="android:background">@color/colorLightGray</item>
+    </style>
+
+    <style name="feed_divider_wh">
+        <item name="android:background">@color/colorLightGray4</item>
+    </style>
 
     <style name="nav_background_wh" parent="Widget.Design.NavigationView">
         <item name="itemTextColor">@color/colorGray</item>
@@ -200,9 +204,13 @@
         <item name="android:background">#404040</item>
     </style>
 
-    <!--<style name="divider_nm">-->
-        <!--<item name="android:background">@color/colorGray</item>-->
-    <!--</style>-->
+    <style name="divider_nm">
+        <item name="android:background">#505050</item>
+    </style>
+
+    <style name="feed_divider_nm">
+        <item name="android:background">#505050</item>
+    </style>
 
     <style name="nav_background_nm" parent="Widget.Design.NavigationView">
         <item name="itemTextColor">#FAFAFA</item>

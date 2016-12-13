@@ -17,7 +17,11 @@ import com.codepath.project.android.activities.HomeActivity;
 import com.codepath.project.android.activities.UserDetailActivity;
 import com.codepath.project.android.helpers.CircleTransform;
 import com.codepath.project.android.model.AppUser;
+import com.codepath.project.android.model.Feed;
+import com.codepath.project.android.model.Recommend;
 import com.codepath.project.android.utils.GeneralUtils;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -74,15 +78,40 @@ public class RecommendedFriendsAdapter extends
                     startUserDetailActivity(user.getObjectId())
             );
             viewHolder.btnFollow.setOnClickListener(v -> {
+                AppUser cuser = (AppUser) ParseUser.getCurrentUser();
                 if(viewHolder.btnFollow.getText().toString().toLowerCase().equals("following")) {
                     viewHolder.btnFollow.setText("Follow");
                     viewHolder.btnFollow.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                     viewHolder.btnFollow.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
+                    viewHolder.btnFollow.setBackground(ContextCompat.getDrawable(mContext, R.drawable.rounded_corner));
+                    cuser.removeFollowUser(user);
                 } else {
                     viewHolder.btnFollow.setText("Following");
                     viewHolder.btnFollow.setTextColor(ContextCompat.getColor(mContext, R.color.black));
                     viewHolder.btnFollow.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+
+                    Feed feed = new Feed();
+                    feed.setType("followUser");
+                    feed.setFromUser(ParseUser.getCurrentUser());
+                    feed.setToUser(user);
+                    feed.saveInBackground();
+                    AppUser otherUser = (AppUser) object;
+                    ParseQuery<Recommend> recQuery = ParseQuery.getQuery(Recommend.class);
+                    recQuery.whereEqualTo("user", otherUser);
+                    recQuery.getFirstInBackground((object1, e1) -> {
+                        if(object1 == null) {
+                            Recommend r = new Recommend();
+                            r.setUser(otherUser);
+                            r.setFollowingUsers(ParseUser.getCurrentUser());
+                            r.saveInBackground();
+                        } else {
+                            object1.setFollowingUsers(ParseUser.getCurrentUser());
+                            object1.saveInBackground();
+                        }
+                    });
+                    cuser.setFollowUsers(user);
                 }
+                cuser.saveInBackground();
                 //mUsers.remove(position);
                 //this.notifyItemRemoved(position);
                 //notifyItemRangeChanged(position, mUsers.size());

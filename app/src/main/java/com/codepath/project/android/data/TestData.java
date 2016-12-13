@@ -94,20 +94,24 @@ public class TestData {
             case ("Television"):
                 return "https://images-na.ssl-images-amazon.com/images/I/71ZFHJ6u9dL._SL1500_.jpg";
             case ("Laptop"):
-                return "https://images-na.ssl-images-amazon.com/images/G/01/img16/consumer-electronics/vertical-store/pc/evergreen/pcvs_os_windows_short-tile_v4c.jpg";
+                return "https://i.kinja-img.com/gawker-media/image/upload/s--_jmjCeYE--/c_scale,fl_progressive,q_80,w_800/yj04jbezopxdunnmbmdz.jpg";
+                //return "https://images-na.ssl-images-amazon.com/images/G/01/img16/consumer-electronics/vertical-store/pc/evergreen/pcvs_os_windows_short-tile_v4c.jpg";
             case ("Speaker"):
-                return "http://i2.wp.com/cdn.bgr.com/2016/12/deals-taotronics-stereo-20w-wireless-portable-speaker.jpg";
+                return "http://sankygz.com/wp-content/uploads/2013/07/2.1-Soundstage-Speakers-with-Dual-Subwoofers-1.jpg";
+                //return "http://i2.wp.com/cdn.bgr.com/2016/12/deals-taotronics-stereo-20w-wireless-portable-speaker.jpg";
             case ("Monitor"):
                 //return "https://images-na.ssl-images-amazon.com/images/I/61kLoHKVN0L._SL1500_.jpg";
                 return "https://images-na.ssl-images-amazon.com/images/I/71qUfTdM19L._SL1500_.jpg";
             case ("Printer"):
                 return "https://images-na.ssl-images-amazon.com/images/I/71vqwRc60pL._SL1500_.jpg";
             case ("Camera"):
-                return "https://images-na.ssl-images-amazon.com/images/I/81Ds3GA1DvL._SL1500_.jpg";
+                //return "https://images-na.ssl-images-amazon.com/images/I/81Ds3GA1DvL._SL1500_.jpg";
+                return "https://upload.wikimedia.org/wikipedia/commons/8/84/Nikon-ftn-400.jpg";
             case ("Tablet"):
                 return "https://images-na.ssl-images-amazon.com/images/I/61XZBdl6CtL._SL1000_.jpg";
             case ("Headphone"):
-                return "http://g-ec2.images-amazon.com/images/G/01/img16/consumer-electronics/other/35373-US-CE-Bose_160x160.jpg";
+                //return "http://g-ec2.images-amazon.com/images/G/01/img16/consumer-electronics/other/35373-US-CE-Bose_160x160.jpg";
+                return "https://cdn.shopify.com/s/files/1/0362/2465/t/56/assets/banner_1_1700x.progressive.jpg?4170590035880899322";
             default:
                 return "https://images-na.ssl-images-amazon.com/images/I/71ZFHJ6u9dL._SL1500_.jpg";
         }

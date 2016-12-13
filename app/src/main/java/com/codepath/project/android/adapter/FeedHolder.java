@@ -3,6 +3,7 @@ package com.codepath.project.android.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ public class FeedHolder extends RecyclerView.ViewHolder {
     public RatingBar rating;
     public LikeButton likeButton;
     public TextView tvLikeCount;
+    public LinearLayout line;
 
     public FeedHolder(View v) {
         super(v);
@@ -34,5 +36,6 @@ public class FeedHolder extends RecyclerView.ViewHolder {
         tvUserAction  = (TextView) v.findViewById(R.id.tvUserAction);
         likeButton = (LikeButton) v.findViewById(R.id.likeButton);
         tvLikeCount = (TextView) v.findViewById(R.id.tvLikeCount);
+        line = (LinearLayout) v.findViewById(R.id.line);
     }
 }

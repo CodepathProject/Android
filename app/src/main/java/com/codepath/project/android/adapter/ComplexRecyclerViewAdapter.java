@@ -124,6 +124,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         AppUser toUser = (AppUser) feed.getToUser();
         viewHolder.rating.setVisibility(View.GONE);
         tvContent.setVisibility(View.GONE);
+        viewHolder.line.setVisibility(View.GONE);
         String fromUserName;
         if(fromUser != null) {
             fromUserName = fromUser.getString("firstName").substring(0, 1).toUpperCase() + fromUser.getString("firstName").substring(1);
@@ -142,8 +143,10 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         } else if(feed.getType().equals("likeReview")) {
             tvContent.setVisibility(View.VISIBLE);
             tvContent.setVisibility(View.VISIBLE);
+            viewHolder.line.setVisibility(View.VISIBLE);
             tvContent.setText(feed.getContent());
             viewHolder.tvUserAction.setText(" liked a review");
+            viewHolder.rating.setVisibility(View.VISIBLE);
             viewHolder.rating.setRating(feed.getRating());
             viewHolder.tvDestName.setText(toProduct.getName());
             Picasso.with(mContext).load(toProduct.getImageUrl()).into(viewHolder.ivProductImage);
@@ -162,6 +165,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         } else if(feed.getType().equals("addReview")) {
             tvContent.setText(feed.getContent());
             tvContent.setVisibility(View.VISIBLE);
+            viewHolder.line.setVisibility(View.VISIBLE);
             viewHolder.tvUserAction.setText(" reviewed a product");
             viewHolder.rating.setVisibility(View.VISIBLE);
             viewHolder.rating.setRating(feed.getRating());

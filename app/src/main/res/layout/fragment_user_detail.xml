@@ -113,6 +113,7 @@
                     android:paddingTop="20dp"
                     android:text="@string/follow"
                     android:fontFamily="sans-serif-light"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
                     android:textColor="@color/colorGray" />
 
                 <com.codepath.project.android.views.QuestTextView

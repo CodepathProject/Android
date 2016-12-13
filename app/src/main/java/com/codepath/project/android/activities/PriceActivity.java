@@ -47,14 +47,19 @@ public class PriceActivity extends AppCompatActivity {
         ThemeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_price);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.report_prices);
-        getSupportActionBar().setElevation(5);
+        setupToolbar();
         String productName = getIntent().getStringExtra(Constants.PRODUCT_NAME);
         productPrice = getIntent().getStringExtra(Constants.PRODUCT_PRICE);
         productId = getIntent().getStringExtra(Constants.PRODUCT_ID);
         tvProductName.setText(productName);
         tvProductPrice.setText("$"+productPrice);
+    }
+
+    private void setupToolbar(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.report_prices);
+        getSupportActionBar().setElevation(5);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 

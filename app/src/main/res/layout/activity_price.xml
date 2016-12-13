@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_price"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,8 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
+        app:theme="@style/ToolbarColoredBackArrow"
         android:titleTextColor="@color/white"
         style="@style/custom_toolbar"
+
         android:background="@color/colorPrimary"/>
     <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvProductName"
@@ -81,6 +84,8 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:paddingLeft="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:textSize="20sp"
         android:id="@+id/etPrice"
         android:layout_width="match_parent"
@@ -110,6 +115,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Store Name"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:textSize="20sp"
         android:fontFamily="sans-serif-light"
         android:layout_below="@id/tvStoreTitle"

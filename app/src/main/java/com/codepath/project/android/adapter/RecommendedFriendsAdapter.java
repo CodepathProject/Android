@@ -2,6 +2,7 @@ package com.codepath.project.android.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -73,9 +74,18 @@ public class RecommendedFriendsAdapter extends
                     startUserDetailActivity(user.getObjectId())
             );
             viewHolder.btnFollow.setOnClickListener(v -> {
-                mUsers.remove(position);
-                this.notifyItemRemoved(position);
-                notifyItemRangeChanged(position, mUsers.size());
+                if(viewHolder.btnFollow.getText().toString().toLowerCase().equals("following")) {
+                    viewHolder.btnFollow.setText("Follow");
+                    viewHolder.btnFollow.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                    viewHolder.btnFollow.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
+                } else {
+                    viewHolder.btnFollow.setText("Following");
+                    viewHolder.btnFollow.setTextColor(ContextCompat.getColor(mContext, R.color.black));
+                    viewHolder.btnFollow.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+                }
+                //mUsers.remove(position);
+                //this.notifyItemRemoved(position);
+                //notifyItemRangeChanged(position, mUsers.size());
             });
         });
     }

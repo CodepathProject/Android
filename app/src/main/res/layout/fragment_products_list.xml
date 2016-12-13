@@ -32,7 +32,7 @@
             android:textSize="20sp"
             android:layout_marginRight="8dp"
             android:textStyle="bold"
-            style="?textSubheader"
+            style="?priceColor"
             android:fontFamily="sans-serif-light"
             tools:text="1000" />
     </LinearLayout>

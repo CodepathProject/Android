@@ -4,6 +4,7 @@
     <attr name="cvBackground" format="reference" />
     <attr name="appbarBackground" format="reference" />
     <attr name="catBackground" format="reference" />
+    <attr name="feedBackground" format="reference" />
     <attr name="likeDivider" format="reference" />
     <attr name="feedDivider" format="reference" />
     <attr name="navBackground" format="reference" />
@@ -12,4 +13,5 @@
     <attr name="textRegular" format="reference" />
     <attr name="whiteBackground" format="reference" />
     <attr name="button" format="reference" />
+    <attr name="priceColor" format="reference" />
 </resources>

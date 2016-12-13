@@ -68,7 +68,7 @@
         android:textSize="18sp"
         android:fontFamily="sans-serif-light"
         android:textStyle="bold"
-        style="?textSubheader"
+        style="?priceColor"
         tools:text="$500"/>
 
 </RelativeLayout>

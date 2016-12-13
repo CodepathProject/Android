@@ -10,6 +10,6 @@
         android:id="@+id/rv_category_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="2dp"
+        android:padding="5dp"
         style="?catBackground" />
 </RelativeLayout>

@@ -37,17 +37,13 @@ public class RecommendedProductsAdapter extends
         public TextView tvProductNAme;
         public ImageView ivProductImage;
         public RatingBar ratingBar;
-        public TextView tvRatingCount;
-        public TextView tvProductPrice;
         public TextView tvFriendsCount;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvProductNAme = (TextView) itemView.findViewById(R.id.tv_product_name);
             ivProductImage = (ImageView) itemView.findViewById(R.id.iv_product);
-            tvRatingCount = (TextView) itemView.findViewById(R.id.tv_total_votes);
             ratingBar = (RatingBar) itemView.findViewById(R.id.rating);
-            tvProductPrice = (TextView) itemView.findViewById(R.id.tv_product_price);
             tvFriendsCount = (TextView) itemView.findViewById(R.id.tv_friends_count);
         }
     }
@@ -64,22 +60,16 @@ public class RecommendedProductsAdapter extends
     @Override
     public void onBindViewHolder(RecommendedProductsAdapter.ViewHolder viewHolder, int position) {
         Product product = mProducts.get(position);
-
         ImageView ivProductImage = viewHolder.ivProductImage;
         Picasso.with(getContext()).load(product.getImageUrl()).placeholder(R.drawable.placeholder).into(ivProductImage);
-        TextView tvRatingCount = viewHolder.tvRatingCount;
-        tvRatingCount.setText(" "+product.getRatingCount()+" reviews");
-
-        TextView tvProductPrice = viewHolder.tvProductPrice;
-        tvProductPrice.setText("$"+product.getPrice());
 
         TextView tvProductName = viewHolder.tvProductNAme;
         tvProductName.setText(product.getName());
 
         if(product.getInt("tempCount") > 1) {
-            viewHolder.tvFriendsCount.setText(product.getInt("tempCount") + " of your friends own this");
+            viewHolder.tvFriendsCount.setText(product.getInt("tempCount") + " friends own this");
         } else  {
-            viewHolder.tvFriendsCount.setText(product.getInt("tempCount") + " of your friend own this");
+            viewHolder.tvFriendsCount.setText(product.getInt("tempCount") + " friend owns this");
         }
     }
 

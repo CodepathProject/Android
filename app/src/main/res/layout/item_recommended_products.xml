@@ -38,47 +38,16 @@
             android:textSize="@dimen/rv_home_item_tv_size" />
 
         <com.codepath.project.android.views.QuestTextView
-            android:id="@+id/tv_product_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_product_name"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif-light"
-            android:gravity="left"
-            android:paddingLeft="10dp"
-            android:paddingTop="3dp"
-            android:paddingBottom="10dp"
-            android:textStyle="bold"
-            android:singleLine="true"
-            style="?textSubheader"
-            android:textSize="@dimen/rv_home_item_tv_size" />
-
-        <com.codepath.project.android.views.QuestTextView
-            android:id="@+id/tv_total_votes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_product_name"
-            android:layout_toRightOf="@id/tv_product_price"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif-light"
-            android:gravity="right"
-            android:paddingTop="3dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
-            android:singleLine="true"
-            style="?textRegular"
-            android:textSize="@dimen/rv_home_item_tv_size" />
-
-
-        <com.codepath.project.android.views.QuestTextView
             android:id="@+id/tv_friends_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_total_votes"
+            android:layout_below="@id/tv_product_name"
             android:fontFamily="sans-serif-light"
             android:paddingTop="3dp"
             android:paddingBottom="10dp"
-            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="left"
             android:textColor="#A0A0A0"
             android:textSize="@dimen/rv_home_item_tv_size" />
     </RelativeLayout>

@@ -231,6 +231,7 @@
     <style name="nav_background_nm" parent="Widget.Design.NavigationView">
         <item name="itemTextColor">#FAFAFA</item>
         <item name="android:background">#404040</item>
+        <item name="itemIconTint">#FAFAFA</item>
     </style>
 
     <style name="text_subheader_nm">

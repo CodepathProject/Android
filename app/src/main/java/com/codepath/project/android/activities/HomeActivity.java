@@ -251,6 +251,10 @@ public class HomeActivity extends AppCompatActivity
             finish();
         }
 
+        if(item.getItemId() == R.id.nav_settings) {
+            return true;
+        }
+
         Fragment fragment = null;
         Class fragmentClass;
 
@@ -284,11 +288,21 @@ public class HomeActivity extends AppCompatActivity
             e.printStackTrace();
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-                .replace(R.id.fragment_container, fragment)
-                .commit();
+
+        if(R.id.nav_home == item.getItemId()) {
+            fragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+        } else {
+            fragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
         drawer.closeDrawer(GravityCompat.START);
 
         item.setChecked(true);

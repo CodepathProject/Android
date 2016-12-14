@@ -257,6 +257,7 @@ public class DetailedReviewActivity extends AppCompatActivity implements OnLikeL
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             supportFinishAfterTransition();
+            overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
             return true;
         }
         return super.onOptionsItemSelected(item);

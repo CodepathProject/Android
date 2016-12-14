@@ -11,9 +11,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_collapseMode="pin"
-        android:background="@color/colorPrimary"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        android:layout_alignParentTop="true"
+        app:theme="@style/ToolbarColoredBackArrow"
+        android:titleTextColor="@color/white"
+        style="@style/custom_toolbar"
+        android:background="@color/colorPrimary">
         <com.codepath.project.android.views.QuestTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

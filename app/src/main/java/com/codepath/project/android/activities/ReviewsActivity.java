@@ -105,7 +105,9 @@ public class ReviewsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            supportFinishAfterTransition();
+            overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

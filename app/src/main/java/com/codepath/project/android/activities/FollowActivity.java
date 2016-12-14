@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.codepath.project.android.R;
@@ -24,6 +25,8 @@ public class FollowActivity extends AppCompatActivity {
 
     @BindView(R.id.rvFollowList)
     RecyclerView rvFollows;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private FollowAdapter followAdapter;
     private ArrayList<ParseUser> followList;
@@ -36,19 +39,10 @@ public class FollowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_follow);
         ButterKnife.bind(this);
 
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-//        try {
-//            user = (AppUser) query.get(getIntent().getStringExtra("USER_ID"));
-//            populate(user.getFollowUsers());
-////            if(getIntent().getBooleanExtra("isFollower", false)) {
-////                populate(user.getFollowUsers());
-////            } else {
-////                populate(user.getFollowUsers());
-////            }
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-      //  }
+        setupToolbar();
+        getSupportActionBar().setTitle("Following");
 
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
         String userId = getIntent().getStringExtra("USER_ID");
         query.getInBackground(userId, (object, e) -> {
             user = (AppUser) object;
@@ -78,9 +72,23 @@ public class FollowActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+            overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        // finish() is called in super: we only override this method to be able to override the transition
+        super.onBackPressed();
+        overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
+    }
+
+    private void setupToolbar(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(5);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
 
 }

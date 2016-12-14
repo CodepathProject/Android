@@ -1,5 +1,6 @@
 package com.codepath.project.android.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -56,6 +57,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
             Intent intent = new Intent(getContext(), UserDetailActivity.class);
             intent.putExtra("USER_ID", user.getObjectId());
             getContext().startActivity(intent);
+            ((Activity)mContext).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         });
     }
 

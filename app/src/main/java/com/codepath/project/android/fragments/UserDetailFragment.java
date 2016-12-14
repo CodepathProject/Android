@@ -142,12 +142,14 @@ public class UserDetailFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), FollowActivity.class);
                         intent.putExtra("USER_ID", currentUser.getObjectId());
                         startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                     });
 
                     tvFollowingLabel.setOnClickListener(v -> {
                         Intent intent = new Intent(getActivity(), FollowActivity.class);
                         intent.putExtra("USER_ID", currentUser.getObjectId());
                         startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                     });
                 } else {
                     tvFollowing.setText("0");

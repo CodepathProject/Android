@@ -41,6 +41,7 @@
             android:layout_below="@+id/tvFriendName"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="15dp"
+            android:alpha="0.2"
             android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_facebook_messenger" />
 

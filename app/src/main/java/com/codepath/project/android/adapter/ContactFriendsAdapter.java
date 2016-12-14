@@ -1,6 +1,5 @@
 package com.codepath.project.android.adapter;
 
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -71,12 +70,12 @@ public class ContactFriendsAdapter extends
         } else {
             Picasso.with(getContext()).load(GeneralUtils.getProfileUrl(user.getObjectId())).transform(new CircleTransform()).into(viewHolder.ivFriendProfile);
         }
-        viewHolder.ivMessenger.setOnClickListener(v -> {
-            Uri uri = Uri.parse("fb-messenger://user/");
-            uri = ContentUris.withAppendedId(uri, 100014431891986L);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            getContext().startActivity(intent);
-        });
+//        viewHolder.ivMessenger.setOnClickListener(v -> {
+//            Uri uri = Uri.parse("fb-messenger://user/");
+//            uri = ContentUris.withAppendedId(uri, 100014431891986L);
+//            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//            getContext().startActivity(intent);
+//        });
 
         viewHolder.ivGmail.setOnClickListener(v -> {
             Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + user.getUsername()));

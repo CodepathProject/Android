@@ -2,34 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryDark">
 
-    <com.codepath.project.android.views.QuestTextView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:layout_alignParentLeft="true"
+        android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
-        android:gravity="center_vertical"
-        android:background="@color/colorPrimary"
-        android:layout_marginBottom="40dp"
-        android:textSize="@dimen/plot_tv_main_size"
-        android:fontFamily="sans-serif-light"
-        android:textColor="@color/white"
-        android:text="Fire HD 8"
-        android:drawablePadding="10dp"
-        android:drawableTint="@color/white"
-        android:drawableStart="@drawable/ic_action_nav_back"
-        android:id="@+id/product_name"/>
+        app:theme="@style/ToolbarColoredBackArrow"
+        android:titleTextColor="@color/white"
+        style="@style/custom_toolbar"
+        android:background="@color/colorPrimary"/>
 
     <com.jjoe64.graphview.GraphView
         android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="@dimen/plot_height"
         android:layout_margin="20dp"
-        android:layout_below="@id/product_name"
+        android:layout_below="@id/toolbar"
         android:id="@+id/graph" />
     
     <RelativeLayout

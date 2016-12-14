@@ -15,7 +15,6 @@
         app:theme="@style/ToolbarColoredBackArrow"
         android:titleTextColor="@color/white"
         style="@style/custom_toolbar"
-
         android:background="@color/colorPrimary"/>
     <com.codepath.project.android.views.QuestTextView
         android:id="@+id/tvProductName"

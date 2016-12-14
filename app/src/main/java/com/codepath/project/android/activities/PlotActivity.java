@@ -4,7 +4,8 @@ package com.codepath.project.android.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.codepath.project.android.R;
@@ -16,9 +17,6 @@ import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.text.DecimalFormat;
-import java.util.Random;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,9 +25,6 @@ public class PlotActivity  extends AppCompatActivity {
 
     @BindView(R.id.graph)
     GraphView graph;
-    @BindView(R.id.product_name)
-    TextView tvProductName;
-
     @BindView(R.id.percent_change)
     TextView tvPercentChange;
     @BindView(R.id.current_price)
@@ -38,15 +33,20 @@ public class PlotActivity  extends AppCompatActivity {
     TextView tvLowestPrice;
     @BindView(R.id.highest_price)
     TextView tvHighestPrice;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plot);
         ButterKnife.bind(this);
+
+        setupToolbar();
+
         String productName = getIntent().getStringExtra(Constants.PRODUCT_NAME);
         String productPrice = getIntent().getStringExtra(Constants.PRODUCT_PRICE);
-        tvProductName.setText(productName);
+        getSupportActionBar().setTitle(productName);
         tvCurrentPrice.setText(productPrice);
         tvHighestPrice.setText(TestData.getMaxMinPrice(productPrice,"MAX"));
         tvLowestPrice.setText(TestData.getMaxMinPrice(productPrice,"MIN"));
@@ -73,5 +73,22 @@ public class PlotActivity  extends AppCompatActivity {
         // finish() is called in super: we only override this method to be able to override the transition
         super.onBackPressed();
         overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
+    }
+
+    private void setupToolbar(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(5);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

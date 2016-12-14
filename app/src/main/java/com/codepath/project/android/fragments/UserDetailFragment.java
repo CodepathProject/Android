@@ -9,11 +9,12 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -52,6 +53,8 @@ public class UserDetailFragment extends Fragment {
     @BindView(R.id.followUser) TextView followUser;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     ArrayList<Feed> feeds = new ArrayList<>();
     ComplexRecyclerViewAdapter feedsAdapter;
@@ -67,6 +70,8 @@ public class UserDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
         userId = getArguments().getString("USER_ID");
+
+        setupToolbar();
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.getInBackground(userId, (object, e) -> {
@@ -231,14 +236,11 @@ public class UserDetailFragment extends Fragment {
         return false;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                getActivity().supportFinishAfterTransition();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+    private void setupToolbar(){
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setElevation(5);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
 }

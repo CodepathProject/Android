@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import com.codepath.project.android.R;
 import com.codepath.project.android.fragments.UserDetailFragment;
@@ -30,6 +31,16 @@ public class UserDetailActivity extends AppCompatActivity {
         // finish() is called in super: we only override this method to be able to override the transition
         super.onBackPressed();
         overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

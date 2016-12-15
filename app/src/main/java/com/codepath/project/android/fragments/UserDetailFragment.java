@@ -211,6 +211,7 @@ public class UserDetailFragment extends Fragment {
         rvFeeds.setNestedScrollingEnabled(false);
 
         ParseQuery<Feed> query = ParseQuery.getQuery(Feed.class);
+        query.addDescendingOrder("updatedAt");
         query.whereEqualTo("fromUser", parseUser);
         query.include("fromUser");
         query.include("toUser");

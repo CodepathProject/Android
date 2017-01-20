@@ -25,5 +25,4 @@ The following **required** functionality is completed:
 
 ## Video walkthrough
 
-* Sprint#2 [sendvid](http://2.sendvid.com/qc4xkfkq.mp4)
-* Sprint#1 [sendvid](http://4.sendvid.com/t4xlpub4.mp4)
+[YouTube](https://www.youtube.com/watch?v=0YYxbXZZhEc)

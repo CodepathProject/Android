@@ -1,6 +1,6 @@
 # *Quest*
 
-**Quest**  will be a Product-Review app, where customers `who wish to buy` / `who have bought` a product can `read` / `write` reviews about the product. It also shows the latest, popular and trending products.
+**Quest**  is a Product-Review app, where customers `who wish to buy` / `who have bought` a product can `read` / `write` reviews about the product. It also shows the latest, popular and trending products.
 
 ## User Stories
 
